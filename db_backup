@@ -1,0 +1,9 @@
+#!/bin/bash
+
+for DB in `su postgres -c "psql -At -c \"select datname from pg_database where datistemplate = false and 'postgres' <> datname;\" postgres"`
+do
+        echo $DB
+        su postgres -c "pg_dump -Fp $DB " | gzip > /var/backups/"$DB".sql.gz
+done
+
+

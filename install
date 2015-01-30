@@ -1,0 +1,71 @@
+#!/bin/bash
+function odooutv {
+    if [ ! -f /etc/odoo/odoopasswords ]; then
+        echo Lösenordsfilen hittades inte!
+        echo /etc/odoo/odoopasswords
+        exit
+    fi
+    cat bash.odoo > temp
+    cat odooutv|sed s/_MYSQL_PASSWORD_/$(sudo cat /etc/odoo/odoopasswords|grep _MYSQL_PASSWORD_|sed s/_MYSQL_PASSWORD_\ //)/ >> temp
+    sudo cp -f temp /etc/bash.odoo
+    sudo chown root:root /etc/bash.odoo
+    rm -rf temp
+    cat /etc/bash.bashrc|grep -v .\ /etc/bash.odoo > temp
+    echo . /etc/bash.odoo >> temp
+    sudo cp -f temp /etc/bash.bashrc
+    rm -rf temp
+    echo Done
+}
+
+function personlig {
+    cat bash.odoo > temp
+    cat personlig >> temp
+    sudo cp -f temp /etc/bash.odoo
+    sudo chown $USER:$USER /etc/bash.odoo
+    rm -rf temp
+    cat /etc/bash.bashrc|grep -v .\ /etc/bash.odoo > temp
+    echo . /etc/bash.odoo >> temp
+    sudo cp -f temp /etc/bash.bashrc
+    rm -rf temp
+    echo Done
+}
+
+
+#Installationsmeny
+echo Vilken maskin installerar du på?
+OPTIONS="personlig odooutv"
+select opt in $OPTIONS; do
+    if [ "$opt" = "odooutv" ]; then
+        echo Kommandon för odooutv kommer att installeras
+        OPTIONS="avbryt installera"
+        select opt in $OPTIONS; do
+            if [ "$opt" = "avbryt" ]; then
+                echo Installationen avbruten
+                exit
+            elif [ "$opt" = "installera" ]; then
+                odooutv
+                exit
+            else
+                echo Inget val gjordes
+            fi
+        done
+    elif [ "$opt" = "personlig" ]; then
+        echo Kommandon för personlig utvecklingsmiljö kommer att installeras
+        OPTIONS="avbryt installera"
+        select opt in $OPTIONS; do
+            if [ "$opt" = "avbryt" ]; then
+                echo Installationen avbruten
+                exit
+            elif [ "$opt" = "installera" ]; then
+                personlig
+                exit
+            else
+                echo Inget val gjordes
+            fi
+        done
+    else
+        echo Inget val gjordes
+    fi
+done
+
+

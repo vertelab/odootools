@@ -1,0 +1,62 @@
+alias alldbs='`su postgres -c "psql -At -c \"select datname from pg_database where datistemplate = false and 'postgres' <> datname;\" postgres"`'
+alias odootail='sudo tail -f /var/log/odoo/odoo-server.log'
+alias odoovilog='sudo vi /var/log/odoo/odoo-server.log'
+alias odooadminpw='grep admin_passwd /etc/odoo/openerp-server.conf | cut -f 3 -d" "'
+
+alias allmodules='ls /usr/share/odoo-*'
+function _cdtodrupaldir()  { cd /usr/share/drupal7/sites/$1;   }
+alias cdd='_cdtodrupaldir'
+alias cda='cd /etc/apache2/sites-available'
+alias cdf='cd /var/lib/drupal7/files'
+function _cdprojectdir() {
+	[ -z $1 ] || ODOOPROJECT=$1
+	cd /usr/share/$ODOOPROJECT
+}
+alias cdp='_cdprojectdir'
+
+function _dirname() {
+	$DIR=`dirname $1`
+	$BASE=`basename $DIR`
+	echo -n $BASE + ","
+}
+
+function list_all_smart_modules() {
+	for MODULE in $(ls /usr/share/odoo-smart/*/__openerp__.py)
+	do
+		_dirname $MODULE
+	done
+}
+
+function _odoo_smart_update() {
+	sudo service odoo stop
+	MODULES="smart_account,smart_activity,smart_cash,smart_client,smart_common,smart_dashboard,smart_expense,smart_login,smart_mc,smart_mc_account,smart_mc_hr,smart_order,smart_project,smart_salary_simulator"
+	sudo su odoo -c "odoo.py -c /etc/odoo/openerp-server.conf --database $1 --update \"$MODULES\" --stop-after-init"
+	sudo service odoo start
+}
+alias odooupd='_odoo_smart_update'
+function _odoo_smart_update_module() {
+	sudo service odoo stop
+	sudo su odoo -c "odoo.py -c /etc/odoo/openerp-server.conf --database $1 --update $2 --stop-after-init"
+	sudo service odoo start
+}
+alias odooupdm='_odoo_smart_update_module'
+alias odoorestart='sudo service odoo restart'
+
+function foralldrupal() {
+	for DRUPAL in $(ls /usr/share/drupal7/sites|sed -e 's/all//' -e 's/default//')
+	do
+		cd $DRUPAL
+		$@
+	done
+}
+
+function dodrush() {
+	cd /usr/share/drupal7/sites/$1
+	drush $2 $3 $4 $5 $6
+}
+
+function _drupalcreateud() {
+	sql "create database $1;"
+ 	sql "grant usage on $1.* to ${1:0:16}@localhost identified by '$2';"
+	sql "grant all privileges on $1.* to ${1:0:16}@localhost;"
+}
