@@ -1,0 +1,46 @@
+# bash completion for Odoo projects
+
+_cdp()
+{
+       COMPREPLY=( $( compgen -W '$( command ls /usr/share | grep odoo)' -- $cur ) )
+}
+complete -F _cdp cdp
+
+
+_drupal_sites()
+{
+       COMPREPLY=( $( compgen -W '$( command ls /etc/drupal/$1/sites 2>/dev/null \
+               | sed -e 's/[.]load$//' -e 's/[.]conf$//' )' -- $cur  ) )
+}
+
+_cdd()
+{
+       local cur
+
+       COMPREPLY=()
+       cur=${COMP_WORDS[COMP_CWORD]}
+
+       _drupal_sites 7
+}
+complete -F _cdd cdd
+
+
+_drupal_databases()
+{
+       COMPREPLY=( $( compgen -W '$( command mysql -u root --password="INSERT_PASSWORD" --batch -e "SHOW DATABASES;" 2>/dev/null \
+               | sed -e 's/[.]information_schema$//' -e 's/[.]Database$//' -e 's/mysql$//' )' -- $cur  ) )
+}
+
+
+_cdb()
+{
+       local cur
+
+       COMPREPLY=()
+       cur=${COMP_WORDS[COMP_CWORD]}
+
+       _drupal_databases
+}
+complete -F _cdb cdb
+complete -F _cdb rmdrupal
+complete -F _cdb sqldump
