@@ -35,7 +35,7 @@ if [ ! -f /etc/apt/sources.list.d/odoo.list ]; then
     sudo wget -O - https://nightly.odoo.com/odoo.key | apt-key add -
     sudo echo "deb http://nightly.odoo.com/8.0/nightly/deb/ ./" > /etc/apt/sources.list.d/odoo.list
     sudo apt-get update && sudo apt-get install odoo
-done
+fi
 
 sudo wget -O /etc/bash.odoo https://raw.githubusercontent.com/vertelab/odootools/master/bash.odoo
 sudo grep -v bash.odoo /etc/bash.bashrc > /etc/bash.bashrc
