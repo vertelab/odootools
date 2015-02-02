@@ -35,6 +35,8 @@ if [ ! -f /etc/apt/sources.list.d/odoo.list ]; then
     sudo wget -O - https://nightly.odoo.com/odoo.key | apt-key add -
     sudo echo "deb http://nightly.odoo.com/8.0/nightly/deb/ ./" > /etc/apt/sources.list.d/odoo.list
     sudo apt-get update && sudo apt-get install odoo
+    sudo grep -v "admin_passwd" /etc/odoo/openerp-server.conf > /etc/odoo/openerp-server.conf
+    sudo echo "admin_passwd = " `python -c 'import base64, os; print(base64.b64encode(os.urandom(14)))' ` >> /etc/odoo/openerp-server.conf
 fi
 
 sudo wget -O /etc/bash.odoo https://raw.githubusercontent.com/vertelab/odootools/master/bash.odoo
