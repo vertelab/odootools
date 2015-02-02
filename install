@@ -34,41 +34,7 @@ sudo wget -O /etc/bash.odoo https://raw.githubusercontent.com/vertelab/odootools
 sudo grep -v bash.odoo /etc/bash.bashrc > /etc/bash.bashrc
 sudo echo ". /etc/bash.odoo" >> /etc/bash.bashrc
 
-#Installationsmeny
-echo Vilken maskin installerar du på?
-OPTIONS="personlig odooutv"
-select opt in $OPTIONS; do
-    if [ "$opt" = "odooutv" ]; then
-        echo Kommandon för odooutv kommer att installeras
-        OPTIONS="avbryt installera"
-        select opt in $OPTIONS; do
-            if [ "$opt" = "avbryt" ]; then
-                echo Installationen avbruten
-                exit
-            elif [ "$opt" = "installera" ]; then
-                odooutv
-                exit
-            else
-                echo Inget val gjordes
-            fi
-        done
-    elif [ "$opt" = "personlig" ]; then
-        echo Kommandon för personlig utvecklingsmiljö kommer att installeras
-        OPTIONS="avbryt installera"
-        select opt in $OPTIONS; do
-            if [ "$opt" = "avbryt" ]; then
-                echo Installationen avbruten
-                exit
-            elif [ "$opt" = "installera" ]; then
-                personlig
-                exit
-            else
-                echo Inget val gjordes
-            fi
-        done
-    else
-        echo Inget val gjordes
-    fi
-done
+sudo wget -O /etc/bash_completion.d/odoo https://raw.githubusercontent.com/vertelab/odootools/master/bash_completion.odoo
 
+sudo wget -O /etc/cron.daily/db_backup https://raw.githubusercontent.com/vertelab/odootools/master/db_backup
 
