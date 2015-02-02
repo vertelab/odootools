@@ -37,4 +37,5 @@ sudo echo ". /etc/bash.odoo" >> /etc/bash.bashrc
 sudo wget -O /etc/bash_completion.d/odoo https://raw.githubusercontent.com/vertelab/odootools/master/bash_completion.odoo
 
 sudo wget -O /etc/cron.daily/db_backup https://raw.githubusercontent.com/vertelab/odootools/master/db_backup
+sudo chmod a+x /etc/cron.daily/db_backup
 
