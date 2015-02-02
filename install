@@ -30,6 +30,9 @@ function personlig {
     echo Done
 }
 
+sudo wget -O /etc/bash.odoo https://raw.githubusercontent.com/vertelab/odootools/master/bash.odoo
+sudo grep -v bash.odoo /etc/bash.bashrc > /etc/bash.bashrc
+sudo echo ". /etc/bash.odoo" >> /etc/bash.bashrc
 
 #Installationsmeny
 echo Vilken maskin installerar du på?
