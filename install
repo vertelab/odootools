@@ -34,13 +34,14 @@ function personlig {
 if [ ! -f /etc/apt/sources.list.d/odoo.list ]; then
     sudo wget -O - https://nightly.odoo.com/odoo.key | sudo apt-key add -
     echo "deb http://nightly.odoo.com/8.0/nightly/deb/ ./" | sudo tee /etc/apt/sources.list.d/odoo.list > /dev/null
-    sudo apt-get update && sudo apt-get install odoo
-    sudo grep -v "admin_passwd" /etc/odoo/openerp-server.conf > /etc/odoo/openerp-server.conf
+    sudo apt-get update
+    sudo apt-get -y install odoo
+    sudo grep -v "admin_passwd" /etc/odoo/openerp-server.conf | sudo tee /etc/odoo/openerp-server.conf > /dev/null
     echo "admin_passwd = " `python -c 'import base64, os; print(base64.b64encode(os.urandom(14)))' ` | sudo tee --append /etc/odoo/openerp-server.conf > /dev/null
 fi
 
 sudo wget -O /etc/bash.odoo https://raw.githubusercontent.com/vertelab/odootools/master/bash.odoo
-sudo grep -v bash.odoo /etc/bash.bashrc > /etc/bash.bashrc
+sudo grep -v bash.odoo /etc/bash.bashrc | sudo tee /etc/bash.bashrc > /dev/null
 echo ". /etc/bash.odoo" | tee --append /etc/bash.bashrc > /dev/null
 
 sudo wget -O /etc/bash_completion.d/odoo https://raw.githubusercontent.com/vertelab/odootools/master/bash_completion.odoo
