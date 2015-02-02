@@ -3,9 +3,8 @@ alias odootail='sudo tail -f /var/log/odoo/odoo-server.log'
 alias odoovilog='sudo vi /var/log/odoo/odoo-server.log'
 alias odooadminpw='grep admin_passwd /etc/odoo/openerp-server.conf | cut -f 3 -d" "'
 
-alias allmodules='ls /usr/share/odoo-*'
-function _cdtodrupaldir()  { cd /usr/share/drupal7/sites/$1;   }
-alias cdd='_cdtodrupaldir'
+alias allprojects='ls -d /usr/share/odoo-*'
+alias cdo='cd /usr/share/odoo-addonsr'
 alias cda='cd /etc/apache2/sites-available'
 alias cdf='cd /var/lib/drupal7/files'
 function _cdprojectdir() {
@@ -42,21 +41,37 @@ function _odoo_smart_update_module() {
 alias odooupdm='_odoo_smart_update_module'
 alias odoorestart='sudo service odoo restart'
 
-function foralldrupal() {
-	for DRUPAL in $(ls /usr/share/drupal7/sites|sed -e 's/all//' -e 's/default//')
-	do
-		cd $DRUPAL
-		$@
-	done
-}
 
-function dodrush() {
-	cd /usr/share/drupal7/sites/$1
-	drush $2 $3 $4 $5 $6
-}
+function _odoo_update_module() {
+        usage() { echo "Usage: $0 [-d <database>] [-m <module>]" 1>&2; exit 1; }
+        [ -f /etc/odoo/odoo.tools ] && . /etc/odoo/odoo.tools
 
-function _drupalcreateud() {
+        while getopts ":m:d:" option; do
+                case "${option}" in
+                d|db) DATABASES=${OPTARG} ; echo "DB: $option $OPTARG" ;;
+                m|module) MODULES=${OPTARG} ;;
+                \:) echo "Option $option requires an argument" ; return ;;
+                \?) echo "Illegal argument ${option}::${OPTARG}" ; return ;;
+                esac
+        done
+        echo "For databases=${DATABASES} modules=${MODULES}"
+return
+        sudo service odoo stop
+        for DATABASE in $DATABASES
+        do
+                for MODULE in $MODULES
+                do
+                        echo "database ${DATABASE} module ${MODULE}"
+                        sudo su odoo -c "odoo.py -c /etc/odoo/openerp-server.conf --database $DATABASE --update $MODULE --stop-after-init"
+                done
+        done
+        sudo service odoo start
+}
+alias odooupd='_odoo_update_module'
+
+function _odoocreatedb() {
 	sql "create database $1;"
  	sql "grant usage on $1.* to ${1:0:16}@localhost identified by '$2';"
 	sql "grant all privileges on $1.* to ${1:0:16}@localhost;"
 }
+alias odoocreatedb='_odooccreatedb'
