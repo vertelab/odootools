@@ -30,6 +30,13 @@ function personlig {
     echo Done
 }
 
+# Install Odoo (if its not installed already)
+if [! -f /etc/apt/sources.list.d/odoo.list ]; do
+    sudo wget -O - https://nightly.odoo.com/odoo.key | apt-key add -
+    sudo echo "deb http://nightly.odoo.com/8.0/nightly/deb/ ./" > /etc/apt/sources.list.d/odoo.list
+    sudo apt-get update && sudo apt-get install odoo
+done
+
 sudo wget -O /etc/bash.odoo https://raw.githubusercontent.com/vertelab/odootools/master/bash.odoo
 sudo grep -v bash.odoo /etc/bash.bashrc > /etc/bash.bashrc
 sudo echo ". /etc/bash.odoo" >> /etc/bash.bashrc
