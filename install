@@ -49,3 +49,5 @@ sudo wget -O /etc/bash_completion.d/odoo https://raw.githubusercontent.com/verte
 sudo wget -O /etc/cron.daily/db_backup https://raw.githubusercontent.com/vertelab/odootools/master/db_backup
 sudo chmod a+x /etc/cron.daily/db_backup
 
+. /etc/bash.odoo
+. /etc/bash_completion
