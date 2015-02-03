@@ -1,48 +1,18 @@
 #!/bin/bash
-function odooutv {
-    if [ ! -f /etc/odoo/odoopasswords ]; then
-        echo Lösenordsfilen hittades inte!
-        echo /etc/odoo/odoopasswords
-        exit
-    fi
-    cat bash.odoo > temp
-    cat odooutv|sed s/_MYSQL_PASSWORD_/$(sudo cat /etc/odoo/odoopasswords|grep _MYSQL_PASSWORD_|sed s/_MYSQL_PASSWORD_\ //)/ >> temp
-    sudo cp -f temp /etc/bash.odoo
-    sudo chown root:root /etc/bash.odoo
-    rm -rf temp
-    cat /etc/bash.bashrc|grep -v .\ /etc/bash.odoo > temp
-    echo . /etc/bash.odoo >> temp
-    sudo cp -f temp /etc/bash.bashrc
-    rm -rf temp
-    echo Done
-}
 
-function personlig {
-    cat bash.odoo > temp
-    cat personlig >> temp
-    sudo cp -f temp /etc/bash.odoo
-    sudo chown $USER:$USER /etc/bash.odoo
-    rm -rf temp
-    cat /etc/bash.bashrc|grep -v .\ /etc/bash.odoo > temp
-    echo . /etc/bash.odoo >> temp
-    sudo cp -f temp /etc/bash.bashrc
-    rm -rf temp
-    echo Done
-}
-
-# Install Odoo (if its not installed already)
-if [ ! -d /etc/odoo ]; then
+if [ ! -d /etc/odoo ]; then  # Install Odoo (only one time)
     sudo wget -O - https://nightly.odoo.com/odoo.key | sudo apt-key add -
     echo "deb http://nightly.odoo.com/8.0/nightly/deb/ ./" | sudo tee /etc/apt/sources.list.d/odoo.list > /dev/null
     sudo apt-get update
     sudo apt-get -y install odoo
-    sudo grep -v "admin_passwd" /etc/odoo/openerp-server.conf | sudo tee /etc/odoo/openerp-server.conf > /dev/null
-    echo "admin_passwd = " `python -c 'import base64, os; print(base64.b64encode(os.urandom(14)))' ` | sudo tee --append /etc/odoo/openerp-server.conf > /dev/null
+    # Generate a good password
+    sudo perl -i -pe 'BEGIN { $pw.=(a..z,A..Z,0..9)[rand 62] for 0..15 } s/; admin_passwd.*$/admin_passwd = $pw/g' /etc/odoo/openerp-server.conf
+    sudo wget -O /etc/odoo/odoo.tools https://raw.githubusercontent.com/vertelab/odootools/master/odoo.tools
 fi
-
 sudo wget -O /etc/bash.odoo https://raw.githubusercontent.com/vertelab/odootools/master/bash.odoo
-sudo grep -v bash.odoo /etc/bash.bashrc | sudo tee /etc/bash.bashrc > /dev/null
-echo ". /etc/bash.odoo" | tee --append /etc/bash.bashrc > /dev/null
+# Adds import of bash.odoo as last line of bash.bashrc
+sudo perl -i -pe 's/\. \/etc\/bash.odoo//g'  /etc/bash.bashrc
+sudo perl -i -pe '$_ .= "\n. /etc/bash.odoo\n" if eof' /etc/bash.bashrc
 
 sudo wget -O /etc/bash_completion.d/odoo https://raw.githubusercontent.com/vertelab/odootools/master/bash_completion.odoo
 
