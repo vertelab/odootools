@@ -31,7 +31,7 @@ function personlig {
 }
 
 # Install Odoo (if its not installed already)
-if [ ! -f /etc/apt/sources.list.d/odoo.list ]; then
+if [ ! -d /etc/odoo ]; then
     sudo wget -O - https://nightly.odoo.com/odoo.key | sudo apt-key add -
     echo "deb http://nightly.odoo.com/8.0/nightly/deb/ ./" | sudo tee /etc/apt/sources.list.d/odoo.list > /dev/null
     sudo apt-get update
