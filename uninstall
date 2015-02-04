@@ -1,7 +1,8 @@
 
 
-sudo apt-get --purge remove odoo
-sudo apt-get --purge remove postgresql
+sudo apt-get --purge remove -y odoo
+sudo apt-get --purge remove -y postgresql
+sudo apt-get -y autoremove
 
 sudo rm -rf /usr/lib/python2.7/dist-packages/openerp/
 sudo rm -rf /var/log/odoo
