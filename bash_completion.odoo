@@ -24,11 +24,10 @@ _cdd()
 }
 complete -F _cdd cdd
 
-
-_drupal_databases()
+_odoo_databases()
 {
-       COMPREPLY=( $( compgen -W '$( command mysql -u root --password="INSERT_PASSWORD" --batch -e "SHOW DATABASES;" 2>/dev/null \
-               | sed -e 's/[.]information_schema$//' -e 's/[.]Database$//' -e 's/mysql$//' )' -- $cur  ) )
+        local dbs='$( command sudo su postgres -c "psql -At -c \"select datname from pg_database where datistemplate = false;\" postgres" )'
+        COMPREPLY=( $( compgen -W "$dbs" -- $cur ) )
 }
 
 
@@ -39,8 +38,8 @@ _cdb()
        COMPREPLY=()
        cur=${COMP_WORDS[COMP_CWORD]}
 
-       _drupal_databases
+       _odoo_databases
 }
 complete -F _cdb cdb
-complete -F _cdb rmdrupal
+complete -F _cdb sqldrop
 complete -F _cdb sqldump

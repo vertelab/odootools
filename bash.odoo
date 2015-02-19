@@ -4,9 +4,8 @@ alias odoovilog='sudo vi /var/log/odoo/odoo-server.log'
 alias odooadminpw='grep admin_passwd /etc/odoo/openerp-server.conf | cut -f 3 -d" "'
 
 alias allprojects='ls -d /usr/share/odoo-*'
-alias cdo='cd /usr/share/odoo-addonsr'
+alias cdo='cd /usr/share/odoo-addons'
 alias cda='cd /etc/apache2/sites-available'
-alias cdf='cd /var/lib/drupal7/files'
 function _cdprojectdir() {
 	[ -z $1 ] || ODOOPROJECT=$1
 	cd /usr/share/$ODOOPROJECT
@@ -39,7 +38,15 @@ function _odoo_smart_update_module() {
 	sudo service odoo start
 }
 alias odooupdm='_odoo_smart_update_module'
-alias odoorestart='sudo service odoo restart'
+
+function _odoo_restart() {
+        usage() { echo "Usage: $0 " 1>&2; exit 1; }
+        [ -f /etc/odoo/odoo.tools ] && . /etc/odoo/odoo.tools
+	[ -z $ODOORESTART ] && ODOORESTART="sudo service odoo restart"
+	echo $ODOORESTART
+	$ODOORESTART
+}
+alias odoorestart='_odoo_restart'
 
 
 function _odoo_update_module() {
