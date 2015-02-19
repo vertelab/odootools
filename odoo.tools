@@ -1,0 +1,4 @@
+# ODOOPROJECT=<default project>
+# DATABASES=<default databases [list] >
+# MODULES=<default modules>
+# ODOORESTART=<special odoo restart command>
