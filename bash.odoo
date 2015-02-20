@@ -75,3 +75,8 @@ function _odoocreatedb() {
 	sql "grant all privileges on $1.* to ${1:0:16}@localhost;"
 }
 alias odoocreatedb='_odooccreatedb'
+
+function _odoofind() {
+	 find /usr/share/odoo-addons -type f -exec grep -Hn $1 {} \;
+}
+alias odoofind='_odoofind'
