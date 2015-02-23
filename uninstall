@@ -9,5 +9,11 @@ sudo rm -rf /var/log/odoo
 sudo rm -rf /etc/odoo /etc/bash.odoo /etc/bash_completion/odoo
 sudo perl -i -pe 's/\. \/etc\/bash.odoo//g' /etc/bash.bashrc
 
-sudo rm -rf /var/lib/postgresql /etc/postgresql
+sudo rm -rf /var/lib/postgresql /etc/postgresql /etc/postgresql-common /var/cache/postgresql/
+
+sudo userdel -rf postgresql
+sudo groupdel postgresql
+sudo userdel -rf odoo
+sudo groupdel odoo
+
 
