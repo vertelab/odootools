@@ -77,6 +77,6 @@ function _odoocreatedb() {
 alias odoocreatedb='_odooccreatedb'
 
 function _odoofind() {
-	 find /usr/share/odoo-addons -type f -exec grep -Hn $1 {} \;
+	 find -L /usr/share/odoo-addons -type f -exec grep -Hn $1 {} \;
 }
 alias odoofind='_odoofind'
