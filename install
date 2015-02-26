@@ -9,6 +9,13 @@ if [ ! -d /etc/odoo ]; then  # Install Odoo (only one time)
     sudo perl -i -pe 'BEGIN { $pw.=(a..z,A..Z,0..9)[rand 62] for 0..15 } s/; admin_passwd.*$/admin_passwd = $pw/g' /etc/odoo/openerp-server.conf
     sudo wget -O /etc/odoo/odoo.tools https://raw.githubusercontent.com/vertelab/odootools/master/odoo.tools
 fi
+
+
+if [ ! -d /usr/share/odoo-addons ]; then 
+    sudo ln -s /usr/lib/python2.7/dist-packages/openerp/ /usr/share/odoo-addons
+fi
+
+
 sudo wget -O /etc/bash.odoo https://raw.githubusercontent.com/vertelab/odootools/master/bash.odoo
 # Adds import of bash.odoo as last line of bash.bashrc
 sudo perl -i -pe 's/\. \/etc\/bash.odoo//g'  /etc/bash.bashrc
