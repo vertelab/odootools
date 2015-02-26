@@ -80,3 +80,16 @@ function _odoofind() {
 	 find -L /usr/share/odoo-addons -type f -exec grep -Hn $1 {} \;
 }
 alias odoofind='_odoofind'
+
+function _odoogitclone() {
+    PROJECT=$1
+    sudo mkdir /usr/share/$1
+    sudo chown odoo:odoo /usr/share/$1
+    cd /usr/share
+    git clone git@github.com:vertelab/$1.git
+}
+alias odoogitclone='_odoogitclone'
+    
+    git clone 
+
+}
