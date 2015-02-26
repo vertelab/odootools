@@ -89,7 +89,3 @@ function _odoogitclone() {
     git clone git@github.com:vertelab/$1.git
 }
 alias odoogitclone='_odoogitclone'
-    
-    git clone 
-
-}
