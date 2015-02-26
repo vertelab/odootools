@@ -89,10 +89,12 @@ function _odoofind() {
 alias odoofind='_odoofind'
 
 function _odoogitclone() {
-    PROJECT=$1
-    sudo mkdir /usr/share/$1
-    sudo chown odoo:odoo /usr/share/$1
+    ODOOPROJECT=$1
+    CWD=`pwd`
+    sudo mkdir -p --mode=g+w /usr/share/$1
+    sudo chown odoo:aw /usr/share/$1
     cd /usr/share
-    git clone git@github.com:vertelab/$1.git
+    git clone https://github.com/vertelab/$1.git
+    cd $CWD
 }
 alias odoogitclone='_odoogitclone'
