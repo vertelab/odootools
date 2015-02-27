@@ -100,10 +100,15 @@ function _odoogitclone() {
 alias odoogitclone='_odoogitclone'
 function _odoosync() {
     [ -z $1 ] || ODOOPROJECT=$1
-    [ -z $ODOOPROJECT ] || echo "odoosync <project>" ; return
+    if [ -z $ODOOPROJECT ]; then
+	echo "odoosync <project>" 
+	return
+    else
+	echo "project $ODOOPROJECT"
+    fi
 
 
-    rync -var Christelle klistrar in
+    rync -var Christelle klistrar in  /usr/share/$ODOOPROJECT
 
 #    CWD=`pwd`
 #    sudo mkdir -p --mode=g+w /usr/share/$1
