@@ -107,7 +107,6 @@ function _odoosync() {
 	echo "project $ODOOPROJECT"
     fi
 
-
     rync -var Christelle klistrar in  /usr/share/$ODOOPROJECT
 
 #    CWD=`pwd`
