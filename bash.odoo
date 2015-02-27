@@ -103,7 +103,7 @@ function _odoosync() {
     [ -z $ODOOPROJECT ] || echo "odoosync <project>" ; return
 
 
-    rync -var Christelle klistrar in
+    rync -var Christelle klistrar in  /usr/share/$ODOOPROJECT
 
 #    CWD=`pwd`
 #    sudo mkdir -p --mode=g+w /usr/share/$1
