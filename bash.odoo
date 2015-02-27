@@ -99,8 +99,8 @@ function _odoogitclone() {
 }
 alias odoogitclone='_odoogitclone'
 function _odoosync() {
-    [ -z $1 ] || ODOOPROJECT=$1
-    [ -z $ODOOPROJECT ] || echo "odoosync <project>" ; return
+    [ -z "$1" ] || ODOOPROJECT=$1
+    [ -z "$ODOOPROJECT" ] || echo "odoosync <project>" ; return
 
 
     rync -var Christelle klistrar in  /usr/share/$ODOOPROJECT
