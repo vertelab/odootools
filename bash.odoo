@@ -98,3 +98,18 @@ function _odoogitclone() {
     cd $CWD
 }
 alias odoogitclone='_odoogitclone'
+function _odoosync() {
+    [ -z $1 ] || ODOOPROJECT=$1
+    [ -z $ODOOPROJECT ] || echo "odoosync <project>" ; return
+
+
+    rync -var Christelle klistrar in
+
+#    CWD=`pwd`
+#    sudo mkdir -p --mode=g+w /usr/share/$1
+#    sudo chown odoo:aw /usr/share/$1
+#    cd /usr/share
+#    git clone https://github.com/vertelab/$1.git
+#    cd $CWD
+}
+alias odoosync='_odoosync'
