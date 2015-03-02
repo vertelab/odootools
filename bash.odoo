@@ -111,13 +111,13 @@ function _odoosync() {
             esac
         done
 
-    rync -var Christelle klistrar in  /usr/share/$ODOOPROJECT   $HOST
+    rsync -var --exclude='.git/' /usr/share/$ODOOPROJECT   $HOST:/usr/share 
 
-#    CWD=`pwd`
-#    sudo mkdir -p --mode=g+w /usr/share/$1
-#    sudo chown odoo:aw /usr/share/$1
-#    cd /usr/share
-#    git clone https://github.com/vertelab/$1.git
-#    cd $CWD
+    CWD=`pwd`
+    sudo mkdir -p --mode=g+w /usr/share/$1
+    sudo chown odoo:aw /usr/share/$1
+    cd /usr/share
+    git clone https://github.com/vertelab/$1.git
+    cd $CWD
 }
 alias odoosync='_odoosync'
