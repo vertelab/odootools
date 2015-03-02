@@ -40,11 +40,16 @@ function _odoo_smart_update_module() {
 alias odooupdm='_odoo_smart_update_module'
 
 function _odoo_restart() {
-        usage() { echo "Usage: $0 " 1>&2; exit 1; }
-        [ -f /etc/odoo/odoo.tools ] && . /etc/odoo/odoo.tools
-	[ -z $ODOORESTART ] && ODOORESTART="sudo service odoo restart"
-	echo $ODOORESTART
-	$ODOORESTART
+        if [ -f /etc/odoo/odoo.tools ]
+        then
+                . /etc/odoo/odoo.tools
+        fi
+        if [ -z "$ODOORESTART" ]
+        then
+                 ODOORESTART="sudo service odoo restart"
+        fi
+        echo $ODOORESTART
+        $ODOORESTART
 }
 alias odoorestart='_odoo_restart'
 
