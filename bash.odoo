@@ -116,10 +116,6 @@ function _odoosync() {
             esac
         done
 
-<<<<<<< HEAD
-    
-=======
->>>>>>> db47941054ed3862f3b0dbfc3aa0334e680240b7
     CWD=`pwd`
     cd /usr/share
     rsync -var --exclude='.git/' /usr/share/$ODOOPROJECT $HOST:/usr/share/
