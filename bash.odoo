@@ -49,11 +49,7 @@ function _odoo_restart() {
                  ODOORESTART="sudo service odoo restart"
         fi
         echo $ODOORESTART
-<<<<<<< HEAD
-        $ODOORESTART
-=======
         eval "$ODOORESTART"
->>>>>>> db47941054ed3862f3b0dbfc3aa0334e680240b7
 }
 alias odoorestart='_odoo_restart'
 
