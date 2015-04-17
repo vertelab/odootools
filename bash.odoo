@@ -106,20 +106,15 @@ alias odoogitclone='_odoogitclone'
 function _odoosync() {
     usage() { echo "Usage: $0 [-p <project>] [-h <host>]" 1>&2; exit 1; }
     [ -f /etc/odoo/odoo.tools ] && . /etc/odoo/odoo.tools
-
-        while getopts ":p:h:" option; do
-           case $option in
-                p) ODOOPROJECT=${OPTARG} ; echo "Project: $option $OPTARG" ;;
-                h) HOST=${OPTARG} ; echo "Host: $option $OPTARG" ;;
-                \:) echo "Option $option requires an argument" ; return ;;
-                \?) echo "Illegal argument ${option}::${OPTARG}" ; return ;;
-            esac
-        done
-
-    CWD=`pwd`
-    cd /usr/share
-    rsync -var --exclude='.git/' /usr/share/$ODOOPROJECT $HOST:/usr/share/
-    cd $CWD
+    while getopts ":p:h:" option; do
+        case $option in
+           p) ODOOPROJECT=${OPTARG} ; echo "Project: $option $OPTARG" ;;
+           h) HOST=${OPTARG} ; echo "Host: $option $OPTARG" ;;
+           \:) echo "Option $option requires an argument" ; return ;;
+           \?) echo "Illegal argument ${option}::${OPTARG}" ; return ;;
+        esac
+    done
+    rsync -var --delete --exclude='.git/' /usr/share/$ODOOPROJECT $HOST:/usr/share
 }
 alias odoosync='_odoosync'
 
