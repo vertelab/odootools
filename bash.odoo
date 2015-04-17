@@ -99,7 +99,7 @@ function _odoogitclone() {
     sudo mkdir -p --mode=g+w /usr/share/$1
     sudo chown odoo:aw /usr/share/$1
     cd /usr/share
-    git clone https://github.com/vertelab/$1.git
+    git clone git@github.com:vertelab/$1.git
     cd $CWD
 }
 alias odoogitclone='_odoogitclone'
