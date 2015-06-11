@@ -15,6 +15,9 @@ if [ ! -d /usr/share/odoo-addons ]; then
     sudo ln -s /usr/lib/python2.7/dist-packages/openerp/ /usr/share/odoo-addons
 fi
 
+sudo apt-get -y install python-pip
+
+# sudo su postgres createuser odoo -s
 
 sudo wget -O /etc/bash.odoo https://raw.githubusercontent.com/vertelab/odootools/master/bash.odoo
 # Adds import of bash.odoo as last line of bash.bashrc
