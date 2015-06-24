@@ -114,7 +114,7 @@ function _odoosync() {
            \?) echo "Illegal argument ${option}::${OPTARG}" ; return ;;
         esac
     done
-    sudo chown odoo:odoo $ODOOPROJECT -R
+    sudo chown odoo:odoo /usr/share/$ODOOPROJECT -R
     rsync -var --delete --exclude='.git/' /usr/share/$ODOOPROJECT $HOST:/usr/share
 }
 alias odoosync='_odoosync'
