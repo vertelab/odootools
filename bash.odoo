@@ -97,7 +97,8 @@ function _odoogitclone() {
     ODOOPROJECT=$1
     CWD=`pwd`
     sudo mkdir -p --mode=g+w /usr/share/$1
-    sudo chown odoo:aw /usr/share/$1
+    # add user to odoo group
+    sudo chown odoo:odoo /usr/share/$1
     cd /usr/share
     git clone git@github.com:vertelab/$1.git
     cd $CWD
