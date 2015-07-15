@@ -123,10 +123,10 @@ alias odoosync='_odoosync'
 
 function _patch_all_patches() {
     	CWD=`pwd`
-	cd /usr/share
+	cd /usr/lib/python2.7/dist-packages/openerp
 	for PATCH in $(ls /etc/odoo/patch.d/*.patch)
 	do
-		sudo patch -p3 < $PATCH
+		sudo patch -p6 < $PATCH
 	done
 	cd $CWD
 }
