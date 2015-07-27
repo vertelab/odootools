@@ -39,6 +39,26 @@ function _odoo_smart_update_module() {
 }
 alias odooupdm='_odoo_smart_update_module'
 
+function _odoo_install_module() {
+	usage() { echo "Usage: $0 [-d <database>] [-m <module>]" 1>&2; exit 1; }
+        [ -f /etc/odoo/odoo.tools ] && . /etc/odoo/odoo.tools
+
+        while getopts ":m:d:" option; do
+                case "${option}" in
+                d|db) DATABASES=${OPTARG} ; echo "DB: $option $OPTARG" ;;
+                m|module) MODULES=${OPTARG} ;;
+                \:) echo "Option $option requires an argument" ; return ;;
+                \?) echo "Illegal argument ${option}::${OPTARG}" ; return ;;
+                esac
+        done
+        echo "For databases=${DATABASES} modules=${MODULES}"
+        
+	sudo service odoo stop
+	sudo su odoo -c "odoo.py -c /etc/odoo/openerp-server.conf --database ${DATABASES} --init ${MODULES} --stop-after-init"
+	sudo service odoo start
+}
+alias odooinstall='_odoo_install_module'
+
 function _odoo_restart() {
         if [ -f /etc/odoo/odoo.tools ]
         then
