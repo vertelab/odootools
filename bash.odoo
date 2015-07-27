@@ -12,6 +12,11 @@ function _cdprojectdir() {
 }
 alias cdp='_cdprojectdir'
 
+function _cddatabase() {
+	[ -z $1 ] || DATABASES=$1
+}
+alias cdb='_cddatabase'
+
 function _dirname() {
 	$DIR=`dirname $1`
 	$BASE=`basename $DIR`
