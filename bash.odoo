@@ -47,7 +47,7 @@ alias odooupdm='_odoo_smart_update_module'
 function _odoo_install_module() {
 	usage() { echo "Usage: $0 [-d <database>] [-m <module>]" 1>&2; exit 1; }
         [ -f /etc/odoo/odoo.tools ] && . /etc/odoo/odoo.tools
-	local OPTIND
+	local OPTIND  # To force the while getops loop
     	local OPTARG
     	local option
         while getopts ":m:d:" option; do
