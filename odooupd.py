@@ -55,23 +55,24 @@ all_modules = [m['name'] for m in client.model('ir.module.module').read(client.m
 installed = [m['name'] for m in client.model('ir.module.module').read(client.model('ir.module.module').search(([('state', '=', 'installed')])), ['name'])]
 to_be_installed = list(set(MODULE.split(',')) - set(installed))
 
+to_be_upgraded = []
+
 if LIST:
     print ','.join(installed)
 elif MODULE:
     while to_be_installed:
-        for m in MODULE.split(','):
-            if m in all_modules:
-                if INSTALL:
-                    if m in installed:
-                        client.upgrade(m)
-                    else:
-                        client.install(m)
-                        to_be_installed = list(set(to_be_installed) - set(m['name'] for m in client.model('ir.module.module').read(client.model('ir.module.module').search(([('state', '=', 'installed')])), ['name'])))
-                if UNINSTALL:
-                    if m in installed:
-                        client.uninstall(m)
+        m = to_be_installed.pop()
+        if INSTALL:
+            if m in installed:
+                to_be_upgraded.append(m)
             else:
-                print 'module <%s> does not exist' %m
+                client.install(m)
+                to_be_installed = list(set(to_be_installed) - set(m['name'] for m in client.model('ir.module.module').read(client.model('ir.module.module').search(([('state', '=', 'installed')])), ['name'])))
+        if UNINSTALL:
+            if m in installed:
+                client.uninstall(m)
+for m in to_be_upgraded:
+    client.upgrade(m)
 
 
 else:
