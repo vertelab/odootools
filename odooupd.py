@@ -46,15 +46,14 @@ for o, a in opts:
     else:
         assert False, "unhandled option"
 
-if not DATABASE:
-    assert False, "missing database"
+#~ if not DATABASE:
+    #~ assert False, "missing database"
 
 #~ print 'databas: %s\tmodule: %s\tpassword: %s\tlist: %s\tinstall: %s\tuninstall: %s' %(DATABASE, MODULE, PASSWD, LIST, INSTALL, UNINSTALL)
 client = erppeek.Client(HOST+':'+PORT, DATABASE, 'admin', PASSWD)
 all_modules = [m['name'] for m in client.model('ir.module.module').read(client.model('ir.module.module').search((['|', ('state', '=', 'installed'), ('state', '=', 'uninstalled')])), ['name'])]
 installed = [m['name'] for m in client.model('ir.module.module').read(client.model('ir.module.module').search(([('state', '=', 'installed')])), ['name'])]
-to_be_installed = list(set(MODULE.split(',')) - set(installed))
-
+to_be_installed = MODULE.split(',')
 to_be_upgraded = []
 
 if LIST:
@@ -66,13 +65,14 @@ elif MODULE:
             if m in installed:
                 to_be_upgraded.append(m)
             else:
+                print '**** to be installed ****\n%s' %to_be_installed
                 client.install(m)
                 to_be_installed = list(set(to_be_installed) - set(m['name'] for m in client.model('ir.module.module').read(client.model('ir.module.module').search(([('state', '=', 'installed')])), ['name'])))
         if UNINSTALL:
             if m in installed:
                 client.uninstall(m)
-for m in to_be_upgraded:
-    client.upgrade(m)
+    for m in to_be_upgraded:
+        client.upgrade(m)
 
 
 else:
