@@ -3,6 +3,17 @@
 import sys, getopt, os
 import erppeek
 
+def usage():
+    print """-h, --host=\thost
+-P, --port=\tport
+-d, --database=\tdatabase
+-m, --module=\tcomma separated module list
+-p, --password=\tadmin password
+-l, --list\tlist all modules
+-i, --install\tinstall modules
+-u, --uninstall\tuninstall modules
+"""
+
 try:
     opts, args = getopt.getopt(sys.argv[1:], "h:P:d:m:p:liu", ["host=", "port=", "database=", "module=", "password=", "list", "install", "uninstall",])
 except getopt.GetoptError as err:
@@ -53,7 +64,7 @@ for o, a in opts:
 client = erppeek.Client(HOST+':'+PORT, DATABASE, 'admin', PASSWD)
 all_modules = [m['name'] for m in client.model('ir.module.module').read(client.model('ir.module.module').search((['|', ('state', '=', 'installed'), ('state', '=', 'uninstalled')])), ['name'])]
 installed = [m['name'] for m in client.model('ir.module.module').read(client.model('ir.module.module').search(([('state', '=', 'installed')])), ['name'])]
-to_be_installed = MODULE.split(',')
+to_be_installed = MODULE and MODULE.split(',') or None
 to_be_upgraded = []
 
 if LIST:

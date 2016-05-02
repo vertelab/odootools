@@ -30,13 +30,6 @@ function list_all_smart_modules() {
 	done
 }
 
-function _odoo_smart_update() {
-	sudo service odoo stop
-	MODULES="smart_account,smart_activity,smart_cash,smart_client,smart_common,smart_dashboard,smart_expense,smart_login,smart_mc,smart_mc_account,smart_mc_hr,smart_order,smart_project,smart_salary_simulator"
-	sudo su odoo -c "odoo.py -c /etc/odoo/openerp-server.conf --database $1 --update \"$MODULES\" --stop-after-init"
-	sudo service odoo start
-}
-alias odooupd='_odoo_smart_update'
 function _odoo_smart_update_module() {
 	sudo service odoo stop
 	sudo su odoo -c "odoo.py -c /etc/odoo/openerp-server.conf --database $1 --update $2 --stop-after-init"
@@ -108,7 +101,7 @@ return
         done
         sudo service odoo start
 }
-alias odooupd='/bin/odooupd'
+alias odooupdx='_odoo_update_module'
 
 function _odoocreatedb() {
 	sql "create database $1;"
