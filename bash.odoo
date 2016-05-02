@@ -108,7 +108,7 @@ return
         done
         sudo service odoo start
 }
-alias odooupd='_odoo_update_module'
+alias odooupd='/bin/odooupd'
 
 function _odoocreatedb() {
 	sql "create database $1;"
