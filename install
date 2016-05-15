@@ -1,6 +1,12 @@
 #!/bin/bash
 
+
+
 if [ ! -d /etc/odoo ]; then  # Install Odoo (only one time)
+    # this package is missing in 16.04 
+    wget https://launchpad.net/ubuntu/+archive/primary/+files/python-support_1.0.15_all.deb
+    sudo dpkg -i python-support_1.0.15_all.deb
+
     sudo wget -O - https://nightly.odoo.com/odoo.key | sudo apt-key add -
     echo "deb http://nightly.odoo.com/8.0/nightly/deb/ ./" | sudo tee /etc/apt/sources.list.d/odoo.list > /dev/null
     sudo apt-get update
@@ -27,8 +33,13 @@ sudo perl -i -pe '$_ .= ". /etc/bash.odoo\n" if eof' /etc/bash.bashrc
 
 sudo wget -O /etc/bash_completion.d/odoo https://raw.githubusercontent.com/vertelab/odootools/master/bash_completion.odoo
 
+# daily backup
 sudo wget -O /etc/cron.daily/db_backup https://raw.githubusercontent.com/vertelab/odootools/master/db_backup
 sudo chmod a+x /etc/cron.daily/db_backup
+# addons_path with wildcards
+sudo perl -i -pe 's/export LOGNAME=\$USER/export LOGNAME=\$USER\n. \/etc\/odoo\/odoo.tools\nlogger Odoo-addons: \$ODOOADDONS/g'  /etc/init.d/odoo
+sudo perl -i -pe 's/--logfile \$LOGFILE/--logfile \$LOGFILE --addons-path=\$ODOOADDONS/g' /etc/init.d/odoo
+
 
 . /etc/bash.odoo
 . /etc/bash_completion
