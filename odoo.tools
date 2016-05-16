@@ -4,3 +4,5 @@
 # ODOORESTART=<special odoo restart command>
 export ODOOADDONS=/usr/share/odoo-addons/addons
 #export ODOOADDONS=/usr/share/odoo-addons/addons,`ls -dxm /usr/share/odoo-* /usr/share/oca-*|tr -d " \n"`
+CMD="s/^addons_path=.*/addons_path=${ODOOADDONS//'/'/'\/'} # Generated path do not change here odoo.tools/g"
+sudo perl -i -pe $CMD /etc/odoo/openerp-server.conf
