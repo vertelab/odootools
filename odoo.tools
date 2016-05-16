@@ -2,4 +2,5 @@
 # DATABASES=<default databases [list] >
 # MODULES=<default modules>
 # ODOORESTART=<special odoo restart command>
-export ODOOADDONS=/usr/share/odoo-addons/addons,`ls -dxm /usr/share/odoo-* /usr/share/oca-*|tr -d " \n"`
+export ODOOADDONS=/usr/share/odoo-addons/addons
+#export ODOOADDONS=/usr/share/odoo-addons/addons,`ls -dxm /usr/share/odoo-* /usr/share/oca-*|tr -d " \n"`
