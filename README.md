@@ -23,13 +23,13 @@ Odoo-tools command |Description
  cdp                       | change directory to project     
  odooaddons                | Updates addons_path with all project according to ODOOADDONS defined in odoo.tools
  odooadminpw               | view master password            
- odoofind <pattern>        | find patterns in odoo-core source code                     
- odoogitclone <project>    | clones and installs projects from githuh (vertel-projects)   
+ odoofind *pattern*        | find patterns in odoo-core source code                     
+ odoogitclone *project*    | clones and installs projects from githuh (vertel-projects)   
  odoopatch                 | Implements patches from the directory /etc/odoo/patch.d        
  odoorestart               | Restarts odoo and apache/varnish or other systems that have to be restarted (configure in odoo.tools)
- odoosync -h <host> -p <project> | Syncs a project to a server without git meta data           
+ odoosync -h *host* -p *project* | Syncs a project to a server without git meta data           
  odootail                  | Views odoo-log live, you can use the one-liner *odoorestart ; odootail* to restart and monitor odoo
-odooupd -h/--host,-P/--port,-d/--database,-m/--module,-p/--password,-l/--list,-i/--install,-u/--uninstall | Modifies Odoo-instanses; -m/--module=	comma separated  module list, -i/--install	install or upgrade modules  -u, --uninstall	uninstall modules
-odooupdm <database> <modulelist>      | Installs/updates modules in single user mode                
+odooupd -h/--host, -P/--port, -d/--database, -m/--module, -p/--password, -l/--list, -i/--install, -u/--uninstall | Modifies Odoo-instanses; -m/--module=	comma separated  module list, -i/--install	install or upgrade modules  -u, --uninstall	uninstall modules
+odooupdm *database* *modulelist*      | Installs/updates modules in single user mode                
  odoovilog                 | Opens Odoo log file in vi       
  
