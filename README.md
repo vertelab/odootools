@@ -34,10 +34,9 @@ Odoo-tools command |Description
                            | the one-liner                   
                            | odoorestart ; odootail          
                            | to restart and monitor odoo     
- odooupd                   | Modifies Odoo-instanses         
-                           |  -h, --host=	host               
-                           |  -P, --port=	port               
-                           |  -d, --database=	database       
+|odooupd                   | Modifies Odoo-instanses  -h, --host=	host 
+-P, --port=	port               
+-d, --database=	database       |
                            |  -m, --module=	comma separated
                            |                  module list    
                            |  -p, --password=	admin password 
