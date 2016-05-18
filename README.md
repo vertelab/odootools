@@ -21,7 +21,7 @@ Odoo-tools command |Description
  cdb                       | change database                 
  cdo                       | change directory to Odoo core   
  cdp                       | change directory to project     
- odooaddons                | Updates addons_path with all project according to ODOOADDONS defined in odoo.tools           
+ odooaddons                | Updates addons_path with all project according to ODOOADDONS defined in odoo.tools  sasd asd asdas asd asd asd asd asd asd asd as das d asd asd sdasd asd asd asd         
  odooadminpw               | view master password            
  odoofind <pattern>        | find patterns in odoo-core source code                     
  odoogitclone <project>    | clones and installs projects from githuh (vertel-projects)   
