@@ -14,14 +14,13 @@ wget -O- https://raw.githubusercontent.com/vertelab/odootools/master/uninstall |
 
 Odoo-tools commands:
 
-Markdown | Less | Pretty
---- | --- | ---
-*Still* | `renders` | **nicely**
-1 | 2 | 3
+Odoo-tools command |Description
+--- | --- 
+ alldbs                    | Lists all databases             
+ allprojects               | Lists all projects              
+ cdb                       | change database                 
  
-| alldbs                    | Lists all databases             |
-| allprojects               | Lists all projects              |
-| cdb                       | change database                 |
+ 
  +---------------------------+---------------------------------+
  | cdo                       | change directory to Odoo core   |
  +---------------------------+---------------------------------+
