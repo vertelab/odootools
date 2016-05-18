@@ -22,7 +22,7 @@ if [ ! -d /usr/share/odoo-addons ]; then
 fi
 
 sudo apt-get -y install python-pip
-sudo pip install openpyxl
+sudo -H pip install openpyxl
 sudo apt-get -y install git
 
 # sudo su postgres createuser odoo -s
