@@ -37,9 +37,6 @@ sudo wget -O /etc/bash_completion.d/odoo https://raw.githubusercontent.com/verte
 # daily backup
 sudo wget -O /etc/cron.daily/db_backup https://raw.githubusercontent.com/vertelab/odootools/master/db_backup
 sudo chmod a+x /etc/cron.daily/db_backup
-# addons_path with wildcards
-sudo perl -i -pe 's/export LOGNAME=\$USER/export LOGNAME=\$USER\n. \/etc\/odoo\/odoo.tools\nlogger Odoo-addons: \$ODOOADDONS/g'  /etc/init.d/odoo
-sudo perl -i -pe 's/--logfile \$LOGFILE/--logfile \$LOGFILE --addons-path=\$ODOOADDONS/g' /etc/init.d/odoo
 
 
 . /etc/bash.odoo

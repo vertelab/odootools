@@ -3,8 +3,4 @@
 # MODULES=<default modules>
 # ODOORESTART=<special odoo restart command>
 # List addons directories in ODOOADDONS-variable
-export ODOOADDONS=
-#export ODOOADDONS=`ls -d /usr/share/odoo-* /usr/share/oca-* /usr/share/initos-* | grep -v odoo-addons | tr "\n" ","`
-CMD="s/^addons_path=.*/addons_path=${ODOOADDONS//"/"/"\/"}/g"
-sudo perl -i -pe $CMD /etc/odoo/openerp-server.conf
-# Save the new addons_path in conf-file
+export ODOOADDONS=`ls -d /usr/share/odoo-* | grep -v odoo-addons | tr "\n" ","`
