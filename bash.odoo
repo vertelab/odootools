@@ -114,12 +114,11 @@ function _patch_all_patches() {
 
 alias odoopatch='_patch_all_patches'
 
-function _odooaddons() {
+function odooaddons() {
     [ -f /etc/odoo/odoo.tools ] && . /etc/odoo/odoo.tools
-    if [ -z "$ODOOADDONS" ]
+    if [ ! -z "$ODOOADDONS" ]
     then
-        CMD="s/^addons_path=.*/addons_path=${ODOOADDONS//"/"/"\/"}/g"
+        CMD="s/^addons_path.*=.*/addons_path=${ODOOADDONS//"/"/"\/"}/g"
         sudo perl -i -pe $CMD /etc/odoo/openerp-server.conf
     fi
 }
-alias odooaddons='_odooaddons'
