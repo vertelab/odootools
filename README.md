@@ -29,7 +29,7 @@ Odoo-tools command |Description
  odoorestart               | Restarts odoo and apache/varnish or other systems that have to be restarted (configure in odoo.tools)
  odoosync -h <host> -p <project> | Syncs a project to a server without git meta data           
  odootail                  | Views odoo-log live, you can use the one-liner *odoorestart ; odootail* to restart and monitor odoo
-odooupd -h, --host=	host -P, --port=	port  -d, --database=	database -m, --module=	comma separated  module list   -p, --password= admin password   -l, --list	list all modules   -i, --install	install or upgrade modules  -u, --uninstall	uninstall modules | Modifies Odoo-instanses
+odooupd -h/--host,-P/--port,-d/--database,-m/--module,-p/--password,-l/--list,-i/--install,-u/--uninstall | Modifies Odoo-instanses; -m/--module=	comma separated  module list, -i/--install	install or upgrade modules  -u, --uninstall	uninstall modules
 odooupdm <database> <modulelist>      | Installs/updates modules in single user mode                
  odoovilog                 | Opens Odoo log file in vi       
  
