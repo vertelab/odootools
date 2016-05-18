@@ -28,8 +28,8 @@ Odoo-tools command |Description
  odoopatch                 | Implements patches from the dir-
                            | ectory /etc/odoo/patch.p        
  odoorestart               | Restarts odoo and apache/varnish 
- odoosync -h <host>        | Syncs a project to a server      
-          -p <project>     | without git meta data           
+ odoosync -h <host> -p <project> | Syncs a project to a server      
+               | without git meta data           
  odootail                  | Views odoo-log live, you can use
                            | the one-liner                   
                            | odoorestart ; odootail          
