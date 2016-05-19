@@ -4,3 +4,4 @@
 # ODOORESTART=<special odoo restart command>
 # List addons directories in ODOOADDONS-variable
 export ODOOADDONS=`ls -d /usr/share/odoo-* | grep -v odoo-addons | tr "\n" ","`
+#export ODOOADDONS=`ls -d /usr/share/odoo-* /usr/share/odooext-* | grep -v odoo-addons | tr "\n" ","`
