@@ -28,6 +28,8 @@ Odoo-tools command |Description
  odoogitpull    | does a *git pull* for every project in ODOOADDONS   
  odoopatch                 | Implements patches from the directory /etc/odoo/patch.d        
  odoorestart               | Restarts odoo and apache/varnish or other systems that have to be restarted (configure in odoo.tools)
+ odoosetperm               | Sets permissions for all projects and modules
+ odoosyncall -h *host*     | Syncs all projects and modules
  odoosync -h *host* -p *project* | Syncs a project to a server without git meta data           
  odootail                  | Views odoo-log live, you can use the one-liner *odoorestart ; odootail* to restart and monitor odoo
 odooupd -h/--host, -P/--port, -d/--database, -m/--module, -p/--password, -l/--list, -i/--install, -u/--uninstall | Modifies Odoo-instanses; -m/--module=	comma separated  module list, -i/--install	install or upgrade modules  -u, --uninstall	uninstall modules
