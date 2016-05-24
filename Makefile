@@ -6,6 +6,7 @@ openpyxl.tmp:
 	@sudo pip install openpyxl
 	@sudo pip install pybarcode
 	@sudo pip install cairosvg
+	@sudo pip install utils
 	@touch openpyxl.tmp
 
 phonenumbers.tmp: 
