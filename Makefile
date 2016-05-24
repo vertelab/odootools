@@ -4,6 +4,8 @@ all : odooupd.tmp erppeek.tmp bash.tmp openpyxl.tmp phonenumbers.tmp
 
 openpyxl.tmp: 
 	@sudo pip install openpyxl
+	@sudo pip install pybarcode
+	@sudo pip install cairosvg
 	@touch openpyxl.tmp
 
 phonenumbers.tmp: 
