@@ -103,7 +103,7 @@ alias odoosync='_odoosync'
 
 
 function _patch_all_patches() {
-    	CWD=`pwd`
+    CWD=`pwd`
 	cd /usr/lib/python2.7/dist-packages/openerp
 	for PATCH in $(ls /etc/odoo/patch.d/*.patch)
 	do
@@ -120,5 +120,53 @@ function odooaddons() {
     then
         CMD="s/^addons_path.*=.*/addons_path=${ODOOADDONS//"/"/"\/"}/g"
         sudo perl -i -pe $CMD /etc/odoo/openerp-server.conf
+    fi
+}
+
+function odoogitpull() {
+    [ -f /etc/odoo/odoo.tools ] && . /etc/odoo/odoo.tools
+    if [ ! -z "$ODOOADDONS" ]
+    then
+        CWD=`pwd`
+        for p in ${ODOOADDONS//,/ }; do
+            cd $p
+            echo -n $p " "
+            git pull
+        done
+        cd $CWD
+    fi
+}
+function odoosyncall() {
+    usage() { echo "Usage: $0 [-h <host>]" 1>&2; exit 1; }
+    [ -f /etc/odoo/odoo.tools ] && . /etc/odoo/odoo.tools
+    local OPTIND
+    local OPTARG
+    local option
+    while getopts ":h:" option; do
+        case $option in
+           h) HOST=${OPTARG} ; echo "Host: $option $OPTARG" ;;
+           \:) echo "Option $option requires an argument" ; return ;;
+           \?) echo "Illegal argument ${option}::${OPTARG}" ; return ;;
+        esac
+    done
+    if [ ! -z "$ODOOADDONS" ]
+    then
+        for p in ${ODOOADDONS//,/ }; do
+            echo -n $p " "
+            sudo chown odoo:odoo $p -R
+            rsync -ar --delete --exclude='.git/' $p $HOST:/usr/share
+        done
+    fi
+}
+
+function odoosetperm() {
+    if [ ! -z "$ODOOADDONS" ]
+    then
+        for p in ${ODOOADDONS//,/ }; do
+            echo -n $p " "
+            sudo chown odoo:odoo $p -R
+            find $p -type d -exec sudo chmod 775 {} \;
+            find $p -type f -exec sudo chmod 665 {} \;
+        done
     fi
 }

@@ -25,6 +25,7 @@ Odoo-tools command |Description
  odooadminpw               | view master password            
  odoofind *pattern*        | find patterns in odoo-core source code                     
  odoogitclone *project*    | clones and installs projects from githuh (vertel-projects)   
+ odoogitpull    | does a *git pull* for every project in ODOOADDONS   
  odoopatch                 | Implements patches from the directory /etc/odoo/patch.d        
  odoorestart               | Restarts odoo and apache/varnish or other systems that have to be restarted (configure in odoo.tools)
  odoosync -h *host* -p *project* | Syncs a project to a server without git meta data           
