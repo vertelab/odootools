@@ -4,12 +4,12 @@
 Install by:
 
 
-wget -O- https://raw.githubusercontent.com/vertelab/odootools/master/install | bash
+wget -O- https://raw.githubusercontent.com/vertelab/odootools/9.0/install | bash
 
 
 Uninstall by: (this drops your databases and all your data related to Odoo)
 
-wget -O- https://raw.githubusercontent.com/vertelab/odootools/master/uninstall | bash
+wget -O- https://raw.githubusercontent.com/vertelab/odootools/9.0/uninstall | bash
 
 
 Odoo-tools commands:
