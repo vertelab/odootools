@@ -131,8 +131,9 @@ function odoogitpull() {
         for p in ${ODOOADDONS//,/ }; do
             cd $p
             echo -n $p " "
-            git pull
+            git pull 2> ~/odoogitpull.err
         done
+        cat ~/odoogitpull.err
         cd $CWD
     fi
 }
