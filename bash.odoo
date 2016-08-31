@@ -178,6 +178,7 @@ function odoolangexport() {
     local OPTIND  # To force the while getops loop
     local OPTARG
     local option
+    local L
     while getopts ":m:d:l:" option; do
             case "${option}" in
                 d|db) DATABASES=${OPTARG} ; echo "DB: $option $OPTARG" ;;
