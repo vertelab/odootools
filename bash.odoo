@@ -200,7 +200,7 @@ function odoolangexport() {
     echo $FILE
     sudo service odoo stop
     echo "odoo.py --modules='${MODULES}' -d ${DATABASES} ${LCMD} --stop-after-init --i18n-export='${FILE}'"
-    sudo su odoo -c "odoo.py --modules='${MODULES}' -d ${DATABASES} ${LCMD} --stop-after-init --i18n-export='${FILE}'"
+    sudo su odoo -c "odoo.py -c /etc/odoo/openerp-server.conf --modules='${MODULES}' -d ${DATABASES} ${LCMD} --stop-after-init --i18n-export='${FILE}'"
     sudo service odoo start
     sudo chown ${USER} ${FILE}
     if [ -z "${L}" ]
