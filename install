@@ -13,7 +13,7 @@ if [ ! -d /etc/odoo ]; then  # Install Odoo (only one time)
     sudo apt-get -y install odoo
     # Generate a good password
     sudo perl -i -pe 'BEGIN { $pw.=(a..z,A..Z,0..9)[rand 62] for 0..15 } s/; admin_passwd.*$/admin_passwd = $pw/g' /etc/odoo/openerp-server.conf
-    sudo wget -O /etc/odoo/odoo.tools https://raw.githubusercontent.com/vertelab/odootools/master/odoo.tools
+    sudo wget -O /etc/odoo/odoo.tools https://raw.githubusercontent.com/vertelab/odootools/9.0/odoo.tools
 fi
 
 
@@ -27,15 +27,15 @@ sudo apt-get -y install git
 
 # sudo su postgres createuser odoo -s
 
-sudo wget -O /etc/bash.odoo https://raw.githubusercontent.com/vertelab/odootools/master/bash.odoo
+sudo wget -O /etc/bash.odoo https://raw.githubusercontent.com/vertelab/odootools/9.0/bash.odoo
 # Adds import of bash.odoo as last line of bash.bashrc
 sudo perl -i -pe 's/\. \/etc\/bash.odoo//g'  /etc/bash.bashrc
 sudo perl -i -pe '$_ .= ". /etc/bash.odoo\n" if eof' /etc/bash.bashrc
 
-sudo wget -O /etc/bash_completion.d/odoo https://raw.githubusercontent.com/vertelab/odootools/master/bash_completion.odoo
+sudo wget -O /etc/bash_completion.d/odoo https://raw.githubusercontent.com/vertelab/odootools/9.0/bash_completion.odoo
 
 # daily backup
-sudo wget -O /etc/cron.daily/db_backup https://raw.githubusercontent.com/vertelab/odootools/master/db_backup
+sudo wget -O /etc/cron.daily/db_backup https://raw.githubusercontent.com/vertelab/odootools/9.0/db_backup
 sudo chmod a+x /etc/cron.daily/db_backup
 
 
