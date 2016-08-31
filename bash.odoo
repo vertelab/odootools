@@ -189,16 +189,23 @@ function odoolangexport() {
             esac
     done
     echo "For databases=${DATABASES} modules=${MODULES} language=${L}"
-    FILE="${MODULES}.po"
     if [ ! -z "${L}" ]
     then
         LCMD="-l ${L}"
         FILE="${L}.po"
+    else
+        LCMD="-l ''"
+        FILE="${MODULES}.po"
     fi
     echo $FILE
     sudo service odoo stop
     echo "odoo.py --modules='${MODULES}' -d ${DATABASES} ${LCMD} --stop-after-init --i18n-export='${FILE}'"
     sudo su odoo -c "odoo.py --modules='${MODULES}' -d ${DATABASES} ${LCMD} --stop-after-init --i18n-export='${FILE}'"
     sudo service odoo start
+    sudo chown ${USER} ${FILE}
+    if [ -z "${L}" ]
+    then
+        mv ${FILE} ${FILE}t
+    fi
 }
 
