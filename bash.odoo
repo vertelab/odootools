@@ -6,35 +6,35 @@ alias odooadminpw='grep admin_passwd /etc/odoo/openerp-server.conf | cut -f 3 -d
 alias allprojects='ls -d /usr/share/odoo-*'
 alias cdo='cd /usr/share/odoo-addons'
 function _cdprojectdir() {
-	[ -z $1 ] || ODOOPROJECT=$1
-	cd /usr/share/$ODOOPROJECT
+    [ -z $1 ] || ODOOPROJECT=$1
+    cd /usr/share/$ODOOPROJECT
 }
 alias cdp='_cdprojectdir'
 
 function _cddatabase() {
-	[ -z $1 ] || DATABASES=$1
+    [ -z $1 ] || DATABASES=$1
 }
 alias cdb='_cddatabase'
 
 function _dirname() {
-	$DIR=`dirname $1`
-	$BASE=`basename $DIR`
-	echo -n $BASE + ","
+    $DIR=`dirname $1`
+    $BASE=`basename $DIR`
+    echo -n $BASE + ","
 }
 
 function _odoo_update_module() {
-	sudo service odoo stop
-	sudo su odoo -c "odoo.py -c /etc/odoo/openerp-server.conf --database $1 --update $2 --stop-after-init"
-	sudo service odoo start
+    sudo service odoo stop
+    sudo su odoo -c "odoo.py -c /etc/odoo/openerp-server.conf --database $1 --update $2 --stop-after-init"
+    sudo service odoo start
 }
 alias odooupdm='_odoo_update_module'
 
 function _odoo_install_module() {
-	usage() { echo "Usage: $0 [-d <database>] [-m <module>]" 1>&2; exit 1; }
+    usage() { echo "Usage: $0 [-d <database>] [-m <module>]" 1>&2; exit 1; }
         [ -f /etc/odoo/odoo.tools ] && . /etc/odoo/odoo.tools
-	local OPTIND  # To force the while getops loop
-    	local OPTARG
-    	local option
+    local OPTIND  # To force the while getops loop
+        local OPTARG
+        local option
         while getopts ":m:d:" option; do
                 case "${option}" in
                 d|db) DATABASES=${OPTARG} ; echo "DB: $option $OPTARG" ;;
@@ -44,10 +44,10 @@ function _odoo_install_module() {
                 esac
         done
         echo "For databases=${DATABASES} modules=${MODULES}"
-        
-	sudo service odoo stop
-	sudo su odoo -c "odoo.py -c /etc/odoo/openerp-server.conf --database ${DATABASES} --init ${MODULES} --stop-after-init"
-	sudo service odoo start
+
+    sudo service odoo stop
+    sudo su odoo -c "odoo.py -c /etc/odoo/openerp-server.conf --database ${DATABASES} --init ${MODULES} --stop-after-init"
+    sudo service odoo start
 }
 alias odooinstall='_odoo_install_module'
 
@@ -67,7 +67,7 @@ alias odoorestart='_odoo_restart'
 
 
 function _odoofind() {
-	 find -L /usr/share/odoo-addons -type f -exec grep -Hn $1 {} \;
+     find -L /usr/share/odoo-addons -type f -exec grep -Hn $1 {} \;
 }
 alias odoofind='_odoofind'
 
@@ -104,12 +104,12 @@ alias odoosync='_odoosync'
 
 function _patch_all_patches() {
     CWD=`pwd`
-	cd /usr/lib/python2.7/dist-packages/openerp
-	for PATCH in $(ls /etc/odoo/patch.d/*.patch)
-	do
-		sudo patch -p6 < $PATCH
-	done
-	cd $CWD
+    cd /usr/lib/python2.7/dist-packages/openerp
+    for PATCH in $(ls /etc/odoo/patch.d/*.patch)
+    do
+        sudo patch -p6 < $PATCH
+    done
+    cd $CWD
 }
 
 alias odoopatch='_patch_all_patches'
@@ -171,3 +171,33 @@ function odoosetperm() {
         done
     fi
 }
+
+function odoolangexport() {
+    usage() { echo "Usage: $0 [-d <database>] [-m <module>] [-l <language>]" 1>&2; exit 1; }
+        [ -f /etc/odoo/odoo.tools ] && . /etc/odoo/odoo.tools
+    local OPTIND  # To force the while getops loop
+    local OPTARG
+    local option
+    while getopts ":m:d:l:" option; do
+            case "${option}" in
+                d|db) DATABASES=${OPTARG} ; echo "DB: $option $OPTARG" ;;
+                m|module) MODULES=${OPTARG} ;;
+                l|language) L=${OPTARG} ;;
+                \:) echo "Option $option requires an argument" ; return ;;
+                \?) echo "Illegal argument ${option}::${OPTARG}" ; return ;;
+            esac
+    done
+    echo "For databases=${DATABASES} modules=${MODULES} language=${L}"
+    FILE="${MODULES}.po"
+    if [ ! -z "${L}" ]
+    then
+        LCMD="-l ${L}"
+        FILE="${L}.po"
+    fi
+    echo $FILE
+    sudo service odoo stop
+    echo "odoo.py --modules='${MODULES}' -d ${DATABASES} ${LCMD} --stop-after-init --i18n-export='${FILE}'"
+    sudo su odoo -c "odoo.py --modules='${MODULES}' -d ${DATABASES} ${LCMD} --stop-after-init --i18n-export='${FILE}'"
+    sudo service odoo start
+}
+

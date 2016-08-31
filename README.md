@@ -4,8 +4,9 @@
 Install by:
 
 
-wget -O- https://raw.githubusercontent.com/vertelab/odootools/master/install | bash
-
+ wget -O- https://raw.githubusercontent.com/vertelab/odootools/8.0/install | bash
+ wget -O- https://raw.githubusercontent.com/vertelab/odootools/9.0/install | bash
+ wget -O- https://raw.githubusercontent.com/vertelab/odootools/master/install | bash
 
 Uninstall by: (this drops your databases and all your data related to Odoo)
 
@@ -25,7 +26,8 @@ Odoo-tools command |Description
  odooadminpw               | view master password            
  odoofind *pattern*        | find patterns in odoo-core source code                     
  odoogitclone *project*    | clones and installs projects from githuh (vertel-projects)   
- odoogitpull    | does a *git pull* for every project in ODOOADDONS   
+ odoogitpull    | does a *git pull* for every project in ODOOADDONS  
+ odoolangexport    | export po/pot file for a module, -m <module> -d <database> -l <language>. To export a pot-file exclude "-l"
  odoopatch                 | Implements patches from the directory /etc/odoo/patch.d        
  odoorestart               | Restarts odoo and apache/varnish or other systems that have to be restarted (configure in odoo.tools)
  odoosetperm               | Sets permissions for all projects and modules
