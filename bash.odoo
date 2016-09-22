@@ -78,7 +78,7 @@ function _odoogitclone() {
     # add user to odoo group
     sudo chown odoo:odoo /usr/share/$1
     cd /usr/share
-    git clone git@github.com:vertelab/$1.git
+    git clone -b master9 git@github.com:vertelab/$1.git
     cd $CWD
 }
 alias odoogitclone='_odoogitclone'
