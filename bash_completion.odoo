@@ -1,17 +1,29 @@
 # bash completion for Odoo projects
 
+_odoo_projects()
+{
+    COMPREPLY=( $( compgen -W '$( command ls /usr/share | grep odoo)' -- $cur ) )
+}
+
+_odoo_databases()
+{
+        local dbs='$( command sudo su postgres -c "psql -At -c \"select datname from pg_database where datistemplate = false;\" postgres" )'
+        COMPREPLY=( $( compgen -W "$dbs" -- $cur ) )
+}
+
+_odoohosts(){
+    [ -f /etc/odoo/odoo.tools ] && . /etc/odoo/odoo.tools
+    COMPREPLY=( $( compgen -W "$ODOOHOSTS" -- $cur ) )
+}
+
 _cdp()
 {
-       COMPREPLY=( $( compgen -W '$( command ls /usr/share | grep odoo)' -- $cur ) )
+        local cur
+        COMPREPLY=()
+        cur=${COMP_WORDS[COMP_CWORD]}
+        _odoo_projects
 }
 complete -F _cdp cdp
-
-
-_drupal_sites()
-{
-       COMPREPLY=( $( compgen -W '$( command ls /etc/drupal/$1/sites 2>/dev/null \
-               | sed -e 's/[.]load$//' -e 's/[.]conf$//' )' -- $cur  ) )
-}
 
 _cdd()
 {
@@ -23,13 +35,6 @@ _cdd()
        _drupal_sites 7
 }
 complete -F _cdd cdd
-
-_odoo_databases()
-{
-        local dbs='$( command sudo su postgres -c "psql -At -c \"select datname from pg_database where datistemplate = false;\" postgres" )'
-        COMPREPLY=( $( compgen -W "$dbs" -- $cur ) )
-}
-
 
 _cdb()
 {
@@ -43,3 +48,33 @@ _cdb()
 complete -F _cdb cdb
 complete -F _cdb sqldrop
 complete -F _cdb sqldump
+
+_check_prev_words()
+{
+    for i in `seq 0 $(expr $COMP_CWORD - 1)`; do
+        if [[ $1 == ${COMP_WORDS[i]} ]]; then
+            return
+        fi
+    done
+    options=$options\ $1
+}
+
+__odoosync()
+{
+    local cur
+    local prev
+    COMPREPLY=()
+    cur=${COMP_WORDS[COMP_CWORD]}
+    prev=${COMP_WORDS[COMP_CWORD-1]}
+    if [[ $prev == -p ]]; then
+        _odoo_projects
+    elif [[ $prev == -h ]]; then
+        _odoohosts
+    else
+        local options
+        _check_prev_words -p
+        _check_prev_words -h
+        COMPREPLY=( $( compgen -W "$options" -- $cur ) )
+    fi
+}
+complete -F __odoosync odoosync
