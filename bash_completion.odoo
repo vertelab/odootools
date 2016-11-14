@@ -77,4 +77,15 @@ __odoosync()
         COMPREPLY=( $( compgen -W "$options" -- $cur ) )
     fi
 }
-complete -F __odoosync odoosync
+
+__odoo_create_test_db()
+{
+    local cur
+    COMPREPLY=()
+    cur=${COMP_WORDS[COMP_CWORD]}
+    if [[ $COMP_CWORD == 2 ]]; then
+        
+        COMPREPLY=( $( compgen -W "$(ls|grep .gz$)" -- $cur ) )
+    fi
+}
+complete -F __odoo_create_test_db odoocreatetestdb
