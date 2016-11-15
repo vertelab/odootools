@@ -77,6 +77,7 @@ __odoosync()
         COMPREPLY=( $( compgen -W "$options" -- $cur ) )
     fi
 }
+complete -F __odoosync odoosync
 
 __odoo_create_test_db()
 {
