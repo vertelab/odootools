@@ -71,17 +71,32 @@ function _odoofind() {
 }
 alias odoofind='_odoofind'
 
+function _odoolistprojects() {
+    local PROJECTS=
+    local PROJECT=
+    for PROJECT in $(ls /usr/share|grep odoo-|grep -v odoo-addons); do
+        PROJECTS=$PROJECTS$PROJECT,
+    done
+    echo "${PROJECTS::-1}"
+}
+alias odoolistprojects='_odoolistprojects'
+
 function _odoogitclone() {
-    ODOOPROJECT=$1
-    CWD=`pwd`
-    sudo mkdir -p --mode=g+w /usr/share/$1
-    # add user to odoo group
-    sudo chown odoo:odoo /usr/share/$1
-    cd /usr/share
-    git clone git@github.com:vertelab/$1.git
+    local PROJECTS=$1
+    local PROJECT
+    for PROJECT in $(echo $PROJECTS | tr "," " "); do
+        ODOOPROJECT=$PROJECT
+        CWD=`pwd`
+        sudo mkdir -p --mode=g+w /usr/share/$PROJECT
+        # add user to odoo group
+        sudo chown odoo:odoo /usr/share/$PROJECT
+        cd /usr/share
+        git clone git@github.com:vertelab/$PROJECT.git
+    done
     cd $CWD
 }
 alias odoogitclone='_odoogitclone'
+
 function _odoosync() {
     usage() { echo "Usage: $0 [-p <project>] [-h <host>]" 1>&2; exit 1; }
     [ -f /etc/odoo/odoo.tools ] && . /etc/odoo/odoo.tools
