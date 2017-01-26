@@ -12,7 +12,7 @@ if [ ! -d /etc/odoo ]; then  # Install Odoo (only one time)
     sudo apt-get update
     sudo apt-get -y install odoo
     # Generate a good password
-    sudo perl -i -pe 'BEGIN { $pw.=(a..z,A..Z,0..9)[rand 62] for 0..15 } s/; admin_passwd.*$/admin_passwd = $pw/g' /etc/odoo/openerp-server.conf
+    sudo perl -i -pe 'BEGIN { $pw.=(a..z,A..Z,0..9)[rand 62] for 0..15 } s/; admin_passwd.*$/admin_passwd = $pw/g' /etc/odoo/odoo.conf
     sudo wget -O /etc/odoo/odoo.tools https://raw.githubusercontent.com/vertelab/odootools/10.0/odoo.tools
 fi
 

@@ -1,7 +1,7 @@
 alias alldbs='`su postgres -c "psql -At -c \"select datname from pg_database where datistemplate = false and 'postgres' <> datname;\" postgres"`'
 alias odootail='sudo tail -f /var/log/odoo/odoo-server.log'
 alias odoovilog='sudo vi /var/log/odoo/odoo-server.log'
-alias odooadminpw='sudo grep admin_passwd /etc/odoo/openerp-server.conf | cut -f 3 -d" "'
+alias odooadminpw='sudo grep admin_passwd /etc/odoo/odoo.conf | cut -f 3 -d" "'
 
 alias allprojects='ls -d /usr/share/odoo-*'
 alias cdo='cd /usr/share/odoo-addons'
@@ -24,7 +24,7 @@ function _dirname() {
 
 function _odoo_update_module() {
     sudo service odoo stop
-    sudo su odoo -c "odoo.py -c /etc/odoo/openerp-server.conf --database $1 --update $2 --stop-after-init"
+    sudo su odoo -c "odoo.py -c /etc/odoo/odoo.conf --database $1 --update $2 --stop-after-init"
     sudo service odoo start
 }
 alias odooupdm='_odoo_update_module'
@@ -46,7 +46,7 @@ function _odoo_install_module() {
         echo "For databases=${DATABASES} modules=${MODULES}"
 
     sudo service odoo stop
-    sudo su odoo -c "odoo.py -c /etc/odoo/openerp-server.conf --database ${DATABASES} --init ${MODULES} --stop-after-init"
+    sudo su odoo -c "odoo.py -c /etc/odoo/odoo.conf --database ${DATABASES} --init ${MODULES} --stop-after-init"
     sudo service odoo start
 }
 alias odooinstall='_odoo_install_module'
@@ -134,7 +134,7 @@ function odooaddons() {
     if [ ! -z "$ODOOADDONS" ]
     then
         CMD="s/^addons_path.*=.*/addons_path=${ODOOADDONS//"/"/"\/"}/g"
-        sudo perl -i -pe $CMD /etc/odoo/openerp-server.conf
+        sudo perl -i -pe $CMD /etc/odoo/odoo.conf
     fi
 }
 
@@ -215,7 +215,7 @@ function odoolangexport() {
     echo $FILE
     sudo service odoo stop
     echo "odoo.py --modules='${MODULES}' -d ${DATABASES} ${LCMD} --stop-after-init --i18n-export='${FILE}'"
-    sudo su odoo -c "odoo.py -c /etc/odoo/openerp-server.conf --modules='${MODULES}' -d ${DATABASES} ${LCMD} --stop-after-init --i18n-export='${FILE}'"
+    sudo su odoo -c "odoo.py -c /etc/odoo/odoo.conf --modules='${MODULES}' -d ${DATABASES} ${LCMD} --stop-after-init --i18n-export='${FILE}'"
     sudo service odoo start
     sudo chown ${USER} ${FILE}
     if [ -z "${L}" ]
