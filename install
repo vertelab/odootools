@@ -18,7 +18,7 @@ fi
 
 
 if [ ! -d /usr/share/odoo-addons ]; then 
-    sudo ln -s /usr/lib/python2.7/dist-packages/openerp/ /usr/share/odoo-addons
+    sudo ln -s /usr/lib/python2.7/dist-packages/odoo/ /usr/share/core-odoo
 fi
 
 sudo apt-get -y install python-pip
