@@ -187,6 +187,27 @@ function odoosetperm() {
     fi
 }
 
+function _create_test_db() {
+    if [ -z ${1} ];then
+        echo "Usage: odoocreatetestdb <database name> <input file or stdin>"
+        return
+    fi
+    sudo service odoo stop
+    if sudo -u odoo psql -lqt| cut -d \| -f 1|grep -qw $1; then
+        echo "Database "$1" already exists!"
+        return
+    fi
+    sudo -u odoo createdb $1
+    zcat "${2:-/dev/stdin}" | sudo -u odoo psql $1
+    sudo -u odoo psql $1 -c "update fetchmail_server set active = false;"
+    sudo -u odoo psql $1 -c "update ir_mail_server set active = false;"
+    sudo service odoo start
+    sleep 1
+    odooupd -d $1 -i -m web_environment_ribbon
+}
+
+alias odoocreatetestdb='_create_test_db'
+
 function odoolangexport() {
     usage() { echo "Usage: $0 [-d <database>] [-m <module>] [-l <language>]" 1>&2; exit 1; }
         [ -f /etc/odoo/odoo.tools ] && . /etc/odoo/odoo.tools
