@@ -14,6 +14,7 @@ def usage():
 -u, --uninstall\tuninstall modules
 """
 
+#TODO: add username parameter.
 try:
     opts, args = getopt.getopt(sys.argv[1:], "h:P:d:m:p:liu", ["host=", "port=", "database=", "module=", "password=", "list", "install", "uninstall",])
 except getopt.GetoptError as err:
@@ -62,6 +63,7 @@ for o, a in opts:
 
 #~ print 'databas: %s\tmodule: %s\tpassword: %s\tlist: %s\tinstall: %s\tuninstall: %s' %(DATABASE, MODULE, PASSWD, LIST, INSTALL, UNINSTALL)
 client = erppeek.Client(HOST+':'+PORT, DATABASE, 'admin', PASSWD)
+client.model('ir.module.module').update_list()
 all_modules = [m['name'] for m in client.model('ir.module.module').read(client.model('ir.module.module').search((['|', ('state', '=', 'installed'), ('state', '=', 'uninstalled')])), ['name'])]
 installed = [m['name'] for m in client.model('ir.module.module').read(client.model('ir.module.module').search(([('state', '=', 'installed')])), ['name'])]
 to_be_installed = MODULE and MODULE.split(',') or None
