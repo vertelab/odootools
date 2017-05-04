@@ -244,3 +244,14 @@ function _create_test_db() {
 }
 
 alias odoocreatetestdb='_create_test_db'
+
+function _odoocheckmodule() {
+    for DB in `sudo su postgres -c "psql -At -c \"select datname from pg_database where datistemplate = false and 'postgres' <> datname;\" postgres"`
+    do
+        if odooupd -d $DB -c $1; then
+            echo $DB
+        fi
+    done
+}
+
+alias odoocheckmodule='_odoocheckmodule'

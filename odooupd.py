@@ -1,7 +1,8 @@
 #!/usr/bin/python
 
 import sys, getopt, os
-import erppeek
+import odoorpc
+
 
 def usage():
     print """-h, --host=\thost
@@ -15,7 +16,7 @@ def usage():
 """
 
 try:
-    opts, args = getopt.getopt(sys.argv[1:], "h:P:d:m:p:liu", ["host=", "port=", "database=", "module=", "password=", "list", "install", "uninstall",])
+    opts, args = getopt.getopt(sys.argv[1:], "h:P:d:m:p:liuUc:", ["host=", "port=", "database=", "module=", "password=", "list", "install", "uninstall", "update_list", "check="])
 except getopt.GetoptError as err:
     # print help information and exit:
     print str(err) # will print something like "option -a not recognized"
@@ -24,7 +25,7 @@ except getopt.GetoptError as err:
 
 output = None
 verbose = False
-HOST = os.environ.get('HOST', 'http://localhost')
+HOST = os.environ.get('HOST', 'localhost')
 PORT = os.environ.get('PORT', '8069')
 DATABASE = os.environ.get('DATABASE', None)
 PASSWD = os.popen('grep admin_passwd /etc/odoo/openerp-server.conf | cut -f 3 -d" "').read().replace('\n', '')
@@ -32,6 +33,8 @@ MODULE = None
 LIST = None
 INSTALL = None
 UNINSTALL = None
+UPDATE_LIST = None
+CHECK = None
 
 for o, a in opts:
     if o == "-v":
@@ -54,23 +57,36 @@ for o, a in opts:
         INSTALL = True
     elif o in ("-u", "--uninstall"):
         UNINSTALL = True
+    elif o in ("-U", "--update_list"):
+        UPDATE_LIST = True
+    elif o in ("-c", "--check"):
+        CHECK = a
     else:
         assert False, "unhandled option"
 
 #~ if not DATABASE:
     #~ assert False, "missing database"
 
-#~ print 'databas: %s\tmodule: %s\tpassword: %s\tlist: %s\tinstall: %s\tuninstall: %s' %(DATABASE, MODULE, PASSWD, LIST, INSTALL, UNINSTALL)
-client = erppeek.Client(HOST+':'+PORT, DATABASE, 'admin', PASSWD)
-client.model('ir.module.module').update_list()
-all_modules = [m['name'] for m in client.model('ir.module.module').read(client.model('ir.module.module').search((['|', ('state', '=', 'installed'), ('state', '=', 'uninstalled')])), ['name'])]
-installed = [m['name'] for m in client.model('ir.module.module').read(client.model('ir.module.module').search(([('state', '=', 'installed')])), ['name'])]
-to_be_installed = MODULE and MODULE.split(',') or None
-to_be_upgraded = []
+#~ print 'host: %s\tdatabas: %s\tmodule: %s\tpassword: %s\tlist: %s\tinstall: %s\tuninstall: %s' %(HOST, DATABASE, MODULE, PASSWD, LIST, INSTALL, UNINSTALL)
+odoo = odoorpc.ODOO(HOST, port=PORT)
+odoo.login(DATABASE, 'admin', PASSWD)
+if UPDATE_LIST:
+    odoo.env['ir.module.module'].update_list()
+#~ client = erppeek.Client(HOST+':'+PORT, DATABASE, 'admin', PASSWD)
+#~ client.model('ir.module.module').update_list()
+
+
 
 if LIST:
+    installed = [m['name'] for m in odoo.env['ir.module.module'].read(odoo.env['ir.module.module'].search(([('state', '=', 'installed')])), ['name'])]
     print ','.join(installed)
+elif CHECK:
+    sys.exit(len(odoo.env['ir.module.module'].search([('state', '=', 'installed'), ('name', '=', CHECK)])) == 0)
 elif MODULE:
+    all_modules = [m['name'] for m in odoo.env['ir.module.module'].read(odoo.env['ir.module.module'].search((['|', ('state', '=', 'installed'), ('state', '=', 'uninstalled')])), ['name'])]
+    installed = [m['name'] for m in odoo.env['ir.module.module'].read(odoo.env['ir.module.module'].search(([('state', '=', 'installed')])), ['name'])]
+    to_be_installed = MODULE and MODULE.split(',') or None
+    to_be_upgraded = []
     while to_be_installed:
         m = to_be_installed.pop()
         if INSTALL:
@@ -79,7 +95,7 @@ elif MODULE:
             else:
                 print '**** to be installed ****\n%s' %to_be_installed
                 client.install(m)
-                to_be_installed = list(set(to_be_installed) - set(m['name'] for m in client.model('ir.module.module').read(client.model('ir.module.module').search(([('state', '=', 'installed')])), ['name'])))
+                to_be_installed = list(set(to_be_installed) - set(m['name'] for m in odoo.env['ir.module.module'].read(odoo.env['ir.module.module'].search(([('state', '=', 'installed')])), ['name'])))
         if UNINSTALL:
             if m in installed:
                 client.uninstall(m)
