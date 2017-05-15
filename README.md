@@ -21,7 +21,8 @@ Odoo-tools command |Description
  cdo                       | change directory to Odoo core   
  cdp                       | change directory to project     
  odooaddons                | Updates addons_path with all project according to ODOOADDONS defined in odoo.tools
- odooadminpw               | view master password            
+ odooadminpw               | view master password
+ odoocheckmodule           | lists databases that use a module (eg odoocheckmodule sale)
  odoofind *pattern*        | find patterns in odoo-core source code                     
  odoogitclone *project*    | clones and installs projects from githuh (vertel-projects)   
  odoogitpull    | does a *git pull* for every project in ODOOADDONS  
@@ -32,7 +33,7 @@ Odoo-tools command |Description
  odoosyncall -h *host*     | Syncs all projects and modules
  odoosync -h *host* -p *project* | Syncs a project to a server without git meta data           
  odootail                  | Views odoo-log live, you can use the one-liner *odoorestart ; odootail* to restart and monitor odoo
-odooupd -h/--host, -P/--port, -d/--database, -m/--module, -p/--password, -l/--list, -i/--install, -u/--uninstall | Modifies Odoo-instanses; -m/--module=	comma separated  module list, -i/--install	install or upgrade modules  -u, --uninstall	uninstall modules
+odooupd -h/--host, -P/--port, -d/--database, -m/--module, -p/--password, -l/--list, -i/--install, -u/--uninstall | Modifies Odoo-instanses; -m/--module=	comma separated  module list, -i/--install	install or upgrade modules  -u, --uninstall	uninstall modules, -c/--check coma separeted module list
 odooupdm *database* *modulelist*      | Installs/updates modules in single user mode                
  odoovilog                 | Opens Odoo log file in vi       
  
