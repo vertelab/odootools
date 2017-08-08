@@ -1,22 +1,38 @@
 #!/usr/bin/python
 
-import sys, getopt, os
-import odoorpc
+import sys, getopt, os, subprocess
+import erppeek
+from openerp.modules import get_module_path
 
 
 def usage():
     print """-h, --host=\thost
 -P, --port=\tport
 -d, --database=\tdatabase
+-c, --check=\tcomma separated module list to check
 -m, --module=\tcomma separated module list
 -p, --password=\tadmin password
 -l, --list\tlist all modules
+-L, --listprojects\tlist all projects
 -i, --install\tinstall modules
 -u, --uninstall\tuninstall modules
+-U, --update_list\tupdate_list of modules
+
+
 """
+#~ def get_projects(modules):
+        #~ module_path = set()
+        #~ for m in modules
+        #~ if m.index('/') and get_module_path(m).split('/')[-2] not in module_path:
+            #~ module_path.add(get_module_path(m).split('/')[-2])
+        #~ return module_path
+
+
+def get_module_name(domain):
+    return client.model('ir.module.module').read(client.model('ir.module.module').search((domain)), ['name'])
 
 try:
-    opts, args = getopt.getopt(sys.argv[1:], "h:P:d:m:p:liuUc:", ["host=", "port=", "database=", "module=", "password=", "list", "install", "uninstall", "update_list", "check="])
+    opts, args = getopt.getopt(sys.argv[1:], "h:P:d:m:p:lLiuUc:", ["host=", "port=", "database=", "module=", "password=", "list", "install", "uninstall", "update_list", "check="])
 except getopt.GetoptError as err:
     # print help information and exit:
     print str(err) # will print something like "option -a not recognized"
@@ -25,12 +41,14 @@ except getopt.GetoptError as err:
 
 output = None
 verbose = False
-HOST = os.environ.get('HOST', 'localhost')
+#~ HOST = os.environ.get('HOST', 'localhost')
+HOST = os.environ.get('HOST', 'http://localhost')
 PORT = os.environ.get('PORT', '8069')
 DATABASE = os.environ.get('DATABASE', None)
 PASSWD = os.popen('grep admin_passwd /etc/odoo/openerp-server.conf | cut -f 3 -d" "').read().replace('\n', '')
 MODULE = None
 LIST = None
+LISTP = None
 INSTALL = None
 UNINSTALL = None
 UPDATE_LIST = None
@@ -53,6 +71,8 @@ for o, a in opts:
         PASSWD = a
     elif o in ("-l", "--list"):
         LIST = True
+    elif o in ("-L", "--listprojects"):
+        LISTP = True
     elif o in ("-i", "--install"):
         INSTALL = True
     elif o in ("-u", "--uninstall"):
@@ -67,24 +87,41 @@ for o, a in opts:
 #~ if not DATABASE:
     #~ assert False, "missing database"
 
-#~ print 'host: %s\tdatabas: %s\tmodule: %s\tpassword: %s\tlist: %s\tinstall: %s\tuninstall: %s' %(HOST, DATABASE, MODULE, PASSWD, LIST, INSTALL, UNINSTALL)
-odoo = odoorpc.ODOO(HOST, port=PORT)
-odoo.login(DATABASE, 'admin', PASSWD)
+#~ print 'host: %s:%s\tdatabas: %s\tmodule: %s\tpassword: %s\tlist: %s\tlistp: %s\tinstall: %s\tuninstall: %s' %(HOST, PORT,DATABASE, MODULE, PASSWD, LIST, LISTP, INSTALL, UNINSTALL)
+#~ odoo = odoorpc.ODOO(HOST, port=PORT)
+#~ odoo.login(DATABASE, 'admin', PASSWD)
+client = erppeek.Client(HOST+':'+PORT, DATABASE, 'admin', PASSWD)
 if UPDATE_LIST:
-    odoo.env['ir.module.module'].update_list()
-#~ client = erppeek.Client(HOST+':'+PORT, DATABASE, 'admin', PASSWD)
-#~ client.model('ir.module.module').update_list()
+    client.model('ir.module.module').update_list()
 
 
 
 if LIST:
-    installed = [m['name'] for m in odoo.env['ir.module.module'].read(odoo.env['ir.module.module'].search(([('state', '=', 'installed')])), ['name'])]
+    installed = [m['name'] for m in get_module_name([('state', '=', 'installed')])]
     print ','.join(installed)
+elif LISTP:
+    module_path = {}
+    missing = []
+    for module in [m['name'] for m in get_module_name([('state', '=', 'installed')])]:
+        path = get_module_path(module)
+        if path:
+            if path.split('/')[-2] in module_path:
+                module_path[path.split('/')[-2]].append(module)
+            else:
+                module_path[path.split('/')[-2]] = [module]
+        else:
+            if module_path.get('missing'):
+                module_path['missing'].append(module)
+            else:
+                module_path['missing'] = [module]
+    for p in module_path.keys():
+        print p,':',','.join(module_path[p])
+    
 elif CHECK:
-    sys.exit(len(odoo.env['ir.module.module'].search([('state', '=', 'installed'), ('name', '=', CHECK)])) == 0)
+    sys.exit(len(client.model('ir.module.module').search([('state', '=', 'installed'), ('name', '=', CHECK)])) == 0)
 elif MODULE:
-    all_modules = [m['name'] for m in odoo.env['ir.module.module'].read(odoo.env['ir.module.module'].search((['|', ('state', '=', 'installed'), ('state', '=', 'uninstalled')])), ['name'])]
-    installed = [m['name'] for m in odoo.env['ir.module.module'].read(odoo.env['ir.module.module'].search(([('state', '=', 'installed')])), ['name'])]
+    all_modules = [m['name'] for m in get_module_name(['|', ('state', '=', 'installed'), ('state', '=', 'uninstalled')])]
+    installed = [m['name'] for m in get_module_name([('state', '=', 'installed')])]
     to_be_installed = MODULE and MODULE.split(',') or None
     to_be_upgraded = []
     while to_be_installed:
@@ -95,7 +132,7 @@ elif MODULE:
             else:
                 print '**** to be installed ****\n%s' %to_be_installed
                 client.install(m)
-                to_be_installed = list(set(to_be_installed) - set(m['name'] for m in odoo.env['ir.module.module'].read(odoo.env['ir.module.module'].search(([('state', '=', 'installed')])), ['name'])))
+                to_be_installed = list(set(to_be_installed) - set(m['name'] for m in get_module_name([('state', '=', 'installed')])))
         if UNINSTALL:
             if m in installed:
                 client.uninstall(m)
