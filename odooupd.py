@@ -93,9 +93,6 @@ for o, a in opts:
 client = erppeek.Client(HOST+':'+PORT, DATABASE, 'admin', PASSWD)
 if UPDATE_LIST:
     client.model('ir.module.module').update_list()
-
-
-
 if LIST:
     installed = [m['name'] for m in get_module_name([('state', '=', 'installed')])]
     print ','.join(installed)
