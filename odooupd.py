@@ -100,12 +100,13 @@ elif LISTP:
     module_path = {}
     missing = []
     for module in [m['name'] for m in get_module_name([('state', '=', 'installed')])]:
-        path = get_module_path(module)
+        path = subprocess.Popen('locate %s/__openerp__.py' % module,shell=True,stdout=subprocess.PIPE ).stdout.readlines()
         if path:
-            if path.split('/')[-2] in module_path:
-                module_path[path.split('/')[-2]].append(module)
+            path = path[-1].strip()
+            if path.split('/')[-3] in module_path:
+                module_path[path.split('/')[-3]].append(module)
             else:
-                module_path[path.split('/')[-2]] = [module]
+                module_path[path.split('/')[-3]] = [module]
         else:
             if module_path.get('missing'):
                 module_path['missing'].append(module)
