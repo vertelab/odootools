@@ -1,16 +1,58 @@
-#!/bin/bash
-
-
+#!/usr/bin/env bash
 
 if [ ! -d /etc/odoo ]; then  # Install Odoo (only one time)
-    # this package is missing in 16.04 
-    wget https://launchpad.net/ubuntu/+archive/primary/+files/python-support_1.0.15_all.deb
-    sudo dpkg -i python-support_1.0.15_all.deb
+    # Define some stuff
+    ODOO_HOME=/var/lib/odoo
+    ODOO_CORE=/usr/share/OCB
+    OPENERP=/usr/lib/python2.7/dist-packages/openerp
+    SYSTEMD_FILE=/lib/systemd/system/odoo.service
 
-    sudo wget -O - https://nightly.odoo.com/odoo.key | sudo apt-key add -
-    echo "deb http://nightly.odoo.com/8.0/nightly/deb/ ./" | sudo tee /etc/apt/sources.list.d/odoo.list > /dev/null
-    sudo apt-get update
-    sudo apt-get -y install odoo
+    sudo apt install -y python python-pip
+
+    # Install repository
+    sudo git clone https://github.com/OCA/OCB.git -b 8.0 $ODOO_CORE
+
+    sudo ln -s $ODOO_CORE/openerp $OPENERP
+
+    # Install dependencies defined in odoo repo
+    sudo apt install -y $(grep python- $ODOO_CORE/debian/control | sed s/,//)
+
+    # Install missing dependencies
+    sudo apt install -y python-webdav python-zsi python-pybabel libldap2-dev libsasl2-dev libssl-dev libssl-doc zlib1g-dev libxml2-dev libxmlsec1-dev
+    pip install -r $ODOO_CORE/requirements.txt
+
+    # Install wkhtml
+    sudo wget https://github.com/wkhtmltopdf/wkhtmltopdf/releases/download/0.12.1/wkhtmltox-0.12.1_linux-trusty-amd64.deb
+    sudo dpkg -i wkhtmltox-0.12.1_linux-trusty-amd64.deb
+    sudo ln -s /usr/local/bin/wkhtmltopdf /usr/bin
+    sudo ln -s /usr/local/bin/wkhtmltoimage /usr/bin
+
+    # Create odoo user
+    sudo adduser --system --group odoo --home $ODOO_HOME
+
+    # Create odoo postgresql user
+    sudo su - postgres -c "createuser --createdb --no-password odoo"
+
+    # Create log directory
+    sudo mkdir /var/log/odoo
+    sudo chown odoo:odoo /var/log/odoo
+
+    # Install config file
+    sudo mkdir /etc/odoo
+    sudo cp $ODOO_CORE/debian/openerp-server.conf /etc/odoo/openerp-server.conf
+    sudo chown root:odoo /etc/odoo -R
+    sudo chmod o-r /etc/odoo/openerp-server.conf
+
+    # Install in /usr/bin
+    sudo ln $ODOO_CORE/odoo.py /usr/bin/odoo.py
+
+    # Install system.d file
+    sudo wget -O $SYSTEMD_FILE https://raw.githubusercontent.com/vertelab/odootools/8.0/odoo.service
+    sudo systemctl enable $SYSTEMD_FILE
+    
+    # Replace addons_path
+    sudo perl -i -pe 's/addons_path.*$/addons_path = \/usr\/lib\/python2.7\/dist-packages\/openerp\/addons,\/usr\/share\/OCB\/addons/g' /etc/odoo/openerp-server.conf
+    
     # Generate a good password
     sudo perl -i -pe 'BEGIN { $pw.=(a..z,A..Z,0..9)[rand 62] for 0..15 } s/; admin_passwd.*$/admin_passwd = $pw/g' /etc/odoo/openerp-server.conf
     sudo wget -O /etc/odoo/odoo.tools https://raw.githubusercontent.com/vertelab/odootools/8.0/odoo.tools
