@@ -53,6 +53,9 @@ if [ ! -d /etc/odoo ]; then  # Install Odoo (only one time)
     # Replace addons_path
     sudo perl -i -pe 's/addons_path.*$/addons_path = \/usr\/lib\/python2.7\/dist-packages\/openerp\/addons,\/usr\/share\/OCB\/addons/g' /etc/odoo/openerp-server.conf
     
+    # Limiting odoo to localhost
+    sudo su -c "echo xmlrpc_interface = localhost >> /etc/odoo/openerp-server.conf"
+    
     # Generate a good password
     sudo perl -i -pe 'BEGIN { $pw.=(a..z,A..Z,0..9)[rand 62] for 0..15 } s/; admin_passwd.*$/admin_passwd = $pw/g' /etc/odoo/openerp-server.conf
     sudo wget -O /etc/odoo/odoo.tools https://raw.githubusercontent.com/vertelab/odootools/8.0/odoo.tools
