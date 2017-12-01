@@ -3,7 +3,7 @@
 for DB in `su postgres -c "psql -At -c \"select datname from pg_database where datistemplate = false and 'postgres' <> datname;\" postgres"`
 do
         echo $DB
-        su odoo -c "./odoobackup.py --database=$DB --filename=/tmp/odoobackup.$$" && mv /tmp/odoobackup.$$ /var/backups/"$DB".zip
+        su odoo -c "odoobackup --database=$DB --filename=/tmp/odoobackup.$$" && mv /tmp/odoobackup.$$ /var/backups/"$DB".zip
 	[ -f /tmp/odoobackup.$$ ] && rm -f /tmp/odoonackup.$$ ; echo Database $DB not backedup
 done
 
