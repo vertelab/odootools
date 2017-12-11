@@ -138,6 +138,20 @@ function odooaddons() {
     fi
 }
 
+function odoogitdate() {
+    [ -f /etc/odoo/odoo.tools ] && . /etc/odoo/odoo.tools
+    if [ ! -z "$ODOOADDONS" ]
+    then
+        CWD=`pwd`
+        for p in ${ODOOADDONS//,/ }; do
+            cd $p
+            echo -n $p " "
+            git checkout `git rev-list -n 1 --before="$1" --branches` 2> ~/odoogitpull.err
+        done
+        cat ~/odoogitpull.err
+        cd $CWD
+    fi
+}
 function odoogitpull() {
     [ -f /etc/odoo/odoo.tools ] && . /etc/odoo/odoo.tools
     if [ ! -z "$ODOOADDONS" ]
