@@ -18,6 +18,7 @@ if [ ! -d /etc/odoo ]; then  # Install Odoo (only one time)
     sudo add-apt-repository "deb http://archive.ubuntu.com/ubuntu $(lsb_release -sc) universe"
     sudo apt update
     sudo apt install -y $(grep python- $ODOO_CORE/debian/control | sed s/,//)
+    sudo apt install postgresql
 
     # Install missing dependencies
     sudo apt install -y python-webdav python-zsi python-pybabel libldap2-dev libsasl2-dev libssl-dev libssl-doc zlib1g-dev libxml2-dev libxmlsec1-dev
