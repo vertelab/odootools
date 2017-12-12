@@ -15,6 +15,8 @@ if [ ! -d /etc/odoo ]; then  # Install Odoo (only one time)
     sudo ln -s $ODOO_CORE/openerp $OPENERP
 
     # Install dependencies defined in odoo repo
+    sudo add-apt-repository "deb http://archive.ubuntu.com/ubuntu $(lsb_release -sc) universe"
+    sudo apt update
     sudo apt install -y $(grep python- $ODOO_CORE/debian/control | sed s/,//)
 
     # Install missing dependencies
