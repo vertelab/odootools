@@ -24,8 +24,8 @@ odooupd.tmp: odooupd.py
 	@sudo chmod a+x /usr/bin/odooupd
 	@touch odooupd.tmp
 
-bash.tmp: bash.odoo bash_completion.odoo
-	@sudo cp bash.odoo /etc
+bash.tmp: odootools.sh bash_completion.odoo
+	@sudo cp odootools.sh /etc/profile.d
 	@sudo cp bash_completion.odoo /etc/bash_completion.d/odoo
 	@touch bash.tmp
 
