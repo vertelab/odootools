@@ -5,9 +5,9 @@ sudo apt-get --purge -f remove -y postgresql postgresql\*
 sudo apt-get -y autoremove
 
 sudo rm -rf /usr/lib/python2.7/dist-packages/odoo/
+sudo rm -rf /usr/share/core-odoo
 sudo rm -rf /var/log/odoo
-sudo rm -rf /etc/odoo /etc/bash.odoo /etc/bash_completion/odoo /etc/cron.daily/db_backup
-sudo perl -i -pe 's/\. \/etc\/bash.odoo//g' /etc/bash.bashrc
+sudo rm -rf /etc/odoo /etc/bash_completion/odoo /etc/cron.daily/db_backup /etc/profile.d/odootools.sh
 
 sudo rm -rf /var/lib/postgresql /etc/postgresql /etc/postgresql-common /var/cache/postgresql/ /usr/share/postgresql-common/ /usr/share/postgresql /var/log/postgresql /usr/lib/postgresql 
 
