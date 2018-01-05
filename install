@@ -17,13 +17,19 @@ if [ ! -d /etc/odoo ]; then  # Install Odoo (only one time)
 fi
 
 
-if [ ! -d /usr/share/odoo-addons ]; then 
+if [ ! -d /usr/share/core-odoo ]; then 
     sudo ln -s /usr/lib/python2.7/dist-packages/odoo/ /usr/share/core-odoo
 fi
 
+sudo apt-get -y install python-dev libffi-dev
+sudo pip install pybarcode
+sudo apt-get -y build-dep cairosvg
+sudo pip install utils
 sudo apt-get -y install python-pip
 sudo -H pip install openpyxl
 sudo apt-get -y install git
+sudo pip install phonenumbers
+sudo pip install erppeek
 
 # sudo su postgres createuser odoo -s
 
