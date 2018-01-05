@@ -14,6 +14,7 @@ if [ ! -d /etc/odoo ]; then  # Install Odoo (only one time)
     # Generate a good password
     sudo perl -i -pe 'BEGIN { $pw.=(a..z,A..Z,0..9)[rand 62] for 0..15 } s/; admin_passwd.*$/admin_passwd = $pw/g' /etc/odoo/odoo.conf
     sudo wget -O /etc/odoo/odoo.tools https://raw.githubusercontent.com/vertelab/odootools/10.0/odoo.tools
+    sudo su postgres createuser odoo
 fi
 
 
@@ -30,8 +31,6 @@ sudo -H pip install openpyxl
 sudo apt-get -y install git
 sudo pip install phonenumbers
 sudo pip install erppeek
-
-# sudo su postgres createuser odoo -s
 
 sudo wget -O /etc/profile.d/odootools.sh https://raw.githubusercontent.com/vertelab/odootools/10.0/odootools.sh
 
