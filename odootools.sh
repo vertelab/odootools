@@ -1,10 +1,28 @@
 alias alldbs='`su postgres -c "psql -At -c \"select datname from pg_database where datistemplate = false and 'postgres' <> datname;\" postgres"`'
 alias odootail='sudo tail -f /var/log/odoo/odoo-server.log'
 alias odoovilog='sudo vi /var/log/odoo/odoo-server.log'
-alias odooadminpw='sudo grep admin_passwd /etc/odoo/openerp-server.conf | cut -f 3 -d" "'
+alias odooadminpw='sudo grep admin_passwd /etc/odoo/odoo.conf | cut -f 3 -d" "'
 
 alias allprojects='ls -d /usr/share/odoo-*'
 alias cdo='cd /usr/share/odoo-addons'
+
+export ODOO_USER="odoo"
+export ODOO_SOURCE_DIR=/opt/odoo
+export ODOO_SERVER_CONF=/etc/odoo/openerp_server.conf
+export LOGS_DIR=/var/log/odoo
+#export ADDONS_PATH=/opt/virtualenv/odoo10/lib/python2.7/site-packages/odoo-10.0-py2.7.egg/odoo/addons,/opt/odoo/addons,/opt/odoo10custom/addons
+export DISTRO='ubuntu'
+[ -z `grep -o 'redhat.com' /proc/version` ] || export DISTRO='redhat'
+[ -z `grep -o 'centos.org' /proc/version` ] || export DISTRO='centos'
+export ODOO_SERVER='odoo'
+[ $DISTRO == 'redhat' -o $DISTRO == 'centos' ] && export ODOO_SERVER='/opt/odoo/odoosrc/odoo-bin'
+export ODOO_START='sudo service odoo start'
+[ $DISTRO == 'redhat' -o $DISTRO == 'centos' ] && export ODOO_START='sudo systemctl start odoo'
+export ODOO_STOP='sudo service odoo stop'
+[ $DISTRO == 'redhat' -o $DISTRO == 'centos' ] && export ODOO_STOP='sudo systemctl stop odoo'
+
+
+
 function _cdprojectdir() {
     [ -z $1 ] || ODOOPROJECT=$1
     cd /usr/share/$ODOOPROJECT
@@ -23,9 +41,9 @@ function _dirname() {
 }
 
 function _odoo_update_module() {
-    sudo service odoo stop
-    sudo su odoo -c "odoo.py -c /etc/odoo/openerp-server.conf --database $1 --update $2 --stop-after-init"
-    sudo service odoo start
+    ${ODOO_STOP}
+    sudo su odoo -c "odoo.py -c ${ODOO_SERVER_CONF} --database $1 --update $2 --stop-after-init"
+    ${ODOO_START}
 }
 alias odooupdm='_odoo_update_module'
 
@@ -46,7 +64,7 @@ function _odoo_install_module() {
         echo "For databases=${DATABASES} modules=${MODULES}"
 
     sudo service odoo stop
-    sudo su odoo -c "odoo.py -c /etc/odoo/openerp-server.conf --database ${DATABASES} --init ${MODULES} --stop-after-init"
+    sudo su odoo -c "odoo.py -c ${ODOO_SERVER_CONF} --database ${DATABASES} --init ${MODULES} --stop-after-init"
     sudo service odoo start
 }
 alias odooinstall='_odoo_install_module'

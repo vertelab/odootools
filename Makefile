@@ -1,5 +1,5 @@
 
-all : odooupd.tmp erppeek.tmp bash.tmp openpyxl.tmp phonenumbers.tmp profile.tmp
+all : odooupd.tmp erppeek.tmp openpyxl.tmp phonenumbers.tmp profile.tmp
 	@echo Complete
 
 openpyxl.tmp:
@@ -11,9 +11,9 @@ openpyxl.tmp:
 	@sudo pip install utils
 	@touch openpyxl.tmp
 
-profile.tmp:
+profile.tmp: odootools.sh bash_completion.odoo
 	@sudo cp bash_completion.odoo /etc/bash_completion.d/odoo
-	@sudo cp bash.odoo /etc/profile.d/odootools
+	@sudo cp odootools.sh /etc/profile.d/odootools
 	@touch profile.tmp
 
 phonenumbers.tmp:
@@ -29,11 +29,6 @@ odooupd.tmp: odooupd.py
 	@sudo cp odooupd.py /usr/bin/odooupd
 	@sudo chmod a+x /usr/bin/odooupd
 	@touch odooupd.tmp
-
-bash.tmp: bash.odoo bash_completion.odoo
-	@sudo cp bash.odoo /etc
-	@sudo cp bash_completion.odoo /etc/bash_completion.d/odoo
-	@touch bash.tmp
 
 clean:
 	@rm -f *pyc
