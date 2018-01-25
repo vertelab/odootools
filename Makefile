@@ -1,14 +1,20 @@
 
-all : odooupd.tmp erppeek.tmp bash.tmp openpyxl.tmp phonenumbers.tmp
+all : odooupd.tmp erppeek.tmp bash.tmp openpyxl.tmp phonenumbers.tmp profile.tmp
 	@echo Complete
 
 openpyxl.tmp:
 	@sudo apt install python-dev libffi-dev
 	@sudo pip install openpyxl
 	@sudo pip install pybarcode
-	@sudo pip install cairosvg
+	@sudo apt install python-cairo python-cairosvg
+#	@sudo pip install cairosvg
 	@sudo pip install utils
 	@touch openpyxl.tmp
+
+profile.tmp:
+	@sudo cp bash_completion.odoo /etc/bash_completion.d/odoo
+	@sudo cp bash.odoo /etc/profile.d/odootools
+	@touch profile.tmp
 
 phonenumbers.tmp:
 	@sudo pip install phonenumbers
