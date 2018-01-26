@@ -76,7 +76,7 @@ sudo apt-get -y install git
 
 # sudo su postgres createuser odoo -s
 
-sudo wget -O /etc/bash.odoo https://raw.githubusercontent.com/vertelab/odootools/8.0/bash.odoo
+sudo wget -O /etc/profile.d/odootools.sh https://raw.githubusercontent.com/vertelab/odootools/8.0/odootools.sh
 # Adds import of bash.odoo as last line of bash.bashrc
 sudo perl -i -pe 's/\. \/etc\/bash.odoo//g'  /etc/bash.bashrc
 sudo perl -i -pe '$_ .= ". /etc/bash.odoo\n" if eof' /etc/bash.bashrc
