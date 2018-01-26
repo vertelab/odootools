@@ -1,5 +1,7 @@
 #!/usr/bin/env bash
 
+
+
 if [ ! -d /etc/odoo ]; then  # Install Odoo (only one time)
     # Define some stuff
     ODOO_HOME=/var/lib/odoo
