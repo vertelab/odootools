@@ -251,11 +251,25 @@ function _create_test_db() {
         return
     fi
     sudo -u odoo createdb $1
-    zcat "${2:-/dev/stdin}" | sudo -u odoo psql $1
+    # Write the new database as postgress to avoid problems with extensions (such as ip4r)
+    zcat "${2:-/dev/stdin}" | sudo -u postgres psql $1
+    # Set odoo as owner of tables, sequences and views
+    for tbl in `sudo -u postgres psql -qAt -c "select tablename from pg_tables where schemaname = 'public';" $1` ; do
+        sudo -u postgres psql -c "alter table \"$tbl\" owner to odoo" $1;
+    done;
+    for tbl in `sudo -u postgres psql -qAt -c "select sequence_name from information_schema.sequences where sequence_schema = 'public';" $1` ; do
+        sudo -u postgres psql -c "alter table \"$tbl\" owner to odoo" $1;
+    done;
+    for tbl in `sudo -u postgres psql -qAt -c "select table_name from information_schema.views where table_schema = 'public';" $1` ; do
+        sudo -u postgres psql -c "alter table \"$tbl\" owner to odoo" $1;
+    done;
+    # Disable mail connections
     sudo -u odoo psql $1 -c "update fetchmail_server set active = false;"
     sudo -u odoo psql $1 -c "update ir_mail_server set active = false;"
+    # Restart odoo
     sudo service odoo start
     sleep 1
+    # Install test ribbon
     odooupd -d $1 -i -m web_environment_ribbon
 }
 

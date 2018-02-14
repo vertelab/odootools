@@ -1,5 +1,5 @@
 
-all : odooupd.tmp erppeek.tmp openpyxl.tmp phonenumbers.tmp profile.tmp
+all : odooupd.tmp erppeek.tmp openpyxl.tmp phonenumbers.tmp profile.tmp odoobackup.tmp
 	@echo Complete
 
 openpyxl.tmp:
@@ -32,6 +32,11 @@ odooupd.tmp: odooupd.py
 	@sudo cp odooupd.py /usr/bin/odooupd
 	@sudo chmod a+x /usr/bin/odooupd
 	@touch odooupd.tmp
+
+odoobackup.tmp: odoobackup.py
+	@sudo cp odoobackup.py /usr/bin/odoobackup
+	@sudo chmod a+x /usr/bin/odoobackup
+	@touch odoobackup.tmp
 
 clean:
 	@rm -f *pyc
