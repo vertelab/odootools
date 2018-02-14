@@ -2,6 +2,8 @@ alias alldbs='`su postgres -c "psql -At -c \"select datname from pg_database whe
 alias odootail='sudo tail -f /var/log/odoo/odoo-server.log'
 alias odoovilog='sudo vi /var/log/odoo/odoo-server.log'
 alias odooadminpw='sudo grep admin_passwd /etc/odoo/openerp-server.conf | cut -f 3 -d" "'
+alias memcached_flush='echo "flush_all"|nc localhost 11211'
+alias memcached_stats='echo "stats"|nc localhost 11211'
 
 alias allprojects='ls -d /usr/share/odoo-*'
 alias cdo='cd /usr/share/odoo-addons'
