@@ -4,7 +4,7 @@ all : odooupd.tmp erppeek.tmp openpyxl.tmp phonenumbers.tmp profile.tmp odooback
 
 openpyxl.tmp:
 	@sudo apt install python-dev libffi-dev
-	sudo apt install -y $(shell . ./odoo.tools;grep python- $$ODOO_CORE/debian/control | sed s/,//)
+	@sudo apt install -y $(shell . ./odoo.tools;grep python- $$ODOO_CORE/debian/control | sed s/,//)
 	@sudo pip install -r $(shell . ./odoo.tools; echo $$ODOO_CORE)/requirements.txt
 	@sudo pip install openpyxl
 	@sudo pip install openpyxl
