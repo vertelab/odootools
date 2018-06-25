@@ -32,6 +32,10 @@ if [ ! -d /etc/odoo ]; then  # Install Odoo (only one time)
     sudo ln -s /usr/local/bin/wkhtmltopdf /usr/bin
     sudo ln -s /usr/local/bin/wkhtmltoimage /usr/bin
 
+    # wkhtmltox-0.12.1_linux-trusty-amd64.deb does not work on 18.04
+    # apt install xfonts-75dpi
+    # dpkg -i wkhtmltox_0.12.5-1.bionic_amd64.deb 
+
     # Create odoo user
     sudo adduser --system --group odoo --home $ODOO_HOME
 
