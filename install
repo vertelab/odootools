@@ -23,18 +23,28 @@ if [ ! -d /etc/odoo ]; then  # Install Odoo (only one time)
     sudo apt install postgresql
 
     # Install missing dependencies
-    sudo apt install -y python-webdav python-zsi python-pybabel libldap2-dev libsasl2-dev libssl-dev libssl-doc zlib1g-dev libxml2-dev libxmlsec1-dev
+    sudo apt install -y python-webdav python-zsi libldap2-dev libsasl2-dev libssl-dev libssl-doc zlib1g-dev libxml2-dev libxmlsec1-dev
+    sudo pip install Babel
     pip install -r $ODOO_CORE/requirements.txt
 
     # Install wkhtml
-    sudo wget https://github.com/wkhtmltopdf/wkhtmltopdf/releases/download/0.12.1/wkhtmltox-0.12.1_linux-trusty-amd64.deb
-    sudo dpkg -i wkhtmltox-0.12.1_linux-trusty-amd64.deb
-    sudo ln -s /usr/local/bin/wkhtmltopdf /usr/bin
-    sudo ln -s /usr/local/bin/wkhtmltoimage /usr/bin
-
-    # wkhtmltox-0.12.1_linux-trusty-amd64.deb does not work on 18.04
-    # apt install xfonts-75dpi
-    # dpkg -i wkhtmltox_0.12.5-1.bionic_amd64.deb 
+    MYPWD=${PWD}
+    cd /tmp
+    if [`lsb_release -rs` -eq '18.04']
+    then
+       # wkhtmltox-0.12.1_linux-trusty-amd64.deb does not work on 18.04
+       apt install xfonts-75dpi
+       sudo wget https://builds.wkhtmltopdf.org/0.12.1.3/wkhtmltox_0.12.1.3-1~bionic_amd64.deb
+       sudo dpkg -i wkhtmltox_0.12.1.3-1~bionic_amd64.deb
+       sudo rm wkhtmltox_0.12.1.3-1~bionic_amd64.deb
+    else
+       sudo wget https://github.com/wkhtmltopdf/wkhtmltopdf/releases/download/0.12.1/wkhtmltox-0.12.1_linux-trusty-amd64.deb
+       sudo dpkg -i wkhtmltox-0.12.1_linux-trusty-amd64.deb
+       sudo ln -s /usr/local/bin/wkhtmltopdf /usr/bin
+       sudo ln -s /usr/local/bin/wkhtmltoimage /usr/bin
+       sudo rm wkhtmltox-0.12.1_linux-trusty-amd64.deb
+    fi 
+    cd $MYPWD
 
     # Create odoo user
     sudo adduser --system --group odoo --home $ODOO_HOME
