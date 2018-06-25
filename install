@@ -30,7 +30,7 @@ if [ ! -d /etc/odoo ]; then  # Install Odoo (only one time)
     # Install wkhtml
     MYPWD=${PWD}
     cd /tmp
-    if ['`lsb_release -rs`' -eq '18.04']
+    if [ `lsb_release -rs`  == 18.04 ]
     then
        # wkhtmltox-0.12.1_linux-trusty-amd64.deb does not work on 18.04
        apt install xfonts-75dpi
