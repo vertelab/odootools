@@ -29,8 +29,8 @@ if [ ! -d /etc/odoo ]; then  # Install Odoo (only one time)
     # Install missing dependencies
     sudo apt install -y python-webdav python-zsi libldap2-dev libsasl2-dev libssl-dev libssl-doc zlib1g-dev libxml2-dev libxmlsec1-dev
     sudo -H pip install Babel
-    sudo -H pip install psycopg2==2.7.3.1
     sudo -H pip install -r $ODOO_CORE/requirements.txt
+    sudo -H pip install psycopg2==2.7.3.1
 
     # Install wkhtml
     MYPWD=${PWD}
