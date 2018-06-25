@@ -1,8 +1,8 @@
 #!/usr/bin/env bash
 
 sudo apt-get -y install python-pip
-sudo pip install click
-sudo pip install openpyxl
+sudo -H pip install click
+sudo -H pip install openpyxl
 sudo apt-get -y install git
 
 
@@ -15,10 +15,10 @@ if [ ! -d /etc/odoo ]; then  # Install Odoo (only one time)
 
     sudo apt install -y python python-pip
 
-    # Install repository
+    # Install ODOO-repository from OCA
     sudo git clone https://github.com/OCA/OCB.git --single-branch --depth 1  -b 8.0 $ODOO_CORE
-
     sudo ln -s $ODOO_CORE/openerp $OPENERP
+    sudo rm $ODOO_CORE/openerp/openerp  # Missleading symbolic link
 
     # Install dependencies defined in odoo repo
     sudo add-apt-repository "deb http://archive.ubuntu.com/ubuntu $(lsb_release -sc) universe"
@@ -28,8 +28,9 @@ if [ ! -d /etc/odoo ]; then  # Install Odoo (only one time)
 
     # Install missing dependencies
     sudo apt install -y python-webdav python-zsi libldap2-dev libsasl2-dev libssl-dev libssl-doc zlib1g-dev libxml2-dev libxmlsec1-dev
-    sudo pip install Babel
-    sudo pip install -r $ODOO_CORE/requirements.txt
+    sudo -H pip install Babel
+    sudo -H pip install psycopg2==2.7.3.1
+    sudo -H pip install -r $ODOO_CORE/requirements.txt
 
     # Install wkhtml
     MYPWD=${PWD}
