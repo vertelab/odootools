@@ -9,7 +9,7 @@ Install by:
 
 Uninstall by: (this drops your databases and all your data related to Odoo)
 
-wget -O- https://raw.githubusercontent.com/vertelab/odootools/master/uninstall | bash
+wget -O- https://raw.githubusercontent.com/vertelab/odootools/8.0/uninstall | bash
 
 
 Odoo-tools commands:
