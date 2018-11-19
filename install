@@ -24,10 +24,10 @@ fi
 
 sudo apt-get -y install python-dev libffi-dev
 sudo pip install pybarcode
-sudo apt-get -y build-dep cairosvg
+sudo apt-get install -y python-cairosvg
 sudo pip install utils
 sudo apt-get -y install python-pip
-sudo -H pip install openpyxl
+sudo apt install python-openpyxl
 sudo apt-get -y install git
 sudo pip install phonenumbers
 sudo pip install erppeek

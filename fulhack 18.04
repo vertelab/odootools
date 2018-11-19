@@ -1,0 +1,15 @@
+sudo pip install pyPdf
+
+https://launchpad.net/ubuntu/bionic/+package/python-imaging
+
+
+Ladda ner senaste paketet från https://nightly.odoo.com/10.0/nightly/deb/
+ar x odoo_10.0.latest_all.deb
+tar xzf control.tar.gz
+
+Editera control. Ändra Ta bort python-pypdf
+
+tar --ignore-failed-read -cvzf control.tar.gz {post,pre}{inst,rm} md5sums control
+ar rcs newpackage.deb debian-binary control.tar.gz data.tar.xz
+
+Installera newpackage.deb
