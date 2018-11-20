@@ -4,35 +4,42 @@
 
 if [ ! -d /etc/odoo ]; then  # Install Odoo (only one time)
     # this package is missing in 16.04 
-    wget https://launchpad.net/ubuntu/+archive/primary/+files/python-support_1.0.15_all.deb
-    sudo dpkg -i python-support_1.0.15_all.deb
+    #wget https://launchpad.net/ubuntu/+archive/primary/+files/python-support_1.0.15_all.deb
+    #sudo dpkg -i python-support_1.0.15_all.deb
     
     sudo add-apt-repository universe
     sudo wget -O - https://nightly.odoo.com/odoo.key | sudo apt-key add -
     echo "deb http://nightly.odoo.com/12.0/nightly/deb/ ./" | sudo tee /etc/apt/sources.list.d/odoo.list > /dev/null
-    sudo apt-get update
-    sudo apt-get -y install odoo
+    sudo apt update
+    sudo apt -y install odoo
     # Generate a good password
-    sudo perl -i -pe 'BEGIN { $pw.=(a..z,A..Z,0..9)[rand 62] for 0..15 } s/; admin_passwd.*$/admin_passwd = $pw/g' /etc/odoo/openerp-server.conf
-    sudo wget -O /etc/odoo/odoo.tools https://raw.githubusercontent.com/vertelab/odootools/master/odoo.tools
+    sudo perl -i -pe 'BEGIN { $pw.=(a..z,A..Z,0..9)[rand 62] for 0..15 } s/; admin_passwd.*$/admin_passwd = $pw/g' /etc/odoo/odoo.conf
+    sudo wget -O /etc/odoo/odoo.tools https://raw.githubusercontent.com/vertelab/odootools/12.0/odoo.tools
 fi
 
 
-if [ ! -d /usr/share/odoo-addons ]; then 
-    sudo ln -s /usr/lib/python2.7/dist-packages/openerp/ /usr/share/odoo-addons
+if [ ! -d /usr/share/core-odoo ]; then 
+    sudo ln -s /usr/lib/python3/dist-packages/odoo/ /usr/share/core-odoo
 fi
+sudo apt -y install python3-pip
+sudo pip3 install wheel
+sudo wget -O /tmp/requirements.txt https://github.com/odoo/odoo/blob/12.0/requirements.txt
+sudo pip3 install -r /tmp/requirements.txt
 
-sudo apt-get -y install python-pip
+
 sudo -H pip install openpyxl
-sudo apt-get -y install git
+wget -O /tmp/wkhtmltox_0.12.1.3-1~bionic_amd64.deb https://builds.wkhtmltopdf.org/0.12.1.3/wkhtmltox_0.12.1.3-1~bionic_amd64.deb
+sudo dpkg -i /tmp/wkhtmltox_0.12.1.3-1~bionic_amd64.deb
+sudo rm -f /tmp/wkhtmltox_0.12.1.3-1~bionic_amd64.deb
+sudo apt -y install git
 
 # sudo su postgres createuser odoo -s
 
-sudo wget -O /etc/profile.d/odootools.sh https://raw.githubusercontent.com/vertelab/odootools/master/odootools.sh
-sudo wget -O /etc/bash_completion.d/odoo https://raw.githubusercontent.com/vertelab/odootools/master/bash_completion.odoo
+sudo wget -O /etc/profile.d/odootools.sh https://raw.githubusercontent.com/vertelab/odootools/12.0/odootools.sh
+sudo wget -O /etc/bash_completion.d/odoo https://raw.githubusercontent.com/vertelab/odootools/12.0/bash_completion.odoo
 
 # daily backup
-sudo wget -O /etc/cron.daily/db_backup https://raw.githubusercontent.com/vertelab/odootools/master/db_backup
+sudo wget -O /etc/cron.daily/db_backup https://raw.githubusercontent.com/vertelab/odootools/12.0/db_backup
 sudo chmod a+x /etc/cron.daily/db_backup
 
 
