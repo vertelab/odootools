@@ -22,9 +22,9 @@ if [ ! -d /usr/share/core-odoo ]; then
     sudo ln -s /usr/lib/python3/dist-packages/odoo/ /usr/share/core-odoo
 fi
 sudo apt -y install python3-pip
-sudo pip3 install wheel
+sudo -H pip3 install wheel
 wget -O /tmp/requirements.txt https://github.com/odoo/odoo/blob/12.0/requirements.txt
-sudo pip3 install -r /tmp/requirements.txt
+sudo -H pip3 install -r /tmp/requirements.txt
 
 
 sudo -H pip install openpyxl
