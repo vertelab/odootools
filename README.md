@@ -1,14 +1,14 @@
 # odootools
 
-Ensure you are using the version (eg branch 8.0 for Odoo 8) you want to install.
+Ensure you are using the version (eg branch 12.0 for Odoo 12) you want to install.
 
 Install by:
 
- wget -O- https://raw.githubusercontent.com/vertelab/odootools/master/install | bash
+ wget -O- https://raw.githubusercontent.com/vertelab/odootools/12.0/install | bash
 
 Uninstall by: (this drops your databases and all your data related to Odoo)
 
-wget -O- https://raw.githubusercontent.com/vertelab/odootools/master/uninstall | bash
+wget -O- https://raw.githubusercontent.com/vertelab/odootools/12.0/uninstall | bash
 
 
 Odoo-tools commands:
