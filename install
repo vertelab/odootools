@@ -6,7 +6,8 @@ if [ ! -d /etc/odoo ]; then  # Install Odoo (only one time)
     # this package is missing in 16.04 
     wget https://launchpad.net/ubuntu/+archive/primary/+files/python-support_1.0.15_all.deb
     sudo dpkg -i python-support_1.0.15_all.deb
-
+    
+    sudo add-apt-repository universe
     sudo wget -O - https://nightly.odoo.com/odoo.key | sudo apt-key add -
     echo "deb http://nightly.odoo.com/12.0/nightly/deb/ ./" | sudo tee /etc/apt/sources.list.d/odoo.list > /dev/null
     sudo apt-get update
