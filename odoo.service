@@ -1,0 +1,20 @@
+[Unit]
+Description=ODOO Application Server
+Requires=postgresql.service
+After=postgresql.service
+[Install]
+Alias=odoo.service
+[Service]
+Type=simple
+PermissionsStartOnly=true
+User=odoo
+Group=odoo
+SyslogIdentifier=odoo
+PIDFile=/run/odoo/odoo.pid
+KillMode=control-group
+KillSignal=SIGTERM
+TimeoutStopSec=600
+ExecStartPre=/usr/bin/install -d -m755 -o odoo -g odoo /run/odoo
+ExecStart=/usr/bin/odoo.py -c /etc/odoo/openerp-server.conf --pid=/run/odoo/odoo.pid --logfile /var/log/odoo/odoo-server.log
+[Install]
+WantedBy=multi-user.target
