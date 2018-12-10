@@ -36,9 +36,9 @@ sudo wget -O /etc/profile.d/odootools.sh https://raw.githubusercontent.com/verte
 sudo wget -O /etc/bash_completion.d/odoo https://raw.githubusercontent.com/vertelab/odootools/10.0/bash_completion.odoo
 # Systemd
 sudo wget -O /etc/systemd/system/odoo.service https://raw.githubusercontent.com/vertelab/odootools/10.0/odoo.service
-systemctl daemon-reload
-systemctl enable odoo
-systemctl start odoo
+sudo systemctl daemon-reload
+sudo systemctl enable odoo
+sudo systemctl start odoo
 
 # daily backup
 sudo wget -O /etc/cron.daily/db_backup https://raw.githubusercontent.com/vertelab/odootools/10.0/db_backup
