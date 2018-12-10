@@ -33,8 +33,8 @@ sudo pip install phonenumbers
 sudo pip install erppeek
 
 sudo wget -O /etc/profile.d/odootools.sh https://raw.githubusercontent.com/vertelab/odootools/10.0/odootools.sh
-
 sudo wget -O /etc/bash_completion.d/odoo https://raw.githubusercontent.com/vertelab/odootools/10.0/bash_completion.odoo
+sudo wget -O /etc/systemd/system/odoo.service https://raw.githubusercontent.com/vertelab/odootools/10.0/odoo.service
 
 # daily backup
 sudo wget -O /etc/cron.daily/db_backup https://raw.githubusercontent.com/vertelab/odootools/10.0/db_backup
