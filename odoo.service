@@ -15,6 +15,6 @@ KillMode=control-group
 KillSignal=SIGTERM
 TimeoutStopSec=600
 ExecStartPre=/usr/bin/install -d -m755 -o odoo -g odoo /run/odoo
-ExecStart=/usr/bin/odoo.py -c /etc/odoo/openerp-server.conf --pid=/run/odoo/odoo.pid --logfile /var/log/odoo/odoo-server.log
+ExecStart=/usr/bin/odoo -c /etc/odoo/odoo.conf --pid=/run/odoo/odoo.pid --logfile /var/log/odoo/odoo-server.log
 [Install]
 WantedBy=multi-user.target
