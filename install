@@ -32,6 +32,7 @@ sudo apt-get -y install git
 sudo pip install phonenumbers
 sudo pip install erppeek
 sudo pip install xlrd
+sudo pip install openpyxl
 
 sudo wget -O /etc/profile.d/odootools.sh https://raw.githubusercontent.com/vertelab/odootools/10.0/odootools.sh
 sudo wget -O /etc/bash_completion.d/odoo https://raw.githubusercontent.com/vertelab/odootools/10.0/bash_completion.odoo
