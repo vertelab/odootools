@@ -8,7 +8,7 @@ alias cdo='cd /usr/share/odoo-addons'
 
 export ODOO_USER="odoo"
 export ODOO_SOURCE_DIR=/opt/odoo
-export ODOO_SERVER_CONF=/etc/odoo/openerp_server.conf
+export ODOO_SERVER_CONF=/etc/odoo/odoo.conf
 export LOGS_DIR=/var/log/odoo
 #export ADDONS_PATH=/opt/virtualenv/odoo10/lib/python2.7/site-packages/odoo-10.0-py2.7.egg/odoo/addons,/opt/odoo/addons,/opt/odoo10custom/addons
 export DISTRO='ubuntu'

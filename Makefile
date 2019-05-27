@@ -3,12 +3,12 @@ all : odooupd.tmp erppeek.tmp openpyxl.tmp phonenumbers.tmp profile.tmp
 	@echo Complete
 
 openpyxl.tmp:
-	@sudo apt install python-dev libffi-dev
-	@sudo pip install openpyxl
-	@sudo pip install pybarcode
-	@sudo apt install python-cairo python-cairosvg
+	@sudo apt install python3-dev libffi-dev
+	@sudo pip3 install openpyxl
+	@sudo pip3 install pybarcode
+	@sudo apt install python3-cairo pythoni3-cairosvg
 #	@sudo pip install cairosvg
-	@sudo pip install utils
+	@sudo pip3 install utils
 	@touch openpyxl.tmp
 
 profile.tmp: odootools.sh bash_completion.odoo
@@ -17,11 +17,11 @@ profile.tmp: odootools.sh bash_completion.odoo
 	@touch profile.tmp
 
 phonenumbers.tmp:
-	@sudo pip install phonenumbers
+	@sudo pip3 install phonenumbers
 	@touch phonenumbers.tmp
 
 erppeek.tmp:
-	@sudo pip install erppeek
+	@sudo pip3 install erppeek
 	@touch erppeek.tmp
 
 odooupd.tmp: odooupd.py
