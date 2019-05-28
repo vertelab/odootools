@@ -25,7 +25,7 @@ Odoo-tools command |Description
  odoocheckmodule   <module>        | lists databases that use a module (eg odoocheckmodule sale)
  odoocreatetestdb <database name> <input file or stdin> | Creates new database without e-mail-settings for outgoing mail
  odoofind *pattern*        | find patterns in odoo-core source code                     
- odoogitclone *project*    | clones and installs projects from githuh (vertel-projects)   
+ odoogitclone *project*    | clones and installs projects from github (vertel-projects)   
  odoogitpull    | does a *git pull* for every project in ODOOADDONS  
  odoolangexport    | export po/pot file for a module, -m <module> -d <database> -l <language>. To export a pot-file exclude "-l"
  odoopatch                 | Implements patches from the directory /etc/odoo/patch.d        
