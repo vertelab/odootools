@@ -137,7 +137,7 @@ alias odoosync='_odoosync'
 
 function _patch_all_patches() {
     CWD=`pwd`
-    cd /usr/lib/python2.7/dist-packages/openerp
+    cd /usr/lib/python3/dist-packages/odoo
     for PATCH in $(ls /etc/odoo/patch.d/*.patch)
     do
         sudo patch -p6 < $PATCH
@@ -152,7 +152,7 @@ function odooaddons() {
     if [ ! -z "$ODOOADDONS" ]
     then
         CMD="s/^addons_path.*=.*/addons_path=${ODOOADDONS//"/"/"\/"}/g"
-        sudo perl -i -pe $CMD /etc/odoo/openerp-server.conf
+        sudo perl -i -pe $CMD /etc/odoo/odoo.conf
     fi
 }
 
@@ -233,7 +233,7 @@ function odoolangexport() {
     echo $FILE
     sudo service odoo stop
     echo "odoo.py --modules='${MODULES}' -d ${DATABASES} ${LCMD} --stop-after-init --i18n-export='${FILE}'"
-    sudo su odoo -c "odoo.py -c /etc/odoo/openerp-server.conf --modules='${MODULES}' -d ${DATABASES} ${LCMD} --stop-after-init --i18n-export='${FILE}'"
+    sudo su odoo -c "odoo.py -c /etc/odoo/odoo.conf --modules='${MODULES}' -d ${DATABASES} ${LCMD} --stop-after-init --i18n-export='${FILE}'"
     sudo service odoo start
     sudo chown ${USER} ${FILE}
     if [ -z "${L}" ]

@@ -5,8 +5,8 @@ all : odooupd.tmp erppeek.tmp openpyxl.tmp phonenumbers.tmp profile.tmp
 openpyxl.tmp:
 	@sudo apt install python3-dev libffi-dev
 	@sudo pip3 install openpyxl
-	@sudo pip3 install pybarcode
-	@sudo apt install python3-cairo pythoni3-cairosvg
+	#@sudo pip3 install pybarcode
+	@sudo apt install python3-cairo python3-cairosvg
 #	@sudo pip install cairosvg
 	@sudo pip3 install utils
 	@touch openpyxl.tmp
