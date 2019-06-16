@@ -109,7 +109,7 @@ function _odoogitclone() {
         # add user to odoo group
         sudo chown odoo:odoo /usr/share/$PROJECT
         cd /usr/share
-        git clone git@github.com:vertelab/$PROJECT.git
+        git clone -b 12.0 git@github.com:vertelab/$PROJECT.git
     done
     cd $CWD
 }
