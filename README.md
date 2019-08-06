@@ -26,7 +26,7 @@ Odoo-tools command |Description
  odoofind *pattern*        | find patterns in odoo-core source code                     
  odoogitclone *project*    | clones and installs projects from githuh (vertel-projects)   
  odoogitpull    | does a *git pull* for every project in ODOOADDONS  
- odoolangexport    | export po/pot file for a module, -m <module> -d <database> -l <language>. To export a pot-file exclude "-l"
+ odoolangexport    | export po/pot file for a module, -m <module> -d <database> -l <language>. To export a pot-file exclude "-l" [Read more](https://raw.githubusercontent.com/vertelab/odootools/8.0/odoolangexport.pdf)
  odoopatch                 | Implements patches from the directory /etc/odoo/patch.d        
  odoorestart               | Restarts odoo and apache/varnish or other systems that have to be restarted (configure in odoo.tools)
  odoosetperm               | Sets permissions for all projects and modules
