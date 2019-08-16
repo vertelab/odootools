@@ -30,6 +30,11 @@ odooupd.tmp: odooupd.py
 	@sudo chmod a+x /usr/bin/odooupd
 	@touch odooupd.tmp
 
+odoobackup.tmp: odoobackup.py
+	@sudo cp odoobackup.py /usr/bin/odoobackup
+	@sudo chmod a+x /usr/bin/odoobackup
+	@touch odoobackup.tmp
+
 clean:
 	@rm -f *pyc
 	@echo "Cleaned up"
