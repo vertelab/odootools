@@ -1,5 +1,5 @@
 
-all : odooupd.tmp erppeek.tmp openpyxl.tmp phonenumbers.tmp profile.tmp
+all : odooupd.tmp erppeek.tmp openpyxl.tmp phonenumbers.tmp profile.tmp odoobackup.tmp
 	@echo Complete
 
 openpyxl.tmp:
