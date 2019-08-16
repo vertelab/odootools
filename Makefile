@@ -1,5 +1,5 @@
 
-all : odooupd.tmp erppeek.tmp bash.tmp openpyxl.tmp phonenumbers.tmp
+all : odooupd.tmp erppeek.tmp bash.tmp openpyxl.tmp phonenumbers.tmp odoobackup.tmp db_backup.tmp
 	@echo Complete
 
 openpyxl.tmp:
@@ -19,10 +19,18 @@ erppeek.tmp:
 	@touch erppeek.tmp
 
 odooupd.tmp: odooupd.py
-	#@python -m py_compile odooupd.py
 	@sudo cp odooupd.py /usr/bin/odooupd
 	@sudo chmod a+x /usr/bin/odooupd
 	@touch odooupd.tmp
+
+odoobackup.tmp: odooupd.py
+	@sudo cp odoobackup.py /usr/bin/odoobackup
+	@sudo chmod a+x /usr/bin/odoobackup
+	@touch odoobackup.tmp
+
+db_backup.tmp: db_backup
+	@sudo cp db_backup /etc/cron.daily/db_backup
+	@sudo chmod a+x /etc/cron.daily/db_backup
 
 bash.tmp: odootools.sh bash_completion.odoo
 	@sudo cp odootools.sh /etc/profile.d
@@ -32,5 +40,3 @@ bash.tmp: odootools.sh bash_completion.odoo
 clean:
 	@rm -f *pyc
 	@echo "Cleaned up"
-
-
