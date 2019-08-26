@@ -43,3 +43,45 @@ _cdb()
 complete -F _cdb cdb
 complete -F _cdb sqldrop
 complete -F _cdb sqldump
+
+_check_prev_words()
+{
+    for i in `seq 0 $(expr $COMP_CWORD - 1)`; do
+        if [[ $1 == ${COMP_WORDS[i]} ]]; then
+            return
+        fi
+    done
+    options=$options\ $1
+}
+
+__odoosync()
+{
+    local cur
+    local prev
+    COMPREPLY=()
+    cur=${COMP_WORDS[COMP_CWORD]}
+    prev=${COMP_WORDS[COMP_CWORD-1]}
+    if [[ $prev == -p ]]; then
+        _odoo_projects
+    elif [[ $prev == -h ]]; then
+        _odoohosts
+    else
+        local options
+        _check_prev_words -p
+        _check_prev_words -h
+        COMPREPLY=( $( compgen -W "$options" -- $cur ) )
+    fi
+}
+complete -F __odoosync odoosync
+
+__odoo_create_test_db()
+{
+    local cur
+    COMPREPLY=()
+    cur=${COMP_WORDS[COMP_CWORD]}
+    if [[ $COMP_CWORD == 2 ]]; then
+        
+        COMPREPLY=( $( compgen -W "$(ls|grep .gz$)" -- $cur ) )
+    fi
+}
+complete -F __odoo_create_test_db odoocreatetestdb
