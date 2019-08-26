@@ -1,5 +1,21 @@
 # bash completion for Odoo projects
 
+_odoo_projects()
+{
+    COMPREPLY=( $( compgen -W '$( command ls /usr/share | grep odoo)' -- $cur ) )
+}
+
+_odoo_databases()
+{
+        local dbs='$( command sudo su postgres -c "psql -At -c \"select datname from pg_database where datistemplate = false;\" postgres" )'
+        COMPREPLY=( $( compgen -W "$dbs" -- $cur ) )
+}
+
+_odoohosts(){
+    [ -f /etc/odoo/odoo.tools ] && . /etc/odoo/odoo.tools
+    COMPREPLY=( $( compgen -W "$ODOOHOSTS" -- $cur ) )
+}
+
 _cdp()
 {
        COMPREPLY=( $( compgen -W '$( command ls /usr/share | grep odoo)' -- $cur ) )
