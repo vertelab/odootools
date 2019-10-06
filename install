@@ -13,6 +13,8 @@ if [ ! -d /etc/odoo ]; then  # Install Odoo (only one time)
     
     wget http://ftp.se.debian.org/debian/pool/main/p/pillow/python-imaging_4.0.0-4_all.deb
     sudo dpkg -i python-imaging_4.0.0-4_all.deb
+    
+    sudo apt -y install postgresql
 
     sudo wget -O - https://nightly.odoo.com/odoo.key | sudo apt-key add -
     echo "deb http://nightly.odoo.com/10.0/nightly/deb/ ./" | sudo tee /etc/apt/sources.list.d/odoo.list > /dev/null
