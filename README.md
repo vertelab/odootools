@@ -1,14 +1,14 @@
 # odootools
 
-Ensure you are using the version (eg branch 12.0 for Odoo 12) you want to install.
+Ensure you are using the version (eg branch 13.0 for Odoo 13) you want to install.
 
 Install by:
 
- wget -O- https://raw.githubusercontent.com/vertelab/odootools/12.0/install | bash
+ wget -O- https://raw.githubusercontent.com/vertelab/odootools/13.0/install | bash
 
 Uninstall by: (this drops your databases and all your data related to Odoo)
 
-wget -O- https://raw.githubusercontent.com/vertelab/odootools/12.0/uninstall | bash
+wget -O- https://raw.githubusercontent.com/vertelab/odootools/13.0/uninstall | bash
 
 
 Odoo-tools commands:
@@ -27,7 +27,7 @@ Odoo-tools command |Description
  odoofind *pattern*        | find patterns in odoo-core source code                     
  odoogitclone *project*    | clones and installs projects from githuh (vertel-projects)   
  odoogitpull    | does a *git pull* for every project in ODOOADDONS  
- [odoolangexport](https://github.com/vertelab/odootools/blob/12.0/odoolangexport.pdf)    | export po/pot file for a module, -m <module> -d <database> -l <language>. To export a pot-file exclude "-l"
+ [odoolangexport](https://github.com/vertelab/odootools/blob/13.0/odoolangexport.pdf)    | export po/pot file for a module, -m <module> -d <database> -l <language>. To export a pot-file exclude "-l"
  odoopatch                 | Implements patches from the directory /etc/odoo/patch.d        
  odoorestart               | Restarts odoo and apache/varnish or other systems that have to be restarted (configure in odoo.tools)
  odoosetperm               | Sets permissions for all projects and modules
