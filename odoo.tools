@@ -4,5 +4,5 @@
 # ODOORESTART=<special odoo restart command>
 # ODOORESTART="sudo service odoo restart && sudo service apache2 restart"
 # List addons directories in ODOOADDONS-variable
-export ODOOADDONS=`ls -d /usr/share/odoo-* | grep -v odoo-addons | tr "\n" ","`
-#export ODOOADDONS=`ls -d /usr/share/odoo-* /usr/share/odooext-* | grep -v odoo-addons | tr "\n" ","`
+#export ODOOADDONS=`ls -d /usr/share/odoo-* | grep -v odoo-addons | tr "\n" ","`
+export ODOOADDONS=`ls -d /usr/share/odoo-* /usr/share/odooext-* 2> /dev/null | grep -v odoo-addons | paste -sd ","`
