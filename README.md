@@ -35,6 +35,6 @@ Odoo-tools command |Description
  odoosync -h *host* -p *project* | Syncs a project to a server without git meta data           
  odootail                  | Views odoo-log live, you can use the one-liner *odoorestart ; odootail* to restart and monitor odoo
 odooupd -h/--host, -P/--port, -d/--database, -m/--module, -p/--password, -l/--list, -i/--install, -u/--uninstall | Modifies Odoo-instanses; -m/--module=	comma separated  module list, -i/--install	install or upgrade modules  -u, --uninstall	uninstall modules, -c/--check coma separeted module list
-odooupdm *database* *modulelist*      | Installs/updates modules in single user mode                
+odooupdm *database* *modulelist*      | Installs/updates modules in single user mode. Modulelist format "module,module,..."                
  odoovilog                 | Opens Odoo log file in vi       
  
