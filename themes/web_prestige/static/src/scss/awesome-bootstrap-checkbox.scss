@@ -1,0 +1,37 @@
+.custom-control {
+  min-height: 1.5rem;
+  // padding-left: 5px;
+}
+
+.custom-control-label {
+  &::before {
+    border: 1px solid $gray-400;
+  }
+
+  .custom-control-input:checked ~ &::before {
+    border-color: $primary;
+  }
+}
+
+.custom-checkbox .custom-control-input:checked {
+  ~ .custom-control-label::after {
+    transform: scale(1.5);
+  }
+}
+
+.custom-radio .custom-control-input {
+  &:checked {
+    ~ .custom-control-label::before {
+      background: $white;
+    }
+    ~ .custom-control-label::after {
+      transform: scale(1.125);
+      transition: 240ms;
+    }
+  }
+  & {
+    ~ .custom-control-label::after {
+      transform: scale(.75);
+    }
+  }
+}

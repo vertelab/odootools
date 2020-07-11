@@ -1,0 +1,43 @@
+<?xml version="1.0" encoding="utf-8" ?>
+<odoo>
+  <data noupdate="1">
+    <function name="write" model="ir.model.data">
+      <function name="search" model="ir.model.data">
+        <value eval="[('module', '=', 'base'), ('name', 'in', ['user_root', 'user_admin', 'default_user', 'template_portal_user_id', 'public_user'])]" />
+      </function>
+      <value eval="{'noupdate': False}" />
+    </function>
+
+    <record id="base.user_root" model="res.users">
+      <field name="name">Yantra</field>
+      <field name="tz">Asia/Kathmandu</field>
+    </record>
+
+    <record id="base.user_admin" model="res.users">
+      <field name="odoobot_state">disabled</field>
+      <field name="tz">Asia/Kathmandu</field>
+    </record>
+
+    <record id="base.default_user" model="res.users">
+      <field name="odoobot_state">disabled</field>
+      <field name="tz">Asia/Kathmandu</field>
+    </record>
+
+    <record id="base.template_portal_user_id" model="res.users">
+      <field name="odoobot_state">disabled</field>
+      <field name="tz">Asia/Kathmandu</field>
+    </record>
+
+    <record id="base.public_user" model="res.users">
+      <field name="odoobot_state">disabled</field>
+      <field name="tz">Asia/Kathmandu</field>
+    </record>
+
+    <function name="write" model="ir.model.data">
+      <function name="search" model="ir.model.data">
+        <value eval="[('module', '=', 'base'), ('name', 'in', ['user_root', 'user_admin', 'default_user', 'template_portal_user_id', 'public_user'])]" />
+      </function>
+      <value eval="{'noupdate': True}" />
+    </function>
+  </data>
+</odoo>

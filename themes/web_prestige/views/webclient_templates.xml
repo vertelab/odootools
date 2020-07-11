@@ -1,0 +1,43 @@
+<?xml version="1.0" encoding="utf-8" ?>
+<odoo>
+  <template id="_assets_backend_helpers" inherit_id="web._assets_backend_helpers">
+      <xpath expr="." position="inside">
+          <link rel="stylesheet" type="text/scss" href="/web_prestige/static/src/scss/bootstrap_overridden.scss"/>
+      </xpath>
+  </template>
+
+  <template id="_assets_primary_variables" inherit_id="web._assets_primary_variables">
+      <xpath expr="." position="inside">
+          <link rel="stylesheet" type="text/scss" href="/web_prestige/static/src/scss/primary_variables.scss"/>
+      </xpath>
+  </template>
+
+  <template id="assets_backend" inherit_id="web.assets_backend">
+      <xpath expr="//link[last()]" position="after">
+          <link rel="stylesheet" type="text/scss" href="/web_prestige/static/src/scss/awesome-bootstrap-checkbox.scss"/>
+          <link rel="stylesheet" type="text/scss" href="/web_prestige/static/src/scss/mega_menu.scss"/>
+          <link rel="stylesheet" type="text/scss" href="/web_prestige/static/src/scss/backend_style.scss"/>
+      </xpath>
+
+      <xpath expr="//script[last()]" position="after">
+          <script type="text/javascript"
+          src="/web_prestige/static/src/js/main.js"></script>
+      </xpath>
+  </template>
+
+  <template id="assets_frontend" inherit_id="web.assets_frontend" name="Frontend Assets GBT Web">
+    <xpath expr="//link[last()]" position="after">
+      <link rel="stylesheet" href="/web_prestige/static/src/scss/login.scss" type="text/scss" />
+    </xpath>
+  </template>
+
+  <template id="web_prestige.layout" name="Web Layout - Prestige" inherit_id="web.layout">
+    <xpath expr="//title" position="replace">
+      <title t-esc="title or 'Prestige'"/>
+    </xpath>
+
+    <xpath expr="//link[@rel='shortcut icon']" position="replace">
+      <link type="image/x-icon" rel="shortcut icon" t-att-href="x_icon or '/web_prestige/static/img/favicon.png'"/>
+    </xpath>
+  </template>
+</odoo>
