@@ -1,0 +1,12 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<odoo>
+  <data>
+    <template id="asset_frontend" inherit_id="website.assets_frontend" name="Theme Hub Frontend">
+      <xpath expr="." position="inside">
+        <link href="/theme_nice_bootstrap/static/src/css/agency.min.css" rel="stylesheet" />
+        <link href="/theme_nice_bootstrap/static/src/css/custom.css" rel="stylesheet" />
+        <script src="/theme_nice_bootstrap/static/src/js/agency.min.js"></script>
+      </xpath>
+    </template>
+  </data>
+</odoo>

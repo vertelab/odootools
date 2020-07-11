@@ -1,0 +1,306 @@
+// Put Loading indicator in the right bottom of the screen 
+.o_loading {
+    background-color: darken(@brand-primary, 13.5%) !important;
+    top: inherit;
+    bottom: 0;
+    right: 0;
+    padding: 5px 50px;
+    border-radius: 0 !important;
+    opacity: 0.8;
+}
+
+// Font
+
+.ui-autocomplete
+{
+	font-family: @font-family-sans-serif;
+}
+
+// Adjust menu counter position
+
+@-moz-document url-prefix() {
+	.badge {
+		margin-top: -20px;
+	}
+}
+
+// Get rid of purple fontcolor
+
+body a {
+	color: @brand-primary;
+
+	&:active, &:focus, &:hover {
+		outline: none;
+	}
+}
+
+.ui-autocomplete .ui-menu-item.ui-state-focus  {
+    background-color: @brand-primary;	
+}
+
+.o_control_panel .breadcrumb > li > a {
+    color: @brand-primary;
+}
+
+.o_form_view .o_horizontal_separator {
+    color: @brand-primary;
+}
+
+.o_stat_value {
+    color: @brand-primary !important;
+}
+
+.o_form_view .oe_button_box .oe_stat_button .o_button_icon {
+    color: @brand-primary;
+}
+
+.nav-tabs > li > a {
+    color: @brand-primary;
+}
+
+.o_web_settings_dashboard .o_web_settings_dashboard_col .o_web_settings_dashboard_planner .o_web_settings_dashboard_progress_title {
+    color: @brand-primary !important
+}
+
+.o_calendar_container .o_calendar_sidebar_container .ui-datepicker table .ui-state-active {
+    background: @brand-primary none repeat scroll 0 0 !important;
+	color: #ffffff !important;
+}
+
+.o_calendar_container .o_calendar_sidebar_container .ui-datepicker table.ui-datepicker-calendar tbody td a {
+    color: @brand-primary;
+}
+
+.o_progressbar {
+    color: @brand-primary;
+}
+
+.o_progressbar .o_progress .o_progressbar_complete {
+    background-color: @brand-primary;
+}
+
+.o_web_client .o_kanban_view.o_kanban_dashboard.o_kanban_ungrouped a, .o_web_client .o_kanban_view.o_kanban_dashboard.o_kanban_grouped a {
+    color: @brand-primary;
+}
+
+
+// Navbar =========================================
+#oe_main_menu_navbar {
+    .box-shadow(0px 0px 8px #666666);
+    border: none;
+    .navbar-collapse {
+        padding-right: 16px;
+        padding-left: 16px;
+    }
+}
+
+#oe_main_menu_navbar,
+.navbar-nav {
+    li {
+        a, button {
+            font-size: 13px !important;
+         //   padding: 14px 10px !important;
+            margin-top: 0 !important;
+            line-height: 21px !important;
+        }
+    }
+    .dropdown-menu {
+        li {
+            a, button {
+                padding: 4px 10px !important;
+                font-size: 13px !important;
+			}
+        }
+    }
+}
+
+// Align green progress indicator
+#oe_main_menu_navbar .o_planner_systray > .progress {
+    margin-top: 18px !important;
+}
+
+// Add some space in button groups
+//.btn-group > .btn, .btn-group-vertical > .btn {
+//    float: left;
+//    margin: 3px;
+//    position: relative;
+//}
+
+// =========================================
+// Make formwidth wider to screen
+
+.o_form_view .o_form_sheet_bg .o_form_sheet {
+	max-width: 1200px;
+}
+
+// Darker background
+.o_form_view .o_form_sheet_bg {
+    background-color: #8f8f8f;
+    background-image: none;
+    border: 0 none;
+}
+
+
+.o_web_client > .o_main .o_main_content {
+	background-color: #8f8f8f;
+}
+
+.o_kanban_view {
+	background-color: #8f8f8f;
+}
+
+.o_event_left {
+    background-color: @brand-primary !important;
+}
+
+
+// Fix background project gantt
+.oe_gantt {
+    background-color: #fff;
+}
+
+// Kanban
+
+//Project
+.o_kanban_view.o_kanban_dashboard.o_project_kanban .o_project_kanban_boxes .o_project_kanban_box:nth-child(2n+1) {
+    background-color: @brand-primary !important;
+    }
+
+// Search filter
+
+.o_searchview .o_searchview_facet .o_searchview_facet_label {
+    background-color: @brand-primary;
+    }
+
+
+.o_primary {
+    color: @brand-primary !important;
+    }
+
+.o_kanban_view.o_kanban_dashboard.o_salesteam_kanban .o_sales_dashboard > div > table > tbody > tr > td.o_main {
+    background-color: @brand-primary !important;
+    }
+
+// Input field
+
+input[type="text"], input[type="password"], input[type="number"],
+textarea, select, .o_form_view.o_form_editable .o_form_field_many2manytags,
+.o_searchview
+{
+    border: 0;
+    border-radius: 0;
+    border-bottom: 1px solid #ccc;
+}
+
+.o_web_client input:focus, .o_web_client textarea:focus, .o_web_client select:focus {
+    outline: none;
+	border-bottom: 2px solid @brand-info;
+}
+
+// Control panel
+
+.breadcrumb {
+    background-color: transparent;
+}
+
+// Make lookup button background transparent
+.o_form_view .o_form_field.o_form_field_many2one .o_external_button {
+    color: @brand-primary;
+	background-color: transparent;
+}
+
+// Button header
+.o_form_view > header {
+    background-color: #ededed;
+    background-image: none;
+    border-bottom: 1px solid #cacaca;
+}
+
+.o_form_view > header {
+    padding-left: 14px;
+    padding-top: 2px;
+	padding-bottom: 2px;
+}
+
+// Status bar
+
+.o_form_view ul.oe_form_status li, .o_form_view ul.oe_form_status_clickable li {
+  background-image: linear-gradient(to bottom, #ededed, #ededed) !important;
+}
+
+.o_form_view ul.oe_form_status li > .arrow, .o_form_view ul.oe_form_status_clickable li > .arrow {
+  margin-left: 5px !important;
+}
+
+.o_form_view ul.oe_form_status li > .arrow span, .o_form_view ul.oe_form_status_clickable li > .arrow span {
+  margin-left: -20px !important;
+  box-shadow: 2px 0px 1px rgba(255, 255, 255, 0.2), inset -3px 3px 0px rgba(0, 0, 0, 0.2) !important;
+  background-color: #ededed !important;
+  background: -moz-linear-gradient(135deg, #ededed, #ededed) !important;
+  background: -o-linear-gradient(135deg, #ededed, #ededed) !important;
+  background: -webkit-gradient(linear, left top, right bottom, from(#ededed), to(#ededed)) !important;
+  background: -ms-linear-gradient(top, #ededed, #ededed) !important;
+  -moz-border-radius: 0px !important;
+  -webkit-border-radius: 0px !important;
+  border-radius: 0px !important;
+
+}
+
+.o_form_view ul.oe_form_status li.oe_active > .arrow span, .o_form_view ul.oe_form_status_clickable li.oe_active > .arrow span {
+  box-shadow: 2px 0px 1px rgba(255, 255, 255, 0.2), inset -3px 3px 0px @brand-info !important;
+  background-color: #ededed !important;
+  background: -moz-linear-gradient(135deg, #ededed, #ededed) !important;
+  background: -o-linear-gradient(135deg, #ededed, #ededed) !important;
+  background: -webkit-gradient(linear, left top, right bottom, from(#ededed), to(#ededed)) !important;
+  background: -ms-linear-gradient(top, #ededed, #ededed) !important;
+}
+
+
+.o_form_view ul.oe_form_status li.oe_active > .label, .o_form_view ul.oe_form_status_clickable li.oe_active > .label {
+  color: @brand-info !important;
+  font-weight: bold;
+  text-shadow: 0 1px 1px #ededed !important;
+}
+
+.o_form_view ul.oe_form_status li:first-child > .label, .o_form_view ul.oe_form_status_clickable li:first-child > .label {
+  border-left: 0px solid #cacaca  !important;
+}
+
+// Chat window
+
+.o_chat_window .o_chat_header {
+    background-color: @brand-primary !important;
+}
+
+// Explorer 11 fix to use fullscreen
+
+@media all and (-ms-high-contrast: none), (-ms-high-contrast: active) {
+
+	.oe-view-manager-view-kanban, .oe-view-manager-view-form, .oe-view-manager-view-list, .oe-view-manager-view-calendar, .oe-view-manager-view-pivot, .oe-view-manager-view-graph {
+        width: 100% !important;
+	}
+
+	// Fix user preference height	
+	.modal .modal-content .modal-body .oe-view-manager-content {
+		position: static;
+		height: 400px;
+	}
+	
+	// Fix salesboard width
+	.oe-view-manager-view-sales_team_dashboard {
+		width: 100%;
+	}
+
+}
+
+// Better contrast navnar sub-menu
+
+.dropdown-header {
+  font-weight: bolder;
+  background-color: @dropdown-border;
+}
+
+// Better contrast no-content
+.oe_view_nocontent {
+color: #333;
+}
