@@ -1,0 +1,80 @@
+// ------------------------------------------------------------------
+// Roboto
+// ------------------------------------------------------------------
+@roboto-font-path: '../fonts/Roboto';
+
+.roboto-font(@type, @weight, @style) {
+    @font-face {
+        font-family: 'Roboto';
+        src: url('@{roboto-font-path}/Roboto-@{type}-webfont.eot');
+        src: url('@{roboto-font-path}/Roboto-@{type}-webfont.eot?#iefix') format('embedded-opentype'),
+             url('@{roboto-font-path}/Roboto-@{type}-webfont.woff') format('woff'),
+             url('@{roboto-font-path}/Roboto-@{type}-webfont.ttf') format('truetype'),
+             url('@{roboto-font-path}/Roboto-@{type}-webfont.svg#Roboto') format('svg');
+        font-weight: @weight;
+        font-style: @style;
+    }
+
+    @font-face {
+        font-family: 'Roboto-@{type}';
+        src: url('@{roboto-font-path}/Roboto-@{type}-webfont.eot');
+        src: url('@{roboto-font-path}/Roboto-@{type}-webfont.eot?#iefix') format('embedded-opentype'),
+             url('@{roboto-font-path}/Roboto-@{type}-webfont.woff') format('woff'),
+             url('@{roboto-font-path}/Roboto-@{type}-webfont.ttf') format('truetype'),
+             url('@{roboto-font-path}/Roboto-@{type}-webfont.svg#Roboto') format('svg');
+    }
+}
+
+.roboto-font-pair(@type, @weight) {
+    .roboto-font('@{type}', @weight, normal);
+    .roboto-font('@{type}Italic', @weight, italic);
+}
+
+.roboto-font-pair('Thin', 100);
+.roboto-font-pair('Light', 300);
+.roboto-font-pair('Regular', 400);
+.roboto-font-pair('Medium', 500);
+.roboto-font-pair('Bold', 700);
+.roboto-font-pair('Black', 900);
+
+
+// ------------------------------------------------------------------
+// Gibson
+// ------------------------------------------------------------------
+@gibson-font-path: '../fonts/Gibson';
+
+.gibson-font(@type, @weight, @style) {
+    @font-face {
+        font-family: 'Gibson';
+        src: url('@{gibson-font-path}/Gibson-@{type}-webfont.eot');
+        src: url('@{gibson-font-path}/Gibson-@{type}-webfont.eot?#iefix') format('embedded-opentype'),
+             url('@{gibson-font-path}/Gibson-@{type}-webfont.woff') format('woff'),
+             url('@{gibson-font-path}/Gibson-@{type}-webfont.ttf') format('truetype'),
+             url('@{gibson-font-path}/Gibson-@{type}-webfont.svg#Gibson') format('svg'),
+             url('@{gibson-font-path}/Gibson-@{type}-webfont.woff2') format('woff2');
+        font-weight: @weight;
+        font-style: @style;
+    }
+
+    @font-face {
+        font-family: 'Gibson-@{type}';
+        src: url('@{gibson-font-path}/Gibson-@{type}-webfont.eot');
+        src: url('@{gibson-font-path}/Gibson-@{type}-webfont.eot?#iefix') format('embedded-opentype'),
+             url('@{gibson-font-path}/Gibson-@{type}-webfont.woff') format('woff'),
+             url('@{gibson-font-path}/Gibson-@{type}-webfont.ttf') format('truetype'),
+             url('@{gibson-font-path}/Gibson-@{type}-webfont.svg#Gibson') format('svg'),
+             url('@{gibson-font-path}/Gibson-@{type}-webfont.woff2') format('woff2');
+    }
+}
+
+.gibson-font-pair(@type, @weight) {
+    .gibson-font('@{type}', @weight, normal);
+    .gibson-font('@{type}Italic', @weight, italic);
+}
+
+.gibson-font-pair('Light', 100);
+.gibson-font-pair('Light', 300);
+.gibson-font-pair('Regular', 400);
+.gibson-font-pair('Medium', 500);
+.gibson-font-pair('Regular', 700);
+.gibson-font-pair('SemiBold', 900);

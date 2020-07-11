@@ -1,0 +1,69 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<templates id="template" xml:space="preserve">
+
+<t t-extend="AppsMenu">
+	<t t-jquery="li.dropdown" t-operation="replace">
+		<li class="dropdown">
+			<a class="full" data-toggle="dropdown" href="#">
+				<i class="fa fa-th"/>
+			</a>
+			<div class="dropdown-menu o_application_switcher" role="menu">
+				<div class="container o_application_switcher_scrollable">
+					<div  class="o_apps">
+						<t t-foreach="widget.getApps()" t-as="app">
+		            <a role="menuitem"
+		                class="o_app o_menuitem"
+		                t-att-data-menu-id="app.menuID"
+		                t-att-data-menu-xmlid="app.xmlID"
+		                t-att-data-action-id="app.actionID">
+		                <img t-attf-src="/web/image/ir.ui.menu/{{ app.menuID }}/web_icon_data" t-att-alt="app.name" class="o_app_icon" t-att-title="app.name"/>
+		            	<div class="o_caption"> <t t-esc="app.name"/></div>
+		            </a>
+		             
+		            </t>
+					</div>
+		            
+		       	</div>
+        </div>
+		</li>
+	</t>
+</t>
+
+
+<t t-name="AppSwitcher.Content">
+    <div t-if="widget.state.apps.length" class="o_apps">
+        <t t-set="focused_app_index" t-value="widget.get_app_index()"/>
+        <t t-foreach="widget.state.apps" t-as="app">
+          <a
+            t-att-class="'o_app o_menuitem' + ((focused_app_index === app_index)? ' o_focused' : '')"
+            t-att-data-menu="app.id"
+            t-att-data-action-model="app.action ? app.action.split(',')[0] : ''"
+            t-att-data-action-id="app.action"
+            t-att-data-menu-xmlid="app.xmlid"
+            t-att-href="app.href ? app.href : ('#menu_id='+app.id+'&amp;action_id='+app.action)">
+            <div t-if="app.web_icon_data" class="o_app_icon"
+                t-attf-style="background-image: url('#{app.web_icon_data}');"/>
+            <div t-else="" class="o_app_icon"
+                t-attf-style="background-color: #{app.web_icon.background};">
+                <i t-att-class="app.web_icon.class" t-attf-style="color: #{app.web_icon.color};"/>
+            </div>
+            <div class="o_caption"><t t-esc="app.label"/></div>
+          </a>
+        </t>
+    </div>
+    <div t-if="widget.state.menu_items.length" class="o_menuitems">
+        <t t-set="focused_menu_index" t-value="widget.get_menu_index()"/>
+        <t t-foreach="widget.state.menu_items" t-as="menu">
+            <a
+              t-att-class="'o_menuitem' + ((focused_menu_index === menu_index)? ' o_focused' : '')"
+              t-att-href="menu.href ? menu.href : ('#menu_id='+menu.id+'&amp;action_id='+menu.action)"
+              t-att-data-menu="menu.id">
+                  <t t-esc="menu.label"/>
+            </a>
+        </t>
+    </div>
+    <t t-if="widget.state.apps.length + widget.state.menu_items.length === 0">
+        <div class="o_no_result">No result</div>
+    </t>
+</t>
+</templates>

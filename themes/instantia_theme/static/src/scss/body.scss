@@ -1,0 +1,33 @@
+body {
+	margin: 0;
+	font-family: "Lucida Grande", Helvetica, Verdana, Arial, sans-serif;
+	font-size: 1.08333333rem;
+	font-weight: 400;
+	line-height: 1.5;
+	color: #4c4c4c;
+	text-align: left;
+	background-color: #f0eeee;
+}
+html .o_web_client > .o_main .o_main_content {
+	-ms-flex: 1 1 auto;
+	-moz-flex: 1 1 auto;
+	-webkit-box-flex: 1;
+	-webkit-flex: 1 1 auto;
+	flex: 1 1 auto;
+	display: -ms-flexbox;
+	display: -moz-box;
+	display: -webkit-box;
+	display: -webkit-flex;
+	display: flex;
+	-ms-flex-flow: column nowrap;
+	-moz-flex-flow: column nowrap;
+	-webkit-flex-flow: column nowrap;
+	flex-flow: column nowrap;
+}
+html .o_web_client > .o_main .o_main_content .o_content > .o_view_controller,
+.o_mail_thread .o_thread_message.o_mail_not_discussion, .o_mail_activity .o_thread_message.o_mail_not_discussion{
+	background: #fff !important;
+}
+.o_tooltip{
+	display: none;
+}

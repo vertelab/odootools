@@ -1,0 +1,27 @@
+<?xml version="1.0" encoding="utf-8"?>
+
+<odoo>
+	<template id="assets_common" name="instantia_theme assets common" inherit_id="web.assets_common">
+		<xpath expr="//link[last()]" position="after">
+			<link rel="stylesheet" type="text/less" href="/instantia_theme/static/src/less/fonts.less"/>
+		</xpath>
+	</template>
+	
+	<template id="assets_backend" inherit_id="web.assets_backend">
+		<xpath expr=".">
+			
+			<link rel="stylesheet" href="/instantia_theme/static/src/scss/style.scss"/>
+			<link rel="stylesheet" href="/instantia_theme/static/src/scss/apps.scss"/>
+			<link rel="stylesheet" href="/instantia_theme/static/src/scss/sidebar.scss"/>
+			<link rel="stylesheet" href="/instantia_theme/static/src/scss/body.scss"/>
+			<link rel="stylesheet" href="/instantia_theme/static/src/scss/button.scss"/>
+			<link rel="stylesheet" href="/instantia_theme/static/src/scss/form.scss"/>
+			<link rel="stylesheet" href="/instantia_theme/static/src/scss/navbar.scss"/>
+			<link rel="stylesheet" href="/instantia_theme/static/src/scss/custom.scss"/>
+			
+		</xpath>
+	</template>
+	
+	
+		
+</odoo>

@@ -1,0 +1,175 @@
+
+
+// -----------------
+.o_main_navbar > ul > li > a:hover, .o_main_navbar > ul > li > label:hover,
+.o_main_navbar .show .dropdown-toggle{
+	background-color: transparent !important;
+}
+
+.o_main_navbar > a:hover, .o_main_navbar > a:focus, .o_main_navbar > button:hover, .o_main_navbar > button:focus{
+	background-color: transparent !important;
+}
+.o_main_navbar > ul > li > a, .o_main_navbar > ul > li > label{
+	color: #DEEBFF !important;
+}
+.o_menu_apps .full .fa-th{
+	font-size: 20px;
+	padding: 15px 5px 0px 2px;
+}
+.o_menu_apps li.dropdown.show {
+  position: static;
+  display: flex !important;
+}
+.o_mail_systray_item.o_no_notification > a{
+	opacity: 1 !important;
+}
+
+.o_menu_apps li.dropdown.show .dropdown-menu {
+	display: table;
+	border-radius: 0px;
+	width: 100%;
+	text-align: center;
+	left: 0;
+	right: 0;
+	position: fixed !important;
+	top: 46px !important;
+	transform: translate3d(0px, 0px, 0px) !important;
+}
+
+.o_main_navbar .o_menu_apps .dropdown-menu.show {
+    max-height: 100% !important;
+    height: 100% !important;
+}
+.o_menu_apps .dropdown-menu > li {
+  display: table-cell;
+  height: 50px;
+  line-height: 50px;
+  vertical-align: middle;
+}
+
+.o_sidebar_menu .o_sidebar_menu_content{
+	overflow-y: scroll !important;
+	height: 550px !important;
+	border-top: 5px solid #dee2e6;
+    border-bottom: 5px solid #dee2e6;
+    direction: rtl;
+}
+.o_sidebar_menu_content{
+	scrollbar-face-color: #367CD2;
+	scrollbar-shadow-color: transparent;
+	scrollbar-highlight-color: transparent;
+    scrollbar-3dlight-color: transparent;
+    scrollbar-darkshadow-color: transparent;
+    scrollbar-track-color: transparen16325Ct;
+    scrollbar-arrow-color: transparent;
+}
+
+/* Let's get this party started */
+.o_sidebar_menu_content::-webkit-scrollbar {
+	width: 8px;
+}
+ 
+/* Track */
+.o_sidebar_menu_content::-webkit-scrollbar-track {
+	-webkit-box-shadow: inset 0 0 6px transparent; 
+	-webkit-border-radius: 10px;
+	border-radius: 10px;
+}
+ 
+/* Handle */
+.o_sidebar_menu_content::-webkit-scrollbar-thumb {
+	-webkit-border-radius: 10px;
+	border-radius: 10px;
+	height: 50px;
+	background: #eeeeee; 
+	-webkit-box-shadow: inset 0 0 6px transparent; 
+}
+@media screen and (max-width: 767px) {
+  .dropdown-menu > li {
+    display: block;
+  }
+}
+
+.o_application_switcher {
+   background-position: center;
+    background-size: cover;
+    background-color: #172B4D;
+    font-size: 15px;
+}
+.o_application_switcher .o_application_switcher_scrollable {
+    display: -ms-flexbox;
+    display: -moz-box;
+    display: -webkit-box;
+    display: -webkit-flex;
+    display: flex;
+    -ms-flex-flow: column nowrap;
+    -moz-flex-flow: column nowrap;
+    -webkit-flex-flow: column nowrap;
+    flex-flow: column nowrap;
+    -webkit-align-items: center;
+    align-items: center;
+    -ms-flex: 1 0 auto;
+    -moz-flex: 1 0 auto;
+    -webkit-box-flex: 1;
+    -webkit-flex: 1 0 auto;
+    flex: 1 0 auto;
+    width: 100%;
+    max-width: 850px;
+}
+
+.o_application_switcher .o_application_switcher_scrollable .o_apps {
+    -ms-flex: 0 0 auto;
+    -moz-flex: 0 0 auto;
+    -webkit-box-flex: 0;
+    -webkit-flex: 0 0 auto;
+    flex: 0 0 auto;
+    width: 100%;
+    max-width: 850px;
+}
+.o_application_switcher .o_application_switcher_scrollable .o_apps {
+    margin-top: 10px;
+    -webkit-user-select: none;
+    -moz-user-select: none;
+    -ms-user-select: none;
+    user-select: none;
+}
+.o_application_switcher .o_application_switcher_scrollable .o_apps .o_app {
+    float: left;
+    margin: 0 1.5% 15px;
+    width: 13.66%;
+    padding: 10px 0;
+}
+.o_application_switcher .o_application_switcher_scrollable .o_apps .o_app {
+    background: transparent;
+    border: 1px solid transparent;
+    border-radius: 3%;
+    text-decoration: none;
+    text-align: center;
+    outline: none;
+    -webkit-transition: all 0.3s ease 0s;
+    -moz-transition: all 0.3s ease 0s;
+    -o-transition: all 0.3s ease 0s;
+    transition: all 0.3s ease 0s;
+}
+
+.o_application_switcher .o_application_switcher_scrollable .o_apps .o_app .o_app_icon {
+    position: relative;
+    width: 75%;
+    max-width: 65px;
+    overflow: hidden;
+    margin: auto;
+    border-radius: 16px;
+}
+
+.o_application_switcher .o_application_switcher_scrollable .o_apps .o_app .o_caption {
+    display: block;
+    max-width: 100%;
+    white-space: nowrap;
+    overflow: hidden;
+    text-overflow: ellipsis;
+    vertical-align: top;
+    margin-top: 8px;
+    color: white;
+    font-weight: 400;
+    font-size: 12px;
+}

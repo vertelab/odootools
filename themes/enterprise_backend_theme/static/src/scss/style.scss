@@ -1,0 +1,586 @@
+/*
+ * License LGPL-3.0 or later (http://www.gnu.org/licenses/lgpl). */
+
+
+@font-face {
+    font-family: Roboto;
+    src: url(/enterprise_backend_theme/static/src/font/Roboto-Regular.ttf)
+}
+
+
+$gray-base:              #000;
+$gray-darker:            lighten($gray-base, 13.5%);
+$gray-dark:              #666;
+$gray:                   #777;
+$gray-light:             #AEA79F;
+$gray-lighter: lighten($gray-base, 93.5%);
+
+
+// Change colors here
+
+// Odoo EE colors
+//------------------------
+$brand-primary: #875a7b;
+$brand-secondary: #00A09D;
+//------------------------
+
+
+$brand-primary-dark: darken($brand-primary, 10%);
+$brand-primary-light: lighten($brand-primary, 10%);
+$brand-secondary-dark: darken($brand-secondary, 10%);
+$brand-secondary-light: lighten($brand-secondary, 10%);
+
+
+body {
+    font-family: "Roboto";
+}
+
+.tooltip .tooltip-inner .oe_tooltip_string {
+    background-color: $brand-primary;
+}
+
+.o_loading {
+    background-color: $brand-primary;
+}
+
+.o_main_navbar {
+    background-color : $brand-primary;
+}
+
+.o_main_navbar > a:hover, .o_main_navbar > a:focus, .o_main_navbar > button:hover, .o_main_navbar > button:focus {
+    background-color: $brand-primary-dark;
+    color: inherit;
+}
+
+.o_main_navbar > ul > li > a:hover, .o_main_navbar > ul > li > label:hover {
+    background-color: $brand-primary-dark;
+}
+
+.o_main_navbar .show .dropdown-toggle {
+    background-color: $brand-primary-dark;
+}
+
+.o_kanban_view .oe_kanban_color_11::after {
+    background-color: $brand-primary;
+}
+
+// Fix color Add file button
+.o_control_panel .o_cp_sidebar .o_hidden_input_file .o_form_binary_form span {
+    color: $gray-dark !important;
+}
+
+// Buttons
+
+.btn-primary:focus, .btn-primary.focus {
+    box-shadow: 0 0 0 0.2rem rgba(0, 160, 157, 0.5);
+}
+
+.btn {
+    border-radius: 0px;
+}
+
+.btn-primary {
+
+    color: #fff;
+    background-color: $brand-secondary;
+    border-color: $brand-secondary-light;
+
+}
+
+.btn-primary:hover {
+
+    color: #fff;
+    background-color: $brand-secondary-dark;
+    border-color: $brand-secondary-light;
+}
+
+.btn-secondary {
+    border: none;
+    color: $brand-secondary;
+}
+
+.btn:active, .btn.active {
+    -webkit-box-shadow: none;
+    box-shadow: none;
+    background-color: #eee !important;
+}
+
+.btn-group.open .dropdown-toggle {
+    -webkit-box-shadow: none;
+    box-shadow: none;
+    background-color: #eee !important;
+}
+
+
+.btn-link {
+    @include o-hover-text-color($brand-secondary, $brand-secondary-dark);
+}
+
+
+.o_form_view .o_form_statusbar > .o_statusbar_status > .o_arrow_button.btn-primary.disabled {
+    color: $brand-primary;
+}
+
+.o_form_view .o_form_statusbar > .o_statusbar_status > .o_arrow_button:not(.disabled):hover {
+    color: $brand-primary;
+}
+
+.o_dropdown_toggler_btn, .o_dropdown_toggler_btn:hover, .o_dropdown_toggler_btn:focus, .o_dropdown_toggler_btn:hover, .o_dropdown_toggler_btn:focus, .btn-icon, .o_graph_button {
+    text-transform: none !important;
+    color: $gray-dark !important;
+    background-color: transparent !important;
+    border: none !important;
+}
+
+.dropdown-menu {
+    border-radius: 0px;
+}
+
+oe_highlight {
+    color: #ffffff !important;
+    background-color: $brand-primary !important;
+}
+
+.o_external_button {
+    color: $brand-primary !important;
+    background: #ffffff;
+}
+
+.o_button_icon {
+    color: $brand-primary !important;
+}
+
+
+// Calendar
+
+.o_calendar_container .o_calendar_sidebar_container .ui-datepicker table .ui-state-active {
+    background: none;
+    background-color: $brand-primary !important;
+    color: #ffffff !important;
+}
+.o_calendar_container .o_calendar_sidebar_container .ui-datepicker table .ui-state-default {
+    color: $brand-primary;
+}
+
+.datepicker {
+    .table-sm {
+        > thead {
+            color: white;
+            background-color: $brand-primary;
+
+            > tr {
+                &:first-child {
+                    th:hover {
+                        color: white;
+                        background-color: darken($brand-primary, 10%);
+                    }
+                }
+
+                &:last-child {
+                    color: $o-datepicker-week-color;
+                    background-color: $o-datepicker-week-bg-color;
+                }
+                > th {
+                    border-radius: 0;
+                }
+            }
+        }
+
+        > tbody {
+            > tr {
+                > td {
+                    &.active, .active {
+                        background-color: $o-brand-primary;
+                        border-radius: 100px;
+                    }
+
+                    &.today:before {
+                        border-bottom-color: $o-brand-primary;
+                    }
+                }
+            }
+        }
+    }
+}
+
+.datepicker .table-sm > tbody > tr > td.active, .datepicker .table-sm > tbody > tr > td .active {
+    background-color: $brand-primary;
+	border-radius: 0;
+}
+
+// Filter search label
+
+.o_searchview {
+    .o_searchview_facet {
+
+         background-color: #ffffff;
+
+        .o_searchview_facet_label {
+            background-color: $brand-primary;
+        }
+    }
+}
+
+a {
+
+    color: $brand-secondary;
+    text-decoration: none;
+    background-color: transparent;
+    -webkit-text-decoration-skip: objects;
+
+}
+
+a:hover {
+
+    color: $brand-secondary-dark;
+    text-decoration: none;
+
+}
+
+
+.o_control_panel {
+    background-color: #ffffff;
+}
+
+.breadcrumb {
+    background-color: inherit;
+}
+
+// Input
+
+input[type="text"], input[type="password"], input[type="number"],
+textarea, select, .o_form_view.o_form_editable .o_form_field_many2manytags,
+.o_searchview
+{
+    border: 0;
+    border-radius: 0;
+    border-bottom: 1px solid #ccc;
+}
+
+.o_web_client input:focus, .o_web_client textarea:focus, .o_web_client select:focus {
+    outline: none;
+    border-bottom: 2px solid $brand-primary;
+}
+
+.o_input {
+    border: 1px solid #ccc;
+    border-top-style: none;
+    border-right-style: none;
+    border-left-style: none;
+    color: $gray;
+}
+
+.o_field_widget {
+    &.o_field_many2one .o_external_button {
+        color: $brand-secondary
+    }
+}
+
+.o_required_modifier {
+    &.o_input, .o_input {
+        background-color: lighten($brand-primary, 65%) ! important;
+    }
+}
+
+.input-group-text {
+	background-color: transparent;
+	color: #fff;
+	border: 0px;
+}
+
+// Listview
+
+.o_list_view.table {
+    border: none;
+}
+.o_list_view.table thead, .o_list_view.table tfoot, .o_list_view.table td,.o_list_view.table th {
+    border: none;
+}
+ 
+.o_list_view.table thead {
+    background-color: #e2e2e0;
+}
+ 
+.o_list_view.table thead > tr > th.o_column_sortable:hover {
+    background-color: #D6D6D3;
+}
+ 
+.o_list_view.table tbody tr.o_group_header {
+    background-color: #dfdfdf;
+    background-image: none;
+    border-top: 1px solid #e2e2e0;
+}
+
+.table-striped > tbody > tr:nth-of-type(2n+1) {
+    background-color: #eef0f0;
+}
+
+.o_list_view tfoot {
+    background-color: $brand-primary;
+    color: #ffffff;
+    cursor: default;
+    font-weight: normal;
+}
+
+.ui-autocomplete .ui-menu-item.ui-state-focus {
+    background-color: #dee2e6;
+}
+
+.ui-menu-item a:hover,.ui-menu-item a:focus {
+    color: #666666 !important;
+}
+.ui-autocomplete .ui-menu-item.ui-state-focus a{
+    color: #666666 !important;
+}
+
+.o_form_view .oe_button_box .oe_stat_button .o_stat_info .o_stat_value {
+    color: $brand-primary;
+}
+
+.bg-info {
+    background-color: #d1ecf1 !important;
+}
+
+.o_form_view .o_horizontal_separator {
+    color: #666666;
+    font-weight: bold;
+}
+
+// Forms
+
+.o_form_view {
+
+     .o_form_sheet_bg {
+        background: none !important;
+        background-color: #F9F9F9 !important;
+        padding: 0px;
+        .o_form_sheet {
+            border: 1px solid #d9d7d7;
+            box-shadow: 0 5px 20px -15px black;
+        }
+    } 
+
+    .o_form_statusbar {
+        //margin: -16px;
+  
+        .o_statusbar_status {
+            > .o_arrow_button {
+                background: #ffffff;
+            }
+        }
+    }
+}
+
+// App Dashboard
+
+.o_menu_apps .dropdown-menu.show {
+	background: transparent url('/dashboard') no-repeat scroll center center / cover;
+
+}
+
+
+.fa-th-large::before {
+    content: "\f00a";
+}
+
+.o_menu_apps .full {
+    width: 46px;
+    font-size: 18px;
+    text-align: center;
+}
+
+.o-app-name {
+	color: #fff;
+    font-size: 15px;
+    font-weight: 400;
+    text-overflow: ellipsis;
+    white-space: nowrap;
+	text-shadow: 0 1px 1px rgba(0, 0, 0, 0.45);
+}
+
+.o_menu_apps .dropdown-menu.show .o-app-icon {
+	padding: 20px 0 0;
+    max-width: 6rem;
+}
+
+.o_menu_apps .dropdown-menu.show .o-app-icon:hover {
+	box-shadow: 0 8px 15px -10px black;
+    transform: translateY(-1px);
+}
+
+.dropdown-item.o_app {
+    background: transparent;
+}
+
+.o-menu-search-result {
+	color: #fff;
+}
+
+// Chat window
+
+.o_thread_window .o_thread_window_header {
+	background-color: $brand-primary;
+}
+
+.o_form_view {
+    .o_form_uri {
+        display: inline-block;
+        color: $brand-secondary;
+
+        &:hover {
+            color: darken($brand-secondary, 15%);
+        }
+    }
+}
+.btn-primary, .btn-secondary, .o_radio_hide_bullet label {
+    text-transform: uppercase;
+}
+
+// ------------------------------------------------------------------
+// Misc. widgets
+// ------------------------------------------------------------------
+.o_notification_manager .o_notification.o_error {
+            color: white;
+            background-color: lighten($brand-primary, 15%);
+}
+
+.o_field_invalid.o_input, .o_field_invalid .o_input, .o_field_invalid.o_form_label {
+    color: lighten($brand-primary, 15%) !important;
+    border-color: lighten($brand-primary, 15%) !important;
+}
+
+.badge-primary {
+    color: #fff;
+    background-color: $brand-secondary;
+}
+
+.o_dashboards .o_website_dashboard div.o_box h4 {
+    color: $brand-secondary;
+}
+
+.o_dashboards .o_website_dashboard div.o_box h2 {
+    text-transform: uppercase;
+    margin-top: 0;
+    color: $brand-secondary;
+}
+
+.o_field_widget.o_field_image .o_form_image_controls {
+    background-color: $brand-primary;
+}
+
+//.custom-control-label::after {
+//    background: no-repeat 50% / 50% 50%;
+//}
+
+.custom-checkbox .custom-control-input:checked ~ .custom-control-label::after {
+    background-color: $brand-secondary;
+}
+
+.custom-radio .custom-control-input:checked ~ .custom-control-label::after {
+    background-color: $brand-secondary;
+}
+
+.o_event_left {
+    background-color: $brand-secondary !important;
+}
+
+.ui-autocomplete .ui-menu-item.o_m2o_dropdown_option > a {
+    color: $brand-secondary;
+}
+
+.o_progressbar .o_progress .o_progressbar_complete {
+    background-color: $brand-secondary !important;
+}
+
+//.o_field_widget.o_field_percent_pie .o_pie:after {
+//    border: 1px solid $brand-secondary !important;
+//}
+
+.o_kanban_view.o_kanban_dashboard.o_account_kanban {
+    .o_kanban_record {
+    
+        .o_kanban_card_settings {
+            border-color: $brand-secondary-light;
+        }
+        
+    }
+}
+
+// Style for the widget "dashboard_graph"
+.o_dashboard_graph {
+    &.o_graph_linechart {
+        > svg {
+            // Remove strokes
+            g.nv-linesWrap {
+                g.nv-group.nv-series-0 {
+                    fill: $brand-primary !important;
+                    stroke: $brand-primary !important;
+
+                    .nv-point {
+                        stroke: $brand-primary !important;
+                    }
+                }
+            }
+        }
+    }
+    &.o_graph_barchart {
+        > svg {
+            g.nv-barsWrap {
+                g.nv-group.nv-series-0 {
+                    g.past {
+                        fill: $brand-primary !important;
+                    }
+                    g.future {
+                        fill: $brand-primary !important;
+                    }
+                }
+            }
+        }
+    }
+}
+
+.o_dashboard_graph.o_graph_barchart > svg g.nv-barsWrap g.nv-group.nv-series-0 g.future {
+    fill: $brand-primary !important;
+}
+
+// Percent pie
+.o_field_widget {
+    // Percent pie
+    &.o_field_percent_pie {
+        > .o_pie {
+            background-color: $brand-primary;
+            &:after { // Outside pie border to go over border-radius irregularities
+                    border: 1px solid $brand-primary;
+            }
+            .o_mask {
+                &.o_full {
+                    background-color: $brand-primary;
+                }
+            }
+
+            .o_pie_value {
+                color: $brand-primary;
+            }
+        }
+    }
+}
+
+.btn-primary.disabled, .btn-primary:disabled {
+    color: #fff;
+    background-color: $brand-secondary !important;
+    border-color: $brand-secondary !important;
+}
+
+.o_list_view .o_field_x2many_list_row_add a:focus, .o_list_view .o_field_x2many_list_row_add a:active {
+    color: $brand-secondary-dark;
+}
+
+.btn-primary:not(:disabled):not(.disabled):active, .btn-primary:not(:disabled):not(.disabled).active, .show > .btn-primary.dropdown-toggle {
+    //color: rgb(255, 255, 255);
+    background-color: $brand-secondary;
+    border-color: $brand-secondary-light !important;
+}
+
+.o_mail_discuss .o_mail_discuss_sidebar .o_mail_discuss_item.o_active {
+    box-shadow: inset 3px 0 0 $brand-primary;
+}

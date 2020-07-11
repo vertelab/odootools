@@ -1,0 +1,69 @@
+
+.btn{
+	font-size: 13px !important;
+	border-radius: 0px;
+}
+
+.btn:focus{
+	outline: none !important;
+}
+
+.o_cp_left .btn-primary,
+.oe_module_action .btn-primary,
+.o_statusbar_buttons .btn-primary,
+.btn-primary:hover{
+	background: $brand-primary;
+	border: 1px solid $brand-primary;
+}
+
+.btn-primary:focus, .btn-primary.focus{
+	box-shadow: none !important;
+}
+
+.o_cp_left .btn-secondary,
+.o_statusbar_buttons .btn-secondary{
+	border-color:$brand-secondary-border;
+	color:$brand-secondary-border;
+}
+
+
+.btn-secondary:hover{
+	background-color:$btn-bg-hover;
+}
+
+
+.o_searchview .o_searchview_facet .o_searchview_facet_label{
+	background: #000000 !important;
+}
+
+.btn:active, .btn.active {
+	-webkit-box-shadow: none;
+	box-shadow: none;
+}
+
+.btn-group.open .dropdown-toggle {
+    -webkit-box-shadow: none;
+    box-shadow: none;
+    background-color: #fff !important;
+}
+
+
+.btn-link {
+    color: $brand-secondary;
+}
+.o_statusbar_buttons .btn{
+	border-radius: 5px;
+}
+
+.tooltip .tooltip-inner .oe_tooltip_string{
+	background: $brand-primary;
+}
+
+.o_form_view .o_form_statusbar > .o_statusbar_buttons > .btn{
+	padding-top: 5px !important;
+	padding-bottom: 7px !important;
+	border-radius: 3px !important;
+	padding-left: 15px !important;
+	padding-right: 15px !important;
+}
+

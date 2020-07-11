@@ -1,0 +1,67 @@
+.o_form_view .o_form_uri{
+	color:$brand-primary;
+}
+.breadcrumb-item{
+	color:$brand-primary;
+}
+
+.o_form_view .o_form_statusbar{
+	height: 40px;
+}
+
+.o_field_widget.o_field_many2manytags .badge .o_badge_text{
+	padding: 1.5px !important;
+}
+.o_field_widget.o_field_many2manytags .o_tag_color_0{
+	color: #4B4C9D !important;
+	box-shadow: inset 0 0 0 2px #8585a9 !important;
+}
+.o_form_view .o_form_statusbar > .o_statusbar_status > .o_arrow_button:first-child{
+	overflow-y: hidden;
+}
+.o_form_view .o_form_sheet_bg > .o_form_sheet {
+	padding: 10px !important;
+	margin: 5px auto !important;
+}
+// .o_form_view .o_form_statusbar > .o_statusbar_status > .o_arrow_button.btn-primary.disabled{
+// 	background: $brand-primary;
+// 	color: #fff !important;
+// 	overflow: hidden;
+// }
+// .o_form_view .o_form_statusbar > .o_statusbar_status > .o_arrow_button.btn-primary.disabled:after{
+// 	border-left-color:$brand-primary;
+// }
+// //.o_form_view .o_form_statusbar > .o_statusbar_status > .o_arrow_button:before, 
+// .o_form_view .o_form_statusbar > .o_statusbar_status > .o_arrow_button:not(:first-child):after{
+// 	border-top: 20px solid transparent !important;
+// 	border-bottom: 20px solid transparent !important;
+// }
+.o_form_view .o_form_statusbar > .o_statusbar_status > .o_arrow_button.btn-primary.disabled{
+	background-color:$brand-primary;
+}
+.o_form_view .o_form_statusbar > .o_statusbar_status > .o_arrow_button.btn-primary.disabled:after{
+	border-left-color: $brand-primary;
+}
+.o_form_view .o_form_statusbar > .o_statusbar_status > .o_arrow_button:before, 
+.o_form_view .o_form_statusbar > .o_statusbar_status > .o_arrow_button:not(:first-child):after{
+	border-top: 20px solid transparent !important;
+	border-bottom: 20px solid transparent !important;
+}
+.o_form_view .o_form_statusbar > .o_statusbar_status > .o_arrow_button.disabled{
+	color: #a8a8a8 !important;
+}
+.o_form_view .o_form_statusbar > .o_statusbar_status > .o_arrow_button:before{
+	border-left-color: $brand-primary;
+}
+.o_mail_systray_item .o_notification_counter{
+	background: transparent !important;
+	color: white !important;
+	vertical-align: super !important;
+	font-size: 0.9em !important;
+	padding: 5px 8px 5px 7px !important;
+	margin-left: -4px !important;
+	font-weight: bold;
+}
+.o_main_navbar .o_user_menu .oe_topbar_avatar{
+	height: 35px !important;
+}

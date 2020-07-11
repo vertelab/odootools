@@ -1,0 +1,8 @@
+#!/usr/bin/bash
+
+BRANCH=13.0
+
+for file in `ls *zip`
+do 
+	unzip $file
+done

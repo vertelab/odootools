@@ -1,0 +1,19 @@
+<?xml version="1.0" encoding="utf-8"?>
+<odoo>
+	<template id="instantia_theme.sidebar_menu_link" name="Sidebar">
+         <t t-set="debug_param" t-value="''"/>
+         <a t-att-href="'/web%s#menu_id=%s&amp;action=%s' % (debug_param, menu['id'], menu['action'] and menu['action'].split(',')[1] or '')"
+            t-att-class="'oe_menu_toggler' if menu.get('children') else 'oe_menu_leaf'"
+            t-att-data-menu="menu['id']"
+            t-att-data-menu-xmlid="menu.get('xmlid')"
+            t-att-data-action-model="menu['action'] and menu['action'].split(',')[0] or None"
+            t-att-data-action-id="menu['action'] and menu['action'].split(',')[1] or None">
+             <img t-attf-src="/web/image/ir.ui.menu/{{ menu['id'] }}/web_icon_data"/>
+             <span class="oe_menu_text">
+                 <t t-esc="menu['name']"/>
+             </span>
+         </a>
+    </template>
+    
+   
+</odoo>

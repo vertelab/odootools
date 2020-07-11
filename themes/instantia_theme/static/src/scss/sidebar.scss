@@ -1,0 +1,143 @@
+
+
+.o_main_navbar {
+	position: relative;
+	height: 46px;
+	border-bottom: 1px solid #ced4da;
+	background-color: #3947A6;
+	color: #DEEBFF;
+}
+$odoo-sidebar-width: 180px;
+
+.app-sidebar-panel {
+//    @include o-flex(0, 0, $odoo-sidebar-width);
+    background-color: $gray-base;
+    height: 100% !important;
+    overflow-y: auto;
+    @media (max-width: 768px) {
+      display: none;
+    }
+}
+
+@media (min-width: 768px) {
+	.o_menu_apps {
+	//	display: none !important;
+	}
+}
+
+//.app-sidebar-panel:hover {
+//    @include o-flex(0, 0, $odoo-sidebar-width);
+//}
+
+.app-sidebar {
+    white-space: nowrap;
+    padding: 0;
+    .app-sidebar-menu {
+    list-style: none;
+    margin: 0;
+    padding: 0;
+    >li {
+        display: block;
+        margin: 0;
+        padding: 0;
+        border: 0px;
+        >a {
+            display: block;
+            position: relative;
+            margin: 0;
+            border: 0px;
+            padding: 8px 15px;
+            text-decoration: none;
+            font-size: 13px;
+            font-weight: 300;
+            color: $gray-lighter;
+            overflow: hidden;
+            text-overflow: ellipsis;
+        }
+    }
+        > li:hover > a{
+	    background: darken(#0099ff, 15%);
+	    color: #fff;
+        }
+    }
+}
+
+.app-sidebar-menuitem {
+    width: 23px;
+    height: 22px;
+    margin-right: 5px;
+}
+
+.toggle-sidebar {
+    margin-left: 0px - $odoo-sidebar-width;
+}
+
+.o_sidebar_menu {
+    -ms-flex: 0 0 190px;
+    -moz-flex: 0 0 190px;
+    -webkit-box-flex: 0;
+    -webkit-flex: 0 0 190px;
+    flex: 0 0 190px;
+    
+    -ms-flex-flow: column nowrap;
+    -moz-flex-flow: column nowrap;
+    -webkit-flex-flow: column nowrap;
+    flex-flow: column nowrap;
+    background-color: #4B4C9D;
+}
+.o_sidebar_menu .o_sidebar_menu_logo {
+    -ms-flex: 0 0 auto;
+    -moz-flex: 0 0 auto;
+    -webkit-box-flex: 0;
+    -webkit-flex: 0 0 auto;
+    flex: 0 0 auto;
+    text-align: center;
+    position: relative;
+}
+.o_sidebar_menu .o_sidebar_menu_content .oe_application_menu_placeholder {
+    list-style: none;
+    margin: 0;
+    padding: 0;
+}
+.o_sidebar_menu .o_sidebar_menu_content .oe_application_menu_placeholder > li {
+    margin: 0;
+    padding: 10px 0px 10px 15px;
+    border: 0px;
+    text-align: left;
+}
+.o_sidebar_menu .o_sidebar_menu_logo > img {
+    margin: 14px 0;
+}
+
+.o_sidebar_menu .o_sidebar_menu_content .oe_application_menu_placeholder > li > a > img {
+	width: 24px;
+	height: 24px;
+	margin-right: 5px;
+	float: left;
+}
+.o_sidebar_menu .o_sidebar_menu_content .oe_application_menu_placeholder > li > a > span {
+    width: auto;
+    font-size: 14px!important;
+    padding: 0px;
+    margin: 0px;
+    color: #fff;
+}
+.o_sidebar_menu .o_sidebar_menu_content {
+    -ms-flex: 1 1 auto;
+    -moz-flex: 1 1 auto;
+    -webkit-box-flex: 1;
+    -webkit-flex: 1 1 auto;
+    flex: 1 1 auto;
+    height: 100%;
+    overflow-y: hidden;
+}
+.o_tooltip_parent {
+    position: relative!important;
+    opacity: 0.999;
+}
+
+
+
+
+
+
