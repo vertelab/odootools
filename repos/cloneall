@@ -1,0 +1,30 @@
+#!/usr/bin/bash
+
+BRANCH=10.0
+
+for gitrepo in `cat *-repo`
+do 
+        repobase=`basename $gitrepo .git`
+        repodir=`dirname $gitrepo`
+	printf "$repobase "
+	if [ $repodir == 'vertelab' ];
+	then
+		target="/usr/share/odoo-${repobase}"
+	else
+		target="/usr/share/odooext-${repodir}-${repobase}"
+	fi
+	if [ -d $target ];
+	then
+		printf " already feteched\n"
+		continue
+	fi
+	git clone -b $BRANCH git@github.com:$gitrepo > /dev/null 2> /dev/null
+#	if [ `ls $repobase/*/__manifest__.py 2> /dev/null |wc -l 2>/dev/null` -gt 0 ]
+#	then
+		sudo mv $repobase $target
+		printf " fetched\n"
+#	else
+#		rm -rf $repo
+#		printf " empty\n"
+#	fi
+done
