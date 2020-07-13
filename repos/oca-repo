@@ -10,7 +10,6 @@ OCA/account-payment.git
 OCA/account-reconcile.git
 OCA/bank-payment.git
 OCA/bank-statement-import.git
-OCA/brand.git
 OCA/business-requirement.git
 OCA/calendar.git
 OCA/commission.git
@@ -23,7 +22,6 @@ OCA/credit-control.git
 OCA/crm.git
 OCA/currency.git
 OCA/data-protection.git
-OCA/ddmrp.git
 OCA/delivery-carrier.git
 OCA/dms.git
 OCA/e-commerce.git
@@ -60,7 +58,7 @@ OCA/project-reporting.git
 OCA/project.git
 OCA/purchase-workflow.git
 OCA/queue.git
-OCA/report-engine.git
+OCA/reporting-engine.git
 OCA/report-print-send.git
 OCA/rest-framework.git
 OCA/rma.git
