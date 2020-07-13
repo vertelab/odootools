@@ -13,10 +13,6 @@ OCA/bank-statement-import.git
 OCA/business-requirement.git
 OCA/calendar.git
 OCA/commission.git
-OCA/connector-cmis.git
-OCA/connector-interfaces.git
-OCA/connector-telephony.git
-OCA/connector.git
 OCA/contract.git
 OCA/credit-control.git
 OCA/crm.git
