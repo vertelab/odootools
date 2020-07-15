@@ -1,7 +1,7 @@
 OCA/account-analytic.git
 OCA/account-budgeting.git
 OCA/account-closing.git
-OCA/account-financial-report.git
+OCA/account-financial-reporting.git
 OCA/account-financial-tools.git
 OCA/account-fiscal-rule.git
 OCA/account-invoice-reporting.git
@@ -10,8 +10,12 @@ OCA/account-payment.git
 OCA/account-reconcile.git
 OCA/bank-payment.git
 OCA/bank-statement-import.git
+OCA/bank-statement-reconcile.git
 OCA/business-requirement.git
 OCA/calendar.git
+OCA/community-data-files.git
+OCA/connector.git
+OCA/connector-telephony.git
 OCA/commission.git
 OCA/contract.git
 OCA/credit-control.git
@@ -71,6 +75,8 @@ OCA/social.git
 OCA/stock-logistics-barcode.git
 OCA/stock-logistics-reporing.git
 OCA/stock-logistics-warehouse.git
+OCA/stock-logistics-tracking.git
+OCA/stock-logistics-transport.git
 OCA/stock-logistics-workflow.git
 OCA/storage.git
 OCA/survey.git
@@ -81,4 +87,5 @@ OCA/web.git
 OCA/website-cms.git
 OCA/website-themes.git
 OCA/website.git
+OCA/webkit-tools.git
 OCA/wms.git
