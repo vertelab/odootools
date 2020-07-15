@@ -75,7 +75,7 @@ OCA/server-tools.git
 OCA/server-ux.git
 OCA/social.git
 OCA/stock-logistics-barcode.git
-OCA/stock-logistics-reporing.git
+OCA/stock-logistics-reporting.git
 OCA/stock-logistics-warehouse.git
 OCA/stock-logistics-workflow.git
 OCA/storage.git
