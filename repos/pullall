@@ -1,0 +1,18 @@
+#!/bin/bash
+
+BRANCH=10.0
+
+for gitrepo in `cat *-repo`
+do 
+        repobase=`basename $gitrepo .git`
+        repodir=`dirname $gitrepo`
+	printf "$repobase "
+	if [ $repodir == 'vertelab' ];
+	then
+		target="/usr/share/odoo-${repobase}"
+	else
+		target="/usr/share/odooext-${repodir}-${repobase}"
+	fi
+	cd $target
+	git pull
+done
