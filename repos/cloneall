@@ -10,8 +10,10 @@ do
 	if [ $repodir == 'vertelab' ];
 	then
 		target="/usr/share/odoo-${repobase}"
+		BRANCH=master10
 	else
 		target="/usr/share/odooext-${repodir}-${repobase}"
+		BRANCH=10.0
 	fi
 	if [ -d $target ];
 	then
