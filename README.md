@@ -10,11 +10,11 @@ wget -O- https://raw.githubusercontent.com/vertelab/odootools/10.0/uninstall | b
 
 Odoo 10 Install Error:
 - Install two times.
-- "ProgrammingError: permission denied to create database"
-sudo su postgres
-psql
-ALTER USER odoo WITH CREATEDB;
-Try to create the db once again
+- "ProgrammingError: permission denied to create database" <br>
+sudo su postgres<br>
+psql<br>
+ALTER USER odoo WITH CREATEDB;<br>
+Try to create the db once again<br>
 
 
 
