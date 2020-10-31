@@ -1,6 +1,6 @@
 # odootools
 
-Ensure you are using the version (eg branch 13.0 for Odoo 13) you want to install.
+Ensure you are using the version (eg branch 14.0 for Odoo 14) you want to install.
 
 Install by:
 
