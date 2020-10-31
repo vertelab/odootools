@@ -1,5 +1,4 @@
 alias alldbs='`su postgres -c "psql -At -c \"select datname from pg_database where datistemplate = false and 'postgres' <> datname;\" postgres"`'
-alias odootail='sudo tail -f /var/log/odoo/odoo-server.log'
 alias odoovilog='sudo vi /var/log/odoo/odoo-server.log'
 alias odooadminpw='sudo grep admin_passwd /etc/odoo/odoo.conf | cut -f 3 -d" "'
 
@@ -10,7 +9,7 @@ export ODOO_USER="odoo"
 export ODOO_SOURCE_DIR=/opt/odoo
 export ODOO_SERVER_CONF=/etc/odoo/odoo.conf
 export LOGS_DIR=/var/log/odoo
-#export ADDONS_PATH=/opt/virtualenv/odoo10/lib/python2.7/site-packages/odoo-10.0-py2.7.egg/odoo/addons,/opt/odoo/addons,/opt/odoo10custom/addons
+
 export DISTRO='ubuntu'
 [ -z `grep -o 'redhat.com' /proc/version` ] || export DISTRO='redhat'
 [ -z `grep -o 'centos.org' /proc/version` ] || export DISTRO='centos'
@@ -21,7 +20,14 @@ export ODOO_START='sudo service odoo start'
 export ODOO_STOP='sudo service odoo stop'
 [ $DISTRO == 'redhat' -o $DISTRO == 'centos' ] && export ODOO_STOP='sudo systemctl stop odoo'
 
-
+function odootail() {
+    tail -f /var/log/odoo/odoo-server.log | awk ' {
+      gsub("INFO", "\033[0;32mINFO\033[0m", $0); 
+      gsub("WARNING", "\033[0;33mWARNING\033[0m", $0);
+      gsub("ERROR", "\033[0;31mERROR\033[0m", $0);
+      print $0 };
+      '
+}
 
 function _cdprojectdir() {
     [ -z $1 ] || ODOOPROJECT=$1
@@ -35,8 +41,8 @@ function _cddatabase() {
 alias cdb='_cddatabase'
 
 function _dirname() {
-    $DIR=`dirname $1`
-    $BASE=`basename $DIR`
+    DIR=`dirname $1`
+    BASE=`basename $DIR`
     echo -n $BASE + ","
 }
 
@@ -49,66 +55,56 @@ alias odooupdm='_odoo_update_module'
 
 function _odoo_install_module() {
     usage() { echo "Usage: $0 [-d <database>] [-m <module>]" 1>&2; exit 1; }
-        [ -f /etc/odoo/odoo.tools ] && . /etc/odoo/odoo.tools
+    [ -f /etc/odoo/odoo.tools ] && . /etc/odoo/odoo.tools
     local OPTIND  # To force the while getops loop
-        local OPTARG
-        local option
-        while getopts ":m:d:" option; do
-                case "${option}" in
-                d|db) DATABASES=${OPTARG} ; echo "DB: $option $OPTARG" ;;
-                m|module) MODULES=${OPTARG} ;;
-                \:) echo "Option $option requires an argument" ; return ;;
-                \?) echo "Illegal argument ${option}::${OPTARG}" ; return ;;
-                esac
-        done
-        echo "For databases=${DATABASES} modules=${MODULES}"
+    local OPTARG
+    local option
+    while getopts ":m:d:" option; do
+        case "${option}" in
+            d|db) DATABASES=${OPTARG} ; echo "DB: $option $OPTARG" ;;
+            m|module) MODULES=${OPTARG} ;;
+            \:) echo "Option $option requires an argument" ; return ;;
+            \?) echo "Illegal argument ${option}::${OPTARG}" ; return ;;
+        esac
+    done
+    echo "For databases=${DATABASES} modules=${MODULES}"
 
-    sudo service odoo stop
+    ${ODOO_STOP}
     sudo su odoo -c "odoo.py -c ${ODOO_SERVER_CONF} --database ${DATABASES} --init ${MODULES} --stop-after-init"
-    sudo service odoo start
+    ${ODOO_START}
 }
 alias odooinstall='_odoo_install_module'
 
 function _odoo_restart() {
-        if [ -f /etc/odoo/odoo.tools ]
-        then
-                . /etc/odoo/odoo.tools
-        fi
-        if [ -z "$ODOORESTART" ]
-        then
-                 ODOORESTART="sudo service odoo restart"
-        fi
-        echo $ODOORESTART
-        eval "$ODOORESTART"
+    [ -f /etc/odoo/odoo.tools ] && . /etc/odoo/odoo.tools
+    [ -z "$ODOORESTART" ] && ODOORESTART="sudo service odoo restart"
+    
+    echo $ODOORESTART
+    ${ODOORESTART}
 }
 alias odoorestart='_odoo_restart'
 
-
 function _odoofind() {
-     find -L /usr/share/odoo-addons -type f -exec grep -Hn $1 {} \;
+    find -L /usr/share/odoo-addons -type f -exec grep -Hn $1 {} \;
 }
 alias odoofind='_odoofind'
 
 function _odoolistprojects() {
-    local PROJECTS=
-    local PROJECT=
-    for PROJECT in $(ls /usr/share|grep odoo-|grep -v odoo-addons); do
-        PROJECTS=$PROJECTS$PROJECT,
+    local PROJECTS=""
+    for PROJECT in $(ls /usr/share/odoo-* | grep -v odoo-addons); do
+        PROJECTS+=$PROJECT,
     done
     echo "${PROJECTS::-1}"
 }
 alias odoolistprojects='_odoolistprojects'
 
 function _odoogitclone() {
+    CWD=$(pwd)
+    cd /usr/share
     local PROJECTS=$1
-    local PROJECT
     for PROJECT in $(echo $PROJECTS | tr "," " "); do
-        ODOOPROJECT=$PROJECT
-        CWD=`pwd`
         sudo mkdir -p --mode=g+w /usr/share/$PROJECT
-        # add user to odoo group
         sudo chown odoo:odoo /usr/share/$PROJECT
-        cd /usr/share
         git clone -b 13.0 git@github.com:vertelab/$PROJECT.git
     done
     cd $CWD
@@ -123,10 +119,10 @@ function _odoosync() {
     local option
     while getopts ":p:h:" option; do
         case $option in
-           p) ODOOPROJECT=${OPTARG%/} ; echo "Project: $option $ODOOPROJECT" ;;
-           h) HOST=${OPTARG} ; echo "Host: $option $OPTARG" ;;
-           \:) echo "Option $option requires an argument" ; return ;;
-           \?) echo "Illegal argument ${option}::${OPTARG}" ; return ;;
+            p) ODOOPROJECT=${OPTARG%/} ; echo "Project: $option $ODOOPROJECT" ;;
+            h) HOST=${OPTARG} ; echo "Host: $option $OPTARG" ;;
+            \:) echo "Option $option requires an argument" ; return ;;
+            \?) echo "Illegal argument ${option}::${OPTARG}" ; return ;;
         esac
     done
     sudo chown odoo:odoo /usr/share/$ODOOPROJECT -R
@@ -134,23 +130,19 @@ function _odoosync() {
 }
 alias odoosync='_odoosync'
 
-
 function _patch_all_patches() {
     CWD=`pwd`
     cd /usr/lib/python3/dist-packages/odoo
-    for PATCH in $(ls /etc/odoo/patch.d/*.patch)
-    do
+    for PATCH in /etc/odoo/patch.d/*.patch; do
         sudo patch -p6 < $PATCH
     done
     cd $CWD
 }
-
 alias odoopatch='_patch_all_patches'
 
 function odooaddons() {
     [ -f /etc/odoo/odoo.tools ] && . /etc/odoo/odoo.tools
-    if [ ! -z "$ODOOADDONS" ]
-    then
+    if [ ! -z "$ODOOADDONS" ]; then
         CMD="s/^addons_path.*=.*/addons_path=${ODOOADDONS//"/"/"\/"}/g"
         sudo perl -i -pe $CMD $ODOO_SERVER_CONF
     fi
@@ -158,8 +150,7 @@ function odooaddons() {
 
 function odoogitpull() {
     [ -f /etc/odoo/odoo.tools ] && . /etc/odoo/odoo.tools
-    if [ ! -z "$ODOOADDONS" ]
-    then
+    if [ ! -z "$ODOOADDONS" ]; then
         CWD=`pwd`
         for p in ${ODOOADDONS//,/ }; do
             cd $p
@@ -178,13 +169,12 @@ function odoosyncall() {
     local option
     while getopts ":h:" option; do
         case $option in
-           h) HOST=${OPTARG} ; echo "Host: $option $OPTARG" ;;
-           \:) echo "Option $option requires an argument" ; return ;;
-           \?) echo "Illegal argument ${option}::${OPTARG}" ; return ;;
+            h) HOST=${OPTARG} ; echo "Host: $option $OPTARG" ;;
+            \:) echo "Option $option requires an argument" ; return ;;
+            \?) echo "Illegal argument ${option}::${OPTARG}" ; return ;;
         esac
     done
-    if [ ! -z "$ODOOADDONS" ]
-    then
+    if [ ! -z "$ODOOADDONS" ]; then
         for p in ${ODOOADDONS//,/ }; do
             echo -n $p " "
             sudo chown odoo:odoo $p -R
@@ -207,19 +197,19 @@ function odoosetperm() {
 
 function odoolangexport() {
     usage() { echo "Usage: $0 [-d <database>] [-m <module>] [-l <language>]" 1>&2; exit 1; }
-        [ -f /etc/odoo/odoo.tools ] && . /etc/odoo/odoo.tools
+    [ -f /etc/odoo/odoo.tools ] && . /etc/odoo/odoo.tools
     local OPTIND  # To force the while getops loop
     local OPTARG
     local option
     local L
     while getopts ":m:d:l:" option; do
-            case "${option}" in
-                d|db) DATABASES=${OPTARG} ; echo "DB: $option $OPTARG" ;;
-                m|module) MODULES=${OPTARG} ;;
-                l|language) L=${OPTARG} ;;
-                \:) echo "Option $option requires an argument" ; return ;;
-                \?) echo "Illegal argument ${option}::${OPTARG}" ; return ;;
-            esac
+        case "${option}" in
+            d|db) DATABASES=${OPTARG} ; echo "DB: $option $OPTARG" ;;
+            m|module) MODULES=${OPTARG} ;;
+            l|language) L=${OPTARG} ;;
+            \:) echo "Option $option requires an argument" ; return ;;
+            \?) echo "Illegal argument ${option}::${OPTARG}" ; return ;;
+        esac
     done
     echo "For databases=${DATABASES} modules=${MODULES} language=${L}"
     if [ ! -z "${L}" ]
@@ -260,7 +250,6 @@ function _create_test_db() {
     sleep 1
     odooupd -d $1 -i -m web_environment_ribbon
 }
-
 alias odoocreatetestdb='_create_test_db'
 
 function _odoocheckmodule() {
@@ -271,5 +260,4 @@ function _odoocheckmodule() {
         fi
     done
 }
-
 alias odoocheckmodule='_odoocheckmodule'
