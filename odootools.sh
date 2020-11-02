@@ -184,14 +184,16 @@ function odoosyncall() {
 }
 
 function odoosetperm() {
-    if [ ! -z "$ODOOADDONS" ]
-    then
+    if [ ! -z "$ODOOADDONS" ]; then
         for p in ${ODOOADDONS//,/ }; do
             echo -n $p " "
             sudo chown odoo:odoo $p -R
             find $p -type d -exec sudo chmod 775 {} \;
             find $p -type f -exec sudo chmod 665 {} \;
         done
+        
+        sudo chown odoo:odoo /usr/share/core-odoo -R
+        sudo chown odoo:odoo /usr/share/odoo-addons -R
     fi
 }
 
