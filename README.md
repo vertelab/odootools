@@ -2,16 +2,16 @@
 
 Ensure you are using the version (eg branch 14.0 for Odoo 14) you want to install.
 
-Install by:
-
- wget -O- https://raw.githubusercontent.com/vertelab/odootools/14.0/install | bash
-
-Uninstall by: (this drops your databases and all your data related to Odoo)
-
+## Install
+```
+wget -O- https://raw.githubusercontent.com/vertelab/odootools/14.0/install | bash
+```
+## Uninstall (this drops your databases and all your data related to Odoo)
+```
 wget -O- https://raw.githubusercontent.com/vertelab/odootools/14.0/uninstall | bash
+``` 
 
-
-Odoo-tools commands:
+## Odoo-tools commands
 
 Odoo-tools command |Description
 --- | --- 
