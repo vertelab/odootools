@@ -28,12 +28,11 @@ sudo -H pip3 install openpyxl
 wget -O /tmp/wkhtmltox_0.12.1.3-1~bionic_amd64.deb https://builds.wkhtmltopdf.org/0.12.1.3/wkhtmltox_0.12.1.3-1~bionic_amd64.deb
 sudo dpkg -i /tmp/wkhtmltox_0.12.1.3-1~bionic_amd64.deb
 sudo rm -f /tmp/wkhtmltox_0.12.1.3-1~bionic_amd64.deb
-sudo apt -y install git
 
 # sudo su postgres createuser odoo -s
 
 sudo wget -O /etc/profile.d/odootools.sh https://raw.githubusercontent.com/vertelab/odootools/14.0/odootools.sh
-sudo wget -O /etc/bash_completion.d/odoo https://raw.githubusercontent.com/vertelab/odootools/13.0/bash_completion.odoo
+sudo wget -O /etc/bash_completion.d/odoo https://raw.githubusercontent.com/vertelab/odootools/14.0/bash_completion.odoo
 
 # daily backup
 sudo wget -O /etc/cron.daily/db_backup https://raw.githubusercontent.com/vertelab/odootools/14.0/db_backup
