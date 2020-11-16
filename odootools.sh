@@ -105,7 +105,7 @@ function _odoogitclone() {
     for PROJECT in $(echo $PROJECTS | tr "," " "); do
         sudo mkdir -p --mode=g+w /usr/share/$PROJECT
         sudo chown odoo:odoo /usr/share/$PROJECT
-        git clone -b 13.0 git@github.com:vertelab/$PROJECT.git
+        git clone -b 14.0 git@github.com:vertelab/$PROJECT.git
     done
     cd $CWD
 }
