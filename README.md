@@ -1,21 +1,38 @@
 # odootools
 
-Ensure you are using the version (eg branch 14.0 for Odoo 14) you want to install.
+Tools to help manage an Odoo installation.
+
+## Prerequisite
+
+The installation scripts assume the host OS is a Debian-flavor. Usage on other
+systems might require tweaking to work.
+
+Odoo 14 require `init-system-helpers 1.5.4` or later. This rules out usage of
+Ubuntu 18.04 or older.
 
 ## Install
+
+Installation of Odoo and Odootools.
+
+Ensure you are using the version (eg branch 14.0 for Odoo 14) you want to install.
+
+The command below will download and execute the installation script:
 ```
 wget -O- https://raw.githubusercontent.com/vertelab/odootools/14.0/install | bash
 ```
-## Uninstall 
+## Uninstall
+
+Use the command below to uninstall your Odoo installation.
+
 *this drops your databases and all your data related to Odoo*
 ```
 wget -O- https://raw.githubusercontent.com/vertelab/odootools/14.0/uninstall | bash
-``` 
+```
 
 ## Odoo-tools commands
 
 Odoo-tools command |Description
---- | --- 
+--- | ---
  alldbs                    | Lists all databases             
  allprojects               | Lists all projects              
  cdb                       | change database                 
@@ -38,4 +55,3 @@ Odoo-tools command |Description
 odooupd -h/--host, -P/--port, -d/--database, -m/--module, -p/--password, -l/--list, -i/--install, -u/--uninstall | Modifies Odoo-instanses; -m/--module=	comma separated  module list, -i/--install	install or upgrade modules  -u, --uninstall	uninstall modules, -c/--check coma separeted module list
 odooupdm *database* *modulelist*      | Installs/updates modules in single user mode                
  odoovilog                 | Opens Odoo log file in vi       
- 
