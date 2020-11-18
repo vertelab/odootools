@@ -1,4 +1,11 @@
 #!/bin/bash
+################################################################################
+#                                                                              #
+#   Installation of Odootools - Tools to help manage an Odoo installation      #
+#                                                                              #
+#                                                                              #
+#                                                                              #
+################################################################################
 # Odoo
 echo "Installing Odoo"
 if [ ! -d /etc/odoo ]; then  # Install Odoo (only one time)
