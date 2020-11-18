@@ -1,10 +1,11 @@
 #!/bin/bash
-
+# Odoo
+echo "Installing Odoo"
 if [ ! -d /etc/odoo ]; then  # Install Odoo (only one time)
-    # this package is missing in 16.04 
+    # this package is missing in 16.04
     #wget https://launchpad.net/ubuntu/+archive/primary/+files/python-support_1.0.15_all.deb
     #sudo dpkg -i python-support_1.0.15_all.deb
-    
+
     sudo add-apt-repository universe
     sudo wget -O - https://nightly.odoo.com/odoo.key | sudo apt-key add -
     echo "deb http://nightly.odoo.com/14.0/nightly/deb/ ./" | sudo tee /etc/apt/sources.list.d/odoo.list > /dev/null
@@ -15,22 +16,30 @@ if [ ! -d /etc/odoo ]; then  # Install Odoo (only one time)
     sudo wget -O /etc/odoo/odoo.tools https://raw.githubusercontent.com/vertelab/odootools/14.0/odoo.tools
 fi
 
-if [ ! -d /usr/share/core-odoo ]; then 
+if [ ! -d /usr/share/core-odoo ]; then
     sudo ln -s /usr/lib/python3/dist-packages/odoo/ /usr/share/core-odoo
 fi
 
-sudo apt -y install git python3-pip build-essential wget python3-dev python3-venv python3-wheel libxslt-dev libzip-dev libldap2-dev libsasl2-dev python3-setuptools node-less
+# Additional packages
+echo "Installing additional packages"
+sudo apt -y install git python3-pip build-essential wget python3-dev python3-venv python3-wheel libxslt-dev libjpeg-dev libzip-dev libldap2-dev libsasl2-dev python3-setuptools node-less libpq-dev
+
+# Python with dependencies
+echo "Installing Python modules"
 sudo -H pip3 install wheel
 wget -O /tmp/requirements.txt https://raw.githubusercontent.com/odoo/odoo/14.0/requirements.txt
 sudo -H pip3 install -r /tmp/requirements.txt
 
+# wkhtmltopdf
 sudo -H pip3 install openpyxl
-wget -O /tmp/wkhtmltox_0.12.1.3-1~bionic_amd64.deb https://builds.wkhtmltopdf.org/0.12.1.3/wkhtmltox_0.12.1.3-1~bionic_amd64.deb
-sudo dpkg -i /tmp/wkhtmltox_0.12.1.3-1~bionic_amd64.deb
-sudo rm -f /tmp/wkhtmltox_0.12.1.3-1~bionic_amd64.deb
+sudo apt -y install xfonts-base xfonts-75dpi
+wget -O /tmp/wkhtmltox_0.12.6-1.focal_amd64.deb https://github.com/wkhtmltopdf/packaging/releases/download/0.12.6-1/wkhtmltox_0.12.6-1.focal_amd64.deb
+sudo dpkg -i /tmp/wkhtmltox_0.12.6-1.focal_amd64.deb
+sudo rm -f /tmp/wkhtmltox_0.12.6-1.focal_amd64.deb
 
 # sudo su postgres createuser odoo -s
 
+# Odootools
 sudo wget -O /etc/profile.d/odootools.sh https://raw.githubusercontent.com/vertelab/odootools/14.0/odootools.sh
 sudo wget -O /etc/bash_completion.d/odoo https://raw.githubusercontent.com/vertelab/odootools/14.0/bash_completion.odoo
 
