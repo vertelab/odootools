@@ -1,5 +1,28 @@
 #!/bin/bash
+################################################################################
+#                                                                              #
+#   Installation of Odootools - Tools to help manage an Odoo installation      #
+#                                                                              #
+#                                                                              #
+#                                                                              #
+################################################################################
 
+echo "Performing basic prerequisite checks ..."
+
+# User odoo shouldn't exist or should have been created by the Odoo installation
+# procedures such as via the deb-package
+grep --quiet -E '/home/odoo' /etc/passwd    # Indication odoo user have been
+                                            # created the wrong way.
+if [ $? -eq 0 ]; then
+    echo "Warning! An odoo user seems to be present with the wrong home folder."
+    echo "This user might conflict with the Odoo 13 installation process."
+    echo "Exiting..."
+    exit 1
+fi
+
+# ---------------------------------------------------------------------------- #
+# Odoo
+echo "Installing Odoo"
 if [ ! -d /etc/odoo ]; then  # Install Odoo (only one time)
     # this package is missing in 16.04 
     #wget https://launchpad.net/ubuntu/+archive/primary/+files/python-support_1.0.15_all.deb
