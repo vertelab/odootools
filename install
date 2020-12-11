@@ -22,12 +22,13 @@ fi
 
 # ---------------------------------------------------------------------------- #
 # Odoo
-echo "Installing Odoo"
+echo "Preparing to install Odoo"
 if [ ! -d /etc/odoo ]; then  # Install Odoo (only one time)
-    # this package is missing in 16.04 
+    echo "Installing Odoo"
+    # this package is missing in 16.04
     #wget https://launchpad.net/ubuntu/+archive/primary/+files/python-support_1.0.15_all.deb
     #sudo dpkg -i python-support_1.0.15_all.deb
-    
+
     sudo add-apt-repository universe
     sudo wget -O - https://nightly.odoo.com/odoo.key | sudo apt-key add -
     echo "deb http://nightly.odoo.com/13.0/nightly/deb/ ./" | sudo tee /etc/apt/sources.list.d/odoo.list > /dev/null
@@ -36,26 +37,59 @@ if [ ! -d /etc/odoo ]; then  # Install Odoo (only one time)
     # Generate a good password
     sudo perl -i -pe 'BEGIN { $pw.=(a..z,A..Z,0..9)[rand 62] for 0..15 } s/; admin_passwd.*$/admin_passwd = $pw/g' /etc/odoo/odoo.conf
     sudo wget -O /etc/odoo/odoo.tools https://raw.githubusercontent.com/vertelab/odootools/13.0/odoo.tools
+else
+    echo "Odoo already installed."
 fi
 
+## Installing other dependencies and packages
+echo "Installing other dependencies and packages"
+eval $(grep VERSION_ID /etc/os-release) # Evaluate match of grep as a BASH-cmd
+# Install extra dependencies if Ubuntu 20.04
+if [ $VERSION_ID == "20.04" ]; then
+    echo "Installing for Ubuntu 20.04"
+    # Additional packages
+    echo "Installing additional packages"
+    sudo apt -y install git python3-pip build-essential wget python3-dev python3-venv python3-wheel libxslt-dev libjpeg-dev libzip-dev libldap2-dev libsasl2-dev python3-setuptools node-less libpq-dev
 
-if [ ! -d /usr/share/core-odoo ]; then 
+    # Python with dependencies
+    echo "Installing Python modules"
+    sudo -H pip3 install wheel
+    wget -O /tmp/requirements.txt https://raw.githubusercontent.com/odoo/odoo/13.0/requirements.txt
+    sudo -H pip3 install -r /tmp/requirements.txt
+
+    # wkhtmltopdf
+    sudo -H pip install openpyxl
+    sudo apt -y install xfonts-base xfonts-75dpi
+    wget -O /tmp/wkhtmltox_0.12.6-1.focal_amd64.deb https://github.com/wkhtmltopdf/packaging/releases/download/0.12.6-1/wkhtmltox_0.12.6-1.focal_amd64.deb
+    sudo dpkg -i /tmp/wkhtmltox_0.12.6-1.focal_amd64.deb
+    sudo rm -f /tmp/wkhtmltox_0.12.6-1.focal_amd64.deb
+#elif [ $VERSION_ID == "18.04" ]; then
+else
+    echo "Installing for Ubuntu 18.04"
+    # Additional packages
+    sudo apt -y install git python3-pip build-essential wget python3-dev python3-venv python3-wheel libxslt-dev libzip-dev libldap2-dev libsasl2-dev python3-setuptools node-less
+    # Python with dependencies
+    echo "Installing Python modules"
+    sudo -H pip3 install wheel
+    wget -O /tmp/requirements.txt https://raw.githubusercontent.com/odoo/odoo/13.0/requirements.txt
+    sudo -H pip3 install -r /tmp/requirements.txt
+
+    # wkhtmltopdf
+    sudo -H pip install openpyxl
+    wget -O /tmp/wkhtmltox_0.12.1.3-1~bionic_amd64.deb https://builds.wkhtmltopdf.org/0.12.1.3/wkhtmltox_0.12.1.3-1~bionic_amd64.deb
+    sudo dpkg -i /tmp/wkhtmltox_0.12.1.3-1~bionic_amd64.deb
+    sudo rm -f /tmp/wkhtmltox_0.12.1.3-1~bionic_amd64.deb
+fi
+
+echo "Linking Odoo core to /usr/share/core-odoo"
+if [ ! -d /usr/share/core-odoo ]; then
     sudo ln -s /usr/lib/python3/dist-packages/odoo/ /usr/share/core-odoo
 fi
 
-sudo apt -y install git python3-pip build-essential wget python3-dev python3-venv python3-wheel libxslt-dev libzip-dev libldap2-dev libsasl2-dev python3-setuptools node-less
-sudo -H pip3 install wheel
-wget -O /tmp/requirements.txt https://raw.githubusercontent.com/odoo/odoo/13.0/requirements.txt
-sudo -H pip3 install -r /tmp/requirements.txt
-
-
-sudo -H pip install openpyxl
-wget -O /tmp/wkhtmltox_0.12.1.3-1~bionic_amd64.deb https://builds.wkhtmltopdf.org/0.12.1.3/wkhtmltox_0.12.1.3-1~bionic_amd64.deb
-sudo dpkg -i /tmp/wkhtmltox_0.12.1.3-1~bionic_amd64.deb
-sudo rm -f /tmp/wkhtmltox_0.12.1.3-1~bionic_amd64.deb
-sudo apt -y install git
-
 # sudo su postgres createuser odoo -s
+
+# Odootools
+echo "Installing Odootools"
 
 sudo wget -O /etc/profile.d/odootools.sh https://raw.githubusercontent.com/vertelab/odootools/13.0/odootools.sh
 sudo wget -O /etc/bash_completion.d/odoo https://raw.githubusercontent.com/vertelab/odootools/13.0/bash_completion.odoo
@@ -63,7 +97,6 @@ sudo wget -O /etc/bash_completion.d/odoo https://raw.githubusercontent.com/verte
 # daily backup
 sudo wget -O /etc/cron.daily/db_backup https://raw.githubusercontent.com/vertelab/odootools/13.0/db_backup
 sudo chmod a+x /etc/cron.daily/db_backup
-
 
 . /etc/profile.d/odootools.sh
 . /etc/bash_completion
