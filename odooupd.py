@@ -1,11 +1,11 @@
-#!/usr/bin/python
+#!/usr/bin/python3
 
 import sys, getopt, os
 import odoorpc
 
 
 def usage():
-    print """-h, --host=\thost
+    print ("""-h, --host=\thost
 -P, --port=\tport
 -d, --database=\tdatabase
 -m, --module=\tcomma separated module list
@@ -13,13 +13,13 @@ def usage():
 -l, --list\tlist all modules
 -i, --install\tinstall modules
 -u, --uninstall\tuninstall modules
-"""
+""")
 
 try:
     opts, args = getopt.getopt(sys.argv[1:], "h:P:d:m:p:liuUc:", ["host=", "port=", "database=", "module=", "password=", "list", "install", "uninstall", "update_list", "check="])
 except getopt.GetoptError as err:
     # print help information and exit:
-    print str(err) # will print something like "option -a not recognized"
+    print( str(err)) # will print something like "option -a not recognized"
     usage()
     sys.exit(2)
 
@@ -79,7 +79,7 @@ if UPDATE_LIST:
 
 if LIST:
     installed = [m['name'] for m in odoo.env['ir.module.module'].read(odoo.env['ir.module.module'].search(([('state', '=', 'installed')])), ['name'])]
-    print ','.join(installed)
+    print( ','.join(installed))
 elif CHECK:
     sys.exit(len(odoo.env['ir.module.module'].search([('state', '=', 'installed'), ('name', '=', CHECK)])) == 0)
 elif MODULE:
@@ -93,8 +93,8 @@ elif MODULE:
             if m in installed:
                 to_be_upgraded.append(m)
             else:
-                print '**** to be installed ****\n%s' %to_be_installed
-                client.install(m)
+                print( '**** to be installed ****\n%s' %to_be_installed)
+                odoo.env['ir.module.module'].search([('name','=',m)]).button_install()
                 to_be_installed = list(set(to_be_installed) - set(m['name'] for m in odoo.env['ir.module.module'].read(odoo.env['ir.module.module'].search(([('state', '=', 'installed')])), ['name'])))
         if UNINSTALL:
             if m in installed:
@@ -104,7 +104,7 @@ elif MODULE:
 
 
 else:
-    print 'Nothing to do'
+    print( 'Nothing to do')
 
 
 #~ if sys.argv[1] == 'list_modules':
