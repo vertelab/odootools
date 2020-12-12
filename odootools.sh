@@ -170,6 +170,22 @@ function odoogitpull() {
         cd $CWD
     fi
 }
+
+function _odoocheckout() {
+    [ -f /etc/odoo/odoo.tools ] && . /etc/odoo/odoo.tools
+    if [ ! -z "$ODOOADDONS" ]
+    then
+        CWD=`pwd`
+        for p in ${ODOOADDONS//,/ }; do
+            cd $p
+            echo -n $p " "
+            git checkout $1  2> /dev/null || git checkout 12.0 2>/dev/null
+        done
+        cd $CWD
+    fi
+}
+alias odoocheckout='_odoocheckout'
+
 function odoosyncall() {
     usage() { echo "Usage: $0 [-h <host>]" 1>&2; exit 1; }
     [ -f /etc/odoo/odoo.tools ] && . /etc/odoo/odoo.tools
