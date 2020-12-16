@@ -8,14 +8,17 @@ Uninstall by: (this drops your databases and all your data related to Odoo)
 
 wget -O- https://raw.githubusercontent.com/vertelab/odootools/10.0/uninstall | bash
 
-Odoo 10 Install Error:
+
+<b>ProgrammingError: permission denied to create database</b> <br>
+This install will generate an error. Here is the solution:
 - Install two times.
 - "ProgrammingError: permission denied to create database" <br>
 sudo su postgres<br>
 psql<br>
 ALTER USER odoo WITH CREATEDB;<br>
 Try to create the db once again<br>
-
+<br>
+See URL: https://www.odoo.com/forum/help-1/programmingerror-permission-denied-to-create-database-64086
 
 
 Odoo-tools commands:
