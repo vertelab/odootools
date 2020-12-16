@@ -36,6 +36,18 @@ if [ ! -d /etc/odoo ]; then  # Install Odoo (only one time)
     # Generate a good password
     sudo perl -i -pe 'BEGIN { $pw.=(a..z,A..Z,0..9)[rand 62] for 0..15 } s/; admin_passwd.*$/admin_passwd = $pw/g' /etc/odoo/odoo.conf
     sudo wget -O /etc/odoo/odoo.tools https://raw.githubusercontent.com/vertelab/odootools/14.0/odoo.tools
+
+    # Making odoo a more reqular user
+    echo "Enabling bash login for the odoo user..."
+    sudo sed -i 's|/var/lib/odoo:/usr/sbin/nologin|/var/lib/odoo:/bin/bash|g' /etc/passwd
+    if [ $? -eq 0 ]; then
+        echo "Bash login enabled for user 'odoo'"
+    else
+        echo "Failed to enable Bash login for user 'odoo'"
+        echo "Continuing installation." # Failure is not a dealbreaker for odootools
+    fi
+    # TODO: Add passwd or accept only 
+
 fi
 
 if [ ! -d /usr/share/core-odoo ]; then
