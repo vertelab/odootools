@@ -2,7 +2,7 @@
 
 Tools to help manage an Odoo installation.
 
-## Prerequisite
+## Prerequisites
 
 The installation scripts assume the host OS is a Debian-flavor. Usage on other
 systems might require tweaking to work.

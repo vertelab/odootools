@@ -11,7 +11,7 @@ echo "Performing basic prerequisite checks ..."
 
 # User odoo shouldn't exist or should have been created by the Odoo installation
 # procedures such as via the deb-package
-grep --quiet -E '/home/odoo' /etc/passwd    # Indication odoo user have been
+grep --quiet -E '/home/odoo:' /etc/passwd    # Indication odoo user have been
                                             # created the wrong way.
 if [ $? -eq 0 ]; then
     echo "Warning! An odoo user seems to be present with the wrong home folder."
@@ -38,6 +38,7 @@ if [ ! -d /etc/odoo ]; then  # Install Odoo (only one time)
     sudo wget -O /etc/odoo/odoo.tools https://raw.githubusercontent.com/vertelab/odootools/14.0/odoo.tools
 
     # Making odoo a more reqular user
+    # It can be useful when doing some operations.
     echo "Enabling bash login for the odoo user..."
     sudo sed -i 's|/var/lib/odoo:/usr/sbin/nologin|/var/lib/odoo:/bin/bash|g' /etc/passwd
     if [ $? -eq 0 ]; then
@@ -46,7 +47,7 @@ if [ ! -d /etc/odoo ]; then  # Install Odoo (only one time)
         echo "Failed to enable Bash login for user 'odoo'"
         echo "Continuing installation." # Failure is not a dealbreaker for odootools
     fi
-    # TODO: Add passwd or accept only 
+    # TODO: Add passwd or accept only sudo for switching user.
 
 fi
 
