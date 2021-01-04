@@ -22,8 +22,8 @@ Odoo-tools command |Description
  cdp                       | change directory to project     
  odooaddons                | Updates addons_path with all project according to ODOOADDONS defined in odoo.tools
  odooadminpw               | view master password
- odoocheckmodule   <module>        | lists databases that use a module (eg odoocheckmodule sale)
- odoocheckout   <branch>   | Checks out all projects to a) <branch> b) if not available 12.0
+ odoocheckmodule   [module]        | lists databases that use a module (eg odoocheckmodule sale)
+ odoocheckout   [branch]   | Checks out all projects to a) [branch] b) if not available 12.0
  odoocreatetestdb <database name> <input file or stdin> | Creates new database without e-mail-settings for outgoing mail
  odoofind *pattern*        | find patterns in odoo-core source code                     
  odoogitclone *project*    | clones and installs projects from githuh (vertel-projects)   
