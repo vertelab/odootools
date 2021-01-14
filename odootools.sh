@@ -1,7 +1,7 @@
 alias alldbs='`su postgres -c "psql -At -c \"select datname from pg_database where datistemplate = false and 'postgres' <> datname;\" postgres"`'
 alias odootail='sudo tail -f /var/log/odoo/odoo-server.log'
 alias odoovilog='sudo vi /var/log/odoo/odoo-server.log'
-alias odooadminpw='sudo grep admin_passwd /etc/odoo/odoo.conf | cut -f 3 -d" "'
+alias odooadminpw='sudo grep -o "^admin_passwd.*$" /etc/odoo/odoo.conf | cut -f 3 -d" "'
 
 alias allprojects='ls -d /usr/share/odoo-*'
 alias cdo='cd /usr/share/odoo-addons'
