@@ -4,4 +4,4 @@
 
 # List addons directories in ODOOADDONS-variable
 export ODOOADDONS=`ls -d /usr/share/odoo-* /usr/share/odooext-* 2> /dev/null | grep -v odoo-addons | paste -sd ","`
-export ODOOHOSTS="azzar.pl"
+export ODOOHOSTS="azzar.net"
