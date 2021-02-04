@@ -38,3 +38,16 @@ odooupd -h/--host, -P/--port, -d/--database, -m/--module, -p/--password, -l/--li
 odooupdm *database* *modulelist*      | Installs/updates modules in single user mode. Modulelist format: "module,module,..."                
  odoovilog                 | Opens Odoo log file in vi       
  
+
+
+***
+
+When commando  `odoobackup` fail to run, then re-install the back-up-part.
+
+```
+$ odoo --version
+$ odoo --v
+$ git clone -b 13.0 git@github.com:vertelab/odootools.git
+$ cd odootools
+$ /odootools: make
+```
