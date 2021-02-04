@@ -50,8 +50,8 @@ When commando  `odoobackup` fail to run, then re-install the back-up-part.
 ```
 $ odoo --version
 $ odoo --v
-Odoo Server 12.0-20210204
-$ git clone -b 13.0 git@github.com:vertelab/odootools.git
+Odoo Server 14.0-20210204
+$ git clone -b 14.0 git@github.com:vertelab/odootools.git
 $ cd odootools
 $ /odootools: make
 
