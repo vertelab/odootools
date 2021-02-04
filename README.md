@@ -56,6 +56,6 @@ $ cd odootools
 $ /odootools: make
 
 
-Confirm odoobackup is installed by typing `$odoob [tab-tab], outcome should be
+Confirm odoobackup is installed by typing '$odoob [tab-tab]', outcome should be
 $ odoobackup
 ```
