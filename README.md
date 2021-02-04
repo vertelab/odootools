@@ -55,7 +55,6 @@ $ git clone -b 13.0 git@github.com:vertelab/odootools.git
 $ cd odootools
 $ /odootools: make
 
-
 Confirm odoobackup is installed by typing '$odoob [tab-tab]', outcome should be
 $ odoobackup
 ```
