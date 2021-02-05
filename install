@@ -29,7 +29,7 @@ sudo -H pip3 install -r /tmp/requirements.txt
 
 
 sudo -H pip install openpyxl
-wget -O /tmp/wkhtmltox_0.12.1.3-1~bionic_amd64.deb https://builds.wkhtmltopdf.org/0.12.1.3/wkhtmltox_0.12.1.3-1~bionic_amd64.deb
+wget -O /tmp/wkhtmltox_0.12.1.3-1~bionic_amd64.deb https://github.com/wkhtmltopdf/wkhtmltopdf/releases/download/0.12.5/wkhtmltox_0.12.5-1.bionic_amd64.deb
 sudo dpkg -i /tmp/wkhtmltox_0.12.1.3-1~bionic_amd64.deb
 sudo rm -f /tmp/wkhtmltox_0.12.1.3-1~bionic_amd64.deb
 sudo apt -y install git
