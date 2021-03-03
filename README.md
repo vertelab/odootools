@@ -1,4 +1,4 @@
-# odootools
+# odootools for Ubuntu 20.04
 
 Tools to help manage an Odoo installation.
 
