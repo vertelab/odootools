@@ -1,4 +1,4 @@
-# odootools
+# odootools for Ubuntu 18.04
 
 Ensure you are using the version (eg branch 12.0 for Odoo 12) you want to install.
 
