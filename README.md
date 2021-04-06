@@ -10,6 +10,7 @@ Uninstall by: (this drops your databases and all your data related to Odoo)
 
 wget -O- https://raw.githubusercontent.com/vertelab/odootools/13.0/uninstall | bash
 
+__Ubuntu 20.04__
 
 Odoo-tools commands:
 
