@@ -4,7 +4,7 @@ alias odoovilog='sudo vi /var/log/odoo/odoo-server.log'
 alias odooadminpw='sudo grep admin_passwd /etc/odoo/odoo.conf | cut -f 3 -d" "'
 
 alias allprojects='ls -d /usr/share/odoo-*'
-alias cdo='cd /usr/share/odoo-addons'
+alias cdo='cd /usr/share/core-odoo'
 
 export ODOO_USER="odoo"
 export ODOO_SOURCE_DIR=/opt/odoo
@@ -85,14 +85,14 @@ alias odoorestart='_odoo_restart'
 
 
 function _odoofind() {
-     find -L /usr/share/odoo-addons -type f -exec grep -Hn $1 {} \;
+     find -L /usr/share/core-odoo -type f -exec grep -Hn $1 {} \;
 }
 alias odoofind='_odoofind'
 
 function _odoolistprojects() {
     local PROJECTS=
     local PROJECT=
-    for PROJECT in $(ls /usr/share|grep odoo-|grep -v odoo-addons); do
+    for PROJECT in $(ls /usr/share|grep odoo-); do
         PROJECTS=$PROJECTS$PROJECT,
     done
     echo "${PROJECTS::-1}"
