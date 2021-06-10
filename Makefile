@@ -3,7 +3,7 @@ all : odooupd.tmp erppeek.tmp openpyxl.tmp profile.tmp
 	@echo Complete
 
 openpyxl.tmp:
-	@sudo apt install python-dev libffi-dev
+	@sudo apt install python3-dev libffi-dev
 	@sudo pip3 install utils
 	@touch openpyxl.tmp
 
