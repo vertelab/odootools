@@ -1,6 +1,7 @@
 alias alldbs='`su postgres -c "psql -At -c \"select datname from pg_database where datistemplate = false and 'postgres' <> datname;\" postgres"`'
 alias odootail='sudo tail -f /var/log/odoo/odoo-server.log'
 alias odoovilog='sudo vi /var/log/odoo/odoo-server.log'
+alias odooemacslog='sudo emacs /var/log/odoo/odoo-server.log'
 alias odooadminpw='sudo grep admin_passwd /etc/odoo/odoo.conf | cut -f 3 -d" "'
 
 alias allprojects='ls -d /usr/share/odoo-*'
@@ -8,7 +9,7 @@ alias cdo='cd /usr/share/core-odoo'
 
 export ODOO_USER="odoo"
 export ODOO_SOURCE_DIR=/opt/odoo
-export ODOO_SERVER_CONF=/etc/odoo/openerp_server.conf
+export ODOO_SERVER_CONF=/etc/odoo/odoo.conf
 export LOGS_DIR=/var/log/odoo
 #export ADDONS_PATH=/opt/virtualenv/odoo10/lib/python2.7/site-packages/odoo-10.0-py2.7.egg/odoo/addons,/opt/odoo/addons,/opt/odoo10custom/addons
 export DISTRO='ubuntu'
@@ -137,7 +138,7 @@ alias odoosync='_odoosync'
 
 function _patch_all_patches() {
     CWD=`pwd`
-    cd /usr/lib/python2.7/dist-packages/openerp
+    cd /usr/lib/python3.8/dist-packages/odoo
     for PATCH in $(ls /etc/odoo/patch.d/*.patch)
     do
         sudo patch -p6 < $PATCH
@@ -152,7 +153,7 @@ function odooaddons() {
     if [ ! -z "$ODOOADDONS" ]
     then
         CMD="s/^addons_path.*=.*/addons_path=${ODOOADDONS//"/"/"\/"}/g"
-        sudo perl -i -pe $CMD /etc/odoo/openerp-server.conf
+        sudo perl -i -pe $CMD /etc/odoo/odoo.conf
     fi
 }
 
@@ -233,7 +234,7 @@ function odoolangexport() {
     echo $FILE
     sudo service odoo stop
     echo "odoo.py --modules='${MODULES}' -d ${DATABASES} ${LCMD} --stop-after-init --i18n-export='${FILE}'"
-    sudo su odoo -c "odoo.py -c /etc/odoo/openerp-server.conf --modules='${MODULES}' -d ${DATABASES} ${LCMD} --stop-after-init --i18n-export='${FILE}'"
+    sudo su odoo -c "odoo.py -c /etc/odoo/odoo.conf --modules='${MODULES}' -d ${DATABASES} ${LCMD} --stop-after-init --i18n-export='${FILE}'"
     sudo service odoo start
     sudo chown ${USER} ${FILE}
     if [ -z "${L}" ]
