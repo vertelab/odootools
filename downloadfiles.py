@@ -9,6 +9,9 @@ ODOO_VERSION = '14.0'
 SUBDIR =  sys.argv[1] if len(sys.argv) > 1 else ''
 BASE_URL = f'https://raw.githubusercontent.com/vertelab/odootools/{ODOO_VERSION}'
 TARGET_DIR = '/usr/share'
+THEME_DIR = f'{TARGET_DIR}/odooext-themes'
+VERTEL_PREFIX = ''
+ETERNAL_PREFIX = 'odooext-{repodir}-'
 
 data = json.loads(sys.stdin.read())
 tree = data.get('tree', [])
@@ -31,9 +34,8 @@ def setrights(path):
             except (PermissionError, FileNotFoundError):
                 pass
 
-if SUBDIR in ('themes'):
-    theme_dir = f'{TARGET_DIR}/odooext-themes'
-    os.makedirs(theme_dir, exist_ok=True)
+if SUBDIR in ('themes',):
+    os.makedirs(THEME_DIR, exist_ok=True)
             
 for node in tree:
     path = node.get('path')
@@ -45,8 +47,8 @@ for node in tree:
                 repodir = os.path.dirname(gitrepo)
                 repobase = os.path.basename(gitrepo)
                 reponame = os.path.splitext(repobase)[0]
-                ext = '' if repodir == 'vertelab' else f'odooext-{repodir}-'
-                target = f'{TARGET_DIR}/{ext}{repobase}'
+                prefix = VERTEL_PREFIX if repodir == 'vertelab' else EXTERNAL_PREFIX.format(**locals())
+                target = f'{TARGET_DIR}/{prefix}{repobase}'
                 if os.path.exists(target):
                     print(f'Repo already fetched: {target}')
                     continue
@@ -63,14 +65,14 @@ for node in tree:
                 except PermissionError:
                     print(f'Failed to move {reponame} due to permission error.')
                 print(f'{reponame} fetched')
-                break
+
         elif SUBDIR in ('themes', ):
             base_path = path.split('/', 1)[-1]
             if path in ('themes', 'themes/install', 'themes/Makefile', 'themes/unzipall') or  path.startswith('themes/zip'):
                 continue
-            p = subprocess.run(['wget', '-O', f'{theme_dir}/{path}', path])
+            p = subprocess.run(['wget', '-O', f'{THEME_DIR}/{path}', path])
 
-if SUBDIR in ('themes'):
+if SUBDIR in ('themes',):
     setrights(theme_dir)
 
 
