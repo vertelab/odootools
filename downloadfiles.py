@@ -29,7 +29,7 @@ def setrights(path):
             try:
                 target = os.path.join(root, f)
                 # chmod works on octals
-                os.chmod(target, int('665', 8))
+                os.chmod(target, int('664', 8))
                 shutil.chown(target, 'odoo', 'odoo')
             except (PermissionError, FileNotFoundError):
                 pass

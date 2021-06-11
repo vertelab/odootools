@@ -189,7 +189,7 @@ function odoosetperm() {
             echo -n $p " "
             sudo chown odoo:odoo $p -R
             find $p -type d -exec sudo chmod 775 {} \;
-            find $p -type f -exec sudo chmod 665 {} \;
+            find $p -type f -exec sudo chmod 664 {} \;
         done
         
         sudo chown odoo:odoo /usr/share/core-odoo -R
