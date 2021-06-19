@@ -1,0 +1,27 @@
+#!/usr/bin/bash
+################################################################################
+#                                                                              #
+#       Installation of several Odoo-Repositories that are commonly used       #
+#                                                                              #
+################################################################################
+
+TARGETDIR="/usr/share"
+REPOPREFIX='odoo'
+
+echo "Installing additional repos"
+sudo odooextras.py repos
+
+echo "Installing requirements with apt"
+
+echo "Installing requirements with pip3"
+
+for repo in $(ls $TARGETDIR | grep ^$REPOPREFIX) ; do
+    REQUIREMENTS=$TARGETDIR/$repo/requirements.txt
+    if test -f $REQUIREMENTS ; then
+	echo "Installing requirements from: "$REQUIREMENTS
+        sudo pip3 install -r $REQUIREMENTS
+    fi
+done
+
+echo "Install done!"
+
