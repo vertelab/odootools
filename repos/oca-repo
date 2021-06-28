@@ -1,3 +1,8 @@
+
+# When installing Field-Service, an error will occur.
+# Solution:
+# sudo apt install postgresql-10-postgis-2.4
+
 OCA/account-analytic.git
 OCA/account-budgeting.git
 OCA/account-closing.git
