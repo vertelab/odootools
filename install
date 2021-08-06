@@ -11,6 +11,8 @@ if [ ! -d /etc/odoo ]; then  # Install Odoo (only one time)
     echo "deb http://nightly.odoo.com/8.0/nightly/deb/ ./" | sudo tee /etc/apt/sources.list.d/odoo.list > /dev/null
     sudo apt-get update
     sudo apt-get -y install odoo
+    # Move BAD l10n_se
+    mv /usr/lib/python3/dist-packages/odoo/addons/l10n_se /usr/lib/python3/dist-packages/odoo/addons/l10n_se-bad
     # Generate a good password
     sudo perl -i -pe 'BEGIN { $pw.=(a..z,A..Z,0..9)[rand 62] for 0..15 } s/; admin_passwd.*$/admin_passwd = $pw/g' /etc/odoo/openerp-server.conf
     sudo wget -O /etc/odoo/odoo.tools https://raw.githubusercontent.com/vertelab/odootools/master/odoo.tools
