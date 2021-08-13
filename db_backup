@@ -2,12 +2,13 @@
 for DB in `su postgres -c "psql -At -c \"select datname from pg_database where datistemplate = false and 'postgres' <> datname;\" postgres"`
 do
         echo $DB
-        su odoo -c "odoobackup --database=$DB --filename=/tmp/odoobackup.$$" && mv /tmp/odoobackup.$$ /var/backups/"$DB".zip
-	if [ -f /tmp/odoobackup.$$ ] 
-	then
-		rm -f /tmp/odoobackup.$$ ; echo Database $DB not backedup
+        #su odoo -c "odoobackup --database=$DB --filename=/tmp/odoobackup.$$" && mv /tmp/odoobackup.$$ /var/backups/"$DB".zip
+	#if [ -f /tmp/odoobackup.$$ ] 
+	#then
+	#	rm -f /tmp/odoobackup.$$ ; echo Database $DB not backedup
 		su postgres -c "pg_dump -Fp $DB " | gzip > /var/backups/"$DB".sql.gz
-	fi
+	#fi
+	# remarked backup with filestore, this is not a good idea when filestore i large and another system takes backup
 done
 
 #
