@@ -1,6 +1,6 @@
 # odootools for Ubuntu 20.04
 
-Tools to help manage an Odoo installation.
+Tools to help install and manage an Odoo installation.
 
 ## Prerequisites
 
@@ -14,12 +14,25 @@ Ubuntu 18.04 or older.
 
 Installation of Odoo and Odootools.
 
-Ensure you are using the version (eg branch 14.0 for Odoo 14) you want to install.
+1 Ensure you are using the version (eg branch 14.0 for Odoo 14) you want to install.
 
-The command below will download and execute the installation script:
+2 The command below will download and execute the installation script:
 ```
 wget -O- https://raw.githubusercontent.com/vertelab/odootools/14.0/install | bash
 ```
+3 Follow the instruction in: /repos/README.md to copy the modules to the server.
+
+# 4 Follow the instruction in: /themes/README.md to copy the themes to the server.
+
+5 If you want to add additional customer unique repositories to the server
+git clone -b 14 https://git.vertel.se/vertelab/odoo-customer-addons.git or any other repository where there is a copy of a similar odootools/repos-folder with a list of repos in one of the folders.
+
+6 restart the server and run this command.
+```
+odooaddons
+```
+
+
 ## Uninstall
 
 Use the command below to uninstall your Odoo installation.
@@ -38,7 +51,7 @@ Odoo-tools command |Description
  cdb                       | change database                 
  cdo                       | change directory to Odoo core   
  cdp                       | change directory to project     
- odooaddons                | Updates addons_path with all project according to ODOOADDONS defined in odoo.tools
+ odooaddons                | Updates addons_path with all project according to ODOOADDONS defined in odoo.tools (or is it odootools/repos/MAINTAINER_repo)
  odooadminpw               | view master password
  odoocheckmodule   <module>        | lists databases that use a module (eg odoocheckmodule sale)
  odoocreatetestdb <database name> <input file or stdin> | Creates new database without e-mail-settings for outgoing mail
