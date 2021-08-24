@@ -11,7 +11,8 @@ jakob@odoo12_local_server:~$ cat .ssh/id_rsa.pub
 ssh-rsa AAAAB3NzaC1yc2EAAAAD.......[reduced for space]..yqjlQqpECgyhNieLoskf+etAes= jakob@odoo12_local_server
 
 At GitHub, go "Settings" >> "SSH and PGP keys". Select Add key and paste all of your key, 
-"ssh-rsa AAAAB3NzaC1yc2EAAAAD.......[reduced for space]..yqjlQqpECgyhNieLoskf+etAes= jakob@odoo12_local_server" in the box!
+"ssh-rsa AAAAB3NzaC1yc2EAAAAD.......[reduced for space]..
+yqjlQqpECgyhNieLoskf+etAes= jakob@odoo12_local_server" in the box!
 
 * * * * 
 
