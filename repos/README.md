@@ -1,15 +1,22 @@
 
 
-To install all repos in the repos directgory
+To install all repos in the repos directory:
 
 
-1)
+1) $ git clone -b 14 git@github.com:vertelab/odootools.git
 
-git clone -b 14 git.odootools...
+First, download the Odoo toolbox.
 
-2)
+2) Install repos + all requirements.
 
-cd odootools/repos
+When done, go into folder odootools/repos and execure two files using the bash-command.
 
-./cloneall
-./allrequirements
+$ cd odootools/repos
+odootools/repos: $ bash cloneall
+odootools/repos: $ bash allrequirements
+
+3) Not to forget, the owner...!
+
+$ sudo chown odoo:odoo /usr/share/odoo*/ -R
+$ sudo chmod g+w /usr/share/odoo*/ -R
+
