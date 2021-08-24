@@ -2,7 +2,7 @@
 ```
 To install all repos in the repos directory:
 
-1) $ git clone -b 12 git@github.com:vertelab/odootools.git
+1) $ git clone -b 12.0 git@github.com:vertelab/odootools.git
 
 First, download the Odoo toolbox.
 
@@ -21,6 +21,6 @@ $ sudo chmod g+w /usr/share/odoo*/ -R
 
 4) Try your new server at port 8069!
 
-http://odoo14_local_server:8069/
+http://odoo12_local_server:8069/
 ```
 
