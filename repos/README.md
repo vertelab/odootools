@@ -20,4 +20,7 @@ odootools/repos: $ bash allrequirements
 $ sudo chown odoo:odoo /usr/share/odoo*/ -R
 $ sudo chmod g+w /usr/share/odoo*/ -R
 
+4) Try your new server at port 8069!
+
+http://odoo14_local_server:8069/
 ```
