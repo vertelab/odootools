@@ -2,7 +2,7 @@
 ```
 To install all repos in the repos directory:
 
-1) $ git clone -b 14 git@github.com:vertelab/odootools.git
+1) $ git clone -b 14.0 git@github.com:vertelab/odootools.git
 
 First, download the Odoo toolbox.
 
