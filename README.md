@@ -20,8 +20,17 @@ Installation of Odoo and Odootools.
 ```
 wget -O- https://raw.githubusercontent.com/vertelab/odootools/14.0/install | bash
 ```
-3 Follow the instruction in: /repos/README.md to copy the modules to the server.
+3 To install all repos in the repos-directory follow these steps
+```
+git clone -b 14.0 git@github.com:vertelab/odootools.git
 
+cd odootools/repos
+
+./cloneall
+
+./allrequirements
+
+```
 # 4 Follow the instruction in: /themes/README.md to copy the themes to the server.
 
 5 If you want to add additional customer unique repositories to the server
