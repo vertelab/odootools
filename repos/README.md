@@ -1,5 +1,5 @@
 
-
+```
 To install all repos in the repos directory:
 
 
@@ -20,3 +20,4 @@ odootools/repos: $ bash allrequirements
 $ sudo chown odoo:odoo /usr/share/odoo*/ -R
 $ sudo chmod g+w /usr/share/odoo*/ -R
 
+```
