@@ -43,7 +43,13 @@ odooext-CybroOdoo-CybroAddons
 odooext-itpp-labs-access-addons
 odooext-itpp-labs-mail-addons
 
-4) Not to forget, the owner...!
+
+5) If you want to add additional customer unique repositories to the server
+git clone -b 14 https://git.vertel.se/vertelab/odoo-[customer]-addons.git 
+or any other repository where there is a copy of a similar odootools/repos-folder with a list of repos in one of the folders.
+
+
+5) Not to forget, the owner...!
 
 $ sudo chown odoo:odoo /usr/share/odoo*/ -R
 $ sudo chmod g+w /usr/share/odoo*/ -R
@@ -57,7 +63,7 @@ drwxrwxr-x 128 odoo odoo  4096 Aug 24 07:59 odooext-CybroOdoo-CybroAddons
 drwxrwxr-x  16 odoo odoo  4096 Aug 24 08:00 odooext-itpp-labs-access-addons
 drwxrwxr-x   5 odoo odoo  4096 Aug 24 07:59 odooext-itpp-labs-mail-addons
 
-5) Try your new server at port 8069!
+6) Try your new server at port 8069!
 
 http://odoo14_local_server:8069/
 ```
