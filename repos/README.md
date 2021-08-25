@@ -45,7 +45,8 @@ odooext-itpp-labs-mail-addons
 
 
 5) If you want to add additional customer unique repositories to the server
-git clone -b 14 https://git.vertel.se/vertelab/odoo-[customer]-addons.git 
+git clone -b 14 https://git.vertel.se/vertelab/odoo-customer-addons.git
+and add a folder with your customer
 or any other repository where there is a copy of a similar odootools/repos-folder with a list of repos in one of the folders.
 
 
