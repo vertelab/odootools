@@ -18,12 +18,14 @@ key, "ssh-rsa AAAAB3NzaC1yc2EAAAAD.......[reduced for space]..yqjlQqpECgyhNieLos
 To install all repos in the repos directory:
 
 1) $ git clone -b 14.0 git@github.com:vertelab/odootools.git
+or if this does not work - try: 
+$ sudo git clone -b 14.0 https://github.com/vertelab/odootools.git
 
 First, download the Odoo toolbox.
 
 2) Install repos + all requirements.
 
-When done, go into folder odootools/repos and execure two files using the bash-command.
+When done, go to the folder odootools/repos and execute two the commands below
 
 $ cd odootools/repos
 odootools/repos: $ bash cloneall
@@ -34,7 +36,7 @@ odootools/repos: $ bash allrequirements
 $ cd /usr/share
 /usr/share: $ ls | grep "odoo*"
 
-Expected output:
+Expected output is a list like this:
 core-odoo
 odooext-commitsun-pms
 odooext-CybroOdoo-CybroAddons
