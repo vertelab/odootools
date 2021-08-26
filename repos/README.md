@@ -65,6 +65,12 @@ drwxrwxr-x 128 odoo odoo  4096 Aug 24 07:59 odooext-CybroOdoo-CybroAddons
 drwxrwxr-x  16 odoo odoo  4096 Aug 24 08:00 odooext-itpp-labs-access-addons
 drwxrwxr-x   5 odoo odoo  4096 Aug 24 07:59 odooext-itpp-labs-mail-addons
 
+6) Run the Odoo tools command to update the config-file with the new repositories and restart the server
+$ odooaddons
+$ odoorestart
+
+
+
 6) Try your new server at port 8069!
 
 http://odoo14_local_server:8069/
