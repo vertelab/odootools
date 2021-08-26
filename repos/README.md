@@ -18,8 +18,6 @@ key, "ssh-rsa AAAAB3NzaC1yc2EAAAAD.......[reduced for space]..yqjlQqpECgyhNieLos
 To install all repos in the repos directory:
 
 1) $ git clone -b 14.0 git@github.com:vertelab/odootools.git
-or if this does not work - try: 
-$ sudo git clone -b 14.0 https://github.com/vertelab/odootools.git
 
 First, download the Odoo toolbox.
 
