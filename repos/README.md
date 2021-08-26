@@ -49,6 +49,9 @@ git clone -b 14 https://git.vertel.se/vertelab/odoo-customer-addons.git
 and add a folder with your customer
 or any other repository where there is a copy of a similar odootools/repos-folder with a list of repos in one of the folders.
 
+Then copy the new downloaded libraries from your home direcoryt to the target
+$ sudo mv odoo-customer-addons /usr/share/
+
 
 5) Not to forget, the owner...!
 
