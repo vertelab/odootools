@@ -57,6 +57,9 @@ $ sudo mv odoo-customer-addons /usr/share/
 $ sudo chown odoo:odoo /usr/share/odoo*/ -R
 $ sudo chmod g+w /usr/share/odoo*/ -R
 
+or run the Odootools command
+$ sudo odoosetperm
+
 /usr/share: $ ls -la | grep "odoo*"
 
 Expected output:
