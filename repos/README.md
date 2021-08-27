@@ -6,12 +6,8 @@ $ ssh-keygen
 Press [enter][enter][enter][enter] (Don't enter password!)
 
 Copy your password to Github:
-jakob@odoo14_local_server:~$ cat .ssh/id_rsa.pub
-
+$ cat .ssh/id_rsa.pub
 ssh-rsa AAAAB3NzaC1yc2EAAAAD...[reduced for space]..yqjlQqpECgyhNieLoskf+etAes= jakob@odoo14_local_server
-
-Use this to copy the key
-$ sudo cat .ssh/id_rsa.pub 
 
 At GitHub, go to "Settings" >> "SSH and PGP keys". Select "Add ke"y and paste all of your key in the box!
 "ssh-rsa AAAAB3NzaC1yc2EAAAAD...[reduced for space]..yqjlQqpECgyhNieLoskf+etAes= jakob@odoo14_local_server"
