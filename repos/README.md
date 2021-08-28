@@ -27,8 +27,8 @@ First, download the Odoo toolbox.
 When done, go to the folder odootools/repos and execute two the commands below
 
 $ cd odootools/repos
-odootools/repos: $ sudo bash cloneall
-odootools/repos: $ sudo bash allrequirements
+odootools/repos: $ bash cloneall
+odootools/repos: $ bash allrequirements
 
 3) Check your download:
 
