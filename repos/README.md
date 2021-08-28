@@ -7,7 +7,7 @@ Press [enter][enter][enter][enter] (Don't enter password!)
 
 Copy your password to Github:
 $ cat .ssh/id_rsa.pub 
-(eller $ sudo cat /root/.ssh/id_rsa.pub )
+Make a note of where it is stored (example: /home/[username]/.ssh/id_rsa)
 
 ssh-rsa AAAAB3NzaC1yc2EAAAAD...[reduced for space]..yqjlQqpECgyhNieLoskf+etAes= jakob@odoo14_local_server
 
@@ -18,7 +18,7 @@ At GitHub, go to "Settings" >> "SSH and PGP keys". Select "Add ke"y and paste al
 
 To install all repos in the repos directory:
 
-1) $ sudo git clone -b 14.0 git@github.com:vertelab/odootools.git
+1) $ git clone -b 14.0 git@github.com:vertelab/odootools.git
 
 First, download the Odoo toolbox.
 
