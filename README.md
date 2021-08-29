@@ -7,13 +7,6 @@ Tools to help to install and manage an Odoo installation.
 The installation scripts assume the host OS is Ubuntu 20.04. Usage on other 
 systems might require tweaking to work.
 
-Add users with these commands:
-Add userser
-```
-sudo adduser username
-sudo adduser username sudo
-```
-
 Odoo 14 require `init-system-helpers 1.57` or later. This rules out usage of
 Ubuntu 18.04 or older.
 
@@ -29,9 +22,16 @@ Step 1: The command below will download and execute the installation script:
 ```
 wget -O- https://raw.githubusercontent.com/vertelab/odootools/14.0/install | bash
 ```
-Then log out from the root account and log in with a user-account (that is a member of the sudo-group).
 
-Step 2: Follow the instructions for the management of the Odoo source repositories
+Step 2: Add users with these commands:
+Add userser
+```
+sudo adduser username
+sudo adduser username sudo
+```
+Step 3: Then log out from the root account and log in with a user-account (that is a member of the sudo-group).
+
+Step 4: Follow the instructions for the management of the Odoo source repositories
 https://github.com/vertelab/odootools/blob/14.0/repos/README.md
 
 Step 3: If you want to add more than the standard themes please add them from here
