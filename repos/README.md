@@ -20,9 +20,10 @@ To install all repos in the repos directory:
 
 1) $ git clone -b 14.0 git@github.com:vertelab/odootools.git
 
-First, download the Odoo toolbox.
+2) Then add the your user to the Odoo-group
+$ sudo adduser username odoo
 
-2) Install repos + all requirements.
+3) Install repos + all requirements.
 
 When done, go to the folder odootools/repos and execute two the commands below
 
@@ -30,7 +31,7 @@ $ cd odootools/repos
 odootools/repos: $ bash cloneall
 odootools/repos: $ bash allrequirements
 
-3) Check your download:
+4) Check your download:
 
 $ cd /usr/share
 /usr/share: $ ls | grep "odoo*"
@@ -54,7 +55,7 @@ $ sudo mv odoo-customer-addons /usr/share/odooext-vertel-odoo-customer-addons
 
 
 
-5) Not to forget, the owner...!
+6) Not to forget, the owner...!
 
 $ sudo chown odoo:odoo /usr/share/odoo*/ -R
 $ sudo chmod g+w /usr/share/odoo*/ -R
@@ -71,13 +72,13 @@ drwxrwxr-x 128 odoo odoo  4096 Aug 24 07:59 odooext-CybroOdoo-CybroAddons
 drwxrwxr-x  16 odoo odoo  4096 Aug 24 08:00 odooext-itpp-labs-access-addons
 drwxrwxr-x   5 odoo odoo  4096 Aug 24 07:59 odooext-itpp-labs-mail-addons
 
-6) Run the Odoo tools command to update the config-file with the new repositories and restart the server
+7) Run the Odoo tools command to update the config-file with the new repositories and restart the server
 $ odooaddons
 $ odoorestart
 
 
 
-6) Try your new server at port 8069!
+8) Try your new server at port 8069!
 
 http://odoo14_local_server:8069/
 ```
