@@ -28,8 +28,15 @@ $ sudo adduser username odoo
 When done, go to the folder odootools/repos and execute two the commands below
 
 $ cd odootools/repos
+```
 odootools/repos: $ bash cloneall
+```
+Just to confirm - run this one more time (sometimes it times out).
+
+Then run:
+```
 odootools/repos: $ bash allrequirements
+```
 
 4) Check your download:
 
