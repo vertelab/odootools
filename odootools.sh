@@ -3,7 +3,7 @@ alias odoovilog='sudo vi /var/log/odoo/odoo-server.log'
 alias odooadminpw='sudo grep -o "^admin_passwd.*$" /etc/odoo/odoo.conf | cut -f 3 -d" "'
 
 alias allprojects='ls -d /usr/share/odoo-*'
-alias cdo='cd /usr/share/odoo-addons'
+alias cdo='cd /usr/share/core-odoo/addons'
 
 export ODOO_USER="odoo"
 export ODOO_SOURCE_DIR=/opt/odoo
