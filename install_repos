@@ -27,13 +27,13 @@ echo "changing name on excludes l10n_se module so that it doesn't conflict with 
 FILE=/usr/share/core-odoo/addons/l10n_se
 if [ -f "$FILE" ]; then
     echo "$FILE exists. Changing name of $FILE"
-    sudo /usr/share/core-odoo/addons/l10n_se /usr/share/core-odoo/addons/exclude_l10n_se   
+    sudo mv /usr/share/core-odoo/addons/l10n_se /usr/share/core-odoo/addons/exclude_l10n_se   
 fi
 
 FILE2=/usr/share/core-odoo/addons/l10n_se_ocr
 if [ -f "$FILE2" ]; then
     echo "$FILE2 exists. Changing name of $FILE2"
-    sudo /usr/share/core-odoo/addons/l10n_se_ocr /usr/share/core-odoo/addons/exclude_l10n_se_ocr  
+    sudo mv /usr/share/core-odoo/addons/l10n_se_ocr /usr/share/core-odoo/addons/exclude_l10n_se_ocr  
 fi
 
 
