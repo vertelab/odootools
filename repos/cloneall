@@ -9,7 +9,7 @@ do
 	printf "$repobase "
 	if [ $repodir == 'vertelab' ];
 	then
-		target="/usr/share/odoo-${repobase}"
+		target="/usr/share/${repobase}"
 	else
 		target="/usr/share/odooext-${repodir}-${repobase}"
 	fi
