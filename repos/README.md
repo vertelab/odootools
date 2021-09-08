@@ -14,6 +14,11 @@ ssh-rsa AAAAB3NzaC1yc2EAAAAD...[reduced for space]..yqjlQqpECgyhNieLoskf+etAes= 
 At GitHub, go to "Settings" >> "SSH and PGP keys". Select "Add ke"y and paste all of your key in the box!
 "ssh-rsa AAAAB3NzaC1yc2EAAAAD...[reduced for space]..yqjlQqpECgyhNieLoskf+etAes= jakob@odoo14_local_server"
 
+Test your new key:
+ssh -T git@github.com
+Expected result is:  Hi username! You've successfully authenticated, but GitHub does not > provide shell access.
+See: https://docs.github.com/en/github/authenticating-to-github/connecting-to-github-with-ssh/testing-your-ssh-connection for responses.
+
 * * * * 
 
 To install all repos in the repos directory:
