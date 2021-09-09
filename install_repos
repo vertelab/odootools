@@ -16,12 +16,9 @@ sudo apt update
 sudo apt --yes upgrade
 for repo in $(ls $TARGETDIR | grep ^$REPOPREFIX) ; do
     REQUIREMENTS=$TARGETDIR/$repo/apt-requirements.txt
-    if test -f $REQUIREMENTS ; then
+    if [ -f $REQUIREMENTS ] ; then
 	echo "Installing requirements from: "$REQUIREMENTS
-	while read line; do
-	    echo "Installing: "$line
-	    sudo apt --yes install $line
-	done < $REQUIREMENTS
+	xargs -a apt_requirements.txt -- sudo apt --yes install
     fi
 done
 
