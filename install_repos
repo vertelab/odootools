@@ -18,7 +18,7 @@ for repo in $(ls $TARGETDIR | grep ^$REPOPREFIX) ; do
     REQUIREMENTS=$TARGETDIR/$repo/apt-requirements.txt
     if [ -f $REQUIREMENTS ] ; then
 	echo "Installing requirements from: "$REQUIREMENTS
-	xargs -a apt_requirements.txt -- sudo apt --yes install
+	xargs -a $REQUIREMENTS -- sudo apt --yes install
     fi
 done
 
