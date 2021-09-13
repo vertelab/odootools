@@ -12,6 +12,15 @@ echo "Installing additional repos"
 sudo odooextras.py repos
 
 echo "Installing requirements with apt"
+sudo apt update
+sudo apt --yes upgrade
+for repo in $(ls $TARGETDIR | grep ^$REPOPREFIX) ; do
+    REQUIREMENTS=$TARGETDIR/$repo/apt-requirements.txt
+    if [ -f $REQUIREMENTS ] ; then
+	echo "Installing requirements from: "$REQUIREMENTS
+	xargs -a $REQUIREMENTS -- sudo apt --yes install
+    fi
+done
 
 echo "Installing requirements with pip3"
 
