@@ -30,12 +30,10 @@ sudo adduser username
 sudo adduser username sudo
 sudo adduser username odoo
 ```
-Step 3: Then log out from the root account and log in with a user-account (that is a member of the sudo-group).
-
-Step 4: Follow the instructions for the management of the Odoo source repositories
+Step 3: Follow the instructions for the management of the Odoo source repositories
 https://github.com/vertelab/odootools/blob/14.0/repos/README.md
 
-Step 3: If you want to add more than the standard themes please add them from here
+Step 4: If you want to add more than the standard themes please add them from here
 https://github.com/vertelab/odootools/blob/14.0/themes
 
 
