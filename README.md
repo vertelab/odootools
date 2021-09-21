@@ -28,6 +28,7 @@ Add userser
 ```
 sudo adduser username
 sudo adduser username sudo
+sudo adduser username odoo
 ```
 Step 3: Then log out from the root account and log in with a user-account (that is a member of the sudo-group).
 
