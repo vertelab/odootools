@@ -22,24 +22,6 @@ _cdp()
 }
 complete -F _cdp cdp
 
-
-_drupal_sites()
-{
-       COMPREPLY=( $( compgen -W '$( command ls /etc/drupal/$1/sites 2>/dev/null \
-               | sed -e 's/[.]load$//' -e 's/[.]conf$//' )' -- $cur  ) )
-}
-
-_cdd()
-{
-       local cur
-
-       COMPREPLY=()
-       cur=${COMP_WORDS[COMP_CWORD]}
-
-       _drupal_sites 7
-}
-complete -F _cdd cdd
-
 _cdb()
 {
        local cur
@@ -82,6 +64,26 @@ __odoosync()
     fi
 }
 complete -F __odoosync odoosync
+
+__odoosyncall()
+{
+    local cur
+    local prev
+    COMPREPLY=()
+    cur=${COMP_WORDS[COMP_CWORD]}
+    prev=${COMP_WORDS[COMP_CWORD-1]}
+    if [[ $prev == -p ]]; then
+        _odoo_projects
+    elif [[ $prev == -h ]]; then
+        _odoohosts
+    else
+        local options
+        _check_prev_words -p
+        _check_prev_words -h
+        COMPREPLY=( $( compgen -W "$options" -- $cur ) )
+    fi
+}
+complete -F __odoosyncall odoosyncall
 
 __odoo_create_test_db()
 {
