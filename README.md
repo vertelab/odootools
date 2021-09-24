@@ -46,6 +46,7 @@ Use the command below to uninstall your Odoo installation.
 wget -O- https://raw.githubusercontent.com/vertelab/odootools/14.0/uninstall | bash
 ```
 
+
 ## Odoo-tools commands
 
 Odoo-tools command |Description
@@ -72,3 +73,11 @@ Odoo-tools command |Description
 odooupd -h/--host, -P/--port, -d/--database, -m/--module, -p/--password, -l/--list, -i/--install, -u/--uninstall | Modifies Odoo-instanses; -m/--module=	comma separated  module list, -i/--install	install or upgrade modules  -u, --uninstall	uninstall modules, -c/--check coma separeted module list
 odooupdm *database* *modulelist*      | Installs/updates modules in single user mode                
  odoovilog                 | Opens Odoo log file in vi       
+
+ 
+ ## /etc/odoo/odoo.tools
+ You can change the line
+ ```
+ export ODOOHOSTS="" 
+ ```
+ to change the autocomplete for odootools commands that has a target host.
