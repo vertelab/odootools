@@ -232,7 +232,7 @@ function odoolangexport() {
     fi
     echo $FILE
     sudo service odoo stop
-    echo "odoo.py --modules='${MODULES}' -d ${DATABASES} ${LCMD} --stop-after-init --i18n-export='${FILE}'"
+    echo "odoo --modules='${MODULES}' -d ${DATABASES} ${LCMD} --stop-after-init --i18n-export='${FILE}'"
     sudo su odoo -c "odoo.py -c /etc/odoo/odoo.conf --modules='${MODULES}' -d ${DATABASES} ${LCMD} --stop-after-init --i18n-export='${FILE}'"
     sudo service odoo start
     sudo chown ${USER} ${FILE}
