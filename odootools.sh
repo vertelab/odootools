@@ -70,7 +70,7 @@ function _odoo_install_module() {
     echo "For databases=${DATABASES} modules=${MODULES}"
 
     ${ODOO_STOP}
-    sudo su odoo -c "odoo.py -c ${ODOO_SERVER_CONF} --database ${DATABASES} --init ${MODULES} --stop-after-init"
+    sudo su odoo -c "odoo -c ${ODOO_SERVER_CONF} --database ${DATABASES} --init ${MODULES} --stop-after-init"
     ${ODOO_START}
 }
 alias odooinstall='_odoo_install_module'
@@ -233,7 +233,7 @@ function odoolangexport() {
     echo $FILE
     sudo service odoo stop
     echo "odoo --modules='${MODULES}' -d ${DATABASES} ${LCMD} --stop-after-init --i18n-export='${FILE}'"
-    sudo su odoo -c "odoo.py -c /etc/odoo/odoo.conf --modules='${MODULES}' -d ${DATABASES} ${LCMD} --stop-after-init --i18n-export='${FILE}'"
+    sudo su odoo -c "odoo -c /etc/odoo/odoo.conf --modules='${MODULES}' -d ${DATABASES} ${LCMD} --stop-after-init --i18n-export='${FILE}'"
     sudo service odoo start
     sudo chown ${USER} ${FILE}
     if [ -z "${L}" ]
