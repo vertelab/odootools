@@ -1,4 +1,4 @@
-# odootools for Ubuntu 20.04
+# odootools for Odoo 15 and Ubuntu 20.04
 
 Tools to help to install and manage an Odoo installation.
 
@@ -7,20 +7,17 @@ Tools to help to install and manage an Odoo installation.
 The installation scripts assume the host OS is Ubuntu 20.04. Usage on other 
 systems might require tweaking to work.
 
-Odoo 14 require `init-system-helpers 1.57` or later. This rules out usage of
-Ubuntu 18.04 or older.
-
 ## Install
 
 Installation of Odoo and Odootools.
 
-Ensure you are using the version (eg branch 14.0 for Odoo 14) you want to install.
+Ensure you are using the version (eg branch 15.0 for Odoo 15) you want to install.
 
 When you are logged in with the root-account. Run the following command.
 
 Step 1: The command below will download and execute the installation script:
 ```
-wget -O- https://raw.githubusercontent.com/vertelab/odootools/14.0/install | bash
+wget -O- https://raw.githubusercontent.com/vertelab/odootools/15.0/install | bash
 ```
 
 Step 2: Add users with these commands:
@@ -31,10 +28,10 @@ sudo adduser username sudo
 sudo adduser username odoo
 ```
 Step 3: Follow the instructions for the management of the Odoo source repositories
-https://github.com/vertelab/odootools/blob/14.0/repos/README.md
+https://github.com/vertelab/odootools/blob/15.0/repos/README.md
 
 Step 4: If you want to add more than the standard themes please add them from here
-https://github.com/vertelab/odootools/blob/14.0/themes
+https://github.com/vertelab/odootools/blob/15.0/themes
 
 
 ## Uninstall
@@ -43,7 +40,7 @@ Use the command below to uninstall your Odoo installation.
 
 *this drops your databases and all your data related to Odoo*
 ```
-wget -O- https://raw.githubusercontent.com/vertelab/odootools/14.0/uninstall | bash
+wget -O- https://raw.githubusercontent.com/vertelab/odootools/15.0/uninstall | bash
 ```
 
 
