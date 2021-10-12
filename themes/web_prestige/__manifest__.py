@@ -36,7 +36,7 @@ backend
         'static/description/main_screenshot.png',
     ],
     'license': 'LGPL-3',
-    'auto_install': True,
+    'auto_install': False,
     'installable': True,
     'application':False,
 }
