@@ -10,8 +10,8 @@ import click
 @click.option('--db_port', prompt='db_port', help='Database working Port.')
 @click.option('--db_user', prompt='db_user', help='Database User.')
 @click.option('--db_password', prompt='db_password', help='Database Password.')
-@click.option('--stream', prompt='stream', help='if stream is None return a file object with the dump')
-def backup(database, filename):
+@click.option('--stream', prompt='stream', default=False, help='if stream is None return a file object with the dump')
+def backup(database, filename, db_port, host, db_user, db_password, stream):
     odoo.tools.config['db_port'] = db_port
     odoo.tools.config['db_host'] = host
     odoo.tools.config['db_user'] = db_user
@@ -23,3 +23,4 @@ def backup(database, filename):
     
 if __name__ == '__main__':
     backup()
+
