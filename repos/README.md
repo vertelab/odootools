@@ -69,8 +69,7 @@ $ sudo mv odoo-customer-addons /usr/share/odooext-vertel-odoo-customer-addons
 
 6) Not to forget, the owner...!
 
-$ sudo chown odoo:odoo /usr/share/odoo*/ -R
-$ sudo chmod g+w /usr/share/odoo*/ -R
+$ sudo chown odoo:odoo /usr/share/odoo*/ -R;sudo chmod g+w /usr/share/odoo*/ -R
 
 or run the Odootools command
 $ sudo odoosetperm
