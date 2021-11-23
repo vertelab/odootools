@@ -98,7 +98,7 @@ Solution: $ sudo adduser username odoo (add user to the group odoo.)
 Ctrl + D (Close the SSH connection.)
 $ ssh username@odoo14 (Connect to server.)
 
-Tips! Use ssh-copy-id to become the true lazy hacker and code faster!
+Tips! Do as the lazy hacker, use "ssh-copy-id"!
 ssh-copy-id -i ~/.ssh/id_rsa.pub username@odoo14 
 ssh-copy-id -i ~/.ssh/id_rsa.pub username@odoo14 -f (after re-install)
 ```
