@@ -16,6 +16,7 @@ At GitHub, go to "Settings" >> "SSH and PGP keys". Select "Add ke"y and paste al
 
 Test your new key:
 ssh -T git@github.com
+ssh -T git@git.vertel.se
 Expected result is:  Hi username! You've successfully authenticated, but GitHub does not > provide shell access.
 See: https://docs.github.com/en/github/authenticating-to-github/connecting-to-github-with-ssh/testing-your-ssh-connection for responses.
 
