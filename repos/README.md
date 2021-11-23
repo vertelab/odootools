@@ -66,7 +66,6 @@ odoo-ext-reponame (where reponame is the original reponame at the supplier) as w
 $ sudo mv odoo-customer-addons /usr/share/odooext-vertel-odoo-customer-addons
 
 
-
 6) Not to forget, the owner...!
 
 $ sudo chown odoo:odoo /usr/share/odoo*/ -R;sudo chmod g+w /usr/share/odoo*/ -R
@@ -88,8 +87,14 @@ $ odooaddons
 $ odoorestart
 
 
-
 8) Try your new server at port 8069!
 
 http://odoo14_local_server:8069/
+
+9) error: cannot open .git/FETCH_HEAD: Permission denied
+odoogitpull -- load all repos from remote.
+
+Solution: $ sudo adduser username odoo (add user to the group odoo.)
+Ctrl + D (Close the SSH connection.)
+$ ssh username@odoo14 (Connect to server.)
 ```
