@@ -14,6 +14,7 @@ OCA/brand.git
 OCA/business-requirement.git
 OCA/calendar.git
 OCA/commission.git
+OCA/community-data-files.git
 OCA/connector-cmis.git
 OCA/connector-interfaces.git
 OCA/connector-telephony.git
