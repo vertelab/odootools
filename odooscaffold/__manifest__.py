@@ -32,9 +32,9 @@
         Long description of module's purpose
     """,
     #'sequence': 1,
-    'images': ['static/descrition/banner.svg'],
     'author': 'Vertel AB',
-    'website': 'https://vertel.se/apps/',
+    'website': 'https://vertel.se/apps/odoo-',
+    'images': ['static/descrition/banner.png'], # 560x280
     'license': 'AGPL-3',
     'depends': [],
      #"external_dependencies": {
