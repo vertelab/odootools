@@ -271,3 +271,9 @@ function _odoocheckmodule() {
     done
 }
 alias odoocheckmodule='_odoocheckmodule'
+
+function _odoo_scaffold() {
+	unzip /etc/profile.d/scaffold.zip -d $1
+	mv $1odooscaffold $1$2
+}
+alias odooscaffold="_odoo_scaffold"
