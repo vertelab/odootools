@@ -79,7 +79,7 @@ sudo rm -f /tmp/wkhtmltox_0.12.6-1.focal_amd64.deb
 
 # Odootools
 sudo wget -O /etc/profile.d/odootools.sh https://raw.githubusercontent.com/vertelab/odootools/14.0/odootools.sh 
-sudo wegt -O /etc/profile.d/scaffold.zip https://raw.githubusercontent.com/vertelab/odootols./14.9/scaffold.zip
+sudo wget -O /etc/profile.d/scaffold.zip https://raw.githubusercontent.com/vertelab/odootols./14.9/scaffold.zip
 sudo wget -O /etc/bash_completion.d/odoo https://raw.githubusercontent.com/vertelab/odootools/14.0/bash_completion.odoo
 sudo wget -O /usr/local/bin/odooextras.py https://raw.githubusercontent.com/vertelab/odootools/14.0/odooextras.py
 
