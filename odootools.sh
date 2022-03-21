@@ -272,8 +272,48 @@ function _odoocheckmodule() {
 }
 alias odoocheckmodule='_odoocheckmodule'
 
+# function _odoo_scaffold() {
+# 	unzip /etc/profile.d/scaffold.zip -d $1
+# 	mv $1odooscaffold $1$2
+# }
+# alias odooscaffold="_odoo_scaffold"
+
+# 1) tar är mer unix-mässigt än zip som dessutom måste installeras på de flesta maskiner
+# 2) /etc/odoo är ett bättre ställe för scaffold.tgz
+# 3) Vår standard är -p för project som dessutom skall läggas in i environment ODOOPROJECT -p skall kunna utelämnas och då är det ODOOPROJECT som gäller se cdp
+# 4) -m kan vara lämpligt för modul
+# 5) försök att inte behöva mellanlagra data i onödan på filsystemet, kommandot bör vara oberoende av var man står i filsystemet och får inte heller förflytta användaren
+# Överfört till kod skulle det kunna se ut så här:
 function _odoo_scaffold() {
-	unzip /etc/profile.d/scaffold.zip -d $1
-	mv $1odooscaffold $1$2
+    usage() { echo "Usage: $0 [-p <project>] [-m <module>]" 1>&2; exit 1; }
+    [ -f /etc/odoo/odoo.tools ] && . /etc/odoo/odoo.tools
+    local OPTIND
+    local OPTARG
+	local PROJECT
+    local option
+    while getopts ":p:m:" option; do
+        case $option in
+            p) PROJECT=${OPTARG%/} ; echo "Project: $option $PROJECT" ;;
+            m) MODULE=${OPTARG} ; echo "Module: $option $OPTARG" ;;
+            \:) echo "Option $option requires an argument" ; return ;;
+            \?) echo "Illegal argument ${option}::${OPTARG}" ; return ;;
+        esac
+    done
+	if [ ! -d "/usr/share/$PROJECT" ] ; then
+		sudo mkdir /usr/share/$PROJECT
+		sudo chown odoo:odoo /usr/share/$PROJECT
+		echo "Project successfully created!"
+	fi
+    if [ -z "$PROJECT" ] ; then
+        echo "You have to set -p option to continue"
+    elif [ -d "/usr/share/$PROJECT/$MODULE" ] ; then
+        echo "Module already exists at path: (/user/share/$PROJECT/$MODULE)"
+    elif [ -z "$MODULE" ] ; then
+        echo "You have to set -m option to continue"
+    else
+        sudo mkdir /usr/share/$PROJECT/$MODULE
+        sudo tar xvf /etc/odoo/scaffold.tar.gz -C /usr/share/$PROJECT/$MODULE
+        sudo chown odoo:odoo /usr/share/$PROJECT/$MODULE
+    fi
 }
-alias odooscaffold="_odoo_scaffold"
+alias odooscaffold='_odoo_scaffold'   # echo "You have to set -m option to continue"

@@ -36,6 +36,17 @@ https://github.com/vertelab/odootools/blob/14.0/repos/README.md
 Step 4: If you want to add more than the standard themes please add them from here
 https://github.com/vertelab/odootools/blob/14.0/themes
 
+## Upgrade
+
+If you are developing new features for odoo tools bash scripts and need to verify your changes
+or test them, please move them to the profile.d folder and verify their functionality.
+
+```
+cp odootools.sh /etc/profile.d/
+```
+
+then restart the bash instance, make sure your changes are working correctly, before pushing the changes.
+
 
 ## Uninstall
 
