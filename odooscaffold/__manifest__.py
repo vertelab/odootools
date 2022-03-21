@@ -34,7 +34,7 @@
     #'sequence': 1,
     'author': 'Vertel AB',
     'website': 'https://vertel.se/apps/odoo-',
-    'images': ['static/descrition/banner.png'], # 560x280
+    'images': ['static/description/banner.png'], # 560x280
     'license': 'AGPL-3',
     'depends': [],
      #"external_dependencies": {
