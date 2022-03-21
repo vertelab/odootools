@@ -22,7 +22,7 @@ export ODOO_STOP='sudo service odoo stop'
 
 function odootail() {
     tail -f /var/log/odoo/odoo-server.log | awk ' {
-      gsub("INFO", "\033[0;32mINFO\033[0m", $0); 
+      gsub("INFO", "\033[0;32mINFO\033[0m", $0);
       gsub("WARNING", "\033[0;33mWARNING\033[0m", $0);
       gsub("ERROR", "\033[0;31mERROR\033[0m", $0);
       print $0 };
@@ -78,7 +78,7 @@ alias odooinstall='_odoo_install_module'
 function _odoo_restart() {
     [ -f /etc/odoo/odoo.tools ] && . /etc/odoo/odoo.tools
     [ -z "$ODOORESTART" ] && ODOORESTART="sudo service odoo restart"
-    
+
     echo $ODOORESTART
     eval ${ODOORESTART}
 }
@@ -199,7 +199,7 @@ function odoosetperm() {
             find $p -type d -exec sudo chmod 775 {} \;
             find $p -type f -exec sudo chmod 664 {} \;
         done
-        
+
         sudo chown odoo:odoo /usr/share/core-odoo -R
         sudo chown odoo:odoo /usr/share/odoo-addons -R
     fi
@@ -277,3 +277,10 @@ function _odoo_scaffold() {
 	mv $1odooscaffold $1$2
 }
 alias odooscaffold="_odoo_scaffold"
+
+# Opens psql interface
+# Usage: 'odoopsql <database>'
+function _odoopsql() {
+    sudo su odoo -c "psql $1"
+}
+alias odoopsql="_odoopsql"
