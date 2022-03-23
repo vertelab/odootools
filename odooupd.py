@@ -5,7 +5,7 @@ import odoorpc
 
 
 def usage():
-    print """-h, --host=\thost
+    print("""-h, --host=\thost
 -P, --port=\tport
 -d, --database=\tdatabase
 -m, --module=\tcomma separated module list
@@ -13,7 +13,7 @@ def usage():
 -l, --list\tlist all modules
 -i, --install\tinstall modules
 -u, --uninstall\tuninstall modules
-"""
+""")
 
 try:
     opts, args = getopt.getopt(sys.argv[1:], "h:P:d:m:p:liuUc:", ["host=", "port=", "database=", "module=", "password=", "list", "install", "uninstall", "update_list", "check="])
