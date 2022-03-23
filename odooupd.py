@@ -79,7 +79,7 @@ if UPDATE_LIST:
 
 if LIST:
     installed = [m['name'] for m in odoo.env['ir.module.module'].read(odoo.env['ir.module.module'].search(([('state', '=', 'installed')])), ['name'])]
-    print ','.join(installed)
+    print(','.join(installed))
 elif CHECK:
     sys.exit(len(odoo.env['ir.module.module'].search([('state', '=', 'installed'), ('name', '=', CHECK)])) == 0)
 elif MODULE:
