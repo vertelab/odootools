@@ -19,7 +19,7 @@ try:
     opts, args = getopt.getopt(sys.argv[1:], "h:P:d:m:p:liuUc:", ["host=", "port=", "database=", "module=", "password=", "list", "install", "uninstall", "update_list", "check="])
 except getopt.GetoptError as err:
     # print help information and exit:
-    print str(err) # will print something like "option -a not recognized"
+    print(str(err)) # will print something like "option -a not recognized"
     usage()
     sys.exit(2)
 
@@ -93,7 +93,7 @@ elif MODULE:
             if m in installed:
                 to_be_upgraded.append(m)
             else:
-                print '**** to be installed ****\n%s' %to_be_installed
+                print('**** to be installed ****\n%s' %to_be_installed)
                 client.install(m)
                 to_be_installed = list(set(to_be_installed) - set(m['name'] for m in odoo.env['ir.module.module'].read(odoo.env['ir.module.module'].search(([('state', '=', 'installed')])), ['name'])))
         if UNINSTALL:
@@ -104,7 +104,7 @@ elif MODULE:
 
 
 else:
-    print 'Nothing to do'
+    print('Nothing to do')
 
 
 #~ if sys.argv[1] == 'list_modules':
