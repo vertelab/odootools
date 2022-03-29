@@ -272,12 +272,6 @@ function _odoocheckmodule() {
 }
 alias odoocheckmodule='_odoocheckmodule'
 
-# function _odoo_scaffold() {
-# 	unzip /etc/profile.d/scaffold.zip -d $1
-# 	mv $1odooscaffold $1$2
-# }
-# alias odooscaffold="_odoo_scaffold"
-
 # 1) tar är mer unix-mässigt än zip som dessutom måste installeras på de flesta maskiner
 # 2) /etc/odoo är ett bättre ställe för scaffold.tgz
 # 3) Vår standard är -p för project som dessutom skall läggas in i environment ODOOPROJECT -p skall kunna utelämnas och då är det ODOOPROJECT som gäller se cdp
