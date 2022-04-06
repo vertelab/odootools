@@ -315,6 +315,15 @@ alias odooscaffold='_odoo_scaffold'
 # Opens psql interface
 # Usage: 'odoopsql <database>'
 function _odoopsql() {
-    sudo su odoo -c "psql $1"
+    [ ! -z "$1" ] && sudo su odoo -c "psql $1"
+    [ -z "$1" ] && echo "Usage: odoopsql databasename"
 }
 alias odoopsql="_odoopsql"
+
+# Finds installed modules in given database
+# Usage: 'odoomodules <database>'
+function _odoomodules() {
+    [ ! -z "$1" ] && sudo su odoo -c "psql $1 -c \"select name from ir_module_module where state='installed' order by name asc\"" | tail -n +3 | head -n -2 | sed 's/^ //g' | less
+    [ -z "$1" ] && echo "Usage: odoomodules databasename"
+}
+alias odoomodules="_odoomodules"
