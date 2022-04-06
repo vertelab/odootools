@@ -43,6 +43,7 @@ or test them, please move them to the profile.d folder and verify their function
 
 ```
 cp odootools.sh /etc/profile.d/
+cp odooscaffold.tar.gz /etc/odoo/
 ```
 
 then restart the bash instance, make sure your changes are working correctly, before pushing the changes.
