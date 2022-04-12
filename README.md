@@ -70,6 +70,7 @@ Odoo-tools command |Description
  cdp                       | change directory to project     
  odooaddons                | Updates the addons_path with all project according to ODOOADDONS defined in odoo.tools. These are stored here: https://github.com/vertelab/odootools/blob/14.0/repos/
  odooadminpw               | view master password
+ odooallrequirements       | Loop through all projects installing / updating requirements.txt
  odoocheckmodule   <module>        | lists databases that use a module (eg odoocheckmodule sale)
  odoocreatetestdb <database name> <input file or stdin> | Creates new database without e-mail-settings for outgoing mail
  odoofind *pattern*        | find patterns in odoo-core source code                     
