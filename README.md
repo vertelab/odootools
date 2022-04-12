@@ -100,5 +100,5 @@ Type this command
  ```
 user@odoo14server:~/odootools$ . odootools.sh 
  ```
-to load new or current odootools commands to the Terminal
+to load new or update current odootools commands to the Terminal.
 
