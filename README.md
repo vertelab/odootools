@@ -95,3 +95,10 @@ odooupdm *database* *modulelist*      | Installs/updates modules in single user 
  export ODOOHOSTS="" 
  ```
  to change the autocomplete for odootools commands that has a target host.
+ 
+Type this command
+ ```
+user@odoo14server:~/odootools$ . odootools.sh 
+ ```
+to load new or current odootools commands to the Terminal
+
