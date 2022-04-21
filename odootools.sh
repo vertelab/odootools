@@ -157,10 +157,16 @@ function odooaddons() {
 }
 
 function odoogitpull() {
+    ## git config
+
     [ -f /etc/odoo/odoo.tools ] && . /etc/odoo/odoo.tools
     if [ ! -z "$ODOOADDONS" ]; then
         CWD=`pwd`
         for p in ${ODOOADDONS//,/ }; do
+            grep -q $p ~/.gitconfig
+            if [ $? -ne 0 ]; then
+                git config --global --add safe.directory $p
+            fi
             cd $p
             echo -n $p " "
             git pull 2> ~/odoogitpull.err
@@ -168,6 +174,8 @@ function odoogitpull() {
         cat ~/odoogitpull.err
         cd $CWD
     fi
+    sudo chown odoo:odoo /usr/share/odoo*/ -R
+    sudo chmod g+w /usr/share/odoo*/ -R
 }
 function odooallrequirements() {
     for req in `ls /usr/share/odoo*/requirements.txt`
