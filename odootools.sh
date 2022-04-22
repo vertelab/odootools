@@ -112,6 +112,8 @@ function _odoogitclone() {
 	fi
     done
     cd $CWD
+    sudo chown odoo:odoo /usr/share/odoo*/ -R
+    sudo chmod g+w /usr/share/odoo*/ -R
 }
 alias odoogitclone='_odoogitclone'
 
