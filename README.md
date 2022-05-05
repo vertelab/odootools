@@ -66,8 +66,8 @@ Odoo-tools command |Description
  alldbs                    | Lists all databases             
  allprojects               | Lists all projects              
  cdb                       | change database                 
- cdo                       | :/usr/share/core-odoo/addons$
- cdp                       | :/usr/share$  
+ cdo                       | Shortcut: /usr/share/core-odoo/addons$
+ cdp                       | Shortcut: /usr/share$  
  odooaddons                | Updates the addons_path with all project according to ODOOADDONS defined in odoo.tools. These are stored here: https://github.com/vertelab/odootools/blob/14.0/repos/
  odooadminpw               | view master password
  odooallrequirements       | Loop through all projects installing / updating requirements.txt
