@@ -26,9 +26,9 @@ wget -O- https://raw.githubusercontent.com/vertelab/odootools/14.0/install | bas
 Step 2: Add users with these commands:
 Add userser
 ```
-sudo adduser username
-sudo adduser username sudo
-sudo adduser username odoo
+sudo adduser $USER
+sudo adduser $USER sudo
+sudo adduser $USER odoo
 ```
 Step 3: Follow the instructions for the management of the Odoo source repositories
 https://github.com/vertelab/odootools/blob/14.0/repos/README.md
