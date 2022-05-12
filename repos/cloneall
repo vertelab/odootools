@@ -2,7 +2,7 @@
 
 BRANCH=14.0
 
-for gitrepo in `cat *-repo`
+for gitrepo in `cat *-repo | grep -v '#' | grep -v '^$' `
 do 
         repobase=`basename $gitrepo .git`
         repodir=`dirname $gitrepo`
