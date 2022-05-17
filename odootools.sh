@@ -344,4 +344,4 @@ function _odoomodules() {
 }
 alias odoomodules="_odoomodules"
 
-alias odoocheckdeps='python /usr/local/bin/odoocheckdeps.py'
+alias odoocheckdeps='python3 /usr/local/bin/odoocheckdeps.py'
