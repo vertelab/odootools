@@ -143,6 +143,7 @@ class Module:
         self.depends = set()
         self.inherits = set()
         self.names = set()
+        self.reverse_depends = set()
 
     def parse_deps(self):
         if not self.depends:
@@ -253,11 +254,53 @@ def check_missing(module_file):
 
 
 def check_dependency(dependency):
-    raise NotImplementedError
+    modules = {}
+    for path in find_modules():
+        module = Module(path)
+        modules[module.name] = module
+        module.parse_deps()
+
+    if print_module_tree(dependency, modules):
+        _logger.error("Missing at least one module.")
+        sys.exit(1)
+
+def print_module_tree(module_name, modules, seen=None, depth=0, key="depends"):
+    error_found = False
+    module = modules.get(module_name)
+    base_spaces = "    "
+    spaces = base_spaces * depth
+    if seen is None:
+        seen = set()
+
+    if module is None:
+        print(f"{spaces}Missing module {module_name}.")
+        return False
+    elif module not in seen:
+        seen.add(module)
+        print(f"{spaces}{module.name}")
+        for dep in getattr(module, key):
+            error_found = print_module_tree(dep, modules, seen, depth+1, key) or error_found
+    else:
+        print(f"{spaces}{module.name}")
+        if getattr(module, key):
+            print(f"{spaces}{base_spaces}...")
+    return error_found
 
 
 def check_consequence(consequence):
-    raise NotImplementedError
+    modules = {}
+    for path in find_modules():
+        module = Module(path)
+        modules[module.name] = module
+        module.parse_deps()
+
+    for module_name, module in modules.items():
+        for module in (modules.get(d, None) for d in module.depends):
+            if module is not None:
+                module.reverse_depends.add(module_name)
+
+    print_module_tree(consequence, modules, key="reverse_depends")
+
 
 
 if __name__ == "__main__":
