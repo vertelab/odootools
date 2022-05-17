@@ -181,7 +181,7 @@ function odoogitpull() {
 }
 function odooallrequirements() {
     for req in `ls /usr/share/odoo*/requirements.txt`
-    do 
+    do
         sudo pip3 install -r $req
     done
 }
@@ -343,3 +343,5 @@ function _odoomodules() {
     [ -z "$1" ] && echo "Usage: odoomodules databasename"
 }
 alias odoomodules="_odoomodules"
+
+alias odoocheckdeps='python /usr/local/bin/odoocheckdeps.py'

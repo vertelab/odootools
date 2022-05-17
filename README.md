@@ -72,7 +72,7 @@ Odoo-tools command |Description
  odooadminpw               | view master password
  odooallrequirements       | Loop through all projects installing / updating requirements.txt
  odoocheckmodule   <module>        | lists databases that use a module (eg odoocheckmodule sale)
- odoocheckdeps.py          | Helper script that is primarally intended to find missing dependencies. Can easily be extended to also show dependencies/consequences
+ odoocheckdeps             | Helper script that is primarally intended to find missing dependencies. Can easily be extended to also show dependencies/consequences
  odoocreatetestdb <database name> <input file or stdin> | Creates new database without e-mail-settings for outgoing mail
  odoofind *pattern*        | find patterns in odoo-core source code
  odoogitclone *project*    | clones and installs projects from githuh (vertel-projects)

@@ -84,7 +84,7 @@ sudo wget -O /etc/bash_completion.d/odoo https://raw.githubusercontent.com/verte
 sudo wget -O /usr/local/bin/odooextras.py https://raw.githubusercontent.com/vertelab/odootools/14.0/odooextras.py
 
 # Extra tools
-sudo wget -O /usr/local/bin/odoocheckdeps.py https://raw.guthubusercontent.com/vertelab/odootools/14.0/scripts/odoocheckdeps.py
+sudo wget -O /usr/local/bin/odoocheckdeps.py https://raw.githubusercontent.com/vertelab/odootools/14.0/scripts/odoocheckdeps.py
 
 
 # daily backup
