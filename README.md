@@ -4,7 +4,7 @@ Tools to help to install and manage an Odoo installation.
 
 ## Prerequisites
 
-The installation scripts assume the host OS is Ubuntu 20.04. Usage on other 
+The installation scripts assume the host OS is Ubuntu 20.04. Usage on other
 systems might require tweaking to work.
 
 Odoo 14 require `init-system-helpers 1.57` or later. This rules out usage of
@@ -63,23 +63,24 @@ wget -O- https://raw.githubusercontent.com/vertelab/odootools/14.0/uninstall | b
 
 Odoo-tools command |Description
 --- | ---
- alldbs                    | Lists all databases             
- allprojects               | Lists all projects              
- cdb                       | change database                 
+ alldbs                    | Lists all databases
+ allprojects               | Lists all projects
+ cdb                       | change database
  cdo                       | Shortcut: /usr/share/core-odoo/addons$
- cdp                       | Shortcut: /usr/share$  
+ cdp                       | Shortcut: /usr/share$
  odooaddons                | Updates the addons_path with all project according to ODOOADDONS defined in odoo.tools. These are stored here: https://github.com/vertelab/odootools/blob/14.0/repos/
  odooadminpw               | view master password
  odooallrequirements       | Loop through all projects installing / updating requirements.txt
  odoocheckmodule   <module>        | lists databases that use a module (eg odoocheckmodule sale)
+ odoocheckdeps.py          | Helper script that is primarally intended to find missing dependencies. Can easily be extended to also show dependencies/consequences
  odoocreatetestdb <database name> <input file or stdin> | Creates new database without e-mail-settings for outgoing mail
- odoofind *pattern*        | find patterns in odoo-core source code                     
- odoogitclone *project*    | clones and installs projects from githuh (vertel-projects)   
- odoogitpull    | does a *git pull* for every project in ODOOADDONS  
+ odoofind *pattern*        | find patterns in odoo-core source code
+ odoogitclone *project*    | clones and installs projects from githuh (vertel-projects)
+ odoogitpull    | does a *git pull* for every project in ODOOADDONS
  [odoolangexport](https://github.com/vertelab/odootools/blob/14.0/odoolangexport.pdf)    | export po/pot file for a module, -m <module> -d <database> -l <language>. To export a pot-file exclude "-l"
- odoomodules <database>    | List all installed modules in a database        
- odoopsql <database>       | Open database in psql-mode        
- odoopatch                 | Implements patches from the directory /etc/odoo/patch.d        
+ odoomodules <database>    | List all installed modules in a database
+ odoopsql <database>       | Open database in psql-mode
+ odoopatch                 | Implements patches from the directory /etc/odoo/patch.d
  odoorestart               | Restarts odoo and apache/varnish or other systems that have to be restarted (configure in odoo.tools)
  odoosetperm               | Sets permissions for all projects and modules
  odoosyncall -h *host*     | Syncs all projects and modules
@@ -87,20 +88,20 @@ Odoo-tools command |Description
  odooscaffold -p *project* -m *modulename* | Creates a boilerplate for new modules to work from
  odootail                  | Views odoo-log live, you can use the one-liner *odoorestart ; odootail* to restart and monitor odoo
 odooupd -h/--host, -P/--port, -d/--database, -m/--module, -p/--password, -l/--list, -i/--install, -u/--uninstall | Modifies Odoo-instanses; -m/--module=	comma separated  module list, -i/--install	install or upgrade modules  -u, --uninstall	uninstall modules, -c/--check coma separeted module list
-odooupdm *database* *modulelist*      | Installs/updates modules in single user mode. For example: $ odooupdm customer_db1 base              
- odoovilog                 | Opens Odoo log file in vi       
+odooupdm *database* *modulelist*      | Installs/updates modules in single user mode. For example: $ odooupdm customer_db1 base
+ odoovilog                 | Opens Odoo log file in vi
 
- 
+
  ## /etc/odoo/odoo.tools
  You can change the line
  ```
- export ODOOHOSTS="" 
+ export ODOOHOSTS=""
  ```
  to change the autocomplete for odootools commands that has a target host.
- 
+
 Type this command
  ```
-user@odoo14server:~/odootools$ . odootools.sh 
+user@odoo14server:~/odootools$ . odootools.sh
  ```
 to load new or update current odootools commands to the Terminal.
 
