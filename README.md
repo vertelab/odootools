@@ -1,4 +1,4 @@
-# odootools for Ubuntu 20.04
+# odootools for Ubuntu -- common
 
 Tools to help to install and manage an Odoo installation.
 
@@ -14,7 +14,7 @@ Ubuntu 18.04 or older.
 
 Installation of Odoo and Odootools.
 
-Ensure you are using the version (eg branch 14.0 for Odoo 14) you want to install.
+Ensure you are using the version you want to install.
 
 When you are logged in with the root-account. Run the following command.
 
