@@ -24,10 +24,6 @@ fi
 # Odoo
 echo "Installing Odoo"
 if [ ! -d /etc/odoo ]; then  # Install Odoo (only one time)
-    # this package is missing in 16.04
-    #wget https://launchpad.net/ubuntu/+archive/primary/+files/python-support_1.0.15_all.deb
-    #sudo dpkg -i python-support_1.0.15_all.deb
-
     sudo add-apt-repository universe
     sudo wget -O - https://nightly.odoo.com/odoo.key | sudo apt-key add -
     echo "deb http://nightly.odoo.com/14.0/nightly/deb/ ./" | sudo tee /etc/apt/sources.list.d/odoo.list > /dev/null
@@ -35,7 +31,7 @@ if [ ! -d /etc/odoo ]; then  # Install Odoo (only one time)
     sudo apt -y install odoo
     # Generate a good password
     sudo sed -i "s|^.*admin_passwd = .*|admin_passwd = $(openssl rand -base64 32)|g" /etc/odoo/odoo.conf
-    sudo wget -O /etc/odoo/odoo.tools https://raw.githubusercontent.com/vertelab/odootools/14.0/odoo.tools
+    sudo wget -O /etc/odoo/odoo.tools https://raw.githubusercontent.com/vertelab/odootools/{$VERSION}/odoo.tools
 
     # Move BAD l10n_se
     mv /usr/lib/python3/dist-packages/odoo/addons/l10n_se /usr/lib/python3/dist-packages/odoo/addons/l10n_se-bad
@@ -65,7 +61,7 @@ sudo apt -y install git python3-pip build-essential wget python3-dev python3-ven
 # Python with dependencies
 echo "Installing Python modules"
 sudo -H pip3 install wheel
-wget -O /tmp/requirements.txt https://raw.githubusercontent.com/odoo/odoo/14.0/requirements.txt
+wget -O /tmp/requirements.txt https://raw.githubusercontent.com/odoo/odoo/{$VERSION}/requirements.txt
 sudo -H pip3 install -r /tmp/requirements.txt
 
 # wkhtmltopdf
@@ -78,17 +74,17 @@ sudo rm -f /tmp/wkhtmltox_0.12.6-1.focal_amd64.deb
 # sudo su postgres createuser odoo -s
 
 # Odootools
-sudo wget -O /etc/profile.d/odootools.sh https://raw.githubusercontent.com/vertelab/odootools/14.0/odootools.sh
-sudo wget -O /etc/odoo/scaffold.tar.gz https://raw.githubusercontent.com/vertelab/odootools/14.0/scaffold.tar.gz
-sudo wget -O /etc/bash_completion.d/odoo https://raw.githubusercontent.com/vertelab/odootools/14.0/bash_completion.odoo
-sudo wget -O /usr/local/bin/odooextras.py https://raw.githubusercontent.com/vertelab/odootools/14.0/odooextras.py
+sudo wget -O /etc/profile.d/odootools.sh https://raw.githubusercontent.com/vertelab/odootools/{$VERSION}/odootools.sh
+sudo wget -O /etc/odoo/scaffold.tar.gz https://raw.githubusercontent.com/vertelab/odootools/{$VERSION}/scaffold.tar.gz
+sudo wget -O /etc/bash_completion.d/odoo https://raw.githubusercontent.com/vertelab/odootools/{$VERSION}/bash_completion.odoo
+sudo wget -O /usr/local/bin/odooextras.py https://raw.githubusercontent.com/vertelab/odootools/{$VERSION}/odooextras.py
 
 # Extra tools
-sudo wget -O /usr/local/bin/odoocheckdeps.py https://raw.githubusercontent.com/vertelab/odootools/14.0/scripts/odoocheckdeps.py
+sudo wget -O /usr/local/bin/odoocheckdeps.py https://raw.githubusercontent.com/vertelab/odootools/{$VERSION}/scripts/odoocheckdeps.py
 
 
 # daily backup
-sudo wget -O /etc/cron.daily/db_backup https://raw.githubusercontent.com/vertelab/odootools/14.0/db_backup
+sudo wget -O /etc/cron.daily/db_backup https://raw.githubusercontent.com/vertelab/odootools/{$VERSION}/db_backup
 sudo chmod a+x /etc/cron.daily/db_backup
 
 . /etc/profile.d/odootools.sh
