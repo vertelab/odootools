@@ -18,7 +18,7 @@ grep --quiet -E '/home/odoo:' /etc/passwd    # Indication odoo user have been
                                             # created the wrong way.
 if [ $? -eq 0 ]; then
     echo "Warning! An odoo user seems to be present with the wrong home folder."
-    echo "This user might conflict with the Odoo 14 installation process."
+    echo "This user might conflict with the Odoo {$VERSION} installation process."
     echo "Exiting..."
     exit 1
 fi
