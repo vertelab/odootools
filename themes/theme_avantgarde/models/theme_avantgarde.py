@@ -5,6 +5,9 @@ class ThemeAvantgarde(models.AbstractModel):
     _inherit = 'theme.utils'
 
     def _theme_avantgarde_post_copy(self, mod):
-        # For compatibility
-        # self.enable_view('theme_common.compatibility-saas-10-2')
-        pass
+        self.enable_view('website.template_header_hamburger')
+        self.enable_view('website.template_header_default_align_right')
+        self.enable_view('website.template_header_hamburger_align_right')
+
+        self.enable_view('website.template_footer_descriptive')
+

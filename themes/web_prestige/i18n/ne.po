@@ -1,5 +1,0 @@
-msgid ""
-msgstr ""
-
-msgid "Create"
-msgstr "नयाँ"

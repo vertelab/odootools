@@ -5,5 +5,10 @@ class ThemeArtists(models.AbstractModel):
     _inherit = 'theme.utils'
 
     def _theme_artists_post_copy(self, mod):
-        # Color preset
-        self.enable_view('theme_common.option_colors_03_variables')
+        self.enable_view('website.template_header_hamburger')
+        self.enable_header_off_canvas()
+
+        self.enable_view('website.template_footer_centered')
+
+        self.enable_asset('Ripple effect SCSS')
+        self.enable_asset('Ripple effect JS')

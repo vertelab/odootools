@@ -5,12 +5,11 @@ class ThemeCommon(models.AbstractModel):
     _inherit = 'theme.utils'
 
     def _theme_common_post_copy(self, mod):
-        self.disable_view('website_theme_install.customize_modal')
-
         # Reset all default color when switching themes
-        for nb in range(2, 9):
-            self.disable_view('theme_common.option_colors_%02d_variables' % nb)
-
-        # For compatibility
-        # self.enable_view('theme_common.compatibility-saas-11-4-variables')
-        # self.enable_view('theme_common.compatibility-saas-11-4')
+        self.disable_asset('Option colors 02 variables SCSS')
+        self.disable_asset('Option colors 03 variables SCSS')
+        self.disable_asset('Option colors 04 variables SCSS')
+        self.disable_asset('Option colors 05 variables SCSS')
+        self.disable_asset('Option colors 06 variables SCSS')
+        self.disable_asset('Option colors 07 variables SCSS')
+        self.disable_asset('Option colors 08 variables SCSS')

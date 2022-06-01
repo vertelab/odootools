@@ -57,7 +57,7 @@
         top: 50%;
         transform: translateY(-50%);
         &:hover {
-            color: theme-color('beta');
+            color: o-color('beta');
         }
     }
     .carousel-inner {
@@ -296,7 +296,7 @@
 #wrapwrap .s_separator_color hr {
     height: 2px;
     border-top: 0;
-    background-color: theme-color('beta');
+    background-color: o-color('beta');
     border-radius: 5px;
 }
 
@@ -310,7 +310,7 @@
         border-top: 0;
         padding: 0px;
         margin: 0;
-        background: linear-gradient(to right, theme-color('beta') 0%, theme-color('beta') 30%, theme-color('delta') 30%, theme-color('delta') 80%, theme-color('gamma') 80%);
+        background: linear-gradient(to right, o-color('beta') 0%, o-color('beta') 30%, o-color('delta') 30%, o-color('delta') 80%, o-color('gamma') 80%);
     }
 }
 
@@ -324,7 +324,7 @@
 #wrapwrap .s_separator_multicolor hr {
     height: 12px;
     border-top: 0;
-    background: linear-gradient(to right, theme-color('beta') 0%, theme-color('beta') 30%, theme-color('delta') 30%, theme-color('delta') 80%, theme-color('gamma') 80%);
+    background: linear-gradient(to right, o-color('beta') 0%, o-color('beta') 30%, o-color('delta') 30%, o-color('delta') 80%, o-color('gamma') 80%);
 }
 
 .s_separator {
@@ -464,7 +464,7 @@
         margin: 0 20px;
         &:hover {
             transition: all 0.3s ease-in-out;
-            background-color: theme-color('gamma');
+            background-color: o-color('gamma');
         }
     }
     @include fa-size-generator(25px);
@@ -478,7 +478,7 @@
         margin: 0 20px;
         &:hover {
             transition: all 0.3s ease-in-out;
-            background-color: theme-color('gamma');
+            background-color: o-color('gamma');
         }
     }
     @include fa-size-generator(25px);
@@ -510,21 +510,21 @@
     color:#fff;
     padding: 36px 0;
     transition: all 0.3s ease-in-out;
-    background-color: theme-color('alpha');
+    background-color: o-color('alpha');
     h5 {
         margin-top: 48px;
-        color: theme-color('alpha');
+        color: o-color('alpha');
     }
 }
 
 #wrapwrap .s_big_icon_square_box:hover .s_big_icon_square_icon {
     transition: all 0.3s ease-in-out;
-    background-color: theme-color('gamma');
+    background-color: o-color('gamma');
 }
 
 #wrapwrap .s_big_icon_square_box:hover .s_big_icon_square_content h4 {
     transition: all 0.3s ease-in-out;
-    color: theme-color('gamma');
+    color: o-color('gamma');
 }
 
 #wrapwrap .s_big_icons {
@@ -563,12 +563,12 @@
 
 #wrapwrap .s_big_icons_box:hover .s_big_icons_icon {
     transition: all 0.3s ease-in-out;
-    background-color: theme-color('gamma');
+    background-color: o-color('gamma');
 }
 
 #wrapwrap .s_big_icons_box:hover .s_big_icons_content h4 {
     transition: all 0.3s ease-in-out;
-    color: theme-color('gamma');
+    color: o-color('gamma');
 }
 
 #wrapwrap .s_color_blocks_slider {
@@ -766,23 +766,23 @@
 }
 
 #wrapwrap .s_timeline_badge.primary {
-    background-color: theme-color('alpha') !important;
+    background-color: o-color('alpha') !important;
 }
 
 #wrapwrap .s_timeline_badge.success {
-    background-color: theme-color('beta') !important;
+    background-color: o-color('beta') !important;
 }
 
 #wrapwrap .s_timeline_badge.warning {
-    background-color: theme-color('delta') !important;
+    background-color: o-color('delta') !important;
 }
 
 #wrapwrap .s_timeline_badge.danger {
-    background-color: theme-color('epsilon') !important;
+    background-color: o-color('epsilon') !important;
 }
 
 #wrapwrap .s_timeline_badge.info {
-    background-color: theme-color('gamma') !important;
+    background-color: o-color('gamma') !important;
 }
 
 #wrapwrap .s_timeline_title {
@@ -800,7 +800,7 @@
     color: gray('800');
 }
 
-$s-timeline-company-color: theme-color('alpha') !default;
+$s-timeline-company-color: o-color('alpha') !default;
 
 #wrapwrap .s_timeline_company {
     margin-top: 0;
@@ -1029,7 +1029,7 @@ $s-timeline-company-color: theme-color('alpha') !default;
 #wrapwrap .s_team_profile_share {
     margin: 24px 0;
     .fa {
-        color: theme-color('alpha');
+        color: o-color('alpha');
         padding: 0 2px;
     }
 }
@@ -1231,7 +1231,7 @@ $s-timeline-company-color: theme-color('alpha') !default;
         top: 50%;
         transform: translateY(-50%);
         &:hover {
-            color: theme-color('beta');
+            color: o-color('beta');
         }
     }
 

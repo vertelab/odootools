@@ -1,8 +1,3 @@
-@function o-theme-color($name) {
-    $-tmp: palette-theme-color($name);
-    @return if($-tmp, $-tmp, palette-color($name));
-}
-
 @function o-theme-common-add-color-variations($from, $to, $variations: ('light': 10%, 'dark': -10%)) {
     $color-variations: ();
     @each $color-name in ('alpha', 'beta', 'gamma', 'delta', 'epsilon') {
@@ -70,7 +65,6 @@
         }
         small {
             display: inline-block;
-            color: $color;
         }
         .blockquote-text {
             overflow: hidden;
@@ -81,8 +75,6 @@
             }
         }
         p {
-            background-color: $bg-color;
-            color: $color;
             padding: 24px;
         }
     }
@@ -98,7 +90,7 @@
         top: 50%;
         background-color: #fff;
         &:hover {
-            color: theme-color('alpha');
+            color: theme-color('primary');
         }
         @include media-breakpoint-down(sm) {
             top: auto;
@@ -247,40 +239,31 @@
 
 @mixin o-theme-cfa-btn-main-style() {
     .btn {
-        padding: 10px 20px;
-        border-radius: 0px;
         transition: all 0.3s ease-out;
-        border-width: 0px;
     }
 }
 
 @mixin o-theme-cfa-btn-style() {
     @include o-theme-cfa-btn-main-style();
 
-    .btn {
-        // TODO this is not very consistent but this was how the theme was
-        // designed... should we keep this ?
-        @each $color, $alias in ('success': 'epsilon', 'info': 'gamma', 'warning': 'delta') {
-            &.btn-#{$color} {
-                @include button-variant(theme-color($alias), theme-color($alias));
+    @if ($o-support-13-0-color-system) {
+        .btn {
+            // TODO this is not very consistent but this was how the theme was
+            // designed... should we keep this ?
+            @each $color, $alias in ('success': 'epsilon', 'info': 'gamma', 'warning': 'delta') {
+                &.btn-#{$color} {
+                    @include button-variant(theme-color($alias), theme-color($alias));
+                }
+                &.btn-outline-#{$color} {
+                    @include button-outline-variant(theme-color($alias));
+                }
             }
-            &.btn-outline-#{$color} {
-                @include button-outline-variant(theme-color($alias));
+            &.btn-danger {
+                @include button-variant(gray('black'), gray('black'));
             }
-        }
-        &.btn-danger {
-            @include button-variant(gray('black'), gray('black'));
-        }
-        &.btn-outline-danger {
-            @include button-outline-variant(gray('black'), gray('black'));
-        }
-    }
-}
-
-@mixin o-theme-cfa-header-shadows() {
-    .bg-100, .bg-200, .bg-300, .bg-400, .bg-500, .bg-600, .bg-700, .bg-800, .bg-900 {
-        h1, h2, h3, h4, h5, h6 {
-            text-shadow: 0px 2px 0px $black;
+            &.btn-outline-danger {
+                @include button-outline-variant(gray('black'), gray('black'));
+            }
         }
     }
 }
@@ -300,7 +283,6 @@
 }
 
 @mixin o-theme-cfa-custom-form-control($with-color: true, $with-focus-border-width: true) {
-    box-shadow: none;
     border-top-width: 0px;
     border-left-width: 0px;
     border-right-width: 0px;
@@ -310,11 +292,14 @@
     }
 
     &:focus {
-        border-bottom-color: gray('700');
+        border-bottom-color: o-color('primary');
         @if $with-focus-border-width {
             border-bottom-width: 2px;
         }
-        box-shadow: none;
+    }
+
+    + .input-group-append {
+        margin-left: 1em;
     }
 }
 
@@ -334,143 +319,25 @@
     }
 }
 
-@mixin o-theme-cfa-card-classes($font-size: $h4-font-size, $color: o-theme-color('epsilon'), $border-color: gray('200')) {
+@mixin o-theme-cfa-card-classes($font-size: $h4-font-size) {
     .card-header {
-        background-color: rgba(0, 0, 0, 0) !important;
+        background-color: inherit;
         border: none;
-        color: $color !important;
         font-size: $font-size;
     }
     .card-footer {
-        background: rgba(0, 0, 0, 0);
+        background: inherit;
     }
     .card {
         text-align: center;
-        border: none;
         box-shadow: none;
-        border: 1px solid $border-color;
         border-radius: 0px;
-        .list-group-item {
-            background: rgba(0, 0, 0, 0);
-            border-color: $border-color;
-        }
-    }
-}
-
-@mixin o-theme-cfa-nav-pills-styles($color: gray('600'),
-    $active-color: o-theme-color('epsilon'), $active-bg: rgba(0, 0, 0, 0),
-    $badge-color: o-theme-color('alpha'), $badge-bg: o-theme-color('epsilon')) {
-    .nav-pills .nav-link {
-        color: $color;
-        &:hover {
-            color: gray('700');
-        }
-        &.active {
-            color: $active-color !important;
-            background: $active-bg !important;
-            &:hover {
-                background-color: gray('200');
-                color: gray('700') !important;
-            }
-            .badge {
-                color: $badge-color;
-                background-color: $badge-bg;
-            }
-        }
-    }
-}
-
-@mixin o-theme-cfa-website-blog-styles($border: 0, $text-transform: none) {
-    .website_blog {
-        #blog_right_column {
-            border-left: $border;
-            padding: 0 15px 35px 30px;
-            h4 {
-                text-transform: $text-transform;
-            }
-        }
-        .col-md-8 {
-            padding: 0 15px 30px 35px;
-        }
-        .post-meta {
-            margin-top: 20px;
-            text-align: left;
-        }
-        .blog_title .post-meta {
-                text-align: center;
-        }
-        #main_column {
-            h4 {
-                font-size: 18px;
-            }
-            h2 {
-                font-size: 25px;
-            }
-        }
-    }
-}
-
-@mixin o-theme-cfa-forum-style($bg-color: o-theme-color('beta-light'), $padding: 0 15px 0 15px,
-    $nav-link-color: rgba(0, 0, 0, 0.5), $nav-link-active-color: transparent, $question-btn-color: o-theme-color('epsilon'),
-    $btn-block-bg-color: o-theme-color('epsilon')) {
-
-    .o_wforum_navbar_container {
-        background-color: $bg-color;
-        margin-top: 0px !important;
-        width: 100%;
-        max-width: 100%;
-        padding: $padding;
-
-        .navbar {
-            .nav-link, .navbar-brand {
-                color: $nav-link-color;
-            }
-            .nav-link.active {
-                background-color: $nav-link-active-color !important;
-            }
-            .navbar-right {
-                margin-bottom: 0;
-                .btn {
-                    padding: 5px 20px;
-                }
-                input {
-                    margin-right: 15px;
-                    transition: background-color 0.3s ease-out;
-                }
-            }
-        }
-    }
-    .website_forum {
-        #wrap {
-            padding: 35px;
-            .col-md-3 .btn-block {
-                background-color: $btn-block-bg-color;
-                color: white;
-            }
-            .question #options button {
-                color: $question-btn-color;
-            }
-        }
-    }
-    .forum_docs {
-        margin-top: 30px;
-        padding: 10px 35px;
-        background-color: white;
-    }
-
-    /* =====================  DOCUMENTATION ===================== */
-    [data-view-xmlid*="website_forum_doc.documentation_post"] {
-        .container:first-child {
-            margin-bottom: 0px !important;
-            height: 90px;
-            padding-top: 20px;
-        }
     }
 }
 
 @mixin o-theme-cfa-top-menu-style($padding: 0, $display: flex, $margin: 0, $media-padding: 0,
-    $bg-color: white, $top: auto, $font-size: inherit, $dropdown-item-color: o-theme-color('delta'),
-    $dropdown-item-hover-bg-color: rgba(0, 0, 0, 0), $dropdown-item-hover-color: o-theme-color('epsilon'),
+    $bg-color: white, $top: auto, $font-size: inherit, $dropdown-item-color: o-color('delta'),
+    $dropdown-item-hover-bg-color: rgba(0, 0, 0, 0), $dropdown-item-hover-color: o-color('epsilon'),
     $nav-link-color: rgba(0, 0, 0, 0.5), $font-weight: normal, $text-transform: none,
     $transition: all 0s ease 0s) {
 
@@ -486,87 +353,60 @@
         display: none;
     }
     .nav-link {
-        color: $nav-link-color;
         font-weight: $font-weight;
         text-transform: $text-transform;
         transition: $transition;
 
         &.active {
-            background-color: rgba(0, 0, 0, 0);
             font-weight: bolder;
-            color: initial;
         }
-        &:hover, &.active:hover {
-            color: $dropdown-item-hover-color;
-        }
-    }
-    .show > a:focus {
-        background-color: rgba(0, 0, 0, 0);
     }
     .dropdown-menu, .navbar-collapse { // FIXME navbar should be removed ? (https://github.com/odoo/design-themes/commit/d20298fe41fdee5324c7e32f78e89d26edc71896#diff-042ad6434fc37ef55af3ca7db63906b8L259)
-        background-color: $bg-color;
-        border-color: rgba(0, 0, 0, 0);
         border-radius: 0px;
         box-shadow: none;
         top: $top;
         .dropdown-item, .nav-link {
             font-size: $font-size;
-            color: $dropdown-item-color;
-            &:hover {
-                background: $dropdown-item-hover-bg-color;
-                color: $dropdown-item-hover-color;
-            }
         }
         .dropdown-divider, .divider {
-            background-color: rgba(0, 0, 0, 0);
             margin: 0;
         }
     }
 }
 
-@mixin o-theme-cfa-footer-style($font-size: 14px, $container-padding: 8px 65px 32px, $padding: 0, $bg-color: theme-color('delta'), $border-top: 0,
-    $h4-color: o-theme-color('beta'), $margin-right: 50px, $h4-padding: 0 0 0 20px, $text-transform: uppercase, $p-color: white) {
+@mixin o-theme-cfa-footer-style($font-size: 14px, $container-padding: 8px 65px 32px, $padding: 0, $border-top: 0, $margin-right: 50px, $h4-padding: 0 0 0 20px, $text-transform: uppercase) {
 
     .container {
-        padding: $container-padding;
         .js_language_selector .dropdown-toggle {
             padding: 6px 20px;
         }
         p, .list-unstyled {
-            color: $p-color;
             font-size: $font-size;
         }
         h4 {
-            color: $h4-color;
             margin-right: $margin-right;
             padding: $h4-padding;
             text-transform: $text-transform;
         }
     }
     .o_footer_copyright {
-        background-color: $bg-color;
         border-top: $border-top;
         padding: $padding;
     }
 }
 
 @mixin o-theme-cfa-ecommerce-classes(
-    $nav-link-color: o-theme-color('epsilon'), $nav-link-hover-color: o-theme-color('beta'), $nav-link-hover-bg-color: gray('800'),
-    $nav-link-active-bg-color: rgba(0, 0, 0, 0), $nav-link-active-color: o-theme-color('epsilon'),
-    $js-attributes-padding: 0px 15px 15px 15px, $js-attributes-strong-color: o-theme-color('gamma'), $js-attributes-label-color: gray('700'),
-    $h6-padding-y: 10px, $h6-font-size: 13px, $h6-text-align: left, $h6-border-top: 0, $h6-border-bottom: 0, $h6-color: o-theme-color('delta'),
+    $nav-link-color: o-color('epsilon'), $nav-link-hover-color: o-color('beta'), $nav-link-hover-bg-color: gray('800'),
+    $nav-link-active-bg-color: rgba(0, 0, 0, 0), $nav-link-active-color: o-color('epsilon'),
+    $js-attributes-padding: 0px 15px 15px 15px, $js-attributes-strong-color: o-color('gamma'), $js-attributes-label-color: gray('700'),
+    $h6-padding-y: 10px, $h6-font-size: 13px, $h6-text-align: left, $h6-border-top: 0, $h6-border-bottom: 0, $h6-color: o-color('delta'),
     $price-font-size: 12px, $product-price-padding: 0, $product-price-align: left, $btn-secondary-padding: 5px 10px,
     $right-column-border-bottom: 1px solid gray('700'), $right-column-color: gray('700'), $right-column-font-weight: bold,
     $add-cart-bg-color: gray('700'), $add-cart-color: white, $add-cart-width: auto, $price-h4: 25px) {
 
     .breadcrumb {
         padding-top: 20px;
-        background: rgba(0, 0, 0, 0);
-        border-bottom: 1px solid gray('200');
         font-size: 15px;
-        li a {
-            color: o-theme-color('gamma');
-        }
     }
     .form-inline .input-group {
         .form-control {
@@ -585,26 +425,13 @@
                 border-radius: 0px;
                 height: 50px;
                 width: 50px;
-                &:hover {
-                    background-color: white !important;
-                }
             }
         }
     }
     .js_add_cart_variants {
-        color: gray('700');
         li strong {
             font-size: 20px;
         }
-    }
-    .js_add_cart_json {
-        background-color: $add-cart-bg-color;
-        border: none;
-        color: $add-cart-color;
-        width: $add-cart-width;
-    }
-    .oe_price_h4 {
-        font-size: $price-h4;
     }
     .oe_product  {
         .btn.btn-danger {
@@ -612,10 +439,6 @@
         }
         .text-danger {
             color: theme-color('danger') !important;
-        }
-        .ribbon {
-            top: 0px;
-            width: 145px;
         }
         .o_wsale_product_information {
             padding: 0px 15px;
@@ -626,9 +449,6 @@
                 margin: 0px;
                 padding: $h6-padding-y 0px;
                 text-align: $h6-text-align;
-                a {
-                    color: $h6-color;
-                }
             }
             .oe_subdescription {
                 text-align: left;
@@ -647,7 +467,6 @@
 
             .btn {
                 padding: $btn-padding-y-sm $btn-padding-x-sm;
-                background: transparent;
                 transform: scale(1);
             }
         }
@@ -705,36 +524,17 @@
             text-align: left !important
         }
 
-        .nav-link {
-            margin: 1px 0px;
-            padding-right: 0;
-            color: theme-color('epsilon');
-            font-size: 18px !important;
-            text-transform: uppercase;
-        }
-
-        #wsale_products_categories_collapse .nav-link {
-            &:hover, &:focus {
-                background-color: gray('800');
-                color: theme-color('beta') !important;
-            }
-        }
-
         .js_attributes {
             padding: $js-attributes-padding;
 
             .css_attribute_color.active {
-                border: 5px ridge o-theme-color('alpha');
-            }
-            label > span {
-                color: $js-attributes-label-color;
+                border: 5px ridge o-color('primary');
             }
             li > ul {
                 display: block;
                 padding-left: 15px;
             }
             strong {
-                color: $js-attributes-strong-color;
                 display: block;
                 padding-left: 10px;
                 margin-bottom: 10px;
@@ -744,15 +544,14 @@
         }
     }
     .list-unstyled .css_attribute_color.active {
-        border: 3px solid theme-color('gamma');
+        border: 3px solid;
     }
     #website_sale_recommended_products {
         padding: 30px;
         h3 {
             text-align: center;
-            border-bottom: 5px solid theme-color('epsilon');
+            border-bottom: 5px solid;
             padding-bottom: 20px;
-            color: theme-color('gamma');
         }
         .row {
             padding: 0 15px;
@@ -760,9 +559,6 @@
         .col-lg-2 {
             margin-top: 10px;
             min-height: 160px;
-            span {
-                color: theme-color('epsilon');
-            }
         }
     }
     .oe_cart {
@@ -844,12 +640,6 @@
         $font-color: white) {
     %chd-bg-img {
         background-size: cover;
-        .fa, h1, h2, h3, h4, h5, h6, p  {
-            color: $font-color;
-        }
-        .text-muted {
-            color: theme-color('alpha');
-        }
     }
     .bg-img-01 {
         @extend %chd-bg-img;
@@ -945,14 +735,16 @@
 }
 
 @mixin o-theme-chd-padding-l-r-classes() {
+    // Note: To be removed.
+    // Kept for back-compatibility only.
     .padding-l-r-8 {
-        padding: 0 8px;
+        @extend .px-2;
     }
     .padding-l-r-16 {
-        padding: 0 16px;
+        @extend .px-3;
     }
     .padding-l-r-32 {
-        padding: 0 32px;
+        @extend .px-4;
     }
 }
 
@@ -960,44 +752,36 @@
     p {
         text-align: justify;
     }
-    .fa:not(.fa-2x):not(.fa-3x):not(.fa-4x):not(.fa-5x) {
-        font-size: 18px;
-    }
 }
 
 @mixin o-theme-chd-ecommerce-classes() {
     #products_grid .oe_product section {
         padding: 4px 15px 24px 10px;
-        border-top: 1px dotted o-theme-color('gamma');
-        background-color: rgba(o-theme-color('alpha'), 0.65);
+        border-top: 1px dotted;
+        background-color: rgba(o-color('primary'), 0.2);
         h5 a {
-            color: white;
             font-weight: 300;
         }
         &:hover {
-            background-color: rgba(o-theme-color('alpha'), 0.9);
+            background-color: rgba(o-color('primary'), 0.4);
             transition: all 0.3s ease-in-out;
-            color: o-theme-color('epsilon');
         }
     }
     #products_grid_before .nav-pills {
         font-size: 15px;
         .nav-link {
             font-size: 16px;
-            color: gray('600');
             margin: 1px 0px;
 
             &.active, &:focus, &:hover {
                 transition: all 0.3s ease-in-out;
-                color: #fff;
-                background-color: rgba(o-theme-color('alpha'), 0.4);
                 padding: 6px 6px;
             }
         }
     }
 }
 
-@mixin o-theme-chd-big-icons-styles($bg-color: rgba(o-theme-color('alpha'), 1), $border-color: o-theme-color('alpha'),
+@mixin o-theme-chd-big-icons-styles($bg-color: o-color('alpha'), $border-color: o-color('alpha'),
     $transform: scale(1.1, 1.1), $fa-color: white, $h5-color: white) {
 
     background-color: $bg-color !important;
@@ -1008,25 +792,6 @@
     }
     h5.o_default_snippet_text {
         color: $h5-color !important;
-    }
-}
-
-@mixin o-theme-chd-big-icons-classes($border, $font-color) {
-    .s_big_icons_box {
-        .s_big_icons_icon {
-            border: $border;
-            color: #fff;
-            .fa {
-                color: o-theme-color('alpha') !important;
-            }
-            h5.o_default_snippet_text {
-                color: $font-color;
-                margin-top: 20px;
-            }
-        }
-        &:hover .s_big_icons_icon {
-            @include o-theme-chd-big-icons-styles($h5-color: o-theme-color('alpha'));
-        }
     }
 }
 
@@ -1053,6 +818,7 @@
 }
 
 @mixin o-theme-sri-bg-effects-classes() {
+    // TODO: remove these classes in a future version (kept for compatibility)
     .glossy {
         @include o-theme-sri-bg-effects-styles($border-top: 2px solid rgba(255, 255, 255, 0.73), $border-bottom: 1px solid rgba(155, 155, 155, 0.73));
     }
@@ -1164,14 +930,6 @@
             > h1 {
                 margin: 0 0 20px;
             }
-            #add_to_cart {
-                background-color: theme-color('success');
-                border: 1px solid theme-color('success');
-                text-transform: uppercase;
-                font-size: 14px;
-                font-weight: bold;
-                padding: 8px 22px;
-            }
             hr:first-of-type{
                 display: none;
             }
@@ -1256,43 +1014,16 @@
     }
 }
 
-@mixin o-theme-sri-header-styles($name, $navbar-border-color, $navbar-brand-color, $text-transform, $font-weight, $opacity, $transition, $nav-link-color) {
-    ##{$name}_header, .o_header_affix {
+@mixin o-theme-sri-header-styles($name, $text-transform, $font-weight) {
+    ##{$name}_header {
         font-family: $headings-font-family;
         .navbar {
-            border-color: $navbar-border-color;
-            padding: 20px 0 4px;
+            padding: 20px 0 20px;
 
-            @include media-breakpoint-down(sm) {
-                padding: 10px 0 4px;
-            }
-            .navbar-brand {
-                color: $navbar-brand-color;
-            }
             .navbar-nav {
-                > li {
-                    &.divider {
-                        border-right: 1px solid #E0E0E0;
-                    }
-                    > a {
-                        text-transform: $text-transform;
-                        color: $navbar-brand-color;
-                        font-weight: $font-weight;
-                        opacity: $opacity;
-                        transition: $transition;
-                        &.active, &:hover, &:focus {
-                            background-color: $navbar-border-color !important;
-                            color: $nav-link-color;
-                            opacity: 1;
-
-                            span {
-                                border-bottom-color: $navbar-border-color !important;
-                            }
-                        }
-                    }
-                }
-                b {
-                    font-weight: 600;
+                > li > a {
+                    text-transform: $text-transform;
+                    font-weight: $font-weight;
                 }
                 .navbar-toggle {
                     margin: 0;
@@ -1301,8 +1032,7 @@
         }
     }
     #wrapwrap {
-        .o_header_affix {
-            border-bottom: 1px solid gray('200');
+        .o_header_affixed:not(.o_header_fixed) {
             .navbar {
                 padding: 2px 20px;
             }
@@ -1321,6 +1051,16 @@
 }
 
 @mixin o-theme-sri-ripple-animation-styles($name) {
+    .preserve3d, %preserve3d {
+        -webkit-transform-style: preserve-3d;
+        -moz-transform-style: preserve-3d;
+        transform-style: preserve-3d;
+    }
+
+    .btn {
+        z-index: 2;
+        @extend %preserve3d;
+    }
 
     @keyframes ripple {
         100% { opacity: 0; transform: scale(2.5); }
@@ -1332,52 +1072,12 @@
         border-radius: 100%;
         opacity: 0.3;
         z-index: -1;
-        background: rgba(255, 255, 255, .9);
+        background: currentColor;
         pointer-events: none;
         transform: scale(0);
 
-        .btn-secondary &, .btn-link & {
-            background: rgba(0, 0, 0, .3);
-        }
         &.#{$name}-ripple-animated {
             animation: ripple 0.35s ease-in;
-        }
-    }
-}
-
-@mixin o-theme-sri-btn-style($btn-box-shadow: none, $btn-hover-box-shadow: none, $btn-active-box-sahdow: none) {
-    .preserve3d, %preserve3d {
-        -webkit-transform-style: preserve-3d;
-        -moz-transform-style: preserve-3d;
-        transform-style: preserve-3d;
-    }
-    .btn-lg {
-        @include button-size(
-            $btn-padding-y-lg,
-            $btn-padding-x-lg*2,
-            $font-size-lg,
-            $line-height-lg,
-            $border-radius-lg
-        );
-    }
-    .btn {
-        z-index: 2;
-        box-shadow: $btn-box-shadow;
-        transition: .25s;
-        @extend %preserve3d;
-
-        &:hover {
-            box-shadow: $btn-hover-box-shadow;
-            z-index: 4;
-        }
-        &.btn-link {
-            text-decoration: none;
-            &:hover {
-                box-shadow: none;
-            }
-        }
-        &:active {
-            box-shadow: $btn-active-box-sahdow;
         }
     }
 }
@@ -1491,12 +1191,6 @@
         padding: 0 30px;
         .container {
             width: auto;
-        }
-    }
-    .shadow {
-        border-bottom: 5px solid gray('900');
-        &.#{$shadow-class} {
-            border-bottom-color: #000;
         }
     }
     .text-underline {

@@ -5,5 +5,15 @@ class ThemeBistro(models.AbstractModel):
     _inherit = 'theme.utils'
 
     def _theme_bistro_post_copy(self, mod):
-        # Change color preset
-        self.enable_view('theme_common.option_colors_05_variables')
+        self.enable_view('website.template_header_vertical')
+        self.enable_view('website.template_header_default_align_right')
+        self.enable_view('website.template_header_hamburger_align_right')
+        self.enable_view('website.header_navbar_pills_style')
+        self.enable_header_off_canvas()
+
+        self.enable_view('website.template_footer_centered')
+        self.enable_view('website.template_footer_slideout')
+        self.enable_view('website.option_footer_scrolltop')
+
+        self.enable_asset('Ripple effect SCSS')
+        self.enable_asset('Ripple effect JS')

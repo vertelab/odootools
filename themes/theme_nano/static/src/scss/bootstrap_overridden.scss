@@ -1,136 +1,93 @@
-//
-// Color system
-//
+//------------------------------------------------------------------------------//
+// TODO ideally this should be done in primary variables if it was possible.
+//------------------------------------------------------------------------------//
 
-// The yiq lightness value that determines when the lightness of color changes from "dark" to "light". Acceptable values are between 0 and 255.
-$yiq-contrasted-threshold:  180 !default;
+// Headings
+@if o-website-value('headings-font') == 'Roboto' {
+    $o-theme-headings-font-weight:          500;
+}
+@if o-website-value('headings-font') == 'Dosis' {
+    $o-theme-headings-font-weight:          400;
+}
+@else if o-website-value('headings-font') == 'Lato' {
+    $o-theme-headings-font-weight:          300;
+}
+@else if o-website-value('headings-font') == 'Advent Pro' {
+    $o-theme-headings-font-weight:          600;
+}
 
-// Links
-//
-// Style anchor elements.
+// Body
+@if o-website-value('font') == 'Roboto' {
+    $o-theme-font-weight-bold:              500;
+}
+@if o-website-value('font') == 'Dosis' {
+    $o-theme-font-weight-bold:              500;
+}
+@else if o-website-value('font') == 'Lato' {
+    $o-theme-font-weight-light:             300;
+    $o-theme-font-weight-bold:              600;
+}
+@else if o-website-value('font') == 'Advent Pro' {
+    $o-theme-font-weight-bold:              600;
+}
+@else if o-website-value('font') == 'Oswald' {
+    $o-theme-font-weight-light:             200;
+    $o-theme-font-weight-normal:            300;
+    $o-theme-font-weight-bold:              400;
+}
+@else if o-website-value('font') == 'Open Sans' {
+    $o-theme-font-weight-bold:              600;
+}
+@else if o-website-value('font') == 'Montserrat Alternates' {
+    $o-theme-font-weight-bold:              600;
+}
 
-$link-decoration:           underline !default;
+// Buttons
+@if o-website-value('buttons-font') == 'Roboto' {
+    $o-theme-btn-font-weight:               500;
+}
+@else if o-website-value('buttons-font') == 'Advent Pro' {
+    $o-theme-btn-font-weight:               600;
+}
+@else if o-website-value('buttons-font') == 'Oswald' {
+    $o-theme-btn-font-weight:               200;
+}
+@else if o-website-value('buttons-font') == 'Open Sans' {
+    $o-theme-btn-font-weight:               600;
+}
+@else if o-website-value('buttons-font') == 'Montserrat Alternates' {
+    $o-theme-btn-font-weight:               600;
+}
 
-// Grid columns
-//
-// Set the number of columns and specify the width of the gutters.
+//------------------------------------------------------------------------------//
+// Bootstrap
+//------------------------------------------------------------------------------//
 
-$grid-gutter-width:           40px !default;
-
-// Components
-//
-// Define common padding and border radius sizes and more.
-
-$line-height-lg:              1.4 !default;
-$line-height-sm:              1.4 !default;
-
-$border-radius:               1.25rem !default;
-$border-radius-lg:            1.25rem !default;
-$border-radius-sm:            1.25rem !default;
-
-$box-shadow-sm:               0 !default;
-$box-shadow:                  0 !default;
-$box-shadow-lg:               0 !default;
-
-// Fonts
+// Typography
 //
 // Font, line-height, and color for body text, headings, and more.
 
-$line-height-base:            1.4 !default;
+$font-size-lg:                              o-website-value('font-size-base') * $o-theme-font-size-lg-multiplier !default;
+$font-size-sm:                              o-website-value('font-size-base') * $o-theme-font-size-sm-multiplier !default;
 
-$h1-font-size:                $o-theme-font-size-base * 3.75 !default;
-$h2-font-size:                $o-theme-font-size-base * 3 !default;
-$h3-font-size:                $o-theme-font-size-base * 2 !default;
-$h4-font-size:                $o-theme-font-size-base * 1.563 !default;
-$h5-font-size:                $o-theme-font-size-base * 1.25 !default;
-$h5-font-size:                $o-theme-font-size-base * 1.25 !default;
+$font-weight-light:                         $o-theme-font-weight-light !default;
+$font-weight-normal:                        $o-theme-font-weight-normal !default;
+$font-weight-bold:                          $o-theme-font-weight-bold !default;
 
-$headings-font-weight:        400 !default;
+$headings-font-weight:                      $o-theme-headings-font-weight !default;
 
 // Buttons + Forms
 //
 // Shared variables that are reassigned to `$input-` and `$btn-` specific variables.
 
-$input-btn-padding-y:         .5rem !default;
-$input-btn-padding-x:         2.75rem !default;
+$input-btn-focus-width:                     0 !default;
+$input-focus-border-color:                  o-color('primary') !default;
 
-$input-btn-focus-box-shadow:  0 !default;
+$btn-font-weight:                           400 !default;
+$btn-box-shadow:                            none !default;
 
-$input-btn-padding-y-sm:      .375rem !default;
-$input-btn-padding-x-sm:      2rem !default;
+$input-color:                               o-color('o-cc1-text') !default;
+$input-placeholder-color:                   o-color('500') !default;
 
-$input-btn-padding-y-lg:      .625rem !default;
-$input-btn-padding-x-lg:      3.5rem !default;
-
-$input-btn-border-width:      0 !default;
-
-// Buttons
-//
-// For each of Bootstrap's buttons, define text, background, and border color.
-
-$btn-box-shadow:              0 !default;
-$btn-focus-box-shadow:        0 !default;
-$btn-active-box-shadow:       0 !default;
-
-// Forms
-
-$label-margin-bottom:                   0 !default;
-
-$input-border-width:                    .0625rem !default;
-
-// Dropdowns
-//
-// Dropdown menu container and contents.
-
-$dropdown-padding-y:                .3125rem !default;
-$dropdown-spacer:                   0 !default;
-$dropdown-divider-bg:               white !default;
-$dropdown-border-radius:            .375rem !default;
-$dropdown-box-shadow:               0 !default;
-
-$dropdown-item-padding-y:           .1875rem !default;
-$dropdown-item-padding-x:           1.25rem !default;
-
-// Navs
-
-$nav-link-padding-x:                1.25rem !default;
-
-$nav-tabs-border-width:             0 !default;
-$nav-tabs-link-active-color:        white !default;
-$nav-tabs-link-active-bg:           palette-theme-color('primary') !default;
-
-$nav-pills-border-radius:           $border-radius 0 0 $border-radius !default;
-$nav-pills-link-active-color:       white !default;
-$nav-pills-link-active-bg:          palette-theme-color('primary') !default;
-
-$nav-divider-color:                 transparent !default;
-$nav-divider-margin-y:              0 !default;
-
-// Navbar
-
-$navbar-padding-y:                  0 !default;
-$navbar-padding-x:                  0 !default;
-
-// Pagination
-
-$pagination-padding-y:              .375rem !default;
-$pagination-padding-y-sm:           .3125rem !default;
-$pagination-padding-x-sm:           .625rem !default;
-$pagination-padding-y-lg:           .625rem !default;
-$pagination-padding-x-lg:           1rem !default;
-$pagination-line-height:            1.42 !default;
-
-$pagination-focus-box-shadow:       0 !default;
-
-// Progress bars
-
-$progress-box-shadow:               0 !default;
-
-// Image thumbnails
-
-$thumbnail-box-shadow:              0 !default;
-
-// Breadcrumbs
-
-$breadcrumb-padding-y:              .375rem !default;
-$breadcrumb-padding-x:              1.25rem !default;
+// Cards
+$card-border-width:                         0 !default;
