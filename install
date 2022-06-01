@@ -9,6 +9,9 @@
 
 echo "Performing basic prerequisite checks ..."
 
+echo "Setting download version..."
+VERSION = $1
+
 # User odoo shouldn't exist or should have been created by the Odoo installation
 # procedures such as via the deb-package
 grep --quiet -E '/home/odoo:' /etc/passwd    # Indication odoo user have been
