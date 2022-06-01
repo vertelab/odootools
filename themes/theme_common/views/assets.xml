@@ -13,16 +13,11 @@
     <template id="assets_frontend" inherit_id="website.assets_frontend" priority="1">
         <xpath expr="//link[last()]" position="after">
             <link rel="stylesheet" type="text/scss" href="/theme_common/static/src/scss/fonts.scss"/>
-            <link rel="stylesheet" type="text/scss" href="/theme_common/static/src/scss/s_google_map.scss"/>
-        </xpath>
-        <xpath expr="//script[last()]" position="after">
-            <script type="text/javascript" src="/theme_common/static/src/js/s_google_map_frontend.js"/>
         </xpath>
     </template>
 
     <template id="assets_editor" inherit_id="website.assets_editor">
         <xpath expr="//script[last()]" position="after">
-            <script type="text/javascript" src="/theme_common/static/src/js/s_google_map_editor.js"/>
             <script type="text/javascript" src="/theme_common/static/src/js/compatibility_editor.js"/>
         </xpath>
     </template>

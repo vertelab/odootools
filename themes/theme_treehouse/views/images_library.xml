@@ -1,5 +1,6 @@
 <?xml version="1.0" encoding="utf-8"?>
 <odoo>
+    <!-- Backgrounds -->
     <record id="bg_img_01" model="theme.ir.attachment">
         <field name="key">theme_treehouse.bg_img_01</field>
         <field name="name">background_img_01.jpg</field>
@@ -81,6 +82,7 @@
         <field name="url">/theme_treehouse/static/src/img/backgrounds/16.jpg</field>
     </record>
 
+    <!-- Patterns -->
     <record id="bg_pattern_01" model="theme.ir.attachment">
         <field name="key">theme_treehouse.bg_pattern_01</field>
         <field name="name">background_pattern_01.png</field>
@@ -127,20 +129,125 @@
         <field name="url">/theme_treehouse/static/src/img/patterns/09.png</field>
     </record>
 
-    <!-- Change default images of snippets -->
+    <!-- Cover -->
     <record id="s_cover_default_image" model="theme.ir.attachment">
         <field name="key">website.s_cover_default_image</field>
         <field name="name">website.s_cover_default_image</field>
-        <field name="url">/web/image/theme_treehouse.bg_img_15</field>
+        <field name="url">/theme_treehouse/static/src/img/content/cover.jpg</field>
     </record>
+
+    <!-- Banner -->
+    <record id="s_banner_default_image" model="theme.ir.attachment">
+        <field name="key">website.s_banner_default_image</field>
+        <field name="name">website.s_banner_default_image</field>
+        <field name="url">/theme_treehouse/static/src/img/backgrounds/02.jpg</field>
+    </record>
+
+    <!-- Text-Image -->
     <record id="s_text_image_default_image" model="theme.ir.attachment">
         <field name="key">website.s_text_image_default_image</field>
         <field name="name">website.s_text_image_default_image</field>
-        <field name="url">/web/image/theme_common.image_content_04</field>
+        <field name="url">/theme_treehouse/static/src/img/content/text_image.jpg</field>
     </record>
+
+    <!-- Image-Text -->
     <record id="s_image_text_default_image" model="theme.ir.attachment">
         <field name="key">website.s_image_text_default_image</field>
         <field name="name">website.s_image_text_default_image</field>
-        <field name="url">/web/image/theme_common.image_content_04</field>
+        <field name="url">/theme_treehouse/static/src/img/content/image_text.jpg</field>
+    </record>
+
+    <!-- Three Columns -->
+    <record id="s_three_columns_default_image_1" model="theme.ir.attachment">
+        <field name="key">website.s_three_columns_default_image_1</field>
+        <field name="name">website.s_three_columns_default_image_1</field>
+        <field name="url">/theme_treehouse/static/src/img/content/three_columns_01.jpg</field>
+    </record>
+    <record id="s_three_columns_default_image_2" model="theme.ir.attachment">
+        <field name="key">website.s_three_columns_default_image_2</field>
+        <field name="name">website.s_three_columns_default_image_2</field>
+        <field name="url">/theme_treehouse/static/src/img/content/three_columns_02.jpg</field>
+    </record>
+    <record id="s_three_columns_default_image_3" model="theme.ir.attachment">
+        <field name="key">website.s_three_columns_default_image_3</field>
+        <field name="name">website.s_three_columns_default_image_3</field>
+        <field name="url">/theme_treehouse/static/src/img/content/three_columns_03.jpg</field>
+    </record>
+
+    <!-- Picture -->
+    <record id="s_picture_default_image" model="theme.ir.attachment">
+        <field name="key">website.s_picture_default_image</field>
+        <field name="name">website.s_picture_default_image</field>
+        <field name="url">/theme_treehouse/static/src/img/content/picture.jpg</field>
+    </record>
+
+    <!-- Masonry -->
+    <record id="s_masonry_block_default_image_1" model="theme.ir.attachment">
+        <field name="key">website.s_masonry_block_default_image_1</field>
+        <field name="name">website.s_masonry_block_default_image_1</field>
+        <field name="url">/theme_treehouse/static/src/img/content/masonry_block.jpg</field>
+    </record>
+
+    <!-- Carousel -->
+    <record id="s_carousel_default_image_1" model="theme.ir.attachment">
+        <field name="key">website.s_carousel_default_image_1</field>
+        <field name="name">website.s_carousel_default_image_1</field>
+        <field name="url">/theme_treehouse/static/src/img/backgrounds/11.jpg</field>
+    </record>
+    <record id="s_carousel_default_image_2" model="theme.ir.attachment">
+        <field name="key">website.s_carousel_default_image_2</field>
+        <field name="name">website.s_carousel_default_image_2</field>
+        <field name="url">/theme_treehouse/static/src/img/backgrounds/12.jpg</field>
+    </record>
+    <record id="s_carousel_default_image_3" model="theme.ir.attachment">
+        <field name="key">website.s_carousel_default_image_3</field>
+        <field name="name">website.s_carousel_default_image_3</field>
+        <field name="url">/theme_treehouse/static/src/img/backgrounds/03.jpg</field>
+    </record>
+
+    <!-- Media List -->
+    <record id="s_media_list_default_image_1" model="theme.ir.attachment">
+        <field name="key">website.s_media_list_default_image_1</field>
+        <field name="name">website.s_media_list_default_image_1</field>
+        <field name="url">/theme_treehouse/static/src/img/content/three_columns_01.jpg</field>
+    </record>
+    <record id="s_media_list_default_image_2" model="theme.ir.attachment">
+        <field name="key">website.s_media_list_default_image_2</field>
+        <field name="name">website.s_media_list_default_image_2</field>
+        <field name="url">/theme_treehouse/static/src/img/content/three_columns_02.jpg</field>
+    </record>
+    <record id="s_media_list_default_image_3" model="theme.ir.attachment">
+        <field name="key">website.s_media_list_default_image_3</field>
+        <field name="name">website.s_media_list_default_image_3</field>
+        <field name="url">/theme_treehouse/static/src/img/content/three_columns_03.jpg</field>
+    </record>
+
+    <!-- Company Team -->
+    <record id="s_company_team_default_image_1" model="theme.ir.attachment">
+        <field name="key">website.s_company_team_image_1</field>
+        <field name="name">website.s_company_team_image_1</field>
+        <field name="url">/theme_treehouse/static/src/img/content/company_team_01.jpg</field>
+    </record>
+    <record id="s_company_team_default_image_2" model="theme.ir.attachment">
+        <field name="key">website.s_company_team_image_2</field>
+        <field name="name">website.s_company_team_image_2</field>
+        <field name="url">/theme_treehouse/static/src/img/content/company_team_02.jpg</field>
+    </record>
+    <record id="s_company_team_default_image_3" model="theme.ir.attachment">
+        <field name="key">website.s_company_team_image_3</field>
+        <field name="name">website.s_company_team_image_3</field>
+        <field name="url">/theme_treehouse/static/src/img/content/company_team_03.jpg</field>
+    </record>
+    <record id="s_company_team_default_image_4" model="theme.ir.attachment">
+        <field name="key">website.s_company_team_image_4</field>
+        <field name="name">website.s_company_team_default_image_4</field>
+        <field name="url">/theme_treehouse/static/src/img/content/company_team_04.jpg</field>
+    </record>
+
+    <!-- Quotes Carousel -->
+    <record id="s_quotes_carousel_default_image_1" model="theme.ir.attachment">
+        <field name="key">website.s_quotes_carousel_default_image_1</field>
+        <field name="name">website.s_quotes_carousel_default_image_1</field>
+        <field name="url">/theme_treehouse/static/src/img/content/quotes_carousel.jpg</field>
     </record>
 </odoo>

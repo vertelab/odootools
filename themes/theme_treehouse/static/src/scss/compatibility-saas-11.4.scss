@@ -1,5 +1,14 @@
 #wrapwrap {
 
+    // Carousel
+    .carousel-control .fa {
+        border-radius: 50%;
+        padding-top: 2px;
+        &:hover {
+            color: o-color('alpha') !important;
+        }
+    }
+
     // Banner Carousel
     .s_banner_2.carousel {
         .carousel-box-content {
@@ -55,11 +64,76 @@
         @include border-top-radius($border-radius);
     }
 
-    .label i {
-        opacity: 0.5;
+    // Label
+    .label {
+        padding: 6px 10px;
+        i {
+            opacity: 0.5;
+        }
     }
 
+    // Images + Captions
     .s_images_captions_fw p {
         border-bottom-right-radius: $border-radius;
+    }
+
+    // Panel
+    .s_panel {
+        &.panel {
+            background-color: inherit;
+        }
+        .panel-heading {
+            border: 0;
+            .fa {
+                margin-right: 12px;
+            }
+        }
+    }
+    .panel {
+        box-shadow: none;
+    }
+
+    // Well
+    .s_well {
+        box-shadow: none;
+        .card-text {
+            overflow: hidden;
+        }
+        ol, p, ul {
+            width: 100%;
+            &:last-child {
+                margin-bottom: 0;
+            }
+        }
+    }
+
+    // Big Message
+    .s_big_message {
+        margin: 0;
+        padding: 20px 0 40px;
+    }
+
+    // Comparisons
+    .s_comparisons {
+        .list-group-item.active, .list-group-item.active:focus, .list-group-item.active:hover {
+            background-color: theme-color('primary');
+            border-color: theme-color('primary');
+        }
+        .panel-body h2 small {
+            color: gray('900');
+        }
+    }
+
+    // Jumbotron
+    .jumbotron {
+        margin: 0;
+        p {
+            font-weight: $font-weight-base;
+        }
+    }
+
+    // Features
+    .s_features {
+        @include fa-size-generator(20);
     }
 }

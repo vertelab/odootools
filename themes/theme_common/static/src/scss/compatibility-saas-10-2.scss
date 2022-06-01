@@ -21,8 +21,8 @@ body .color-gray-dark { color: gray('900'); }
 body .color-gray-dark-dark { color: $gray-dark-dark; }
 body .color-gray-darker { color: gray('900'); }
 body .color-gray-darkest { color: $gray-darkest; }
-body .color-alpha { color: theme-color('alpha'); }
-body .color-beta { color: theme-color('beta'); }
-body .color-gamma { color: theme-color('gamma'); }
-body .color-delta { color: theme-color('delta'); }
-body .color-epsilon { color: theme-color('epsilon'); }
+body .color-alpha { color: o-color('alpha'); }
+body .color-beta { color: o-color('beta'); }
+body .color-gamma { color: o-color('gamma'); }
+body .color-delta { color: o-color('delta'); }
+body .color-epsilon { color: o-color('epsilon'); }

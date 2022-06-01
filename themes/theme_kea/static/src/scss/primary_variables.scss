@@ -1,23 +1,3 @@
-@mixin o-bg-color-extension($color, $text-color, $with-muted) {
-    // FIXME "support" of link colors as before ?
-    // a:not(.btn) {
-    //     color: $linkcolor;
-    //     &:hover, &:focus {
-    //         color: $hovercolor;
-    //     }
-    // }
-}
-
-$o-theme-font-size-base: 0.75rem;
-
-$o-theme-bg-img-01: url("/web/image/theme_common.image_content_11");
-$o-theme-bg-img-02: url("/web/image/theme_common.image_content_03");
-$o-theme-bg-img-03: url("/web/image/theme_common.image_content_12");
-$o-theme-bg-img-04: url("/web/image/theme_common.image_content_02");
-$o-theme-bg-img-05: url("/web/image/theme_common.image_content_10");
-$o-theme-bg-img-06: url("/web/image/theme_common.image_content_09");
-$o-theme-bg-img-07: url("/web/image/theme_common.image_content_07");
-
 //------------------------------------------------------------------------------
 // Colors
 //------------------------------------------------------------------------------
@@ -30,7 +10,7 @@ $o-theme-bg-img-07: url("/web/image/theme_common.image_content_07");
 // this only applied to buttons though but we extended that to all components.
 // Success, info, warning and error buttons are also customized with epsilon,
 // gamma, delta and ... black colors (see theme.scss).
-$-palettes: (
+$o-theme-color-palettes: (
     (
         alpha: #ffffff,
         beta: #dcdcdc,
@@ -74,68 +54,135 @@ $-palettes: (
         epsilon: #d40e52,
     ),
 );
-$o-theme-color-palettes: ();
-@each $-palette in $-palettes {
-    $o-theme-color-palettes: append($o-theme-color-palettes, map-merge($-palette, (
-        'primary': map-get($-palette, 'beta'),
-        'secondary': map-get($-palette, 'alpha'),
-    )));
-}
 
 // Grays
 $-gray-700: lighten(#000, 33.5%);
 $o-gray-color-palettes: ();
 @each $-palette in $o-theme-color-palettes {
     $o-gray-color-palettes: append($o-gray-color-palettes, (
-        'black': #000000,
         '900': lighten(#000, 20%),
         '700': $-gray-700,
         '600': lighten(#000, 46.7%),
         '300': #d4d4d4,
         '200': lighten(#000, 85%),
-        'white': #ffffff,
     ));
 }
 
 // Colors
-$o-color-palettes: ();
-@each $-palette in $-palettes {
-    $o-color-palettes: append($o-color-palettes, (
-        'body': #f2edea,
-        'menu': #FFFFFF,
-        'footer': #FFFFFF,
-        'text': $-gray-700,
-    ));
-}
+$o-color-palettes: (
+    (
+        'o-color-1': #e991a3,
+        'o-color-2': #575757,
+        'o-color-3': #f6f5f5,
+        'o-color-4': #ffffff,
+        'o-color-5': #333333,
+
+        'menu': 5,
+        'footer': 5,
+        'copyright': 5,
+    ),
+    (
+        'o-color-1': #f7a58e,
+        'o-color-2': #4b6272,
+        'o-color-3': #ecf0f2,
+        'o-color-4': #ffffff,
+        'o-color-5': #374249,
+
+        'menu': 4,
+        'footer': 4,
+        'copyright': 4,
+    ),
+    (
+        'o-color-1': #f9a646,
+        'o-color-2': #68635d,
+        'o-color-3': #f0efee,
+        'o-color-4': #ffffff,
+        'o-color-5': #333333,
+
+        'menu': 4,
+        'footer': 4,
+        'copyright': 4,
+    ),
+    (
+        'o-color-1': #ed6639,
+        'o-color-2': #385b9f,
+        'o-color-3': #d5dee3,
+        'o-color-4': #ffffff,
+        'o-color-5': #333333,
+
+        'o-cc4-link': 'o-color-4',
+        'o-cc4-btn-primary': 'o-color-4',
+
+        'menu': 4,
+        'footer': 4,
+        'copyright': 4,
+    ),
+);
 
 //------------------------------------------------------------------------------
 // Fonts
 //------------------------------------------------------------------------------
 
-$o-theme-fonts: (
-    ('SinkinSans', sans-serif),
-    ('Rajdhani', sans-serif),
-    ('Roboto', sans-serif),
-    ('Source Sans Pro', sans-serif),
-    ('Ubuntu', sans-serif),
-    ('Lato', sans-serif),
-    ('Ubuntu', sans-serif),
+$o-theme-h1-font-size-multiplier: (36 / 12);
+$o-theme-h2-font-size-multiplier: (30 / 12);
+$o-theme-h3-font-size-multiplier: (24 / 12);
+$o-theme-h4-font-size-multiplier: (18 / 12);
+$o-theme-h5-font-size-multiplier: (14 / 12);
+$o-theme-h6-font-size-multiplier: 1;
+
+$o-theme-font-configs: (
+    'Spartan': (
+        'family': ('Spartan', sans-serif),  // font update - SinKinSans -> Spartan
+        'url': 'Spartan:300,300i,400,400i,700,700i',
+    ),
+    'Rajdhani': (
+        'family': ('Rajdhani', sans-serif),
+        'url': 'Rajdhani:300,300i,400,400i,700,700i',
+    ),
+    'Roboto': (
+        'family': ('Roboto', sans-serif),
+        'url': 'Roboto:300,300i,400,400i,700,700i',
+    ),
+    'Source Sans Pro': (
+        'family': ('Source Sans Pro', sans-serif),
+        'url': 'Source+Sans+Pro:300,300i,400,400i,700,700i',
+    ),
+    'Ubuntu': (
+        'family': ('Ubuntu', sans-serif),
+        'url': 'Ubuntu:300,300i,400,400i,700,700i',
+    ),
+    'Lato': (
+        'family': ('Lato', sans-serif),
+        'url': 'Lato:300,300i,400,400i,700,700i',
+    ),
+    'Playfair Display': (
+        'family': ('Playfair Display', serif),
+        'url': 'Playfair+Display:300,300i,400,400i,700,700i',
+    ),
+    'Lora': (
+        'family': ('Lora', serif),
+        'url': 'Lora:300,300i,400,400i,700,700i',
+    ),
+    'Barlow Condensed': (
+        'family': ('Barlow Condensed', sans-serif),
+        'url': 'Barlow+Condensed:300,300i,400,400i,700,700i',
+    ),
 );
-$o-theme-font-urls: (
-    null,
-    'Rajdhani:300,300i,400,400i,700,700i',
-    'Roboto:300,300i,400,400i,700,700i',
-    'Source+Sans+Pro:300,300i,400,400i,700,700i',
-    'Ubuntu:300,300i,400,400i,700,700i',
-    'Lato:300,300i,400,400i,700,700i',
-    'Ubuntu:300,300i,400,400i,700,700i',
-);
-$o-theme-font-names: (
-    'Sinkin',
-    'Rajdhani',
-    'Roboto',
-    'Source Sans Pro',
-    'Ubuntu',
-    'Lato',
-    'Ubuntu',
+
+$o-website-values-palettes: (
+    (
+        'header-font-size': 1.25rem,
+        'logo-height': 3rem,
+        'fixed-logo-height': 3rem,
+        'font-size-base': .925rem,
+        'font': 'Roboto',
+        'headings-font': 'Barlow Condensed',
+        'navbar-font': 'Barlow Condensed',
+        'buttons-font': 'Barlow Condensed',
+        'link-underline': 'never',
+        'header-links-style': 'outline',
+        'btn-primary-outline': true,
+        'header-template': 'default',
+        'footer-template': 'call_to_action',
+    ),
 );

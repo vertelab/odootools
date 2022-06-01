@@ -4,11 +4,13 @@
     'category': 'Theme/Services',
     'summary': 'Cars, Motorbikes, Bikes, Tires, Transports, Repair, Mechanics, Garages, Sports, Services',
     'sequence': 300,
-    'version': '1.0',
-    'depends': ['theme_monglia'],
+    'version': '2.0.0',
+    'author': 'Odoo S.A.',
+    'depends': ['theme_common'],
     'data': [
         'views/assets.xml',
         'views/images.xml',
+        'views/customizations.xml',
     ],
     'images': [
         'static/description/vehicle_description.png',

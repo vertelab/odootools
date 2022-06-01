@@ -1,38 +1,4 @@
 
-$o-theme-hamburger-layout: false;
-
-$o-theme-img-base-url      : "theme_avantgarde/static/src/img/pictures/";
-$o-theme-img-2x-prefix     : "2x_";
-$o-theme-thumb-base-url    : "theme_avantgarde/static/src/img/thumbs/";
-$o-theme-pattern-base-url  : "theme_avantgarde/static/src/img/patterns/";
-$o-theme-pattern-2x-prefix : "2x_";
-
-$o-theme-family-heading-weight: inherit;
-
-// =============================
-// === IMAGES and PATTERNS =====
-// =============================
-
-$o-theme-img-01 : "bg_image_01.jpg";
-$o-theme-img-02 : "bg_image_02.jpg";
-$o-theme-img-03 : "bg_image_03.jpg";
-$o-theme-img-04 : "bg_image_04.jpg";
-$o-theme-img-05 : "bg_image_05.jpg";
-$o-theme-img-06 : "bg_image_06.jpg";
-$o-theme-img-07 : "bg_image_07.jpg";
-$o-theme-img-08 : "bg_image_08.jpg";
-$o-theme-img-09 : "bg_image_09.jpg";
-$o-theme-img-10 : "bg_image_10.jpg";
-$o-theme-img-11 : "bg_image_11.jpg";
-$o-theme-img-12 : "bg_image_12.jpg";
-
-$o-theme-patt-01 : "bg_pattern_01.jpg";
-$o-theme-patt-02 : "bg_pattern_02.jpg";
-$o-theme-patt-03 : "bg_pattern_03.jpg";
-$o-theme-patt-04 : "bg_pattern_04.jpg";
-$o-theme-patt-05 : "bg_pattern_05.jpg";
-$o-theme-patt-06 : "bg_pattern_06.jpg";
-
 //------------------------------------------------------------------------------
 // Colors
 //------------------------------------------------------------------------------
@@ -85,6 +51,11 @@ $o-theme-color-palettes: (
         'gamma': #1F143B,
         'delta': #80A2BD,
         'epsilon': #655557,
+
+        'success': #31B05E,
+        'info': #4D68A3,
+        'warning': #EACF41,
+        'danger': #CB3E3E,
     ),
     (
         'alpha': #CDDC39,
@@ -106,15 +77,131 @@ $o-theme-color-palettes: (
         'gamma': #A9ACA9,
         'delta': #969397,
         'epsilon': #60495A,
+
+        'success': #5CB85C,
+    ),
+);
+
+// Theme Palettes
+$o-color-palettes: (
+    (
+        'o-color-1': #ee4980,
+        'o-color-2': #5f5458,
+        'o-color-3': #f7f7f7,
+        'o-color-4': #FFFFFF,
+        'o-color-5': #000000,
+
+        'o-cc5-headings': 'o-color-1',
+
+        'body': 'o-color-3',
+        'footer': 1,
+        'copyright': 3,
+    ),
+    (
+        'o-color-1': #38383b,
+        'o-color-2': #918f8b,
+        'o-color-3': #dfe0e1,
+        'o-color-4': #FFFFFF,
+        'o-color-5': #000000,
+
+        'o-cc4-headings': 'o-color-3',
+        'o-cc5-headings': 'o-color-2',
+
+        'o-cc4-btn-primary': 'o-color-3',
+        'o-cc5-btn-primary': 'o-color-2',
+
+        'menu': 4,
+        'footer': 4,
+    ),
+    (
+        'o-color-1': #f08e80,
+        'o-color-2': #0b0d63,
+        'o-color-3': #fdf0e6,
+        'o-color-4': #FFFFFF,
+        'o-color-5': #4e4d4d,
+
+        'o-cc2-headings': 'o-color-2',
+        'o-cc3-headings': 'o-color-3',
+        'o-cc4-headings': 'o-color-5',
+        'o-cc5-headings': 'o-color-1',
+
+        'footer': 1,
+        'copyright': 1,
+    ),
+    (
+        'o-color-1': #f78f4a,
+        'o-color-2': #94583a,
+        'o-color-3': #F7EFBA,
+        'o-color-4': #FFFFFF,
+        'o-color-5': #312b24,
+
+        'o-cc2-headings': 'o-color-2',
+        'o-cc3-headings': 'o-color-3',
+        'o-cc4-headings': 'o-color-5',
+        'o-cc5-headings': 'o-color-1',
+
+        'o-cc2-btn-primary': 'o-color-2',
+        'o-cc3-btn-primary': 'o-color-3',
+
+        'footer': 1,
+        'copyright': 1,
+    ),
+    (
+        'o-color-1': #AC578C,
+        'o-color-2': #69355D,
+        'o-color-3': #F7EFBA,
+        'o-color-4': #FFFFFF,
+        'o-color-5': #000000,
+
+        'o-cc2-headings': 'o-color-2',
+        'o-cc3-headings': 'o-color-3',
+        'o-cc4-headings': 'o-color-5',
+        'o-cc5-headings': 'o-color-1',
+
+        'o-cc2-btn-primary': 'o-color-2',
+        'o-cc3-btn-primary': 'o-color-3',
+
+        'footer': 1,
+        'copyright': 1,
+    ),
+    (
+        'o-color-1': #f3b65b,
+        'o-color-2': #3c4e3c,
+        'o-color-3': #e7d1b5,
+        'o-color-4': #FFFFFF,
+        'o-color-5': #000000,
+
+        'o-cc2-headings': 'o-color-2',
+        'o-cc3-headings': 'o-color-3',
+        'o-cc5-headings': 'o-color-1',
+    ),
+    (
+        'o-color-1': #f48847,
+        'o-color-2': #282d30,
+        'o-color-3': #e9ceb0,
+        'o-color-4': #FFFFFF,
+        'o-color-5': #000000,
+
+        'o-cc2-headings': 'o-color-1',
+        'o-cc5-headings': 'o-color-1',
+    ),
+    (
+        'o-color-1': #278f84,
+        'o-color-2': #494048,
+        'o-color-3': #ebe1ea,
+        'o-color-4': #FFFFFF,
+        'o-color-5': #201c20,
+
+        'o-cc2-headings': 'o-color-1',
+        'o-cc5-headings': 'o-color-1',
     ),
 );
 
 // Grays
 $-black: #000000;
 $o-gray-color-palettes: ();
-@each $-palette in $o-theme-color-palettes {
+@each $-palette in $o-color-palettes {
     $o-gray-color-palettes: append($o-gray-color-palettes, (
-        'black': $-black,
         '975': lighten($-black, 13%),
         '950': lighten($-black, 16%),
         '925': lighten($-black, 19%),
@@ -125,20 +212,82 @@ $o-gray-color-palettes: ();
         '600': lighten($-black, 65.5%),
         '400': lighten($-black, 82%),
         '200': lighten($-black, 93.5%),
-        'white': lighten($-black, 100%),
     ));
 }
 
-// Colors
-$o-color-palettes: ();
-@each $-palette in $o-theme-color-palettes {
-    $o-color-palettes: append($o-color-palettes, (
-        'body': #FFFFFF,
-        'menu': #FFFFFF,
-        'footer': #FFFFFF,
-        'text': #000000,
-    ));
-}
+//------------------------------------------------------------------------------
+// Fonts
+//------------------------------------------------------------------------------
+
+$o-theme-h1-font-size-multiplier: (48.83 / 16);
+$o-theme-h2-font-size-multiplier: (39.06 / 16);
+$o-theme-h3-font-size-multiplier: (31.25 / 16);
+$o-theme-h4-font-size-multiplier: (25.00 / 16);
+$o-theme-h5-font-size-multiplier: (20.00 / 16);
+$o-theme-h6-font-size-multiplier: 1.1;
+
+$o-theme-font-configs: (
+    'Lato': (
+        'family': ('Lato', sans-serif),
+        'url': 'Lato:300,300i,400,400i,700,700i',
+    ),
+    'Raleway': (
+        'family': ('Raleway', sans-serif),
+        'url': 'Raleway:300,300i,400,400i,700,700i',
+    ),
+    'Heebo': (
+        'family': ('Heebo', sans-serif),
+        'url': 'Heebo:300,300i,400,400i,700,700i',
+    ),
+    'Abril Fatface': (
+        'family': ('Abril Fatface', cursive),
+        'url': 'Abril+Fatface:300,300i,400,400i,700,700i',
+    ),
+    'Alfa Slab One': (
+        'family': ('Alfa Slab One', cursive),
+        'url': 'Alfa+Slab+One:300,300i,400,400i,700,700i',
+    ),
+    'Arvo': (
+        'family': ('Arvo', serif),
+        'url': 'Arvo:300,300i,400,400i,700,700i',
+    ),
+    'Cantata One': (
+        'family': ('Cantata One', serif),
+        'url': 'Cantata+One:300,300i,400,400i,700,700i',
+    ),
+    'Open Sans Condensed': (
+        'family': ('Open Sans Condensed', sans-serif),
+        'url': 'Open+Sans+Condensed:300,300i,400,400i,700,700i',
+    ),
+    'Open Sans': (
+        'family': ('Open Sans', sans-serif),
+        'url': 'Open+Sans:300,300i,400,400i,700,700i',
+    ),
+    'Oswald': (
+        'family': ('Oswald', sans-serif),
+        'url': 'Oswald:300,300i,400,400i,700,700i',
+    ),
+    'Poiret One': (
+        'family': ('Poiret One', cursive),
+        'url': 'Poiret+One:300,300i,400,400i,700,700i',
+    ),
+    'PT Sans Narrow': (
+        'family': ('PT Sans Narrow', sans-serif),
+        'url': 'PT+Sans+Narrow:300,300i,400,400i,700,700i',
+    ),
+    'Roboto Slab': (
+        'family': ('Roboto Slab', serif),
+        'url': 'Roboto+Slab:300,300i,400,400i,700,700i',
+    ),
+    'Playfair Display': (
+        'family': ('Playfair Display', serif),
+        'url': 'Playfair+Display:300,300i,400,400i,700,700i',
+    ),
+    'Vollkorn': (
+        'family': ('Vollkorn', serif),
+        'url': 'Vollkorn:300,300i,400,400i,700,700i',
+    ),
+);
 
 //------------------------------------------------------------------------------
 // Website customizations
@@ -146,155 +295,22 @@ $o-color-palettes: ();
 
 $o-website-values-palettes: (
     (
-        'font-number': 1,
-        'headings-font-number': 2,
-        'navbar-font-number': 1,
-        'buttons-font-number': 3,
+        'font-size-base': (14 / 16) * 1rem,
+        'font': 'Heebo',
+        'headings-font': 'Playfair Display',
+        'navbar-font': 'Playfair Display',
+        'buttons-font': 'Playfair Display',
+
+        'layout': 'boxed',
+        'header-template': 'magazine',
+        'hamburger-type': 'off-canvas',
+        'menu-box-shadow': false,
+
+        'footer-template': 'centered',
+
+        'btn-ripple': true,
+        'btn-padding-y-lg': .6rem,
+        'btn-padding-x-lg': 2.2rem,
+        'link-underline': 'always',
     ),
-);
-
-// =============================
-// === s_animated_boxes ========
-// =============================
-
-@mixin s-animated-boxes-slide-hook {
-    transition: none;
-    display: none;
-    -webkit-animation-duration: 1s;
-    animation-duration: 1s;
-    -webkit-animation-fill-mode: both;
-    animation-fill-mode: both;
-}
-@mixin s-animated-boxes-slide-hover-hook {
-    transition: none;
-}
-
-// =================================
-// s_medias_list
-// =================================
-
-$s-medias-list-bg-color-main: #FFFFFF;
-
-// =============================
-// Page Header  s_page_header ==
-// =============================
-
-// Snippet
-$s-page-header-main-font-color     : #FFFFFF;
-
-// Labels
-$s-page-header-label-font-size     : .9em;
-$s-page-header-label-border-radius : 2px;
-$s-page-header-label-padding       : 5px 8px;
-$s-page-header-label-margin        : 0 10px 0 0;
-
-// Labels > i
-$s-page-header-i-margin: 0 6px;
-
-// =============================
-// === s_showcase_slider =======
-// =============================
-
-@mixin s-showcase-slider-navigation-hook {
-    span {
-        text-indent:100%;
-        background:url("../img/ui/s_showcase_slider-arrow.svg") no-repeat center center;
-        &:before{ content: none;}
-    }
-    &:first-of-type {
-        span {
-            transform: rotate(180deg);
-        }
-    }
-}
-
-@mixin s-showcase-slider-close-hook {
-    background: url("../img/ui/s_showcase_slider-close.svg") no-repeat center center;
-    text-indent: 100%;
-}
-
-@mixin s-showcase-slider-slider-hover-hook {
-    &:after{
-        background: rgba(0, 0, 0, 0.4) url("../img/ui/s_showcase_slider-zoom.svg") no-repeat center center;
-    }
-}
-
-// =============================
-// === s_css_slider ============
-// =============================
-
-@mixin s-css-slider-navigation-hook {
-    span {
-        text-indent: 100%;
-        background: url("../img/ui/s_showcase_slider-arrow.svg") no-repeat center center;
-        &:before {
-            content: none;
-        }
-    }
-    &:first-of-type {
-        span {
-            transform: rotate(180deg);
-        }
-    }
-}
-
-@mixin s-css-slider-close-hook {
-    background: url("../img/ui/s_showcase_slider-close.svg") no-repeat center center;
-    text-indent: 100%;
-}
-
-//------------------------------------------------------------------------------
-// Fonts
-//------------------------------------------------------------------------------
-
-$o-theme-fonts: (
-    ('Lato', sans-serif),
-    ('Raleway', sans-serif),
-    ('Heebo', sans-serif),
-    ('Abril Fatface', cursive),
-    ('Alfa Slab One', cursive),
-    ('Arvo', serif),
-    ('Cantata One', serif),
-    ('Open Sans Condensed', sans-serif),
-    ('Open Sans', sans-serif),
-    ('Oswald', sans-serif),
-    ('Poiret One', cursive),
-    ('PT Sans Narrow', sans-serif),
-    ('Roboto Slab', serif),
-    ('Rufina', serif),
-    ('Vollkorn', serif),
-);
-$o-theme-font-urls: (
-    'Lato:300,300i,400,400i,700,700i',
-    'Raleway:300,300i,400,400i,700,700i',
-    'Heebo:300,300i,400,400i,700,700i',
-    'Abril+Fatface:300,300i,400,400i,700,700i',
-    'Alfa+Slab+One:300,300i,400,400i,700,700i',
-    'Arvo:300,300i,400,400i,700,700i',
-    'Cantata+One:300,300i,400,400i,700,700i',
-    'Open+Sans+Condensed:300,300i,400,400i,700,700i',
-    'Open+Sans:300,300i,400,400i,700,700i',
-    'Oswald:300,300i,400,400i,700,700i',
-    'Poiret+One:300,300i,400,400i,700,700i',
-    'PT+Sans+Narrow:300,300i,400,400i,700,700i',
-    'Roboto+Slab:300,300i,400,400i,700,700i',
-    'Rufina:300,300i,400,400i,700,700i',
-    'Vollkorn:300,300i,400,400i,700,700i',
-);
-$o-theme-font-names: (
-    'Lato',
-    'Raleway',
-    'Heebo',
-    'Abril',
-    'Alfa Slab One',
-    'Arvo',
-    'Cantata',
-    'Open Sans Condenced',
-    'Open Sans',
-    'Oswald',
-    'Poiret One',
-    'PT Sans Narrow',
-    'Roboto Slab',
-    'Rufina',
-    'Vollkorn',
 );

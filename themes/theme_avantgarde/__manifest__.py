@@ -1,17 +1,18 @@
 {
-    'name':'Avantgarde Theme',
+    'name': 'Avantgarde Theme',
     'description': 'Avantgarde is a sophisticated theme to inspire and impress',
     'category': 'Theme/Creative',
     'summary': 'Arts, Galleries, Trends, Shows, Magazines, Blogs',
     'sequence': 150,
-    'version':'1.1.0',
-    'author':'Odoo S.A.',
+    'version': '2.0.0',
+    'author': 'Odoo S.A.',
     'data': [
         'views/assets.xml',
-        'views/customize_modal.xml',
-        'views/snippets.xml',
-        'views/options.xml',
-        'views/images_library.xml'
+        'views/images_library.xml',
+        'views/customizations.xml',
+
+        'views/old_snippets/s_css_slider.xml',
+        'views/old_snippets/s_showcase_slider.xml',
     ],
     'images': [
         'static/description/poster.jpg',

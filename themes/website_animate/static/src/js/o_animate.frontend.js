@@ -13,7 +13,8 @@ var WebsiteAnimate = {
     // Retrieve animable elements and attach handlers.
     start: function () {
         var self   = this;
-        self.items = $(".o_animate");
+        self.$scrollingElement = $().getScrollingElement();
+        self.items = $("#wrapwrap .o_animate");
         self.items.each(function () {
             var $el = $(this);
             // Set all monitored elements to initial state
@@ -34,7 +35,9 @@ var WebsiteAnimate = {
             self.win.h = $(window).height();
             $(window).trigger("scroll");
         })
-        .trigger("resize")
+        .trigger("resize");
+
+        self.$scrollingElement
         .on("scroll.o_animate, slid.bs.carousel", (_.throttle(function () {
             // _.throttle -> Limit the number of times the scroll function
             // can be called in a given period. (http://underscorejs.org/#throttle)
@@ -45,17 +48,15 @@ var WebsiteAnimate = {
             var direction = (windowTop < lastScroll) ? -1 : 1;
             lastScroll = windowTop;
 
-            self.items.each(function () {
+            $("#wrapwrap .o_animate").each(function () {
                 var $el       = $(this);
                 var elHeight  = $el.height();
                 var elOffset  = direction * Math.max((elHeight * self.offsetRatio), self.offsetMin);
                 var state     = $el.css("animation-play-state");
 
                 // We need to offset for the change in position from some animation
-                // So we get the top value of the transform matrix
-                var transformMatrix = $el.css('transform').replace(/[^0-9\-.,]/g, '').split(',');
-                var transformOffset = transformMatrix[13] || transformMatrix[5];
-                var elTop = $el.offset().top - transformOffset;
+                // So we get the top value by not taking CSS transforms into calculations
+                var elTop = self.getElementOffsetTop($el[0]) - $().getScrollingElement().scrollTop();
 
                 var visible = windowBottom > (elTop + elOffset) && windowTop < (elTop + elHeight - elOffset);
 
@@ -73,11 +74,14 @@ var WebsiteAnimate = {
 
     // Set elements to initial state
     reset_animation: function ($el) {
+        var self = this;
         var anim_name = $el.css("animation-name");
 
         $el
         .css({"animation-name" : "dummy-none", "animation-play-state" : ""})
         .removeClass("o_animated o_animating");
+
+        self._toggleOverflowXHidden(false);
 
         // force the browser to redraw using setTimeout
         setTimeout(function () {
@@ -87,16 +91,39 @@ var WebsiteAnimate = {
 
     // Start animation and/or update element's state
     start_animation: function ($el) {
+        var self = this;
         // force the browser to redraw using setTimeout
         setTimeout(function () {
+            self._toggleOverflowXHidden(true);
             $el
             .css({"animation-play-state": "running"})
             .addClass("o_animating")
             .one('webkitAnimationEnd oanimationend msAnimationEnd animationend', function (e) {
                 $el.addClass("o_animated").removeClass("o_animating");
+                self._toggleOverflowXHidden(false);
                 $(window).trigger("resize");
             });
         });
+    },
+
+    // show/hide the horizontal scrollbar (on the #wrapwrap)
+    _toggleOverflowXHidden: function (add) {
+        if (add) {
+            this.$scrollingElement[0].classList.add('o_wanim_overflow_x_hidden');
+        } else if (!this.$scrollingElement.find('.o_animating').length) {
+            this.$scrollingElement[0].classList.remove('o_wanim_overflow_x_hidden');
+        }
+    },
+
+    // Get element top offset by not taking CSS transforms into calculations
+    getElementOffsetTop: function (el) {
+        // Loop through the DOM tree and add its parent's offset to get page offset
+        var top = 0;
+        do {
+            top += el.offsetTop || 0;
+            el = el.offsetParent;
+        } while (el);
+        return top;
     },
 };
 
@@ -113,9 +140,24 @@ publicWidget.registry.WebsiteAnimate = publicWidget.Widget.extend({
         WebsiteAnimate.start();
         // Then we render all the elements, the ones which are invisible
         // in state 0 (like fade_in for example) will stay invisible.
-        $(".o_animate").css("visibility", "visible");
+        this.$target.find('.o_animate').css("visibility", "visible");
 
         return this._super.apply(this, arguments);
+    },
+    /**
+     * @override
+     */
+    destroy: function () {
+        WebsiteAnimate.$scrollingElement[0].classList.remove('o_wanim_overflow_x_hidden');
+        this._super.apply(this, arguments);
+
+        this.$target.find('.o_animate')
+            .removeClass('o_animating o_animated o_animate_preview')
+            .css({
+                'animation-name': '',
+                'animation-play-state': '',
+                'visibility': '',
+            });
     },
 });
 
