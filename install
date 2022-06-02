@@ -84,6 +84,9 @@ sudo wget -O /usr/local/bin/odooextras.py https://raw.githubusercontent.com/vert
 
 # Extra tools
 sudo wget -O /usr/local/bin/odoocheckdeps.py https://raw.githubusercontent.com/vertelab/odootools/{$VERSION}/scripts/odoocheckdeps.py
+sudo wget -O /usr/local/bin/odoocheckmanifests.py https://raw.githubusercontent.com/vertelab/odootools/{$VERSION}/scripts/odoocheckmanifests.py
+sudo wget -O /usr/local/bin/manifest_template.py https://raw.githubusercontent.com/vertelab/odootools/{$VERSION}/scripts/manifest_template.py
+
 
 
 # daily backup

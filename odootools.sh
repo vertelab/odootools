@@ -345,3 +345,4 @@ function _odoomodules() {
 alias odoomodules="_odoomodules"
 
 alias odoocheckdeps='python3 /usr/local/bin/odoocheckdeps.py'
+alias odoocheckmanifests='python3 /usr/local/bin/odoocheckmanifests.py'
