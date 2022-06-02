@@ -1,0 +1,75 @@
+<?xml version="1.0" encoding="utf-8" ?>
+<odoo>
+  <template id="login_layout" inherit_id="web.login_layout" name="Login Layout GBT Web">
+    <xpath expr="//div[hasclass('container')]" position="replace">
+      <div class="limiter">
+        <div class="container-login100">
+          <div class="wrap-login100 py-4 px-4">
+            <div t-attf-class="text-center mb-3">
+                <img t-attf-src="/web/binary/company_logo{{ '?dbname='+db if db else '' }}" alt="Logo" style="max-height:120px; max-width: 100%; width:auto"/>
+            </div>
+
+            <t t-raw="0"/>
+
+            <div class="text-center small mt-3 pt-1 border-top" t-if="not disable_footer">
+              <t t-if="not disable_database_manager">
+                  <a href="/web/database/manager">Manage Databases</a>
+              </t>
+            </div>
+          </div>
+        </div>
+      </div>
+    </xpath>
+  </template>
+
+  <template inherit_id="web.login" id="login" name="Login GBT Web">
+    <xpath expr="//form" position="replace">
+      <form class="oe_login_form login100-form validate-form" role="form" t-attf-action="/web/login{{ '?debug' if debug else '' }}" method="post" onsubmit="this.action = this.action + location.hash">
+      <input type="hidden" name="csrf_token" t-att-value="request.csrf_token()"/>
+
+        <span class="login100-form-title pb-4">
+            Login
+        </span>
+
+        <div class="wrap-input100 validate-input mb-4" t-if="databases and len(databases) &gt; 1">
+          <div t-attf-class="input-group {{'input-group-sm' if form_small else ''}}">
+              <input type="text" name="db" t-att-value="request.db" id="db" t-attf-class="form-control #{'form-control-sm' if form_small else ''}" required="required" readonly="readonly"/>
+              <span class="input-group-append">
+                  <a role="button" href="/web/database/selector" class="btn btn-info">Select <i class="fa fa-database" role="img" aria-label="Database" title="Database"></i></a>
+              </span>
+          </div>
+        </div>
+
+        <div class="field-login wrap-input100 validate-input mb-4" data-validate = "Username is required">
+          <input type="text" placeholder="Username/Email" name="login" t-att-value="login" id="login" t-attf-class="input100 form-control #{'form-control-sm' if form_small else ''}" required="required" autofocus="autofocus" autocapitalize="off"/>
+            <span class="focus-input100"></span>
+        </div>
+
+        <div class="field-password wrap-input100 validate-input mb-4" data-validate = "Password is required">
+          <input type="password" placeholder="Password" name="password" id="password" t-attf-class="input100 form-control #{'form-control-sm' if form_small else ''}" required="required" autocomplete="current-password" t-att-autofocus="'autofocus' if login else None" maxlength="4096"/>
+            <span class="focus-input100"></span>
+        </div>
+
+        <p class="alert alert-danger" t-if="error" role="alert">
+            <t t-esc="error"/>
+        </p>
+        <p class="alert alert-success" t-if="message" role="status">
+            <t t-esc="message"/>
+        </p>
+
+        <div class="oe_login_buttons container-login100-form-btn mt-3">
+          <button class="btn btn-default login100-form-btn" type="submit">
+        Login
+          </button>
+
+          <t t-if="debug">
+              <button type="submit" name="redirect" value="/web/become" class="btn btn-link btn-block">Log in as superuser</button>
+          </t>
+          <div class="o_login_auth"/>
+        </div>
+
+        <input type="hidden" name="redirect" t-att-value="redirect"/>
+      </form>
+    </xpath>
+  </template>
+</odoo>

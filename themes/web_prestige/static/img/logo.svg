@@ -1,0 +1,19 @@
+<svg width="640" height="280" xmlns="http://www.w3.org/2000/svg">
+ <!-- Created with Method Draw - http://github.com/duopixel/Method-Draw/ -->
+
+ <g>
+  <title>background</title>
+  <rect fill="#fff" id="canvas_background" height="282" width="642" y="-1" x="-1"/>
+  <g display="none" overflow="visible" y="0" x="0" height="100%" width="100%" id="canvasGrid">
+   <rect fill="url(#gridpattern)" stroke-width="0" y="0" x="0" height="100%" width="100%"/>
+  </g>
+ </g>
+ <g>
+  <title>Layer 1</title>
+  <g stroke="null" id="svg_17">
+   <path stroke="null" id="svg_14" fill="#42064e" d="m74.906736,90.205315l0,-20.417606l-64.375511,0l0,140.280964l64.375511,0l0,-20.417606a49.722876,49.722876 0 0 1 0,-99.445752z"/>
+   <path stroke="null" id="svg_15" fill="#42064e" d="m52.4227,100.26183l0,80.056155a44.351861,40.028077 0 0 0 0,-80.056155z"/>
+   <text stroke="null" font-weight="bold" transform="matrix(4.492801187701576,0,0,4.433162535321978,-575.6934561680524,-745.31966530555) " xml:space="preserve" text-anchor="start" font-family="'Courier New', Courier, monospace" font-size="24" id="svg_18" y="206.73182" x="153.048025" stroke-opacity="null" stroke-width="0" fill="#0b725d">Prestige</text>
+  </g>
+ </g>
+</svg>

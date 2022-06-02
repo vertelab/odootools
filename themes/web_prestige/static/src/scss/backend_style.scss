@@ -1,0 +1,258 @@
+::selection {
+  background: $primary;
+  /* WebKit/Blink Browsers */
+  color: #fff;
+}
+
+::-moz-selection {
+  background: $primary;
+  /* Gecko Browsers */
+  color: #fff;
+}
+
+// Lato Font
+label.o_form_label,
+.o_horizontal_separator,
+b,
+strong,
+h1,
+h2,
+h3,
+h4,
+.o_notebook .nav.nav-tabs .nav-link.active,
+table.o_list_view.table>thead>tr>th,
+span.oe_subtotal_footer_separator,
+span.o_thread_date {
+  font-family: 'Lato-Bol';
+}
+
+
+//
+@include media-breakpoint-down(sm) {
+  .o_menu_sections,
+  .o_menu_systray {
+    background: $o-brand-odoo;
+    width     : 100%;
+  }
+
+  .o_menu_systray {
+    .dropdown-menu-right {
+      left: auto!important;
+      right: auto!important;
+    }
+  }
+}
+
+.o_menu_brand {
+  font-family: 'Lato-Bla';
+}
+
+// .o_cp_buttons,
+// .o_cp_switch_buttons,
+// .o_search_options,
+// .o_cp_pager,
+// .o_statusbar_buttons,
+// .o_cp_sidebar {
+//   .btn {
+//   }
+// }
+
+.btn {
+  border-width: 0;
+  font-family: 'Lato-Bol';
+
+  &.fa,
+  .fa {
+    font-family: 'FontAwesome';
+  }
+
+  &.btn-secondary {
+    color: $o-main-text-color;
+  }
+}
+
+.o_cp_buttons,
+.o_form_statusbar,
+.modal-footer,
+.oe_module_action {
+  .btn {
+    text-transform: uppercase;
+
+    &.btn-secondary {
+      color: $o-brand-primary;
+    }
+  }
+}
+
+
+.btn.oe_stat_button {
+  border-width: 1px;
+}
+
+.o_form_view {
+
+  // Sheet
+  .o_form_sheet_bg {
+    background: $o-webclient-background-color;
+
+    >.o_form_sheet {
+      background: $o-view-background-color;
+      border    : 1px solid $o-brand-lightsecondary;
+      box-shadow: 0 2px 8px rgba(0, 0, 0, 0.1);
+    }
+  }
+
+  // Labels
+  .o_form_label {
+
+    &.o_form_label_empty,
+    &.o_form_label_false {
+      opacity    : 0.5;
+      font-family: 'Lato-Reg';
+      font-weight: normal;
+    }
+
+  }
+
+  // All required form fields
+  .o_form_required {
+
+    &.o_form_input,
+    .o_form_input,
+    &.o_form_textarea,
+    .o_form_textarea {
+      border-width: 2px;
+      border-color: $o-main-text-color;
+    }
+  }
+
+  // Dropdowns input carret
+  .o_form_input_dropdown .o_dropdown_button {
+    @include o-position-absolute(0, 0);
+  }
+
+  // Groups
+  .o_group {
+    .o_td_label {
+      border-right: none;
+    }
+  }
+
+  // Button box
+  .oe_button_box {
+    .oe_stat_button {
+      .o_button_icon {
+        color: $o-main-text-color;
+      }
+    }
+  }
+
+  // Notebooks
+  .o_notebook {
+    .nav.nav-tabs {
+      border-bottom: 1px solid $o-brand-secondary;
+
+      .nav-item {
+        .nav-link {
+          text-transform  : uppercase;
+          color           : $o-main-color-muted;
+          border          : none;
+          background-color: transparent;
+
+          &:hover,
+          &:focus,
+          &:active {
+            outline: none;
+            color  : $o-main-text-color;
+          }
+
+          &:not(.active) {
+            margin-bottom: 0; // Override bootstrap negative margin so that active and non-active tab have same height
+          }
+
+          &.active {
+            border-bottom: 1px solid $o-brand-primary;
+
+            &,
+            &:hover,
+            &:focus,
+            &:active {
+              color      : $o-brand-primary;
+              font-weight: 600;
+            }
+          }
+
+        }
+      }
+    }
+
+    .tab-content {
+      >.tab-pane {
+        padding: 0;
+
+        >.o_group {
+          margin: 0;
+        }
+      }
+    }
+
+    .nav-tabs {
+      border: none;
+    }
+  }
+}
+
+.o_searchview {
+  border       : none;
+  border-radius: 0;
+  border-bottom: 1px solid $o-brand-secondary;
+
+  .o_searchview_input {
+    border : none;
+    outline: none;
+  }
+
+  .o_searchview_autocomplete li {
+    padding: $dropdown-item-padding-y $dropdown-item-padding-x;
+  }
+}
+
+.o_search_options {
+  margin: auto 0;
+}
+
+.o_input {
+  border            : 1px solid $o-form-lightsecondary;
+  border-top-style  : none;
+  border-right-style: none;
+  border-left-style : none;
+  border-radius     : 0;
+}
+
+input[type="text"],
+input[type="password"],
+input[type="number"],
+textarea,
+select {
+  @extend .o_input;
+
+  width  : 100%;
+  outline: none;
+  display: inline-block;
+}
+
+.o_field_widget {
+
+  // Many2one
+  &.o_field_many2one .o_external_button {
+    padding    : 0;
+    margin-left: 0;
+    font-size  : ($font-size-base * 1.1);
+    color      : $o-brand-primary;
+    border     : none;
+
+    &:hover {
+      background-color: transparent;
+    }
+  }
+}

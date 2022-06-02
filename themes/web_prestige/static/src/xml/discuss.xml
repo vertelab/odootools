@@ -1,0 +1,11 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<templates xml:space="preserve">
+  <!--
+        @param {mail.NotificationAlert} widget
+    -->
+  <t t-extend="mail.NotificationAlert">
+    <t t-jquery=".o_notification_alert" t-operation="inner">
+      Push notifications have been blocked. Go to your browser settings to allow them.
+    </t>
+  </t>
+</templates>
