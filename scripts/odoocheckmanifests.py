@@ -1,3 +1,4 @@
+#!/bin/python3
 import sys
 import os
 import re
@@ -11,7 +12,7 @@ from collections import defaultdict
 
 
 # TODO: There's currently a bug where if a manifest does not have a specific attribute it will not be
-# noticed by the script. This needs to be fixed.
+# noticed by the script.
 
 def verify_results(path, manifest_path):
     with open(manifest_path) as file_handle:
