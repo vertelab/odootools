@@ -169,7 +169,16 @@ function odoogitpull() {
         cat ~/odoogitpull.err
         cd $CWD
     fi
+    sudo chown odoo:odoo /usr/share/odoo*/ -R
+    sudo chmod g+w /usr/share/odoo*/ -R
 }
+function odooallrequirements() {
+    for req in `ls /usr/share/odoo*/requirements.txt`
+    do
+        sudo pip3 install -r $req
+    done
+}
+
 function odoosyncall() {
     usage() { echo "Usage: $0 [-h <host>]" 1>&2; exit 1; }
     [ -f /etc/odoo/odoo.tools ] && . /etc/odoo/odoo.tools
