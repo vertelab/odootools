@@ -9,7 +9,7 @@
 
 echo "Performing basic prerequisite checks ..."
 
-VERSION=14.0
+VERSION=16.0
 echo "Download common files..."
 wget -O- https://raw.githubusercontent.com/vertelab/odootools/common/install | bash > /tmp/tmpinstallcommon.sh
 bash /tmp/tmpinstallcommon.sh $VERSION
@@ -35,7 +35,7 @@ if [ ! -d /etc/odoo ]; then  # Install Odoo (only one time)
 
     sudo add-apt-repository universe
     sudo wget -O - https://nightly.odoo.com/odoo.key | sudo apt-key add -
-    echo "deb http://nightly.odoo.com/14.0/nightly/deb/ ./" | sudo tee /etc/apt/sources.list.d/odoo.list > /dev/null
+    echo "deb http://nightly.odoo.com/$VERSION/nightly/deb/ ./" | sudo tee /etc/apt/sources.list.d/odoo.list > /dev/null
     sudo apt update
     sudo apt -y install odoo
     # Generate a good password
