@@ -35,7 +35,8 @@ if [ ! -d /etc/odoo ]; then  # Install Odoo (only one time)
 
     sudo add-apt-repository universe
     sudo wget -O - https://nightly.odoo.com/odoo.key | sudo apt-key add -
-    echo "deb http://nightly.odoo.com/$VERSION/nightly/deb/ ./" | sudo tee /etc/apt/sources.list.d/odoo.list > /dev/null
+    #echo "deb http://nightly.odoo.com/$VERSION/nightly/deb/ ./" | sudo tee /etc/apt/sources.list.d/odoo.list > /dev/null
+    echo "deb http://nightly.odoo.com/master/nightly/deb/ ./" | sudo tee /etc/apt/sources.list.d/odoo.list > /dev/null  # Change to $VERSION as soon its completed
     sudo apt update
     sudo apt -y install odoo
     # Generate a good password
