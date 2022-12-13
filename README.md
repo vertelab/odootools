@@ -29,6 +29,17 @@ Add userser
 sudo adduser $USER
 sudo adduser $USER sudo
 sudo adduser $USER odoo
+
+Access denied! FATAL: role "odoo" does not exist 
+https://www.cier.tech/blog/odoo-tutorials-1/post/operationalerror-fatal-role-odoo-does-not-exist-65
+
+Simply copy and paste this in your terminal:
+1) sudo su postgres
+2) createuser odoo -s
+3) psql template1
+4) \q
+5) exit
+
 ```
 Step 3: Follow the instructions for the management of the Odoo source repositories
 https://github.com/vertelab/odootools/blob/14.0/repos/README.md
