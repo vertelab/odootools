@@ -7,7 +7,7 @@ Tools to help to install and manage an Odoo installation.
 The installation scripts assume the host OS is Ubuntu 20.04. Usage on other
 systems might require tweaking to work.
 
-Odoo 14 require `init-system-helpers 1.57` or later. This rules out usage of
+Odoo 16 require `init-system-helpers 1.57` or later. This rules out usage of
 Ubuntu 18.04 or older.
 
 ## Install
