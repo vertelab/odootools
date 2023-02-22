@@ -185,6 +185,109 @@ function odooallrequirements() {
         sudo pip3 install -r $req
     done
 }
+
+function odooalldependencies() {
+    ## git@github.com:OCA/account-payment.git odooext-OCA
+    ## local REPOS="git@github.com:OCA/account-payment.git"
+    ## local PATH="odooext-OCA"
+    #~ jakob@nella:~$ exec bash
+    #~ jakob@nella:~$ for req in `ls`; do echo $req; done
+
+    #~ https://docstore.mik.ua/orelly/unix/upt/ch07_13.htm
+    # Save old $IFS; set IFS to tab: 
+    OIFS="$IFS"
+    ## SAVE LOCAL PATH
+    OPWD = `pwd`
+
+    for req in `ls /usr/share/odoo*/dependencies*`
+    do
+        echo $req
+        while read gitClone; do
+            echo "Working with loop... This is the gitClone!"
+            echo $gitClone
+            strGitClone="$gitClone"
+            echo "Working with loop... This is the strGitClone!"
+            echo $strGitClone
+            echo $strGitClone
+            IFS="/"
+            read -a arrURL<<<"$gitClone"
+            IFS=""
+            echo "URL1 : ${arrURL[0]}"
+            IFS=":"
+            read -a arrSubcontractor<<<"${arrURL[0]}"
+            IFS=""
+            echo "Subcontractor : ${arrSubcontractor[1]}"
+            echo "URL2 : ${arrURL[1]}"
+            IFS="."
+            read -a arrProject<<<"${arrURL[1]}"
+            IFS=""
+            echo $strGitClone
+            echo "Project : ${arrProject[0]}"
+            echo "odooext-${arrSubcontractor[1]}-${arrProject[0]}"
+            echo "Do the work! Move to /usr/share!"
+            cd /usr/share
+            echo $strGitClone
+            #~ echo "Good! Removing current folder, if any:"
+            #~ sudo rm -rf "odooext-${arrSubcontractor[1]}-${arrProject[0]}"
+            #~ echo $strGitClone
+            
+            echo "Do the folder-check-routine..."
+            DIR="/usr/share/odooext-${arrSubcontractor[1]}-${arrProject[0]}"
+            if [ -d "$DIR" ]; then
+                ### Take action if $DIR exists ###
+                echo "Yes! It's there! Go there... CHANGE DIRECTORY, and do the GIT PULL-magic!"
+                cd /usr/share/odooext-${arrSubcontractor[1]}-${arrProject[0]}
+                #~ git pull
+            else
+                ###  Control will jump here if $DIR does NOT exists ###
+                #~ echo "Error: ${DIR} not found. Can not continue."
+                #~ exit 1
+                echo "OK... Dead end. Do the Git Clone and install in right path:"
+                echo "First, move to /home/ ..."
+                cd ~
+                echo "Good! Now! Do the git clone-thing! ..."
+                echo $strGitClone
+                echo "Good! Now! Do the git clone-thing! ..."
+                git clone -b 14.0 $strGitClone
+                echo "Good! Now! Rename that new DIR!"
+                sudo mv $arrProject "odooext-${arrSubcontractor[1]}-${arrProject[0]}"            
+                echo "Good! Now! Move that new DIR to /usr/share!"
+                sudo mv "odooext-${arrSubcontractor[1]}-${arrProject[0]}" "/usr/share/"
+            fi
+
+
+            #~ echo "Good! Adding the folder..."
+            #~ sudo mkdir "odooext-${arrSubcontractor[1]}-${arrProject[0]}"
+            #~ echo $strGitClone
+            #~ echo "Good! Now! Move to home..."
+            #~ cd ~
+            #~ echo $strGitClone
+            #~ echo "Good! Now! Do the git clone-thing! ..."
+            #~ echo $strGitClone
+            #~ echo "Good! Now! Do the git clone-thing! ..."
+            #~ git clone -b 14.0 $strGitClone
+            #~ echo "Good! Now! Rename that new DIR!"
+            #~ sudo mv $arrProject "odooext-${arrSubcontractor[1]}-${arrProject[0]}"
+            
+            #~ echo "Good! Now! Move that new DIR to /usr/share!"
+            #~ sudo mv "odooext-${arrSubcontractor[1]}-${arrProject[0]}" "/usr/share/"
+
+            echo "Good! Set owner, set read / write! ..."
+            #~ sudo chown odoo:odoo /usr/share/odoo*/ -R
+            #~ sudo chmod g+w /usr/share/odoo*/ -R
+            IFS=""
+            echo "* * * * * * * * end of loop!! * * * * * * * * * * * "
+        done <"$req"
+
+    done
+    # Restore shell environment: 
+    IFS="$OIFS"
+    ## RESTORE LOCAL PATH
+    cd $OPWD
+
+    #~ sudo chown odoo:odoo /usr/share/odoo*/ -R
+    #~ sudo chmod g+w /usr/share/odoo*/ -R
+}
 function odoosyncall() {
     usage() { echo "Usage: $0 [-h <host>]" 1>&2; exit 1; }
     [ -f /etc/odoo/odoo.tools ] && . /etc/odoo/odoo.tools
