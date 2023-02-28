@@ -7,7 +7,7 @@
 #                                                                              #
 ################################################################################
 
-echo "Performing basic prerequisite checks ..."
+echo "Performing basic prerequisite checks ...Common Ground"
 
 echo "Setting download version..."
 VERSION=14.0
