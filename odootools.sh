@@ -197,7 +197,7 @@ function odooalldependencies() {
     # Save old $IFS; set IFS to tab: 
     OIFS="$IFS"
     ## SAVE LOCAL PATH
-    OPWD = `pwd`
+    OPWD=`pwd`
 
     for req in `ls /usr/share/odoo*/dependencies*`
     do
@@ -205,10 +205,6 @@ function odooalldependencies() {
         while read gitClone; do
             echo "Working with loop... This is the gitClone!"
             echo $gitClone
-            strGitClone="$gitClone"
-            echo "Working with loop... This is the strGitClone!"
-            echo $strGitClone
-            echo $strGitClone
             IFS="/"
             read -a arrURL<<<"$gitClone"
             IFS=""
@@ -216,27 +212,36 @@ function odooalldependencies() {
             IFS=":"
             read -a arrSubcontractor<<<"${arrURL[0]}"
             IFS=""
+            echo "Let's check third party! Us or other!"
+            #~ if arrSubcontractor=="vertelab"
+            
+            if [[ "${arrURL[0]}" == "vertelab" ]]; then
+                strOdooPath="odoo"
+            else
+                strOdooPath="odooext" 
+            fi
+            
             echo "Subcontractor : ${arrSubcontractor[1]}"
             echo "URL2 : ${arrURL[1]}"
             IFS="."
             read -a arrProject<<<"${arrURL[1]}"
             IFS=""
-            echo $strGitClone
+            echo $gitClone
             echo "Project : ${arrProject[0]}"
-            echo "odooext-${arrSubcontractor[1]}-${arrProject[0]}"
+            echo "$strOdooPath-${arrSubcontractor[1]}-${arrProject[0]}"
             echo "Do the work! Move to /usr/share!"
             cd /usr/share
-            echo $strGitClone
+            echo $gitClone
             #~ echo "Good! Removing current folder, if any:"
             #~ sudo rm -rf "odooext-${arrSubcontractor[1]}-${arrProject[0]}"
             #~ echo $strGitClone
             
             echo "Do the folder-check-routine..."
-            DIR="/usr/share/odooext-${arrSubcontractor[1]}-${arrProject[0]}"
+            DIR="/usr/share/$strOdooPath-${arrSubcontractor[1]}-${arrProject[0]}"
             if [ -d "$DIR" ]; then
                 ### Take action if $DIR exists ###
                 echo "Yes! It's there! Go there... CHANGE DIRECTORY, and do the GIT PULL-magic!"
-                cd /usr/share/odooext-${arrSubcontractor[1]}-${arrProject[0]}
+                cd /usr/share/$strOdooPath-${arrSubcontractor[1]}-${arrProject[0]}
                 #~ git pull
             else
                 ###  Control will jump here if $DIR does NOT exists ###
@@ -246,13 +251,13 @@ function odooalldependencies() {
                 echo "First, move to /home/ ..."
                 cd ~
                 echo "Good! Now! Do the git clone-thing! ..."
-                echo $strGitClone
+                echo $gitClone
                 echo "Good! Now! Do the git clone-thing! ..."
-                git clone -b 14.0 $strGitClone
+                git clone -b 14.0 $gitClone
                 echo "Good! Now! Rename that new DIR!"
-                sudo mv $arrProject "odooext-${arrSubcontractor[1]}-${arrProject[0]}"            
+                sudo mv $arrProject "$strOdooPath-${arrSubcontractor[1]}-${arrProject[0]}"            
                 echo "Good! Now! Move that new DIR to /usr/share!"
-                sudo mv "odooext-${arrSubcontractor[1]}-${arrProject[0]}" "/usr/share/"
+                sudo mv "$strOdooPath-${arrSubcontractor[1]}-${arrProject[0]}" "/usr/share/"
             fi
 
 
