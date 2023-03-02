@@ -186,6 +186,31 @@ function odooallrequirements() {
     done
 }
 
+function odoocheckbranch() {
+    ## SAVE LOCAL PATH
+    OPWD=`pwd`
+    for req in `ls /usr/share/odoo*/`
+    do
+
+        if [[ $req == *"/odoo"* ]]; then
+            echo $req
+            myPath=$req
+            myCDPath=${myPath::-2}
+            echo $myCDPath
+            cd $myCDPath
+            git branch
+            if [[ `git branch` == *"14"* ]]; then 
+                echo "14!!!"
+            else
+                git checkout 14.0
+            fi
+        fi
+    done
+    ## RESTORE LOCAL PATH
+    cd $OPWD
+}
+
+
 function odooalldependencies() {
     ## git@github.com:OCA/account-payment.git odooext-OCA
     ## local REPOS="git@github.com:OCA/account-payment.git"
@@ -258,6 +283,10 @@ function odooalldependencies() {
                 sudo mv $arrProject "$strOdooPath-${arrSubcontractor[1]}-${arrProject[0]}"            
                 echo "Good! Now! Move that new DIR to /usr/share!"
                 sudo mv "$strOdooPath-${arrSubcontractor[1]}-${arrProject[0]}" "/usr/share/"
+                #~ echo "Good! Now! Run the odooaddons-command...!"
+                #~ odooaddons
+                #~ echo "Good! Now! Run the odoorestart-command...!"
+                #~ odoorestart
             fi
 
 
@@ -290,8 +319,8 @@ function odooalldependencies() {
     ## RESTORE LOCAL PATH
     cd $OPWD
 
-    #~ sudo chown odoo:odoo /usr/share/odoo*/ -R
-    #~ sudo chmod g+w /usr/share/odoo*/ -R
+    sudo chown odoo:odoo /usr/share/odoo*/ -R
+    sudo chmod g+w /usr/share/odoo*/ -R
 }
 function odoosyncall() {
     usage() { echo "Usage: $0 [-h <host>]" 1>&2; exit 1; }
