@@ -110,6 +110,7 @@ function _odoogitclone() {
 	    echo "Trying to clone from git.vertel.se"
 	    git clone -b 14.0 git@git.vertel.se:vertelab/$PROJECT.git
 	fi
+    git config --global --add safe.directory /usr/share/$PROJECT
     done
     cd $CWD
     sudo chown odoo:odoo /usr/share/odoo*/ -R
