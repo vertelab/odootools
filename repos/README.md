@@ -24,13 +24,13 @@ See: https://docs.github.com/en/github/authenticating-to-github/connecting-to-gi
 
 To install all repos in the repos directory:
 
-1) $ git clone -b 14.0 git@github.com:vertelab/odootools.git
+1) $ git clone -b 16.0 git@github.com:vertelab/odootools.git
 
 2) Then add the your user to the Odoo-group
 $ sudo adduser username odoo
 
 3) If you want to add additional customer unique repositories to the server
-$ git clone -b 14.0 git@github.com:vertelab/odoo-customer-addons.git
+$ git clone -b 16.0 git@github.com:vertelab/odoo-customer-addons.git
 and add a folder with your customer
 or any other repository where there is a copy of a similar odootools/repos-folder with a list of repos in one of the folders.
 
@@ -92,16 +92,16 @@ $ odoorestart
 
 9) Try your new server at port 8069!
 
-http://odoo14_local_server:8069/
+http://odoo16_local_server:8069/
 
 10) error: cannot open .git/FETCH_HEAD: Permission denied
 odoogitpull -- load all repos from remote.
 
 Solution: $ sudo adduser username odoo (add user to the group odoo.)
 Ctrl + D (Close the SSH connection.)
-$ ssh username@odoo14 (Connect to server.)
+$ ssh username@odoo16 (Connect to server.)
 
 Tip! Do as the lazy hacker, use "ssh-copy-id"!
-ssh-copy-id -i ~/.ssh/id_rsa.pub username@odoo14 
-ssh-copy-id -i ~/.ssh/id_rsa.pub username@odoo14 -f (after re-install)
+ssh-copy-id -i ~/.ssh/id_rsa.pub username@odoo16 
+ssh-copy-id -i ~/.ssh/id_rsa.pub username@odoo16 -f (after re-install)
 ```
