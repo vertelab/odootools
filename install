@@ -10,9 +10,9 @@
 echo "Performing basic prerequisite checks ..."
 
 VERSION=16.0
-echo "Download common files..."
-wget -O- https://raw.githubusercontent.com/vertelab/odootools/common/install | bash > /tmp/tmpinstallcommon.sh
-bash /tmp/tmpinstallcommon.sh $VERSION
+#echo "Download common files..."
+#wget -O- https://raw.githubusercontent.com/vertelab/odootools/common/install | bash > /tmp/tmpinstallcommon.sh
+#bash /tmp/tmpinstallcommon.sh $VERSION
 
 # User odoo shouldn't exist or should have been created by the Odoo installation
 # procedures such as via the deb-package
