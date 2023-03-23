@@ -230,7 +230,15 @@ function odooalldependencies() {
         echo $req
         while read gitClone; do
             echo "Working with loop... This is the gitClone!"
+            echo $req
             echo $gitClone
+            #~ len=`expr "$gitClone"`
+            len=${#gitClone}
+            echo "The len(gitClone) = $len"
+            if [[ "$gitClone" < '3' ]]; then
+                echo "THIS LINE IS TOO SHORT!!"
+                continue
+            fi
             IFS="/"
             read -a arrURL<<<"$gitClone"
             IFS=""
@@ -238,9 +246,8 @@ function odooalldependencies() {
             IFS=":"
             read -a arrSubcontractor<<<"${arrURL[0]}"
             IFS=""
-            echo "Let's check third party! Us or other!"
-            #~ if arrSubcontractor=="vertelab"
-            
+            echo "Let's check third party! Vertel or other subcontractor!"
+            echo ${arrURL[0]}
             if [[ "${arrURL[0]}" == "vertelab" ]]; then
                 strOdooPath="odoo"
             else
@@ -263,17 +270,23 @@ function odooalldependencies() {
             #~ echo $strGitClone
             
             echo "Do the folder-check-routine..."
-            DIR="/usr/share/$strOdooPath-${arrSubcontractor[1]}-${arrProject[0]}"
+            #~ echo "/usr/share/$strOdooPath-${arrSubcontractor[1]}-${arrProject[0]}"
+            echo "/usr/share/${arrProject[0]}"
+            #~ DIR="/usr/share/$strOdooPath-${arrSubcontractor[1]}-${arrProject[0]}"
+            DIR="/usr/share/${arrProject[0]}"
             if [ -d "$DIR" ]; then
                 ### Take action if $DIR exists ###
-                echo "Yes! It's there! Go there... CHANGE DIRECTORY, and do the GIT PULL-magic!"
-                cd /usr/share/$strOdooPath-${arrSubcontractor[1]}-${arrProject[0]}
+                echo "Yes! It's there! Go there... CHANGE DIRECTORY = cd, and do the GIT PULL-magic on existing folder!"
+                #~ cd /usr/share/$strOdooPath-${arrSubcontractor[1]}-${arrProject[0]}
+                cd /usr/share/${arrProject[0]}
+                echo "Local path: $PWD"
                 #~ git pull
+                echo "The GIT PULL-magic is not executed."
             else
                 ###  Control will jump here if $DIR does NOT exists ###
                 #~ echo "Error: ${DIR} not found. Can not continue."
                 #~ exit 1
-                echo "OK... Dead end. Do the Git Clone and install in right path:"
+                echo "OK... Dead end. Do the Git Clone and install in the correct path:"
                 echo "First, move to /home/ ..."
                 cd ~
                 echo "Good! Now! Do the git clone-thing! ..."
@@ -281,9 +294,14 @@ function odooalldependencies() {
                 echo "Good! Now! Do the git clone-thing! ..."
                 git clone -b 14.0 $gitClone
                 echo "Good! Now! Rename that new DIR!"
-                sudo mv $arrProject "$strOdooPath-${arrSubcontractor[1]}-${arrProject[0]}"            
-                echo "Good! Now! Move that new DIR to /usr/share!"
-                sudo mv "$strOdooPath-${arrSubcontractor[1]}-${arrProject[0]}" "/usr/share/"
+                echo "$arrProject $strOdooPath-${arrSubcontractor[1]}-${arrProject[0]}"            
+                #~ sudo mv $arrProject "$strOdooPath-${arrSubcontractor[1]}-${arrProject[0]}"            
+                echo $arrProject            
+                echo "Good! Now! Move that new DIR to /usr/share/"
+                #~ sudo mv "$strOdooPath-${arrSubcontractor[1]}-${arrProject[0]}" "/usr/share/"
+                echo "Local path: $PWD"
+                echo "This is it: ${arrProject[0]}"
+                sudo mv ${arrProject[0]} "/usr/share/"
                 #~ echo "Good! Now! Run the odooaddons-command...!"
                 #~ odooaddons
                 #~ echo "Good! Now! Run the odoorestart-command...!"
