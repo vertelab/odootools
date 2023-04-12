@@ -33,6 +33,14 @@ https://github.com/vertelab/odootools/blob/16.0/repos/README.md
 Step 4: If you want to add more than the standard themes please add them from here
 https://github.com/vertelab/odootools/blob/16.0/themes
 
+```
+The following packages have unmet dependencies:
+wkhtmltox : Depends: libssl1.1 but it is not installable
+22.04 har libssl 3.02 och är alltså ej bakåtkompatibelt med libssl 1.1
+
+Solution:  "feisalramar" writes a 5-step guide at this URL: https://github.com/dotnet/sdk/issues/24759
+```
+
 ## Upgrade
 
 If you are developing new features for odoo tools bash scripts and need to verify your changes
@@ -44,15 +52,6 @@ cp odooscaffold.tar.gz /etc/odoo/
 ```
 
 then restart the bash instance, make sure your changes are working correctly, before pushing the changes.
-
-```
-The following packages have unmet dependencies:
-wkhtmltox : Depends: libssl1.1 but it is not installable
-22.04 har libssl 3.02 och är alltså ej bakåtkompatibelt med libssl 1.1
-
-Solution:  "feisalramar" writes a 5-step guide at this URL: https://github.com/dotnet/sdk/issues/24759
-```
-
 
 ## Uninstall
 
