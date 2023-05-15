@@ -185,6 +185,29 @@ function odooallrequirements() {
         sudo pip3 install -r $req
     done
 }
+function odoocheckbranch() {
+    ## SAVE LOCAL PATH
+    OPWD=`pwd`
+    for req in `ls /usr/share/odoo*/`
+    do
+
+        if [[ $req == *"/odoo"* ]]; then
+            echo $req
+            myPath=$req
+            myCDPath=${myPath::-2}
+            echo $myCDPath
+            cd $myCDPath
+            git branch
+            if [[ `git branch` == *"16"* ]]; then 
+                echo "16!!!"
+            else
+                git checkout 16.0
+            fi
+        fi
+    done
+    ## RESTORE LOCAL PATH
+    cd $OPWD
+}
 function odoosyncall() {
     usage() { echo "Usage: $0 [-h <host>]" 1>&2; exit 1; }
     [ -f /etc/odoo/odoo.tools ] && . /etc/odoo/odoo.tools
