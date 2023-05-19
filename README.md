@@ -26,6 +26,16 @@ Add userser
 sudo adduser $USER
 sudo adduser $USER sudo
 sudo adduser $USER odoo
+
+/etc/odoo/odoo.conf
+admin_passwd = Silanxi9Oo23
+db_password = Silanxi9Oo23
+
+In Terminal, go to psql and run the following query:
+1) sudo su postgres
+2) psql
+3) create user odoo with password 'Silanxi9Oo23' superuser;
+
 ```
 Step 3: Follow the instructions for the management of the Odoo source repositories
 https://github.com/vertelab/odootools/blob/16.0/repos/README.md
