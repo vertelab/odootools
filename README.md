@@ -72,6 +72,15 @@ Use the command below to uninstall your Odoo installation.
 wget -O- https://raw.githubusercontent.com/vertelab/odootools/16.0/uninstall | bash
 ```
 
+## module 'lib' has no attribute 'OpenSSL_add_all_algorithms'
+https://www.odoo.com/forum/help-1/attributeerror-module-lib-has-no-attribute-x509-v-flag-cb-issuer-check-when-creating-new-staging-branch-202955
+```
+go to terminal and:
+pip uninstall pyopenssl
+pip install pyopenssl==22.0.0
+pip uninstall cryptography
+pip install cryptography==37.0.0
+```
 
 ## Odoo-tools commands
 
