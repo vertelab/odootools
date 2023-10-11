@@ -92,6 +92,14 @@ sudo wget -O /usr/local/bin/odooextras.py https://raw.githubusercontent.com/vert
 # Extra tools
 sudo wget -O /usr/local/bin/odoocheckdeps.py https://raw.githubusercontent.com/vertelab/odootools/common/scripts/odoocheckdeps.py
 
+# 2023-10-11
+# Error occurred: module 'lib' has no attribute 'OpenSSL_add_all_algorithms'
+# https://www.odoo.com/forum/help-1/attributeerror-module-lib-has-no-attribute-x509-v-flag-cb-issuer-check-when-creating-new-staging-branch-202955
+pip uninstall pyopenssl
+pip install pyopenssl==22.0.0
+pip uninstall cryptography
+pip install cryptography==37.0.0
+
 
 # daily backup
 sudo wget -O /etc/cron.daily/db_backup https://raw.githubusercontent.com/vertelab/odootools/common/db_backup
