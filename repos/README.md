@@ -24,13 +24,13 @@ See: https://docs.github.com/en/github/authenticating-to-github/connecting-to-gi
 
 To install all repos in the repos directory:
 
-1) $ git clone -b 16.0 git@github.com:vertelab/odootools.git
+1) $ git clone -b 17.0 git@github.com:vertelab/odootools.git
 
 2) Then add the your user to the Odoo-group
 $ sudo adduser username odoo
 
 3) If you want to add additional customer unique repositories to the server
-$ git clone -b 16.0 git@github.com:vertelab/odoo-customer-addons.git
+$ git clone -b 17.0 git@github.com:vertelab/odoo-customer-addons.git
 and add a folder with your customer
 or any other repository where there is a copy of a similar odootools/repos-folder with a list of repos in one of the folders.
 

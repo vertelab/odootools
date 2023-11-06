@@ -11,13 +11,13 @@ systems might require tweaking to work.
 
 Installation of Odoo and Odootools.
 
-Ensure you are using the version (eg branch 16.0 for Odoo 16) you want to install.
+Ensure you are using the version (eg branch 17.0 for Odoo 17) you want to install.
 
 When you are logged in with the root-account. Run the following command.
 
 Step 1: The command below will download and execute the installation script:
 ```
-wget -O- https://raw.githubusercontent.com/vertelab/odootools/16.0/install | bash
+wget -O- https://raw.githubusercontent.com/vertelab/odootools/17.0/install | bash
 ```
 
 Step 2: Add users with these commands:
@@ -38,10 +38,10 @@ In Terminal, go to psql and run the following query:
 
 ```
 Step 3: Follow the instructions for the management of the Odoo source repositories
-https://github.com/vertelab/odootools/blob/16.0/repos/README.md
+https://github.com/vertelab/odootools/blob/17.0/repos/README.md
 
 Step 4: If you want to add more than the standard themes please add them from here
-https://github.com/vertelab/odootools/blob/16.0/themes
+https://github.com/vertelab/odootools/blob/17.0/themes
 
 ```
 The following packages have unmet dependencies:
@@ -69,7 +69,7 @@ Use the command below to uninstall your Odoo installation.
 
 *this drops your databases and all your data related to Odoo*
 ```
-wget -O- https://raw.githubusercontent.com/vertelab/odootools/16.0/uninstall | bash
+wget -O- https://raw.githubusercontent.com/vertelab/odootools/17.0/uninstall | bash
 ```
 
 ## module 'lib' has no attribute 'OpenSSL_add_all_algorithms'
@@ -91,7 +91,7 @@ Odoo-tools command |Description
  cdb                       | change database
  cdo                       | Shortcut: /usr/share/core-odoo/addons$
  cdp                       | Shortcut: /usr/share$
- odooaddons                | Updates the addons_path with all project according to ODOOADDONS defined in odoo.tools. These are stored here: https://github.com/vertelab/odootools/blob/16.0/repos/
+ odooaddons                | Updates the addons_path with all project according to ODOOADDONS defined in odoo.tools. These are stored here: https://github.com/vertelab/odootools/blob/17.0/repos/
  odooadminpw               | view master password
  odooallrequirements       | Loop through all projects installing / updating requirements.txt
  odoocheckmodule   <module>        | lists databases that use a module (eg odoocheckmodule sale)
@@ -100,7 +100,7 @@ Odoo-tools command |Description
  odoofind *pattern*        | find patterns in odoo-core source code
  odoogitclone *project*    | clones and installs projects from githuh (vertel-projects)
  odoogitpull    | does a *git pull* for every project in ODOOADDONS
- [odoolangexport](https://github.com/vertelab/odootools/blob/16.0/odoolangexport.pdf)    | export po/pot file for a module, -m <module> -d <database> -l <language>. To export a pot-file exclude "-l"
+ [odoolangexport](https://github.com/vertelab/odootools/blob/17.0/odoolangexport.pdf)    | export po/pot file for a module, -m <module> -d <database> -l <language>. To export a pot-file exclude "-l"
  odoomodules <database>    | List all installed modules in a database
  odoopsql <database>       | Open database in psql-mode
  odoopatch                 | Implements patches from the directory /etc/odoo/patch.d
@@ -124,7 +124,7 @@ odooupdm *database* *modulelist*      | Installs/updates modules in single user 
 
 Type this command
  ```
-user@odoo16server:~/odootools$ . odootools.sh
+user@odoo17server:~/odootools$ . odootools.sh
  ```
 to load new or update current odootools commands to the Terminal.
 

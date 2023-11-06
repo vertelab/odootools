@@ -1,6 +1,6 @@
 #!/bin/bash
 
-BRANCH=16.0
+BRANCH=17.0
 
 for req in `ls /usr/share/odoo*/requirements.txt`
 do 

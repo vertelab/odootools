@@ -9,7 +9,7 @@
 
 echo "Performing basic prerequisite checks ..."
 
-VERSION=16.0
+VERSION=17.0
 #echo "Download common files..."
 #wget -O- https://raw.githubusercontent.com/vertelab/odootools/common/install | bash > /tmp/tmpinstallcommon.sh
 #bash /tmp/tmpinstallcommon.sh $VERSION
@@ -20,7 +20,7 @@ grep --quiet -E '/home/odoo:' /etc/passwd    # Indication odoo user have been
                                             # created the wrong way.
 if [ $? -eq 0 ]; then
     echo "Warning! An odoo user seems to be present with the wrong home folder."
-    echo "This user might conflict with the Odoo 16 installation process."
+    echo "This user might conflict with the Odoo 17 installation process."
     echo "Exiting..."
     exit 1
 fi
@@ -71,7 +71,7 @@ sudo apt -y install git python3-pip build-essential wget python3-dev python3-ven
 # Python with dependencies
 echo "Installing Python modules"
 sudo -H pip3 install wheel
-wget -O /tmp/requirements.txt https://raw.githubusercontent.com/odoo/odoo/16.0/requirements.txt
+wget -O /tmp/requirements.txt https://raw.githubusercontent.com/odoo/odoo/17.0/requirements.txt
 sudo -H pip3 install -r /tmp/requirements.txt
 
 # wkhtmltopdf
@@ -85,7 +85,7 @@ sudo rm -f /tmp/wkhtmltox_0.12.6-1.focal_amd64.deb
 
 # Odootools
 sudo wget -O /etc/profile.d/odootools.sh https://raw.githubusercontent.com/vertelab/odootools/common/odootools.sh
-sudo wget -O /etc/odoo/scaffold.tar.gz https://raw.githubusercontent.com/vertelab/odootools/16.0/scaffold.tar.gz
+sudo wget -O /etc/odoo/scaffold.tar.gz https://raw.githubusercontent.com/vertelab/odootools/17.0/scaffold.tar.gz
 sudo wget -O /etc/bash_completion.d/odoo https://raw.githubusercontent.com/vertelab/odootools/common/bash_completion.odoo
 sudo wget -O /usr/local/bin/odooextras.py https://raw.githubusercontent.com/vertelab/odootools/common/odooextras.py
 
