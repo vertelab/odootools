@@ -367,4 +367,48 @@ function _odoomodules() {
 }
 alias odoomodules="_odoomodules"
 
+function _remove_mail_from_zip() {
+    # Check if the correct number of arguments is provided
+    # Caution Result are non reversable.
+    if [ "$#" -ne 1 ]; then
+        echo "Usage: process_zip <zip_file_path>"
+        exit 1
+    fi
+
+    # Get arguments
+    zip_file="$1"
+    output_zip_file="output_zip_file.zip"
+
+    # Unzip the file
+    unzip "$zip_file" -d temp_folder
+    sudo chown postgres:postgres temp_folder/dump.sql
+    # Create the database
+    sudo su postgres -c 'createdb "tempdatabase"'
+
+    # Restore the dump to the database
+    sudo su postgres -c 'psql -d "tempdatabase" -f "temp_folder/dump.sql"'
+
+    # Run SQL commands
+    sudo su postgres -c 'psql -d "tempdatabase" -c "UPDATE fetchmail_server SET active = false;"'
+    sudo su postgres -c 'psql -d "tempdatabase" -c "UPDATE ir_mail_server SET active = false;"'
+
+    # Dump the new database
+    sudo su postgres -c 'pg_dump -Fp "tempdatabase" > "temp_folder/dump.sql"'
+    sudo su postgres -c "dropdb tempdatabase"
+
+    # Zip the contents back
+    cd temp_folder
+    
+    zip -r "../$zip_file" .
+
+    # Clean up temporary files
+    cd ..
+    rm -rf temp_folder
+
+    echo "Script executed successfully!"
+}
+
+# Alias for the function
+alias remove_mail_from_zip='_remove_mail_from_zip'
+
 alias odoocheckdeps='python3 /usr/local/bin/odoocheckdeps.py'
