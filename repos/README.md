@@ -39,23 +39,14 @@ odoo-ext-reponame (where reponame is the original reponame at the supplier) as w
 $ sudo mv odoo-customer-addons /usr/share/
 
 
-4) Install repos + all requirements.
-
-When done, go to the folder odootools/repos and execute two the commands below
+4) Optional part Install third-party repos + all requirements. 
+cd odootools/repos
+bash cloneall
+bash allrequirements
 
 5 $ cd odootools/repos
 Decide if you want to change the repos-folders by removing/adding lines in the files.
-
-```
-odootools/repos: $ bash cloneall
-```
 Just to confirm - run this one more time (sometimes it times out).
-
-Then run:
-```
-odootools/repos: $ bash allrequirements
-```
-
 6) Check your download:
 
 $ cd /usr/share
