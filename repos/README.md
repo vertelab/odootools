@@ -15,8 +15,8 @@ At GitHub, go to "Settings" >> "SSH and PGP keys". Select "Add ke"y and paste al
 "ssh-rsa AAAAB3NzaC1yc2EAAAAD...[reduced for space]..yqjlQqpECgyhNieLoskf+etAes= jakob@odoo14_local_server"
 
 Test your new key:
-ssh -T git@github.com
-ssh -T git@git.vertel.se
+$ ssh -T git@github.com
+$ ssh -T git@git.vertel.se
 Expected result is:  Hi username! You've successfully authenticated, but GitHub does not > provide shell access.
 See: https://docs.github.com/en/github/authenticating-to-github/connecting-to-github-with-ssh/testing-your-ssh-connection for responses.
 
@@ -41,8 +41,8 @@ $ sudo mv odoo-customer-addons /usr/share/
 
 4) Optional part Install third-party repos + all requirements. 
 cd odootools/repos
-bash cloneall
-bash allrequirements
+$ bash cloneall
+$ bash allrequirements
 
 5 $ cd odootools/repos
 Decide if you want to change the repos-folders by removing/adding lines in the files.
