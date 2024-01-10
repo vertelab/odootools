@@ -61,7 +61,7 @@ OCA/project-reporting.git
 OCA/project.git
 OCA/purchase-workflow.git
 OCA/queue.git
-OCA/report-engine.git
+OCA/reporting-engine.git
 OCA/report-print-send.git
 OCA/rest-framework.git
 OCA/rma.git
