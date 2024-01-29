@@ -38,7 +38,7 @@ In Terminal, go to psql and run the following query:
 4) ALTER USER user_name WITH PASSWORD 'new_password';
 5) odoorestart
 
-Use odooadminpw for password.
+failed: FATAL: role "odoo" does not exist >> Use odooadminpw for password.
 1) sudo su postgres
 2) createuser odoo -s
 3) psql template1
