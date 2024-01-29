@@ -38,6 +38,14 @@ In Terminal, go to psql and run the following query:
 4) ALTER USER user_name WITH PASSWORD 'new_password';
 5) odoorestart
 
+Use odooadminpw for password.
+1) sudo su postgres
+2) createuser odoo -s
+3) psql template1
+4) alter role odoo with password 'pnybYEg';
+5) exit
+https://www.odoo.com/forum/help-1/operationalerror-fatal-role-root-does-not-exist-123992
+
 ```
 Step 3: Follow the instructions for the management of the Odoo source repositories
 https://github.com/vertelab/odootools/blob/17.0/repos/README.md
