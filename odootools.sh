@@ -203,6 +203,7 @@ function odoocheckbranch() {
             if [[ `git branch` == *"14"* ]]; then 
                 echo "14!!!"
             else
+	        git config --global --add safe.directory /usr/share/$myCDPath
                 git checkout 14.0
             fi
         fi
