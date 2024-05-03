@@ -158,7 +158,7 @@ function odooaddons() {
 
   . /etc/odoo/odoo.tools
 
-if [ ! -z $ODOO_SERVER_CONF ] && [ ! -z $ODOOADDONS ]; then
+  if [ ! -z $ODOO_SERVER_CONF ] && [ ! -z $ODOOADDONS ]; then
     ACTIVE_ADDONS_PATH=$(sudo grep "addons_path" $ODOO_SERVER_CONF)
     NEW_ADDONS_PATH=addons_path=${ODOOADDONS//","/", "}
     sudo sed -i "s:$ACTIVE_ADDONS_PATH:$NEW_ADDONS_PATH:" $ODOO_SERVER_CONF
