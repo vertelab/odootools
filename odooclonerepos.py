@@ -55,59 +55,72 @@ for o, a in opts:
 
 GITHUB_BASE_URL = 'https://api.github.com'
 GITHUB_RAW_URL = 'https://raw.githubusercontent.com'
-g = Github()
-repo = g.get_repo(f"vertelab/odootools")
 
 # ~ branches = [b.name for b in repo.get_branches() if re.match("^\d*[.]0$", b.name)]
 
 
-
-
-repos = [c.name for c in repo.get_contents("repos") if re.match(".*-repo$",c.name)]
-
 def clone_repo(repo,branch):
     
-    # ~ https://raw.githubusercontent.com/vertelab/odootools/16.0/repos/codup-repo
-    repo_url = f"{GITHUB_RAW_URL}/vertelab/odotools/{branch}/repos/{repo}"
-    response = requests.get(repo_url)
-    if response.status_code == 200:
-        print(eval(response.text))
+    g = Github()
+
+    if os.access('/usr/share',os.F_OK):
+        if not os.access('/usr/share',os.W_OK):
+            print(f"ERROR does not have write rights on /usr/share")
+            exit(2)
     else:
+        print(f"ERROR missing /usr/share")
+        exit(2)
+    # ~ https://raw.githubusercontent.com/vertelab/odootools/16.0/repos/codup-repo
+    repo_url = f"{GITHUB_RAW_URL}/vertelab/odootools/{branch}/repos/{repo}"
+    response = requests.get(repo_url)
+    if not response.status_code == 200:
         print(f"Error {response.status_code}  {repo_url}")
     
-    # ~ for gitrepo in 
-    # ~ do 
-            # ~ repobase=`basename $gitrepo .git`
-            # ~ repodir=`dirname $gitrepo`
-        # ~ printf "$repobase "
-        # ~ if [ $repodir == 'vertelab' ];
-        # ~ then
-            # ~ target="/usr/share/${repobase}"
-        # ~ else
-            # ~ target="/usr/share/odooext-${repodir}-${repobase}"
-        # ~ fi
-        # ~ if [ -d $target ];
-        # ~ then
-            # ~ printf " already feteched\n"
-            # ~ continue
-        # ~ fi
-        # ~ git clone -b $BRANCH git@github.com:$gitrepo > /dev/null 2> /dev/null
-    # ~ #	if [ `ls $repobase/*/__manifest__.py 2> /dev/null |wc -l 2>/dev/null` -gt 0 ]
-    # ~ #	then
-            # ~ sudo mv $repobase $target
-            # ~ printf " fetched\n"
-    # ~ #	else
-    # ~ #		rm -rf $repo
-    # ~ #		printf " empty\n"
-    # ~ #	fi
-    # ~ done
+    for gitrepo in response.text.split('\n'):
+        print(gitrepo)
+        author = repo.split('-')[0]
+        repobase = repo.split('-')[1].split('.')[0]
+        if author == 'vertelab':
+            target = f"/usr/share/{repobase}"
+        else:
+            target = f"/usr/share/odooext-{author}-{repobase}"
+            
+        if os.access(target,os.F_OK):
+            print(f"Target {target} already exists")
+            continue
+        
+        try:
+            grepo = g.get_repo(f"{author}/{repobase}")
+        except Exception as e:
+            print(f"Could not read {author}/{repobase} {e}")
+            continue
+        
+        branches = [b.name for b in grepo.get_branches() if re.match("^\d*[.]0$", b.name)]
+        if not BRANCH in branches:
+            print(f"Branch  is missing {author}/{repobase}")
+        # ~ os.system(f"git clone -b {BRANCH} git@github.com:{gitrepo} > /dev/null 2> /dev/null")
+        os.system(f"git clone -b {BRANCH} git@github.com:{gitrepo}")
+        if os.access(repobase,os.F_OK):
+            os.system(f"mv {repobase} {target}")
+        else:
+            print("ERROR git clone did not work")
+            continue
+        print(f"{target} fetched")
 
 
 
 if LIST:
+    g = Github()
+    repo = g.get_repo(f"vertelab/odootools")
+
     repos = [c.name for c in repo.get_contents("repos") if re.match(".*-repo$",c.name)]
     print(','.join(repos))
 elif REPO:
     clone_repo(REPO,BRANCH)
 elif ALL:
-    pass
+    g = Github()
+    repo = g.get_repo(f"vertelab/odootools")
+
+    for repo in [c.name for c in repo.get_contents("repos") if re.match(".*-repo$",c.name)]:
+        clone_repo(repo,BRANCH)
+
