@@ -152,11 +152,17 @@ function _patch_all_patches() {
 alias odoopatch='_patch_all_patches'
 
 function odooaddons() {
-    [ -f /etc/odoo/odoo.tools ] && . /etc/odoo/odoo.tools
-    if [ ! -z "$ODOOADDONS" ]; then
-        CMD="s/^addons_path.*=.*/addons_path=${ODOOADDONS//"/"/"\/"}/g"
-        sudo perl -i -pe $CMD $ODOO_SERVER_CONF
-    fi
+  if [ ! -f /etc/odoo/odoo.tools ] || [ -s /etc/odoo/odoo.tools ]; then 
+    sudo wget -qO /etc/odoo/odoo.tools https://raw.githubusercontent.com/vertelab/odootools/common/odoo.tools
+  fi
+
+  . /etc/odoo/odoo.tools
+
+  if [ ! -z $ODOO_SERVER_CONF ] && [ ! -z $ODOOADDONS ]; then
+    ACTIVE_ADDONS_PATH=$(sudo grep "addons_path" $ODOO_SERVER_CONF)
+    NEW_ADDONS_PATH=addons_path=${ODOOADDONS//","/", "}
+    sudo sed -i "s:$ACTIVE_ADDONS_PATH:$NEW_ADDONS_PATH:" $ODOO_SERVER_CONF
+  fi
 }
 
 function odoogitpull() {
