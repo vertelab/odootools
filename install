@@ -41,7 +41,7 @@ if [ ! -d /etc/odoo ]; then  # Install Odoo (only one time)
     sudo apt -y install odoo
     # Generate a good password
     sudo sed -i "s|^.*admin_passwd = .*|admin_passwd = $(openssl rand -base64 32)|g" /etc/odoo/odoo.conf
-    sudo wget -O /etc/odoo/odoo.tools https://raw.githubusercontent.com/vertelab/odootools/common/odoo.tools
+    sudo wget -O- /etc/odoo/odoo.tools https://raw.githubusercontent.com/vertelab/odootools/common/odoo.tools
 
 
 
