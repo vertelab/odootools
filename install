@@ -95,7 +95,7 @@ sudo wget -O /usr/local/bin/odoocheckdeps.py https://raw.githubusercontent.com/v
 # 2023-10-11
 # Error occurred: module 'lib' has no attribute 'OpenSSL_add_all_algorithms'
 # https://www.odoo.com/forum/help-1/attributeerror-module-lib-has-no-attribute-x509-v-flag-cb-issuer-check-when-creating-new-staging-branch-202955
-pip uninstall -y pyopenssl && pip install pyopenssl==22.0.0 && pip uninstall -y cryptography && pip install cryptography==37.0.0
+sudo pip uninstall -y pyopenssl && sudo pip install pyopenssl==22.0.0 && sudo pip uninstall -y cryptography && sudo pip install cryptography==37.0.0
 
 
 # daily backup
