@@ -16,9 +16,6 @@ if [[ -z "$(sudo which pip)" ]]; then
     wget -O- https://bootstrap.pypa.io/get-pip.py | sudo python3
 fi
 
-# echo installing pip for $USER
-# wget -O- https://bootstrap.pypa.io/get-pip.py | python3
-
 if [ -n "$(pip freeze | grep odoo)" ]; then
 
     if [ -z "${VERSION}" ]; then
@@ -31,21 +28,21 @@ if [ -n "$(pip freeze | grep odoo)" ]; then
 
     while true; do
 
-    if [ -z "${YESNO}" ]; then
+        if [ -z "${YESNO}" ]; then
 
-        read -p "odoo is already installed do you want to uninstall odoo? (y/n) " YESNO
+            read -p "odoo is already installed do you want to uninstall odoo? (y/n) " YESNO
 
-    fi
+        fi
 
-    case $YESNO in 
-        [yY] ) echo uninstalling odoo...;
-            sudo apt remove --purge odoo
-            sudo pip uninstall odoo --root-user-action=ignore
-            break;;
-        [nN] )
-            break;;
-        * ) echo invalid response;;
-    esac
+        case $YESNO in 
+            [yY] ) echo uninstalling odoo...;
+                sudo apt remove --purge odoo
+                sudo pip uninstall odoo --root-user-action=ignore
+                break;;
+            [nN] )
+                break;;
+            * ) echo invalid response;;
+        esac
 
     done
 
