@@ -4,9 +4,11 @@
 
 # Get the current branch name
 branch_name=$(git rev-parse --abbrev-ref HEAD)
+export branch_name
 
 # Get the repository name
 repo_name=$(basename `git rev-parse --show-toplevel`)
+export repo_name
 
 # sudo pip3 install preprocessor ; preprocessor --help
 
