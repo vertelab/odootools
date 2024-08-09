@@ -117,6 +117,20 @@ function _odoogitclone() {
 }
 alias odoogitclone='_odoogitclone'
 
+function _odooaddpreprocess() {
+    [ -z "$1" ] && echo "Usage: $0 odoo-x,odoo-y.." 1>&2; return 
+    local PROJECTS=$1
+    [ ! -f /usr/local/bin/preprocess ] && sudo pip3 install preprocess
+    [ ! -f /etc/odoo/post-checkout ] && sudo curl https://raw.githubusercontent.com/vertelab/odootools/17.0/post-checkout -o /etc/odoo/post-checkout
+    for PROJECT in $(echo $PROJECTS | tr "," " "); do
+	echo $PROJECT
+	cp /etc/odoo/post-checkout /usr/share/$PROJECT/.git/hooks/
+	chmod a+x /usr/share/$PROJECT/.git/hooks/post-checkout
+    done
+}
+alias odooaddpreprocess='_odooaddpreprocess'
+
+
 function _odoosync() {
     usage() { echo "Usage: $0 [-p <project>] [-h <host>]" 1>&2; exit 1; }
     [ -f /etc/odoo/odoo.tools ] && . /etc/odoo/odoo.tools
