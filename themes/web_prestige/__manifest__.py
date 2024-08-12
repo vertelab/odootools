@@ -1,12 +1,12 @@
 # -*- coding: utf-8 -*-
-# Copyright 2019-Present Lekhnath Rijal<inboxlekhnath@gmail.com>
+# Copyright 2019-Present Lekhnath Rijal<mail@lekhnathrijal.com.np>>
 # License LGPL-3.0 or later (http://www.gnu.org/licenses/lgpl.html).
 
 {
     'name': 'Web Prestige',
-    'summary': 'Backend theme Web Prestige v12',
-    'version': '12.0.1.0',
-    'author': 'Lekhnath Rijal',
+    'summary': 'Backend theme Web Prestige v14',
+    'version': '14.0.1.0',
+    'author': 'Lekhnath Rijal <mail@lekhnathrijal.com.np>',
     'category': 'Theme/Backend',
     'description': '''
 Odoo theme
@@ -36,7 +36,7 @@ backend
         'static/description/main_screenshot.png',
     ],
     'license': 'LGPL-3',
-    'auto_install': False,
+    'auto_install': True,
     'installable': True,
     'application':False,
 }

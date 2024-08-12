@@ -35,6 +35,11 @@ odoobackup.tmp: odoobackup.py
 	@sudo chmod a+x /usr/bin/odoobackup
 	@touch odoobackup.tmp
 
+odooclonerepos.tmp: odooclonerepos.py
+	@sudo cp odooclonerepos.py /usr/bin/odooclonerepos
+	@sudo chmod a+x /usr/bin/odooclonerepos
+	@touch odooclonerepos.tmp
+
 clean:
 	@rm -f *pyc
 	@echo "Cleaned up"

@@ -88,6 +88,25 @@ odoo.define('web_prestige.AppsMenu', function (require) {
   return AppsMenu;
 });
 
+odoo.define('web_prestige.basic_fields', function (require) {
+  "use strict";
+  var basic_fields = require('web.basic_fields');
+
+  basic_fields.InputField.include({
+
+    /**
+     * @override
+     * @param {jQuery|undefined} $input
+     */
+    _prepareInput($input) {
+      this.attrs.autocomplete = 'off';
+      return this._super($input);
+    }
+  });
+
+  return basic_fields;
+});
+
 odoo.define('web_prestige.MailBotService', function (require) {
   'use strict';
 

@@ -1,0 +1,19 @@
+<svg width="320" height="320" xmlns="http://www.w3.org/2000/svg">
+ <!-- Created with Method Draw - http://github.com/duopixel/Method-Draw/ -->
+
+ <g>
+  <title>background</title>
+  <rect fill="none" id="canvas_background" height="322" width="322" y="-1" x="-1"/>
+  <g display="none" overflow="visible" y="0" x="0" height="100%" width="100%" id="canvasGrid">
+   <rect fill="url(#gridpattern)" stroke-width="0" y="0" x="0" height="100%" width="100%"/>
+  </g>
+ </g>
+ <g stroke="null">
+  <title transform="translate(228.308349609375,224.60296630859375) scale(1,0.854026198387146) translate(-228.308349609375,-224.60296630859375) " stroke="null">Layer 1</title>
+  <g stroke="null" id="svg_17">
+   <path stroke="null" id="svg_14" fill="#42064e" d="m187.318748,72.702929l0,-27.915218l-103.058945,0l0,191.793965l103.058945,0l0,-27.915218a79.601498,67.981765 0 0 1 0,-135.96353z"/>
+   <path stroke="null" id="svg_15" fill="#42064e" d="m150.579096,92.759383l0,94.918024a61.57361,47.459012 0 0 0 0,-94.918024z"/>
+   <text stroke="null" font-weight="bold" transform="matrix(2.6453393590849923,0,0,1.8297324740685008,45.45816614668067,32.3667404845186) " xml:space="preserve" text-anchor="start" font-family="'Courier New', Courier, monospace" font-size="24" id="svg_18" y="140.334465" x="-13.834842" stroke-opacity="null" stroke-width="0" fill="#0b725d">Prestige</text>
+  </g>
+ </g>
+</svg>

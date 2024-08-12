@@ -1,65 +1,3 @@
-$o-theme-font-size-base: (14 / 16) * 1rem;
-
-$o-theme-img-base-url: "theme_graphene/static/src/img/pictures/";
-$o-theme-img-2x-prefix: "2x_";
-$o-theme-thumb-base-url: "theme_graphene/static/src/img/thumbs/";
-$o-theme-pattern-base-url: "theme_graphene/static/src/img/patterns/";
-$o-theme-pattern-2x-prefix: "2x_";
-
-$o-theme-img-01: "bg_image_01.jpg";
-$o-theme-img-02: "bg_image_02.jpg";
-$o-theme-img-03: "bg_image_03.jpg";
-$o-theme-img-04: "bg_image_04.jpg";
-$o-theme-img-05: "bg_image_05.jpg";
-$o-theme-img-06: "bg_image_06.jpg";
-$o-theme-img-07: "bg_image_07.jpg";
-$o-theme-img-08: "bg_image_08.jpg";
-$o-theme-img-09: "bg_image_09.jpg";
-$o-theme-img-10: "bg_image_10.jpg";
-
-$o-theme-patt-01: "bg_pattern_01.jpg";
-$o-theme-patt-02: "bg_pattern_02.jpg";
-$o-theme-patt-03: "bg_pattern_03.jpg";
-$o-theme-patt-04: "bg_pattern_04.jpg";
-$o-theme-patt-05: "bg_pattern_05.jpg";
-$o-theme-patt-06: "bg_pattern_06.jpg";
-
-// UI colors
-$graphene-ui-dark: #252931;
-$graphene-ui-light: #303540;
-$graphene-ui-text: #fff;
-$graphene-ui-muted: #9097A8;
-$graphene-ui-success: #16A085;
-$graphene-ui-danger: #E77575;
-
-//------------------------------------------------------------------------------
-// Snippets
-//------------------------------------------------------------------------------
-
-// s_showcase_slider
-// =================
-
-@mixin s-showcase-slider-navigation-hook {
-    span {
-        text-indent: 100%;
-        background: url("../img/ui/s_showcase_slider-arrow.svg") no-repeat center center;
-        &:before { content: none; }
-    }
-    &:first-of-type {
-        span { transform: rotate(180deg); }
-    }
-}
-
-@mixin s-showcase-slider-close-hook {
-    background: url("../img/ui/s_showcase_slider-close.svg") no-repeat center center;
-    text-indent: 100%;
-}
-
-@mixin s-showcase-slider-slider-hover-hook {
-    &::after {
-        background: rgba(0, 0, 0, 0.4) url("../img/ui/s_showcase_slider-zoom.svg") no-repeat center center;
-    }
-}
 
 //------------------------------------------------------------------------------
 // Colors
@@ -73,6 +11,9 @@ $o-theme-color-palettes: (
         'gamma': #85909A,
         'delta': #969397,
         'epsilon': #422335,
+
+        'success': #1b8433,
+        'warning': #e4b013,
     ),
     (
         'alpha': #54787D,
@@ -109,12 +50,64 @@ $o-theme-color-palettes: (
     ),
 );
 
+// Theme Palettes
+$o-color-palettes: (
+    (   // Palette 1
+        'o-color-1': #30cbb2,
+        'o-color-2': #3c4e5e,
+        'o-color-3': #f4f5f6,
+        'o-color-4': #ffffff,
+        'o-color-5': #192028,
+
+        'o-cc1-link': #04957e,
+        'o-cc5-text': #b2b2b2,
+
+        'body': 'black-15',
+        'menu': 1,
+        'footer': 5,
+        'copyright': 'black-25',
+    ),
+    (   // Palette 2
+        'o-color-1': #c8a47e,
+        'o-color-2': #32273b,
+        'o-color-3': #f1f1ef,
+        'o-color-4': #ffffff,
+        'o-color-5': #252424,
+
+        'o-cc3-text': #b2b2b2,
+        'o-cc4-text': 'o-color-4',
+        'o-cc3-headings': 'o-color-4',
+        'o-cc4-headings': 'o-color-5',
+        'o-cc5-text': #b2b2b2,
+    ),
+    (   // Palette 3
+        'o-color-1': #39588e,
+        'o-color-2': #d2b683,
+        'o-color-3': #e0dfdb,
+        'o-color-4': #f4f5f6,
+        'o-color-5': #2a282a,
+
+        'o-cc5-link': #7a9edc,
+
+        'menu': 2,
+        'footer': 2,
+    ),
+    (   // Palette 4
+        'o-color-1': #f48747,
+        'o-color-2': #e9ceb0,
+        'o-color-3': #f1ebe5,
+        'o-color-4': #fbfaf8,
+        'o-color-5': #282d30,
+
+        'menu': 5,
+    ),
+);
+
 // Grays
 $-black: #000000;
 $o-gray-color-palettes: ();
 @each $-palette in $o-theme-color-palettes {
     $o-gray-color-palettes: append($o-gray-color-palettes, (
-        'black': $-black,
         '975': lighten($-black, 13%),
         '950': lighten($-black, 16%),
         '925': lighten($-black, 19%),
@@ -125,19 +118,44 @@ $o-gray-color-palettes: ();
         '600': lighten($-black, 65.5%),
         '400': lighten($-black, 82%),
         '200': lighten($-black, 93.5%),
-        'white': lighten($-black, 100%),
     ));
 }
 
-// Colors
-$o-color-palettes: ();
-@each $-palette in $o-theme-color-palettes {
-    $o-color-palettes: append($o-color-palettes, (
-        'body': #fefefe,
-        'menu': #fefefe,
-        'footer': #f8f8f8,
-    ));
-}
+
+//------------------------------------------------------------------------------
+// Fonts
+//------------------------------------------------------------------------------
+
+$o-theme-h1-font-size-multiplier: (48.83 / 16);
+$o-theme-h2-font-size-multiplier: (39.06 / 16);
+$o-theme-h3-font-size-multiplier: (31.25 / 16);
+$o-theme-h4-font-size-multiplier: (25.00 / 16);
+$o-theme-h5-font-size-multiplier: (20.00 / 16);
+$o-theme-h6-font-size-multiplier: 1.1;
+
+$o-theme-font-configs: (
+    'Heebo': (
+        'family': ('Heebo', sans-serif),
+        'url': 'Heebo:300,300i,400,400i,700,700i',
+    ),
+    'Abel': (
+        'family': ('Abel', sans-serif),
+        'url': 'Abel:300,300i,400,400i,700,700i',
+    ),
+    'Cinzel': (
+        'family': ('Cinzel', serif),
+        'url': 'Cinzel:300,300i,400,400i,700,700i',
+    ),
+    'Old Standard TT': (
+        'family': ('Old Standard TT', serif),
+        'url': 'Old+Standard+TT:300,300i,400,400i,700,700i',
+    ),
+    'Source Sans Pro': (
+        'family': ('Source Sans Pro', sans-serif),
+        'url': 'Source+Sans+Pro:300,300i,400,400i,700,700i',
+    ),
+);
+
 
 //------------------------------------------------------------------------------
 // Website customizations
@@ -145,38 +163,17 @@ $o-color-palettes: ();
 
 $o-website-values-palettes: (
     (
-        'font-number': 1,
-        'headings-font-number': 6,
-        'navbar-font-number': 1,
-        'buttons-font-number': 1,
+        'font-size-base': 1rem,
+        'headings-font': 'Source Sans Pro',
+        'btn-ripple': true,
+        'layout': 'postcard',
+        'hamburger-type': 'off-canvas',
+        'header-template': 'centered_logo',
+        'footer-template': 'centered',
+
+        'btn-font-size-lg': 1rem,
+        'btn-padding-y-lg': .6rem,
+        'btn-padding-x-lg': 2.2rem,
+        'btn-border-radius-lg': 2px,
     ),
-);
-
-//------------------------------------------------------------------------------
-// Fonts
-//------------------------------------------------------------------------------
-
-$o-theme-fonts: (
-    ('Heebo', sans-serif),
-    ('Abel', sans-serif),
-    ('Cinzel', serif),
-    ('Old Standard TT', serif),
-    ('Playfair Display', serif),
-    ('Source Sans Pro', sans-serif),
-);
-$o-theme-font-urls: (
-    'Heebo:300,300i,400,400i,700,700i',
-    'Abel:300,300i,400,400i,700,700i',
-    'Cinzel:300,300i,400,400i,700,700i',
-    'Old+Standard+TT:300,300i,400,400i,700,700i',
-    'Playfair+Display:300,300i,400,400i,700,700i',
-    'Source+Sans+Pro:300,300i,400,400i,700,700i',
-);
-$o-theme-font-names: (
-    'Heebo',
-    'Abel',
-    'Cinzel',
-    'Old Standard',
-    'Playfair Display',
-    'Source Sans Pro',
 );

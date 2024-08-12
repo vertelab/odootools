@@ -29,7 +29,8 @@ echo "Installing Odoo"
 if [ ! -d /etc/odoo ]; then  # Install Odoo (only one time)
     sudo add-apt-repository universe
     sudo wget -O - https://nightly.odoo.com/odoo.key | sudo apt-key add -
-    echo "deb http://nightly.odoo.com/14.0/nightly/deb/ ./" | sudo tee /etc/apt/sources.list.d/odoo.list > /dev/null
+    echo "deb http://nightly.odoo.com/$VERSION/nightly/deb/ ./" | sudo tee /etc/apt/sources.list.d/odoo.list > /dev/null
+    # echo "deb http://nightly.odoo.com/master/nightly/deb/ ./" | sudo tee /etc/apt/sources.list.d/odoo.list > /dev/null  # Change to $VERSION as soon its completed
     sudo apt update
     sudo apt -y install odoo
     # Generate a good password
@@ -37,7 +38,7 @@ if [ ! -d /etc/odoo ]; then  # Install Odoo (only one time)
     sudo wget -O /etc/odoo/odoo.tools https://raw.githubusercontent.com/vertelab/odootools/{$VERSION}/odoo.tools
 
     # Move BAD l10n_se
-    mv /usr/lib/python3/dist-packages/odoo/addons/l10n_se /usr/lib/python3/dist-packages/odoo/addons/l10n_se-bad
+    sudo mv /usr/lib/python3/dist-packages/odoo/addons/l10n_se /usr/lib/python3/dist-packages/odoo/addons/l10n_se-bad
 
     # Making odoo a more reqular user
     # It can be useful when doing some operations.
@@ -70,7 +71,7 @@ sudo -H pip3 install -r /tmp/requirements.txt
 # wkhtmltopdf
 sudo -H pip3 install openpyxl
 sudo apt -y install xfonts-base xfonts-75dpi
-wget -O /tmp/wkhtmltox_0.12.6-1.focal_amd64.deb https://github.com/wkhtmltopdf/packaging/releases/download/0.12.6-1/wkhtmltox_0.12.6-1.focal_amd64.deb
+wget -O /tmp/wkhtmltox_0.12.6-1.focal_amd64.deb https://github.com/wkhtmltopdf/packaging/releases/download/0.12.6.1-2/wkhtmltox_0.12.6.1-2.jammy_amd64.deb
 sudo dpkg -i /tmp/wkhtmltox_0.12.6-1.focal_amd64.deb
 sudo rm -f /tmp/wkhtmltox_0.12.6-1.focal_amd64.deb
 

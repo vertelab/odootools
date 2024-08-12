@@ -1,15 +1,22 @@
 {
     'name': 'Bistro Theme',
     'description': 'Bistro Theme - Restaurant, Food/Drink, Catering, Food trucks',
-    'category': 'Theme/Services',
+    'category': 'Theme/Food',
     'summary': 'Restaurants, Catering, Food, Drinks, Accomodations, Lodging, Hosting, Vacations, Holidays, Travels',
     'sequence': 220,
-    'version': '1.0',
-    'depends': ['theme_treehouse'],
+    'version': '2.0.0',
+    'author': 'Odoo S.A.',
+    'depends': ['theme_common'],
     'data': [
         'views/assets.xml',
-        'views/images.xml',
-        'views/snippets_options.xml',
+        'views/images_library.xml',
+
+        'views/snippets/s_cover.xml',
+        'views/snippets/s_features.xml',
+        'views/snippets/s_picture.xml',
+        'views/snippets/s_product_catalog.xml',
+        'views/snippets/s_quotes_carousel.xml',
+        'views/snippets/s_text_block.xml',
     ],
     'images': [
         'static/description/bistro_cover.jpg',

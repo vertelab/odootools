@@ -10,52 +10,16 @@
     backface-visibility: hidden; // avoid flickering
     text-rendering: geometricPrecision; // take care of animated titles
     visibility: hidden;
+
+    &:not(.o_animating) {
+        transform: none !important;
+    }
 }
 .o_animate_preview {
     visibility: visible;
 }
-
-/*
-  =====================================
-  ======== Durations
-  =====================================
-*/
-.o_anim_dur500 {
-    animation-duration: 500ms;
-}
-// DEFAULT 1000ms;
-.o_anim_dur1500 {
-    animation-duration: 1500ms;
-}
-.o_anim_dur2000 {
-    animation-duration: 2000ms;
-}
-.o_anim_dur2500 {
-    animation-duration: 2500ms;
-}
-.o_anim_dur3000 {
-    animation-duration: 3000ms;
-}
-
-/*
-  =====================================
-  ======== Delays
-  =====================================
-*/
-.o_anim_del500 {
-    animation-delay: 500ms;
-}
-.o_anim_del1000{
-    animation-delay: 1000ms;
-}
-.o_anim_del1500{
-    animation-delay: 1500ms;
-}
-.o_anim_del2000{
-    animation-delay: 2000ms;
-}
-.o_anim_del2500{
-    animation-delay: 2500ms;
+.o_wanim_overflow_x_hidden {
+    overflow-x: hidden !important;
 }
 
 @-moz-keyframes o_animate_timeline_duration {
@@ -1072,4 +1036,39 @@
 .o_anim_flip_in_y {
     backface-visibility: visible;
     animation-name: o_anim_flip_in_y;
+}
+
+//------------------------------------------------------------------------------
+// Compatibility <= 13.0
+//------------------------------------------------------------------------------
+
+.o_anim_dur500 {
+    animation-duration: 500ms;
+}
+.o_anim_dur1500 {
+    animation-duration: 1500ms;
+}
+.o_anim_dur2000 {
+    animation-duration: 2000ms;
+}
+.o_anim_dur2500 {
+    animation-duration: 2500ms;
+}
+.o_anim_dur3000 {
+    animation-duration: 3000ms;
+}
+.o_anim_del500 {
+    animation-delay: 500ms;
+}
+.o_anim_del1000 {
+    animation-delay: 1000ms;
+}
+.o_anim_del1500 {
+    animation-delay: 1500ms;
+}
+.o_anim_del2000 {
+    animation-delay: 2000ms;
+}
+.o_anim_del2500 {
+    animation-delay: 2500ms;
 }

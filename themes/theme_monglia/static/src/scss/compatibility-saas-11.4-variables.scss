@@ -10,7 +10,7 @@ $s-banner-3-h2-size: 25px;
 
 @mixin s-banner-3-row-hook {
     background-color: rgba(255, 255, 255, 0.5);
-    border: 1px solid o-theme-color('alpha');
+    border: 1px solid o-color('alpha');
     height: 200px;
     width: 400px;
     position: relative;
@@ -36,13 +36,15 @@ $s-banner-3-h2-size: 25px;
 $s-big-picture-text-padding: 0;
 $s-big-picture-text-align: center;
 @mixin s-big-picture-text-hero-hook {
-    border-bottom: 1px solid o-theme-color('epsilon');
+    border-bottom: 1px solid o-color('epsilon');
     margin: 0 20%;
 }
 
 $s-text-big-picture-padding: 0;
 $s-text-big-picture-text-align: center;
 @mixin s-text-big-picture-hero-hook {
-    border-bottom: 1px solid o-theme-color('epsilon');
+    border-bottom: 1px solid o-color('epsilon');
     margin: 0 20%;
 }
+
+$s-timeline-company-color: $-gray-700;

@@ -4,14 +4,14 @@
     'category': 'Theme/Corporate',
     'summary': 'Design, Tech, Computers, IT, Blogs',
     'sequence': 110,
-    'version': '1.0',
+    'version': '2.0.0',
     'author': 'Odoo S.A.',
     'data': [
         'views/assets.xml',
-        'views/customize_modal.xml',
-        'views/snippets.xml',
-        'views/options.xml',
-        'views/images_library.xml'
+        'views/images_library.xml',
+        'views/customizations.xml',
+
+        'views/old_snippets/s_showcase_slider.xml',
     ],
     'images': [
         'static/description/graphene_poster.jpg',
