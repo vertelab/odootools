@@ -1,4 +1,4 @@
-# odootools for Ubuntu 22.04
+# odootools for Ubuntu -- common
 
 Tools to help to install and manage an Odoo installation.
 
@@ -11,7 +11,7 @@ systems might require tweaking to work.
 
 Installation of Odoo and Odootools.
 
-Ensure you are using the version (eg branch 17.0 for Odoo 17) you want to install.
+Ensure you are using the version you want to install.
 
 When you are logged in with the root-account. Run the following command.
 
