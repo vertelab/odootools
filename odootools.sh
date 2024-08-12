@@ -412,7 +412,6 @@ function odoosetperm() {
         sudo chmod g+w `echo $ODOOADDONS | tr "," " "` -R
 
         sudo chown odoo:odoo /usr/share/core-odoo -R
-        sudo chown odoo:odoo /usr/share/odoo-addons -R
     fi
 }
 
