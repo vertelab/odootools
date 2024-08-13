@@ -642,6 +642,11 @@ function odooinstallocb() {
     ADDONS_PATH=$(sudo grep "addons_path" $ODOO_CONFIGURATION_FILE)
     sudo sed -i "s:$ADDONS_PATH:addons_path=/usr/src/OCB/addons:" $ODOO_CONFIGURATION_FILE
 
+    echo adding odootools
+    sudo wget -O /etc/profile.d/odootools.sh https://raw.githubusercontent.com/vertelab/odootools/common/odootools.sh
+    sudo wget -O /etc/odoo/odoo.tools https://raw.githubusercontent.com/vertelab/odootools/common/odoo.tools
+    . /etc/profile.d/odootools.sh
+
     sudo systemctl daemon-reload
 
     if [[ "$(sudo systemctl is-active odoo)" != "active" ]]; then
