@@ -610,7 +610,7 @@ function odooinstallocb() {
     fi
 
     echo installing dependencies
-    DEPENDENCIES=$(grep -oP '\s{8}.*' package.dfdebian | tr -d '\\' | tr -d ' ' | tr -d '&&' | tr -s '\n' ' ' )
+    DEPENDENCIES=$(grep -oP '\s{8}.*' $OCB_DIRECTORY/setup/package.dfdebian | tr -d '\\' | tr -d ' ' | tr -d '&&' | tr -s '\n' ' ' )
     sudo apt install $DEPENDENCIES
 
     sudo pip install -r /usr/src/OCB/requirements.txt
