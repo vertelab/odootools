@@ -572,7 +572,7 @@ function odooinstallocb() {
             case $YESNO in 
                 [yY] ) echo uninstalling odoo...;
                     sudo apt remove --purge odoo
-                    sudo pip uninstall odoo --root-user-action=ignore
+                    sudo pip uninstall odoo
                     break;;
                 [nN] )
                     break;;
@@ -613,9 +613,9 @@ function odooinstallocb() {
     DEPENDENCIES=$(grep -oP '\t\t.*' $OCB_DIRECTORY/setup/package.dfsrc  | tr -d '\t' | tr -d '\\' | tr -s '\n' ' ' | tr -d '&&')
     sudo apt install $DEPENDENCIES
 
-    sudo pip install -r /usr/src/OCB/requirements.txt --root-user-action=ignore
+    sudo pip install -r /usr/src/OCB/requirements.txt
 
-    echo adding odoo-bin 
+    echo adding odoo-bin
     sudo cp /usr/src/OCB/odoo-bin /usr/bin/odoo
     echo adding odoo.service
     sudo cp /usr/src/OCB/debian/odoo.service /usr/lib/systemd/system/odoo.service
@@ -630,6 +630,7 @@ function odooinstallocb() {
 
     echo creating odoo user
     sudo su -c "bash /usr/src/OCB/debian/postinst configure"
+    sudo adduser $USER odoo
 
     echo adding odoo as a python library
     sudo pip install -U git+https://github.com/OCA/OCB.git@$VERSION 
