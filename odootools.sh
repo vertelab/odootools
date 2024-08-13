@@ -610,10 +610,8 @@ function odooinstallocb() {
     fi
 
     echo installing dependencies
-    sudo apt install -y build-essential libsasl2-dev python-dev-is-python3 libldap2-dev libssl-dev libpq-dev
-
-    echo installing PostgreSQL
-    sudo apt install -y postgresql postgresql-client
+    DEPENDENCIES=$(grep -oP '\t\t.*' $OCB_DIRECTORY/setup/package.dfsrc  | tr -d '\t' | tr -d '\\' | tr -s '\n' ' ' | tr -d '&&')
+    sudo apt install $DEPENDENCIES
 
     sudo pip install -r /usr/src/OCB/requirements.txt --root-user-action=ignore
 
