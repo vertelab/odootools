@@ -663,3 +663,155 @@ function odooinstallocb() {
         echo -e "${RED}Something seems to have gone horribly wrong!!! ${NOCOLOR}" 
     fi
 }
+
+function _odoobranchget() {
+	# get a module from one branch (source) to another (destination)
+	usage() { echo "Usage: $0 [-p|--project <project>] [-m|--moduie <module>] [-s|--source <branch> ] [-d|--destination <branch> ]" 1>&2; exit 1; }
+	[ -f /etc/odoo/odoo.tools ] && . /etc/odoo/odoo.tools
+	OBRANCH=$(git rev-parse --abbrev-ref HEAD)
+	DBRANCH=$OBRANCH
+	export DBRANCH
+	ODOOPROJECT=$(basename `git rev-parse --show-toplevel`)
+	export ODOOPROJECT
+	local OPTIND
+	local OPTARG
+	local option
+	while getopts ":p:m:d:s: --long source:destination:module:project:" option; do
+       		 case $option in
+       		     p|project) ODOOPROJECT=${OPTARG%/} ; echo "Project: $option $ODOOPROJECT" ;;
+       		     m|module) MODULE=${OPTARG} ; echo "module: $option $OPTARG" ;;
+       		     s|source) SBRANCH=${OPTARG} ; echo "Source Branch: $option $OPTARG" ;;
+       		     d|desitnation) DBRANCH=${OPTARG} ; echo "Destination Branch: $option $OPTARG" ;;
+       		     \:) echo "Option $option requires an argument" ; return ;;
+       		     \?) echo "Illegal argument ${option}::${OPTARG}" ; return ;;
+       		 esac
+	done
+	[ -z "$ODOOPROJECT" ] && echo "You have to set -p --project option to continue" && return
+	[ -z "$MODULE" ] && echo "You have to set -m --module option to continue" && return
+	[ -z "$SBRANCH" ] && echo "You have to set -s --source option to continue" && return
+	[ -z "$DBRANCH" ] && echo "You have to set -d --destination option to continue" && return
+	[ "$DBRANCH" == "$SBRANCH" ] && echo "You have to set -d --destination option not same as -s option to continue" && return
+	CWD=$(pwd)
+	cd /usr/share/$ODOOPROJECT
+	git checkout $SBRANCH
+	files=$(find /usr/share/$ODOOPROJECT/$MODULE  \( -name "*.py" -o -name "*.js" -o -name "*.sh" -o -name "*.csv" -o -name "*.xml" \))
+	git checkout $DBRANCH
+	for file in $files 
+	do  
+		echo  ${file}
+		git checkout --merge $DBRANCH $file -q
+
+	done
+	git add .
+	git commit -m "odoobranchget $MODULE $SBRANCH"
+	git push
+	[ $OBRANCH == $(git rev-parse --abbrev-ref HEAD) ] || git checkout $OBRANCH
+	cd $CWD
+}
+alias odoobranchget='_odoobranchget'
+
+function _odoobranchpfile() {
+	# patch p-files from source branch to all other branches that have this module
+	usage() { echo "Usage: $0 [-p|--project <project>] [-m|--moduie <module>] [-s|--source <branch> ] [-d|--destination <branch> ]" 1>&2; exit 1; }
+	[ -f /etc/odoo/odoo.tools ] && . /etc/odoo/odoo.tools
+	OBRANCH=$(git rev-parse --abbrev-ref HEAD)
+	SBRANCH=$OBRANCH
+	export SBRANCH
+	ODOOPROJECT=$(basename `git rev-parse --show-toplevel`)
+	export ODOOPROJECT
+	local OPTIND
+	local OPTARG
+	local option
+	while getopts ":p:m:d:s: --long source:destination:module:project:" option; do
+       		 case $option in
+       		     p|project) ODOOPROJECT=${OPTARG%/} ; echo "Project: $option $ODOOPROJECT" ;;
+       		     m|module) MODULE=${OPTARG} ; echo "module: $option $OPTARG" ;;
+       		     s|source) SBRANCH=${OPTARG} ; echo "Source Branch: $option $OPTARG" ;;
+       		     d|desitnation) DBRANCH=${OPTARG} ; echo "Destination Branch: $option $OPTARG" ;;
+       		     \:) echo "Option $option requires an argument" ; return ;;
+       		     \?) echo "Illegal argument ${option}::${OPTARG}" ; return ;;
+       		 esac
+	done
+	[ -z "$ODOOPROJECT" ] && echo "You have to set -p --project option to continue" && return
+	[ -z "$MODULE" ] && echo "You have to set -m --module option to continue" && return
+	[ -z "$SBRANCH" ] && echo "You have to set -s --source option to continue" && return
+	[ -z "$DBRANCH" ] && echo "You have to set -d --destination option to continue" && return
+	CWD=$(pwd)
+	cd /usr/share/$ODOOPROJECT
+	git checkout $SBRANCH
+	pfiles=`find /usr/share/$ODOOPROJECT/$MODULE \( -name "*.p.py" -o -name "*.p.js" -o -name "*.p.sh" -o -name "*.p.csv" -o -name "*.p.xml" \)`
+	branches=`git branch -r | tr ' ' '\n'  | grep -E '^origin/[0-9]+\.0$' | sed 's/^origin\///'`
+	for branch in $branches
+	do
+	   [ "$branch" == ""$SBRANCH"" ] && continue
+	   echo $branch 
+	   git checkout $branch
+	   for file in $pfiles
+	   do
+	       echo $file
+	       if [ -f "${file/.p/}" ]
+	       then
+	           git checkout --merge $SBRANCH $file -q
+	       fi
+	   done
+	   git add .
+	   git commit -m "odoobranchpfile $MODULE from $branch"
+	   git push
+	done
+	[ $OBRANCH == $(git rev-parse --abbrev-ref HEAD) ] || git checkout $OBRANCH
+	cd $CWD
+}
+alias odoobranchpfile='_odoobranchpfile'
+
+function _odoobranchdiff() {
+	usage() { echo "Usage: $0 [-p|--project <project>] [-m|--moduie <module>] [-s|--source <branch> ] [-d|--destination <branch> ]" 1>&2; exit 1; }
+	[ -f /etc/odoo/odoo.tools ] && . /etc/odoo/odoo.tools
+	OBRANCH=$(git rev-parse --abbrev-ref HEAD)
+	SBRANCH=$OBRANCH
+	export SBRANCH
+	ODOOPROJECT=$(basename `git rev-parse --show-toplevel`)
+	export ODOOPROJECT
+	local OPTIND
+	local OPTARG
+	local option
+	while getopts ":p:m:d:s: --long source:destination:module:project:" option; do
+       		 case $option in
+       		     p|project) ODOOPROJECT=${OPTARG%/} ; echo "Project: $option $ODOOPROJECT" ;;
+       		     m|module) MODULE=${OPTARG} ; echo "module: $option $OPTARG" ;;
+       		     s|source) SBRANCH=${OPTARG} ; echo "Source Branch: $option $OPTARG" ;;
+       		     d|desitnation) DBRANCH=${OPTARG} ; echo "Destination Branch: $option $OPTARG" ;;
+       		     \:) echo "Option $option requires an argument" ; return ;;
+       		     \?) echo "Illegal argument ${option}::${OPTARG}" ; return ;;
+       		 esac
+	done
+	[ -z "$ODOOPROJECT" ] && echo "You have to set -p --project option to continue" && return
+	[ -z "$MODULE" ] && echo "You have to set -m --module option to continue" && return
+	[ -z "$SBRANCH" ] && echo "You have to set -s --source option to continue" && return
+	[ -z "$DBRANCH" ] && echo "You have to set -d --destination option to continue" && return
+	CWD=$(pwd)
+	cd /usr/share/$ODOOPROJECT
+	git checkout $SBRANCH
+	files=$(find /usr/share/$ODOOPROJECT/$MODULE  \( -name "*.py" -o -name "*.js" -o -name "*.sh" -o -name "*.csv" -o -name "*.xml" \))
+	echo $files
+	for file in $files 
+	do  
+		git diff --quiet $SBRANCH $DBRANCH -- $file && continue
+		echo  ${file}.diff
+		git diff -U10000 $SBRANCH $DBRANCH -- $file > ${file}.diff 
+	done
+	git checkout $OBRANCH
+	cd $CWD
+}
+alias odoobranchdiff='_odoobranchdiff'
+
+function _odooaddpreprocess() {
+    [ -z "$1" ] && echo "Usage: $0 odoo-x,odoo-y.." 1>&2 && return 
+    [ ! -f /usr/local/bin/preprocess ] && sudo pip3 install preprocess
+    [ ! -f /etc/odoo/post-checkout ] && sudo curl https://raw.githubusercontent.com/vertelab/odootools/17.0/post-checkout -o /etc/odoo/post-checkout -s
+    local PROJECTS=$1
+    for PROJECT in $(echo $PROJECTS | tr "," " "); do
+	cp /etc/odoo/post-checkout /usr/share/$PROJECT/.git/hooks/
+	chmod a+x /usr/share/$PROJECT/.git/hooks/post-checkout
+    done
+}
+alias odooaddpreprocess='_odooaddpreprocess'
