@@ -371,17 +371,20 @@ function odoosyncall() {
 }
 
 function odoosetperm() {
-    if [ ! -z "$ODOOADDONS" ]; then
-        for p in ${ODOOADDONS//,/ }; do
-            echo -n $p " "
-            sudo chown odoo:odoo $p -R
-            find $p -type d -exec sudo chmod 775 {} \;
-            find $p -type f -exec sudo chmod 664 {} \;
-        done
+	## 2024-08-16
+	sudo chown odoo:odoo /usr/share/odoo*/ -R
+	sudo chmod g+w /usr/share/odoo*/ -R
+    #if [ ! -z "$ODOOADDONS" ]; then
+    #    for p in ${ODOOADDONS//,/ }; do
+    #        echo -n $p " "
+    #        sudo chown odoo:odoo $p -R
+    #        find $p -type d -exec sudo chmod 775 {} \;
+    #        find $p -type f -exec sudo chmod 664 {} \;
+    #    done
 
-        sudo chown odoo:odoo /usr/share/core-odoo -R
-        sudo chown odoo:odoo /usr/share/odoo-addons -R
-    fi
+     sudo chown odoo:odoo /usr/share/core-odoo -R
+     sudo chown odoo:odoo /usr/share/odoo-addons -R
+    #fi
 }
 
 function odoolangexport() {
