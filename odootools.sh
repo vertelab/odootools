@@ -382,8 +382,8 @@ function odoosetperm() {
     #        find $p -type f -exec sudo chmod 664 {} \;
     #    done
 
-     sudo chown odoo:odoo /usr/share/core-odoo -R
-     sudo chown odoo:odoo /usr/share/odoo-addons -R
+    # 	sudo chown odoo:odoo /usr/share/core-odoo -R
+    # 	sudo chown odoo:odoo /usr/share/odoo-addons -R
     #fi
 }
 
