@@ -205,6 +205,7 @@ function _odoobranchpfile() {
 	[ -z "$DBRANCH" ] && echo "You have to set -d --destination option to continue" && return
 	CWD=$(pwd)
 	cd /usr/share/$ODOOPROJECT
+    git checkout $DBRANCH
 	git checkout $SBRANCH
 	pfiles=`find /usr/share/$ODOOPROJECT/$MODULE \( -name "*.p.py" -o -name "*.p.js" -o -name "*.p.sh" -o -name "*.p.csv" -o -name "*.p.xml"\)`
 	branches=`git branch -r | tr ' ' '\n'  | grep -E '^origin/[0-9]+\.0$' | sed 's/^origin\///'`
