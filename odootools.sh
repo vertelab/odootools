@@ -666,18 +666,25 @@ function odooinstallocb() {
 }
 
 function _odoobranchget() {
-	# get a module from one branch (source) to another (destination)
-	usage() { echo "Usage: $0 [-p|--project <project>] [-m|--moduie <module>] [-s|--source <branch> ] [-d|--destination <branch> ]" 1>&2; exit 1; }
-	[ -f /etc/odoo/odoo.tools ] && . /etc/odoo/odoo.tools
-	OBRANCH=$(git rev-parse --abbrev-ref HEAD)
+	
+    # get a module from one branch (source) to another (destination)
+    usage() { echo "Usage: $0 [-p|--project <project>] [-m|--moduie <module>] [-s|--source <branch> ] [-d|--destination <branch> ]" 1>&2; exit 1; }
+	
+    [ -f /etc/odoo/odoo.tools ] && . /etc/odoo/odoo.tools
+	
+    OBRANCH=$(git rev-parse --abbrev-ref HEAD)
 	DBRANCH=$OBRANCH
-	export DBRANCH
+	
 	ODOOPROJECT=$(basename `git rev-parse --show-toplevel`)
+    
+    export DBRANCH
 	export ODOOPROJECT
-	local OPTIND
+	
+    local OPTIND
 	local OPTARG
 	local option
-	while getopts ":p:m:d:s: --long source:destination:module:project:" option; do
+	
+    while getopts ":p:m:d:s: --long source:destination:module:project:" option; do
        		 case $option in
        		     p|project) ODOOPROJECT=${OPTARG%/} ; echo "Project: $option $ODOOPROJECT" ;;
        		     m|module) MODULE=${OPTARG} ; echo "module: $option $OPTARG" ;;
@@ -687,25 +694,19 @@ function _odoobranchget() {
        		     \?) echo "Illegal argument ${option}::${OPTARG}" ; return ;;
        		 esac
 	done
+
 	[ -z "$ODOOPROJECT" ] && echo "You have to set -p --project option to continue" && return
 	[ -z "$MODULE" ] && echo "You have to set -m --module option to continue" && return
 	[ -z "$SBRANCH" ] && echo "You have to set -s --source option to continue" && return
 	[ -z "$DBRANCH" ] && echo "You have to set -d --destination option to continue" && return
 	[ "$DBRANCH" == "$SBRANCH" ] && echo "You have to set -d --destination option not same as -s option to continue" && return
-	CWD=$(pwd)
-	cd /usr/share/$ODOOPROJECT
+	
+    CWD=$(pwd)
+    cd /usr/share/$ODOOPROJECT
+	
 	git checkout $SBRANCH
-	files=$(find /usr/share/$ODOOPROJECT/$MODULE  \( -name "*.py" -o -name "*.js" -o -name "*.sh" -o -name "*.csv" -o -name "*.xml" \))
-	git checkout $DBRANCH
-	for file in $files 
-	do  
-		echo  ${file}
-		git checkout --merge $DBRANCH $file -q
+    git checkout $DBRANCH ./$MODULE 
 
-	done
-	git add .
-	git commit -m "odoobranchget $MODULE $SBRANCH"
-	git push
 	[ $OBRANCH == $(git rev-parse --abbrev-ref HEAD) ] || git checkout $OBRANCH
 	cd $CWD
 }
