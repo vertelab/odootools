@@ -549,6 +549,7 @@ function _odoobranchget() {
     CWD=$(pwd)
     cd /usr/share/$ODOOPROJECT
 	
+    git checkout $DBRANCH
 	git checkout $SBRANCH
     git checkout $DBRANCH ./$MODULE 
 
