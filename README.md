@@ -71,7 +71,12 @@ cp odootools.sh /etc/profile.d/
 cp odooscaffold.tar.gz /etc/odoo/
 ```
 
-then restart the bash instance, make sure your changes are working correctly, before pushing the changes.
+Then restart the bash instance, make sure your changes are working correctly, before pushing the changes.
+
+To update odootools.sh directly from github run the command below.
+```
+sudo wget -O /etc/profile.d/odootools.sh https://raw.githubusercontent.com/vertelab/odootools/common/odootools.sh
+```
 
 ## Uninstall
 
