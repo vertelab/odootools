@@ -659,10 +659,8 @@ function _odooaddpreprocess() {
     [ ! -f /etc/odoo/post-checkout ] && sudo curl https://raw.githubusercontent.com/vertelab/odootools/17.0/post-checkout -o /etc/odoo/post-checkout -s
     local PROJECTS=$1
     for PROJECT in $(echo "$PROJECTS" | tr "," " "); do
-    sudo chown $USER:$USER /usr/share/$PROJECT/.git/hooks/*
-	cp /etc/odoo/post-checkout /usr/share/"$PROJECT"/.git/hooks/
+	sudo cp /etc/odoo/post-checkout /usr/share/"$PROJECT"/.git/hooks/
 	chmod a+x /usr/share/"$PROJECT"/.git/hooks/post-checkout
     done
-    odoosetperm
 }
 alias odooaddpreprocess='_odooaddpreprocess'
