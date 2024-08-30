@@ -265,7 +265,7 @@ function _odoogitclone() {
 
 	    echo "Trying to clone $PROJECT from github"
         if ! git clone -b "$VERSION" git@github.com:vertelab/"$PROJECT".git; then
-            echo '"${RED}"failed to git clone $PROJECT"${NOCOLOR}"'
+            echo "${RED}failed to git clone $PROJECT${NOCOLOR}"
         fi
     done
     cd "$CWD"
