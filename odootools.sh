@@ -2,8 +2,11 @@ alias alldbs='`su postgres -c "psql -At -c \"select datname from pg_database whe
 alias odoovilog='sudo vi /var/log/odoo/odoo-server.log'
 alias odooadminpw='sudo grep -o "^admin_passwd.*$" /etc/odoo/odoo.conf | cut -f 3 -d" "'
 
-alias allprojects='ls -d /usr/share/odoo-*'
+alias allprojects='ls -dl /usr/share/odoo*'
 alias cdo='cd /usr/share/core-odoo/addons'
+
+VERSION_INFO=$(sudo cat /usr/share/core-odoo/release.py | grep "version_info =")
+VERSION=$(python3 -c "${VERSION_INFO//FINAL/\'\'}[:2];print('.'.join(map(lambda x: str(x), version_info)));")
 
 export ODOO_USER="odoo"
 export ODOO_SOURCE_DIR=/opt/odoo
@@ -98,24 +101,6 @@ function _odoolistprojects() {
 }
 alias odoolistprojects='_odoolistprojects'
 
-function _odoogitclone() {
-    CWD=$(pwd)
-    cd /usr/share
-    local PROJECTS=$1
-    for PROJECT in $(echo "$PROJECTS" | tr "," " "); do
-        sudo mkdir -p --mode=g+w /usr/share/"$PROJECT"
-        sudo chown odoo:odoo /usr/share/"$PROJECT"
-	echo "Trying to clone from github"
-        if git clone -b 17.0 git@github.com:vertelab/"$PROJECT".git ; then
-	    echo "Trying to clone from git.vertel.se"
-	    git clone -b 17.0 git@git.vertel.se:vertelab/"$PROJECT".git
-	fi
-    done
-    cd "$CWD"
-    sudo chown odoo:odoo /usr/share/odoo*/ -R
-    sudo chmod g+w /usr/share/odoo*/ -R
-}
-alias odoogitclone='_odoogitclone'
 
 function _odoosync() {
     usage() { echo "Usage: $0 [-p <project>] [-h <host>]" 1>&2; exit 1; }
@@ -179,6 +164,7 @@ function odoogitpull() {
     sudo chown odoo:odoo /usr/share/odoo*/ -R
     sudo chmod g+w /usr/share/odoo*/ -R
 }
+
 function odooextgitpull() {
     ## git config
 
@@ -200,12 +186,14 @@ function odooextgitpull() {
     sudo chown odoo:odoo /usr/share/odoo*/ -R
     sudo chmod g+w /usr/share/odoo*/ -R
 }
+
 function odooallrequirements() {
     for req in /usr/share/odoo*/requirements.txt
     do
         sudo pip3 install -r "$req"
     done
 }
+
 function odoocheckbranch() {
     ## SAVE LOCAL PATH
     OPWD=$(pwd)
@@ -229,6 +217,7 @@ function odoocheckbranch() {
     ## RESTORE LOCAL PATH
     cd "$OPWD"
 }
+
 function odoosyncall() {
     usage() { echo "Usage: $0 [-h <host>]" 1>&2; exit 1; }
     [ -f /etc/odoo/odoo.tools ] && . /etc/odoo/odoo.tools
@@ -260,6 +249,24 @@ function odoosetperm() {
         sudo chown odoo:odoo /usr/share/core-odoo -R
     fi
 }
+
+function _odoogitclone() {
+    CWD=$(pwd)
+    cd /usr/share
+    local PROJECTS=$1
+    for PROJECT in $(echo "$PROJECTS" | tr "," " "); do
+        sudo mkdir -p --mode=g+w /usr/share/"$PROJECT"
+        sudo chown odoo:odoo /usr/share/"$PROJECT"
+
+	    echo "Trying to clone $PROJECT from github"
+        if ! git clone -b "$VERSION" git@github.com:vertelab/"$PROJECT".git; then
+            echo "git clone failed!!!"
+        fi
+    done
+    cd "$CWD"
+    odoosetperm
+}
+alias odoogitclone='_odoogitclone'
 
 function odoolangexport() {
     usage() { echo "Usage: $0 [-d <database>] [-m <module>] [-l <language>]" 1>&2; exit 1; }
@@ -391,8 +398,6 @@ alias odooinstallocb='odooinstallocb'
 function odooinstallocb() {
     ODOO_CONFIGURATION_FILE='/etc/odoo/odoo.conf'
     OCB_DIRECTORY='/usr/src/OCB'
-    VERSION_INFO=$(sudo cat /usr/share/core-odoo/release.py | grep "version_info =")
-    VERSION=python3 -c "$(test/FINAL/\'\')[:2] ; print('.'.join(map(lambda x: str(x),version_info))) ;"
 
     GREEN='\033[0;32m'
     RED='\033[0;31m'
