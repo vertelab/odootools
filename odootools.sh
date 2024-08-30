@@ -254,8 +254,8 @@ function odoosyncall() {
 function odoosetperm() {
     if [ -n "$ODOOADDONS" ]; then
 
-        sudo chown odoo:odoo "$(echo "$ODOOADDONS" | tr "," " ")" -R
-        sudo chmod g+w "$(echo "$ODOOADDONS" | tr "," " ")" -R
+        sudo chown odoo:odoo "$(echo "$ODOOADDONS" | tr ',' ' ')" -R
+        sudo chmod g+w "$(echo "$ODOOADDONS" | tr ',' ' ')" -R
 
         sudo chown odoo:odoo /usr/share/core-odoo -R
     fi
