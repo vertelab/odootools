@@ -23,11 +23,16 @@ export ODOO_START='sudo service odoo start'
 export ODOO_STOP='sudo service odoo stop'
 [[ $DISTRO == 'redhat' || $DISTRO == 'centos' ]] && export ODOO_STOP='sudo systemctl stop odoo'
 
+GREEN='\033[0;32m'
+YELLOW='\033[0;33m'
+RED='\033[0;31m'
+NOCOLOR='\033[0m'
+
 function odootail() {
     tail -f /var/log/odoo/odoo-server.log | awk ' {
-      gsub("INFO", "\033[0;32mINFO\033[0m", $0);
-      gsub("WARNING", "\033[0;33mWARNING\033[0m", $0);
-      gsub("ERROR", "\033[0;31mERROR\033[0m", $0);
+      gsub("INFO", "${GREEN}INFO${NOCOLOR}", $0);
+      gsub("WARNING", "${YELLOW}WARNING${NOCOLOR}", $0);
+      gsub("ERROR", "${RED}ERROR${NOCOLOR}", $0);
       print $0 };
       '
 }
@@ -398,11 +403,6 @@ alias odooinstallocb='odooinstallocb'
 function odooinstallocb() {
     ODOO_CONFIGURATION_FILE='/etc/odoo/odoo.conf'
     OCB_DIRECTORY='/usr/src/OCB'
-
-    GREEN='\033[0;32m'
-    RED='\033[0;31m'
-    YELLOW='\033[0;33m'
-    NOCOLOR='\033[0m'
 
     echo check if pip is installed for root
     if [[ -z "$(sudo which pip)" ]]; then
