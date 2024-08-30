@@ -212,10 +212,10 @@ function odoocheckbranch() {
             echo "$myCDPath"
             cd "$myCDPath"
             git branch
-            if [[ $(git branch) == *"17"* ]]; then 
-                echo "17!!!"
+            if [[ $(git branch) == *"$VERSION"* ]]; then 
+                echo "$VERSION!!!"
             else
-                git checkout 17.0
+                git checkout "$VERSION"
             fi
         fi
     done
@@ -665,7 +665,7 @@ function _odooaddpreprocess() {
     local PROJECTS=$1
     for PROJECT in $(echo "$PROJECTS" | tr "," " "); do
 	sudo cp /etc/odoo/post-checkout /usr/share/"$PROJECT"/.git/hooks/
-	chmod a+x /usr/share/"$PROJECT"/.git/hooks/post-checkout
+	sudo chmod a+x /usr/share/"$PROJECT"/.git/hooks/post-checkout
     done
 }
 alias odooaddpreprocess='_odooaddpreprocess'
