@@ -11,14 +11,14 @@ export ODOO_SERVER_CONF=/etc/odoo/odoo.conf
 export LOGS_DIR=/var/log/odoo
 
 export DISTRO='ubuntu'
-[ -z `grep -o 'redhat.com' /proc/version` ] || export DISTRO='redhat'
-[ -z `grep -o 'centos.org' /proc/version` ] || export DISTRO='centos'
+[ -z "$( grep -o 'redhat.com' /proc/version)" ] || export DISTRO='redhat'
+[ -z "$(grep -o 'centos.org' /proc/version)" ] || export DISTRO='centos'
 export ODOO_SERVER='odoo'
-[ $DISTRO == 'redhat' -o $DISTRO == 'centos' ] && export ODOO_SERVER='/opt/odoo/odoosrc/odoo-bin'
+[[ $DISTRO == 'redhat' || $DISTRO == 'centos' ]] && export ODOO_SERVER='/opt/odoo/odoosrc/odoo-bin'
 export ODOO_START='sudo service odoo start'
-[ $DISTRO == 'redhat' -o $DISTRO == 'centos' ] && export ODOO_START='sudo systemctl start odoo'
+[[ $DISTRO == 'redhat' || $DISTRO == 'centos' ]] && export ODOO_START='sudo systemctl start odoo'
 export ODOO_STOP='sudo service odoo stop'
-[ $DISTRO == 'redhat' -o $DISTRO == 'centos' ] && export ODOO_STOP='sudo systemctl stop odoo'
+[[ $DISTRO == 'redhat' || $DISTRO == 'centos' ]] && export ODOO_STOP='sudo systemctl stop odoo'
 
 function odootail() {
     tail -f /var/log/odoo/odoo-server.log | awk ' {
@@ -63,7 +63,7 @@ function _odoo_install_module() {
         case "${option}" in
             d|db) DATABASES=${OPTARG} ; echo "DB: $option $OPTARG" ;;
             m|module) MODULES=${OPTARG} ;;
-            \:) echo "Option $option requires an argument" ; return ;;
+            :) echo "Option $option requires an argument" ; return ;;
             \?) echo "Illegal argument ${option}::${OPTARG}" ; return ;;
         esac
     done
@@ -141,12 +141,12 @@ function _odoosync() {
 alias odoosync='_odoosync'
 
 function _patch_all_patches() {
-    CWD=`pwd`
+    CWD=$(pwd)
     cd /usr/lib/python3/dist-packages/odoo
     for PATCH in /etc/odoo/patch.d/*.patch; do
-        sudo patch -p6 < $PATCH
+        sudo patch -p6 < "$PATCH"
     done
-    cd $CWD
+    cd "$CWD"
 }
 alias odoopatch='_patch_all_patches'
 
@@ -162,7 +162,7 @@ function odoogitpull() {
     ## git config
 
     [ -f /etc/odoo/odoo.tools ] && . /etc/odoo/odoo.tools
-    if [ ! -z "$ODOOADDONS" ]; then
+    if [ -n "$ODOOADDONS" ]; then
         CWD=$(pwd)
         for p in ${ODOOADDONS//,/ }; do
             grep -q "$p" ~/.gitconfig
@@ -201,7 +201,7 @@ function odooextgitpull() {
     sudo chmod g+w /usr/share/odoo*/ -R
 }
 function odooallrequirements() {
-    for req in $(ls /usr/share/odoo*/requirements.txt)
+    for req in /usr/share/odoo*/requirements.txt
     do
         sudo pip3 install -r "$req"
     done
@@ -209,7 +209,7 @@ function odooallrequirements() {
 function odoocheckbranch() {
     ## SAVE LOCAL PATH
     OPWD=$(pwd)
-    for req in $(ls /usr/share/odoo*/)
+    for req in /usr/share/odoo*/
     do
 
         if [[ $req == *"/odoo"* ]]; then
@@ -587,8 +587,8 @@ function _odoobranchpfile() {
 	CWD=$(pwd)
 	cd /usr/share/"$ODOOPROJECT"
 	git checkout "$SBRANCH"
-	pfiles=`find /usr/share/"$ODOOPROJECT"/"$MODULE" \( -name "*.p.py" -o -name "*.p.js" -o -name "*.p.sh" -o -name "*.p.csv" -o -name "*.p.xml" \)`
-	branches=`git branch -r | tr ' ' '\n'  | grep -E '^origin/[0-9]+\.0$' | sed 's/^origin\///'`
+    pfiles=$(find /usr/share/"$ODOOPROJECT"/"$MODULE" \( -name "*.p.py" -o -name "*.p.js" -o -name "*.p.sh" -o -name "*.p.csv" -o -name "*.p.xml" \))
+    branches=$(git branch -r | tr ' ' '\n'  | grep -E '^origin/[0-9]+\.0$' | sed 's/^origin\///')
 	for branch in $branches
 	do
 	   [ "$branch" == "$SBRANCH" ] && continue
@@ -617,7 +617,7 @@ function _odoobranchdiff() {
 	OBRANCH=$(git rev-parse --abbrev-ref HEAD)
 	SBRANCH=$OBRANCH
 	export SBRANCH
-	ODOOPROJECT=$(basename `git rev-parse --show-toplevel`)
+    ODOOPROJECT=$(basename "$(git rev-parse --show-toplevel)")
 	export ODOOPROJECT
 	local OPTIND
 	local OPTARG
