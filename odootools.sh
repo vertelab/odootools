@@ -30,9 +30,9 @@ NOCOLOR='\033[0m'
 
 function odootail() {
     tail -f /var/log/odoo/odoo-server.log | awk ' {
-      gsub("INFO", "${GREEN}INFO${NOCOLOR}", $0);
-      gsub("WARNING", "${YELLOW}WARNING${NOCOLOR}", $0);
-      gsub("ERROR", "${RED}ERROR${NOCOLOR}", $0);
+      gsub("INFO", "$GREENINFO$NOCOLOR", $0);
+      gsub("WARNING", "$YELLOWWARNING$NOCOLOR", $0);
+      gsub("ERROR", "$REDERROR$NOCOLOR", $0);
       print $0 };
       '
 }
@@ -265,7 +265,7 @@ function _odoogitclone() {
 
 	    echo "Trying to clone $PROJECT from github"
         if ! git clone -b "$VERSION" git@github.com:vertelab/"$PROJECT".git; then
-            echo "${RED}failed to git clone $PROJECT${NOCOLOR}"
+            echo '"${RED}"failed to git clone $PROJECT"${NOCOLOR}"'
         fi
     done
     cd "$CWD"
