@@ -76,9 +76,9 @@ sudo -H pip3 install -r /tmp/requirements.txt
 # wkhtmltopdf
 sudo -H pip3 install openpyxl
 sudo apt -y install xfonts-base xfonts-75dpi
-wget -O /tmp/wkhtmltox_0.12.6-1.focal_amd64.deb https://github.com/wkhtmltopdf/packaging/releases/download/0.12.6-1/wkhtmltox_0.12.6-1.focal_amd64.deb
-sudo dpkg -i /tmp/wkhtmltox_0.12.6-1.focal_amd64.deb
-sudo rm -f /tmp/wkhtmltox_0.12.6-1.focal_amd64.deb
+wget -O /tmp/wkhtmltox_0.12.6.1-2.jammy_amd64.deb https://github.com/wkhtmltopdf/packaging/releases/download/0.12.6.1-2/wkhtmltox_0.12.6.1-2.jammy_amd64.deb
+sudo dpkg -i /tmp/wkhtmltox_0.12.6.1-2.jammy_amd64.deb
+sudo rm -f /tmp/wkhtmltox_0.12.6.1-2.jammy_amd64.deb
 
 # sudo su postgres createuser odoo -s
 
