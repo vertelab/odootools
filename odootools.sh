@@ -594,15 +594,13 @@ function _odoobranchdiff() {
 	export SBRANCH
     ODOOPROJECT=$(basename "$(git rev-parse --show-toplevel)")
 	export ODOOPROJECT
-	local OPTIND
-	local OPTARG
-	local option
+	local OPTIND OPTARG option
 	while getopts ":p:m:d:s: --long source:destination:module:project:" option; do
        		 case $option in
-       		     p|project) ODOOPROJECT=${OPTARG%/} ; echo "Project: $option $ODOOPROJECT" ;;
-       		     m|module) MODULE=${OPTARG} ; echo "module: $option $OPTARG" ;;
-       		     s|source) SBRANCH=${OPTARG} ; echo "Source Branch: $option $OPTARG" ;;
-       		     d|desitnation) DBRANCH=${OPTARG} ; echo "Destination Branch: $option $OPTARG" ;;
+       		     p|project) export ODOOPROJECT=${OPTARG%/} ; echo "Project: $option $ODOOPROJECT" ;;
+       		     m|module)  export MODULE=${OPTARG} ; echo "module: $option $OPTARG" ;;
+       		     s|source)  export SBRANCH=${OPTARG} ; echo "Source Branch: $option $OPTARG" ;;
+       		     d|desitnation) export DBRANCH=${OPTARG} ; echo "Destination Branch: $option $OPTARG" ;;
        		     :) echo "Option $option requires an argument" ; return ;;
        		     \?) echo "Illegal argument ${option}::${OPTARG}" ; return ;;
        		 esac
