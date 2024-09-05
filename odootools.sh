@@ -13,16 +13,6 @@ export ODOO_SOURCE_DIR=/opt/odoo
 export ODOO_SERVER_CONF=/etc/odoo/odoo.conf
 export LOGS_DIR=/var/log/odoo
 
-export DISTRO='ubuntu'
-[ -z "$( grep -o 'redhat.com' /proc/version)" ] || export DISTRO='redhat'
-[ -z "$(grep -o 'centos.org' /proc/version)" ] || export DISTRO='centos'
-export ODOO_SERVER='odoo'
-[[ $DISTRO == 'redhat' || $DISTRO == 'centos' ]] && export ODOO_SERVER='/opt/odoo/odoosrc/odoo-bin'
-export ODOO_START='sudo service odoo start'
-[[ $DISTRO == 'redhat' || $DISTRO == 'centos' ]] && export ODOO_START='sudo systemctl start odoo'
-export ODOO_STOP='sudo service odoo stop'
-[[ $DISTRO == 'redhat' || $DISTRO == 'centos' ]] && export ODOO_STOP='sudo systemctl stop odoo'
-
 GREEN='\033[0;32m'
 YELLOW='\033[0;33m'
 RED='\033[0;31m'
