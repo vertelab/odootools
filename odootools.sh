@@ -27,13 +27,13 @@ function odootail() {
 }
 
 function _cdprojectdir() {
-    [ -z "$1" ] || ODOOPROJECT=$1
+    [ -z "$1" ] || export ODOOPROJECT=$1
     cd /usr/share/"$ODOOPROJECT"
 }
 alias cdp='_cdprojectdir'
 
 function _cddatabase() {
-    [ -z "$1" ] || DATABASES=$1
+    [ -z "$1" ] || export DATABASES=$1
 }
 alias cdb='_cddatabase'
 
@@ -44,9 +44,7 @@ function _dirname() {
 }
 
 function _odoo_update_module() {
-    ${ODOO_STOP}
     sudo su odoo -c "odoo -c ${ODOO_SERVER_CONF} --database $1 --update $2 --stop-after-init"
-    ${ODOO_START}
 }
 alias odooupdm='_odoo_update_module'
 
@@ -65,10 +63,7 @@ function _odoo_install_module() {
         esac
     done
     echo "For databases=${DATABASES} modules=${MODULES}"
-
-    ${ODOO_STOP}
     sudo su odoo -c "odoo -c ${ODOO_SERVER_CONF} --database ${DATABASES} --init ${MODULES} --stop-after-init"
-    ${ODOO_START}
 }
 alias odooinstall='_odoo_install_module'
 
