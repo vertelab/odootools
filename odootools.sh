@@ -506,24 +506,18 @@ function _odoobranchget() {
 	
     [ -f /etc/odoo/odoo.tools ] && . /etc/odoo/odoo.tools
 	
-    OBRANCH=$(git rev-parse --abbrev-ref HEAD)
-	DBRANCH=$OBRANCH
-	
-    ODOOPROJECT=$(basename "$(git rev-parse --show-toplevel)")
-    
-    export DBRANCH
-	export ODOOPROJECT
-	
+    export OBRANCH=$(git rev-parse --abbrev-ref HEAD)
+    export DBRANCH=$OBRANCH
+    [ -z $ODOOPROJECT ] && export ODOOPROJECT=$(basename "$(git rev-parse --show-toplevel)")
     local OPTIND
-	local OPTARG
-	local option
-	
+    local OPTARG
+    local option
     while getopts ":p:m:d:s: --long source:destination:module:project:" option; do
        		 case $option in
-       		     p|project) ODOOPROJECT=${OPTARG%/} ; echo "Project: $option $ODOOPROJECT" ;;
-       		     m|module) MODULE=${OPTARG} ; echo "module: $option $OPTARG" ;;
-       		     s|source) SBRANCH=${OPTARG} ; echo "Source Branch: $option $OPTARG" ;;
-       		     d|desitnation) DBRANCH=${OPTARG} ; echo "Destination Branch: $option $OPTARG" ;;
+       		     p|project) export ODOOPROJECT=${OPTARG%/} ; echo "Project: $option $ODOOPROJECT" ;;
+       		     m|module)  export MODULE=${OPTARG} ; echo "module: $option $OPTARG" ;;
+       		     s|source)  export SBRANCH=${OPTARG} ; echo "Source Branch: $option $OPTARG" ;;
+       		     d|desitnation) export DBRANCH=${OPTARG} ; echo "Destination Branch: $option $OPTARG" ;;
        		     :) echo "Option $option requires an argument" ; return ;;
        		     \?) echo "Illegal argument ${option}::${OPTARG}" ; return ;;
        		 esac
@@ -537,13 +531,12 @@ function _odoobranchget() {
 	
     CWD=$(pwd)
     cd /usr/share/"$ODOOPROJECT"
-	
-    git checkout "$DBRANCH"
-	git checkout "$SBRANCH"
-    git checkout "$DBRANCH" ./"$MODULE" 
+    #git checkout "$DBRANCH"
+    #git checkout "$SBRANCH"
+    git checkout "$SBRANCH" ./"$MODULE" 
 
-	[ "$OBRANCH" == "$(git rev-parse --abbrev-ref HEAD)" ] || git checkout "$OBRANCH"
-	cd "$CWD"
+    [ "$OBRANCH" == "$(git rev-parse --abbrev-ref HEAD)" ] || git checkout "$OBRANCH"
+    cd "$CWD"
 }
 alias odoobranchget='_odoobranchget'
 
