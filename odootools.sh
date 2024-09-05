@@ -48,9 +48,7 @@ alias odooupdm='_odoo_update_module'
 function _odoo_install_module() {
     usage() { echo "Usage: $0 [-d <database>] [-m <module>]" 1>&2; exit 1; }
     [ -f /etc/odoo/odoo.tools ] && . 
-    local OPTIND  # To force the while getops loop
-    local OPTARG
-    local option
+    local OPTIND OPTARG option # To force the while getops loop
     while getopts ":m:d:" option; do
         case "${option}" in
             d|db) DATABASES=${OPTARG} ; echo "DB: $option $OPTARG" ;;
@@ -91,13 +89,11 @@ alias odoolistprojects='_odoolistprojects'
 function _odoosync() {
     usage() { echo "Usage: $0 [-p <project>] [-h <host>]" 1>&2; exit 1; }
     [ -f /etc/odoo/odoo.tools ] && . /etc/odoo/odoo.tools
-    local OPTIND
-    local OPTARG
-    local option
+    local OPTIND OPTARG option
     while getopts ":p:h:" option; do
         case $option in
-            p) ODOOPROJECT=${OPTARG%/} ; echo "Project: $option $ODOOPROJECT" ;;
-            h) HOST=${OPTARG} ; echo "Host: $option $OPTARG" ;;
+            p) export ODOOPROJECT=${OPTARG%/} ; echo "Project: $option $ODOOPROJECT" ;;
+            h) export HOST=${OPTARG} ; echo "Host: $option $OPTARG" ;;
             :) echo "Option $option requires an argument" ; return ;;
             \?) echo "Illegal argument ${option}::${OPTARG}" ; return ;;
         esac
