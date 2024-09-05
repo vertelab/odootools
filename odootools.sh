@@ -4,10 +4,7 @@ alias odooadminpw='sudo grep -o "^admin_passwd.*$" /etc/odoo/odoo.conf | cut -f 
 
 alias allprojects='ls -dl /usr/share/odoo*'
 alias cdo='cd /usr/share/core-odoo/addons'
-
-VERSION_INFO=$(sudo cat /usr/share/core-odoo/release.py | grep "version_info =")
-VERSION=$(python3 -c "${VERSION_INFO//FINAL/\'\'}[:2];print('.'.join(map(lambda x: str(x), version_info)));")
-
+export VERSION=$((cat /usr/share/core-odoo/release.py; echo 'print(".".join([str(i) for i in version_info[0:2]]))')|python3 -)
 export ODOO_USER="odoo"
 export ODOO_SOURCE_DIR=/opt/odoo
 export ODOO_SERVER_CONF=/etc/odoo/odoo.conf
