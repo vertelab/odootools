@@ -38,7 +38,7 @@ if [ ! -d /etc/odoo ]; then  # Install Odoo (only one time)
     echo "deb http://nightly.odoo.com/$VERSION/nightly/deb/ ./" | sudo tee /etc/apt/sources.list.d/odoo.list > /dev/null
     # echo "deb http://nightly.odoo.com/master/nightly/deb/ ./" | sudo tee /etc/apt/sources.list.d/odoo.list > /dev/null  # Change to $VERSION as soon its completed
     sudo apt update
-    sudo apt -y install odoo
+    sudo DEBIAN_FRONTEND=noninteractive apt -y install odoo
     # Generate a good password
     sudo sed -i "s|^.*admin_passwd = .*|admin_passwd = $(openssl rand -base64 32)|g" /etc/odoo/odoo.conf
     sudo wget -O /etc/odoo/odoo.tools https://raw.githubusercontent.com/vertelab/odootools/common/odoo.tools
@@ -63,7 +63,7 @@ fi
 
 # Additional packages
 echo "Installing additional packages"
-sudo apt -y install git python3-pip build-essential wget python3-dev python3-venv python3-wheel libxslt-dev libjpeg-dev libzip-dev libldap2-dev libsasl2-dev python3-setuptools node-less libpq-dev
+sudo DEBIAN_FRONTEND=noninteractive apt -y install git python3-pip build-essential wget python3-dev python3-venv python3-wheel libxslt-dev libjpeg-dev libzip-dev libldap2-dev libsasl2-dev python3-setuptools node-less libpq-dev
 
 # Python with dependencies
 echo "Installing Python modules"
