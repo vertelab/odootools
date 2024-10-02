@@ -1,4 +1,4 @@
-# odootools for Ubuntu 22.04
+# odootools for Ubuntu 24.04
 
 Tools to help to install and manage an Odoo installation.
 
@@ -11,13 +11,13 @@ systems might require tweaking to work.
 
 Installation of Odoo and Odootools.
 
-Ensure you are using the version (eg branch 17.0 for Odoo 17) you want to install.
+Ensure you are using the version (eg branch 18.0 for Odoo 18) you want to install.
 
 When you are logged in with the root-account. Run the following command.
 
 Step 1: The command below will download and execute the installation script:
 ```
-wget -O- https://raw.githubusercontent.com/vertelab/odootools/17.0/install | bash
+wget -O- https://raw.githubusercontent.com/vertelab/odootools/18.0/install | bash
 ```
 
 Step 2: Add users with these commands:
@@ -79,7 +79,7 @@ Use the command below to uninstall your Odoo installation.
 
 *this drops your databases and all your data related to Odoo*
 ```
-wget -O- https://raw.githubusercontent.com/vertelab/odootools/17.0/uninstall | bash
+wget -O- https://raw.githubusercontent.com/vertelab/odootools/18.0/uninstall | bash
 ```
 
 ## module 'lib' has no attribute 'OpenSSL_add_all_algorithms'

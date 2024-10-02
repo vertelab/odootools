@@ -9,7 +9,7 @@
 
 echo "Performing basic prerequisite checks ..."
 
-VERSION=17.0
+VERSION=18.0
 #echo "Download common files..."
 #wget -O- https://raw.githubusercontent.com/vertelab/odootools/common/install | bash > /tmp/tmpinstallcommon.sh
 #bash /tmp/tmpinstallcommon.sh $VERSION
@@ -68,7 +68,7 @@ sudo DEBIAN_FRONTEND=noninteractive apt -y install git python3-pip build-essenti
 # Python with dependencies
 echo "Installing Python modules"
 sudo -H pip3 install wheel
-wget -O /tmp/requirements.txt https://raw.githubusercontent.com/odoo/odoo/17.0/requirements.txt
+wget -O /tmp/requirements.txt "https://raw.githubusercontent.com/odoo/odoo/${VERSION}/requirements.txt"
 sudo -H pip3 install -r /tmp/requirements.txt
 
 # wkhtmltopdf
@@ -82,7 +82,7 @@ sudo rm -f /tmp/wkhtmltox_0.12.6-1.focal_amd64.deb
 
 # Odootools
 sudo wget -O /etc/profile.d/odootools.sh https://raw.githubusercontent.com/vertelab/odootools/common/odootools.sh
-sudo wget -O /etc/odoo/scaffold.tar.gz https://raw.githubusercontent.com/vertelab/odootools/17.0/scaffold.tar.gz
+sudo wget -O "/etc/odoo/scaffold.tar.gz https://raw.githubusercontent.com/vertelab/odootools/${VERSION}/scaffold.tar.gz"
 sudo wget -O /etc/bash_completion.d/odoo https://raw.githubusercontent.com/vertelab/odootools/common/bash_completion.odoo
 sudo wget -O /usr/local/bin/odooextras.py https://raw.githubusercontent.com/vertelab/odootools/common/odooextras.py
 
