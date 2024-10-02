@@ -1,8 +1,0 @@
-pluginmere/community_odoo.git
-
-# Note
-# This module requires the Captcha Python module.
-# Install the dependency either with
-# pip install captcha
-# or with
-# pip3 install captcha

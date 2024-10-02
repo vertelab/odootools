@@ -1,8 +1,0 @@
-#!/usr/bin/bash
-
-BRANCH=14.0
-
-for file in `ls *zip`
-do 
-	unzip $file
-done

@@ -1,8 +1,0 @@
-#!/bin/bash
-
-BRANCH=17.0
-
-for req in `ls /usr/share/odoo*/requirements.txt`
-do 
-	sudo pip3 install -r $req
-done
