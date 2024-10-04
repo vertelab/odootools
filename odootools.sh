@@ -464,8 +464,8 @@ function odooinstallocb() {
     sudo pip install -U git+https://github.com/OCA/OCB.git@"$VERSION" 
 
     echo create symlinks to cores
-    ln -s /usr/local/lib/python3.8/dist-packages/odoo/addons /usr/share/core-odoo
-    ln -s /usr/src/OCB/addons /usr/share/core-ocb
+    sudo ln -s /usr/local/lib/python3.8/dist-packages/odoo/addons /usr/share/core-odoo
+    sudo ln -s /usr/src/OCB/addons /usr/share/core-ocb
 
     ADDONS_PATH=$(sudo grep "addons_path" $ODOO_CONFIGURATION_FILE)
     sudo sed -i "s:$ADDONS_PATH:addons_path=/usr/src/OCB/addons:" $ODOO_CONFIGURATION_FILE
