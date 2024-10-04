@@ -456,6 +456,8 @@ function odooinstallocb() {
     fi
     sudo cp /usr/src/OCB/debian/odoo.conf /etc/odoo/odoo.conf
 
+    sudo sed -i "s|^.*admin_passwd = .*|admin_passwd = $(openssl rand -base64 32)|g" /etc/odoo/odoo.conf
+
     echo creating odoo user
     sudo su -c "bash /usr/src/OCB/debian/postinst configure"
     sudo adduser "$USER" odoo
