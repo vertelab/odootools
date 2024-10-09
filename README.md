@@ -110,7 +110,7 @@ Odoo-tools command |Description
  odoofind *pattern*        | find patterns in odoo-core source code
  odoogitclone *project*    | clones and installs projects from githuh (vertel-projects)
  odoogitpull    | does a *git pull* for every project in ODOOADDONS
- [odoolangexport](https://github.com/vertelab/odootools/blob/18.0/odoolangexport.pdf)    | export po/pot file for a module, -m <module> -d <database> -l <language>. To export a pot-file exclude "-l"
+ [odoolangexport](https://github.com/vertelab/odootools/blob/17.0/odoolangexport.pdf)    | export po/pot file for a module, -m <module> -d <database> -l <language>. To export a pot-file exclude "-l"
  odoomodules <database>    | List all installed modules in a database
  odoopsql <database>       | Open database in psql-mode
  odoopatch                 | Implements patches from the directory /etc/odoo/patch.d
