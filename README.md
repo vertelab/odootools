@@ -48,10 +48,10 @@ https://www.odoo.com/forum/help-1/operationalerror-fatal-role-root-does-not-exis
 
 ```
 Step 3: Follow the instructions for the management of the Odoo source repositories
-https://github.com/vertelab/odootools/blob/18.0/repos/README.md
+https://github.com/vertelab/odootools/blob/17.0/repos/README.md
 
 Step 4: If you want to add more than the standard themes please add them from here
-https://github.com/vertelab/odootools/blob/18.0/themes
+https://github.com/vertelab/odootools/blob/17.0/themes
 
 ```
 The following packages have unmet dependencies:
