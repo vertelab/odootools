@@ -22,7 +22,8 @@ Step 1: The command below will download and execute the installation script:
 ```
 wget -O- https://raw.githubusercontent.com/vertelab/odootools/14.0/install | bash
 ```
-         
+
+Ladda ner odootools och installera från OCB, för Odoo 14.
 jakobk@marina:~$ odooinstallocb 
 
 Step 2: Add users with these commands:
