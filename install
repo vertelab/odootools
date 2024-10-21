@@ -63,13 +63,13 @@ fi
 
 # Additional packages
 echo "Installing additional packages"
-#sudo DEBIAN_FRONTEND=noninteractive apt -y install git python3-pip build-essential wget python3-dev python3-venv python3-wheel libxslt-dev libjpeg-dev libzip-dev libldap2-dev libsasl2-dev python3-setuptools node-less libpq-dev
+sudo DEBIAN_FRONTEND=noninteractive apt -y install git python3-pip build-essential wget python3-dev python3-venv python3-wheel libxslt-dev libjpeg-dev libzip-dev libldap2-dev libsasl2-dev python3-setuptools node-less libpq-dev
 
 # Python with dependencies
 echo "Installing Python modules"
-#sudo -H pip3 install wheel
-#wget -O /tmp/requirements.txt "https://raw.githubusercontent.com/odoo/odoo/${VERSION}/requirements.txt"
-#sudo -H pip3 install -r /tmp/requirements.txt
+sudo -H pip3 install wheel
+wget -O /tmp/requirements.txt "https://raw.githubusercontent.com/odoo/odoo/${VERSION}/requirements.txt"
+sudo -H pip3 install -r /tmp/requirements.txt
 
 # wkhtmltopdf
 sudo -H pip3 install openpyxl
