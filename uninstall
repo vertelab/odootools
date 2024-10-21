@@ -9,7 +9,7 @@ sudo apt-get --purge -f remove -y postgresql postgresql\*
 sudo apt-get -y autoclean
 sudo apt-get -y autoremove
 
-sudo rm -rf /usr/lib/python2.7/dist-packages/openerp/
+sudo rm -rf /usr/lib/python3/dist-packages/odoo/
 sudo rm -rf /var/log/odoo
 sudo rm -rf /etc/odoo /etc/profile.d/odootools.sh /etc/bash_completion/odoo /etc/cron.daily/db_backup
 
