@@ -4,7 +4,7 @@
 
 # _logger = logging.getLogger(__name__)
 
-# class scaffold_test(models.Model):
+# class scaffold_test(models.TransientModel):
 #     _name = 'scaffold_test.scaffold_test'
 #     _description = 'scaffold_test.scaffold_test'
 #     _inherit = 'scaffold_test.scaffold_test'

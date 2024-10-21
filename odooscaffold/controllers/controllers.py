@@ -1,6 +1,4 @@
-# -*- coding: utf-8 -*-
 # from odoo import http
-
 
 # class ScaffoldTest(http.Controller):
 #     @http.route('/scaffold_test/scaffold_test/', auth='public')
