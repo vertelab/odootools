@@ -69,7 +69,7 @@ sudo DEBIAN_FRONTEND=noninteractive apt -y install git python3-pip build-essenti
 echo "Installing Python modules"
 sudo -H pip3 install wheel
 wget -O /tmp/requirements.txt "https://raw.githubusercontent.com/odoo/odoo/${VERSION}/requirements.txt"
-sudo -H pip3 install -r /tmp/requirements.txt
+sudo -H pip3 install -r /tmp/requirements.txt --break-system-packages
 
 # wkhtmltopdf
 sudo -H pip3 install openpyxl
