@@ -352,7 +352,7 @@ function _odoo_scaffold() {
     else
         sudo mkdir /usr/share/"$PROJECT"/"$MODULE"
         sudo tar xvf /etc/odoo/scaffold.tar.gz -C /usr/share/"$PROJECT"/"$MODULE"
-        sudo chown odoo:odoo /usr/share/"$PROJECT"/"$MODULE"
+        sudo chown odoo:odoo /usr/share/"$PROJECT"/"$MODULE" -R
     fi
 }
 alias odooscaffold='_odoo_scaffold'
