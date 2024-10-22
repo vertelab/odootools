@@ -84,7 +84,7 @@ sudo rm -f /tmp/wkhtmltox_0.12.6.1-2.jammy_amd64.deb
 
 # Odootools
 sudo wget -O /etc/profile.d/odootools.sh https://raw.githubusercontent.com/vertelab/odootools/common/odootools.sh
-sudo wget -O /etc/odoo/scaffold.tar.gz https://raw.githubusercontent.com/vertelab/odootools/16.0/scaffold.tar.gz
+sudo wget -O /etc/odoo/scaffold.tar.gz https://raw.githubusercontent.com/vertelab/odootools/common/scaffold.tar.gz
 sudo wget -O /etc/bash_completion.d/odoo https://raw.githubusercontent.com/vertelab/odootools/common/bash_completion.odoo
 sudo wget -O /usr/local/bin/odooextras.py https://raw.githubusercontent.com/vertelab/odootools/common/odooextras.py
 
