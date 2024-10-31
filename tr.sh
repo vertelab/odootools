@@ -28,8 +28,8 @@ tr_word procent percentage
 tr_word produkt product 
 tr_word produkter products
 tr_word "v\ärde" value
-tr_word "produkt_src" "product_src"
-tr_word "produkt_dest" "product_dest"
+tr_word "produkt_src" product_src
+tr_word "produkt_dest" product_dest
 tr_word "pris_till\ägg" price_surcharge
 tr_word procent percentage
 tr_word "f\öretag" company
@@ -37,39 +37,178 @@ tr_word fel error
 tr_word vy view
 tr_word namn name
 tr_word fil file
+tr_word datum date
 
-tr_phrase "%(fält)s" "%(field)s"
-tr_phrase "%(fält_grupper)s" "%(field_groups)s"
-tr_phrase "%(beskrivning)s" "%(description)s"
-tr_phrase "%(namn)s" "%(name)s"
-tr_phrase "%(grupper)s" "%(groups)s"
-tr_phrase "%(nod)s" "%(node)s"
-tr_phrase "%(modell)s" "%(model)s"
-tr_phrase "%(antal)s" "%(count)s"
-tr_phrase "%(tid)s" "%(time)s"
-tr_phrase "%(detaljer)s" "%(details)s"
-tr_phrase "%(användning)s" "%(use)s"
-tr_phrase "%(filnamn)s" "%(file_name)s"
-tr_phrase "%(felmeddelande)s" "%(error_message)s"
-tr_phrase "%(relaterat_fält)s" "%(related_field)s"
-tr_phrase "%(start_datum)s" "%(start_date)s"
-tr_phrase "%(slut_datum)s" "%(end_date)s"
-tr_phrase "%(team_namn)s" "%(team_name)s"
-tr_phrase "%(arbetade_timmar)s" "%(worked_hours)s"
-tr_phrase "%(metod)s" "%(method)s"
-tr_phrase "%(övrigt_utgiftsnamn)s" "%(other_expense_name)s"
-tr_phrase "%(anställningsnamn)s" "%(employee_name)s"
-tr_phrase "%(utgiftsnamn)s" "%(expense_name)s"
+tr_word "f\ält" field
+tr_word "f\ält_grupper" field_groups
+tr_word beskrivning description
+tr_word namn name
+tr_word grupper groups
+tr_word nod node
+tr_word modell model
+tr_word antal count
+tr_word tid time
+tr_word detaljer details
+tr_word användning use
+tr_word filnamn file_name
+tr_word felmeddelande error_message
+tr_word "relaterat_f\ält" related_field
+tr_word start_datum start_date
+tr_word slut_datum end_date
+tr_word team_namn team_name
+tr_word arbetade_timmar worked_hours
+tr_word metod method
+tr_word "\övrigt_utgiftsnamn" other_expense_name
+tr_word anst\ällningsnamn employee_name
+tr_word utgiftsnamn expense_name
+tr_word tilldelnings_typ allocation_type
+tr_phrase "%(f\ördelningstyp == 'periodiserad')s" "%(allocation_type == 'accrual')s"
+
+tr_word varaktighet duration
+tr_word max maximum
+tr_word stat state
+tr_word "l\änk)" link
+tr_word timmar hours
+tr_word minuter minutes
+
+# mail
+tr_word samtalsnamn conversation_name
+tr_word typ type
+tr_word "\åtgärd" operation
+tr_word poster records
+tr_word "anv\ändare" user
+tr_word "anv\ändare1" user1
+tr_word "anv\ändare2" user2
+tr_word "anv\ändare3" user3
+tr_word online_antal online_count
+tr_word offline_antal offline_count
+tr_word "tr\ådnamn" thread_name
+tr_word "tr\ådnamn" threadName
+tr_word underkanalsnamn subChannelName
+tr_phrase "{'fält':'värde'}" "{'field': 'value'}"
+
+tr_word "dom\än" domain
+tr_word "dom\än_typ" domain_type
+tr_word "f\ält" field
+tr_word modell model
+tr_word kanaler channels
+tr_word goto_slut goto_end
+tr_word "tr\ådnamn" thread_name
+
+tr_word antal mottagare recipientCount
+tr_word antal count
+tr_word "anv\ändarnamn" user_name
+tr_word samtalsnamn conversation_name
+## mass_mailing
+tr_word importerat_antal imported_count
+tr_phrase "Nisse Hult" "John DOE"
+tr_phrase "Nisse Hult" "John Doe"
+tr_word "MittF\öretag" MyCompany
+
+## mrp
+tr_phrase "\"Fäll ut\" : \"Fäll in\" }" "Unfold' : 'Fold' }"
+tr_phrase "{{ rekvisita.isFolded" "{{ props.isFolded"
+tr_word produktnamn product_name
+tr_word antal_boms number_of_boms
+tr_phrase "%(produkt)er:" "%(product)s:"
+
+## mrp_account
+tr_phrase "%(order_list)s" "%(orders_list)s"
+
+## payment
+tr_phrase "oi-arrow-right ms-1 liten" "oi-arrow-right ms-1 small"
+tr_phrase "%(kontohavare)s:" "%(account_holder)s:"
+tr_phrase "%(kontonummer)s:" "%(account_number)s:"
+
+## point_of_sale
+tr_phrase "%(post)er:" "%(entry)s:"
+tr_word betalningsmetod payment_method
+tr_word "l\änk" link
+tr_word originalpris original_price
+tr_word rabatterat_pris discounted_price
+tr_word session_namn session_name
+tr_word kundnamn client_name
+tr_word "f\öretagsnamn" company_name
+tr_word "\är_fakturerat" is_invoiced
+tr_word pos_namn pos_name
+tr_word "\återbetalad_order" refunded_order
+tr_word produktnamn product_name
+tr_word gamla_pm old_pm
+tr_word nya_pm new_pm
+tr_word gamla_beloppet old_amount
+## Att ta bort en produkt som är tillgänglig under en session skulle vara som att försöka ta en hamburgare ur en kunds hand mitt i tuggan; kaos kommer att uppstå när ketchup och majonnäs flyger överallt!
+
+## pos_hr
+tr_word betalningsmetod paymentMethod
+tr_word "anst\älld" employee
+
+## pos_restaurant
+tr_word "v\åning" floor
+
+## product
+tr_word andra_prislistor other_pricelists
+tr_word prislistor pricelists
+tr_word produkt_antal product_count
+tr_word "attribut_v\ärde" attribute_value
+tr_word siffror digits
+tr_word filnamn fileName
+tr_word produkt_lista product_list
+tr_word streckkod barcode
+tr_word prislista pricelist
+tr_word rabatt_typ discount_type
+tr_word artikelnamn item_name
+tr_word basbelopp base
+tr_word rabatt_typ discount_type
+tr_word "till\äggsavgift" surcharge
+tr_word totalbelopp total_amount
+tr_word "pristill\ägg" price_surcharge
+tr_word rabattavgift discount_charge
+
+tr_word prislistor pricelists
+tr_word andra_prislistor other_pricelists
+tr_word "attribut_v\ärde" attribute_value
+tr_word produkt_antal product_count
+
+tr_word kommando_start command_start
+tr_word kommando_slut command_end
+tr_word fet_start bold_start
+tr_word fet_end bold_end
+tr_word program_typ program_type
+tr_word "v\ärde" value
+tr_word kund_nummer customer_number
+
+## project
+tr_phrase "objekt.projekt_id.f\öretag_id.namn eller anv\ändare.env.företag.namn" "object.project_id.company_id.name or user.env.company.name"
+tr_word projektlista projectList
+tr_word synlighet visibility
+tr_word datum date
+tr_word kontoLista accountList
+tr_word "v\änster" left
+tr_word "h\öger" right
+tr_phrase "{{'Viktig' if task.priority" "{{'Important' if task.priority"
+tr_word partner_namn partner_name
+tr_phrase "objekt.projekt_id.företag_id.namn eller användare.env.företag.namn" "object.project_id.company_id.name or user.env.company.name"
+tr_word destination_projekt destination_project
+tr_word källa_projekt source_project
+
+## purchase
+tr_word "%(s\äljare)s" "%(vendor)s"
+
+## sale
+tr_word "anv\ända_produkter" used_products
+tr_phrase "%(order)" "%(order)s"
+tr_word filnamn file_name
+tr_word avkodare decoder
+tr_word referens reference
 
 
-tr_phrase "oi oi-pil-höger" "oi oi-arrow-right"
-
-
+tr_phrase "{{plats}}" "{{location}}"
+tr_phrase "oi oi-pil-h\öger" "oi oi-arrow-right"
 
 
 tr_phrase "&amp; &amp; &amp; &amp; &amp;;;;;;;;;;;;;;;;;;;;;;;;;;;;" "&amp;nbsp;&amp;nbsp;"
 tr_word total_kredit total_credit
-tr_curly nytt_datum new_date
+tr_word nytt_datum new_date
 tr_phrase "Analytisk redovisning" Objektredovisning
 tr_phrase "Analytisk distributionsmodell" Objektfördelning
 tr_phrase "Analytisk distributionsmodeller" Objektfördelningnar
