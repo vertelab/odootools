@@ -42,6 +42,10 @@ def process_file(filename, lang):
         if not entry.msgstr:
             print(entry.msgid)
             print('translating...')
+            trans = translate(entry.msgid, lang)
+	        ## 2024-11-14 LEAVE OUT COMMON ERRORS FROM TRANSLATION. BETTER NO TRANSLATION THAN BAD AND ERROR BASED TRANSLATION!
+            if "</tabell>" in trans or "<span> </span" in trans or "</strong> </strong" in trans or "</div> </div>" in trans:
+            	continue
             entry.msgstr = translate(entry.msgid, lang)
             print(entry.msgstr)
             print('\n')
