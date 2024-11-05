@@ -201,6 +201,75 @@ tr_word filnamn file_name
 tr_word avkodare decoder
 tr_word referens reference
 
+## sale_pdf_quote_builder
+tr_word f\ältnamn field_name
+tr_word modellnamn model_name
+tr_word s\ökv\äg path
+
+## sale_project
+tr_word procduct_name procduct_names
+
+
+## sms
+tr_word totalt total
+
+## spreadsheet
+tr_word _bredd _width
+tr_word kvartal quarter
+tr_word kvartal_nummer quarter_number
+tr_word _höjd _height
+tr_word andra_numret second_number
+tr_word minut_antal minute_number
+tr_word matchningar matches
+tr_word intervall range
+tr_word arknamn sheetName
+tr_word tim_nummer hour_number
+tr_word _bredd _width
+tr_word formelId formulaId
+
+## stock
+tr_word lager warehouse
+tr_word plats location
+tr_word källa_lokal source_location
+tr_word enhet unit
+tr_word fel_linjer error_lines
+tr_word plats_lista location_list
+tr_word andra_platser other_locations
+tr_word serienummer serial_number
+tr_word plats_lista location_list
+tr_word kod code
+tr_word plocknamn picking_name
+tr_word plats location
+tr_word parti lot
+
+## stock_account
+tr_word kategori category
+tr_word ny_metod new_method
+tr_word gammal_metod old_method
+tr_word nya new
+tr_word gamla old
+tr_word nytt_värde new_value
+tr_word tidigare previous
+tr_word anledning reason
+tr_word nytt_pris new_price
+tr_word post record
+tr_word ny_kostnad new_cost
+
+## stock_picking_batch
+tr_word inkompatibla_överföringar incompatible_transfers
+
+## survey
+tr_word "undersökningens namn" survey_names
+tr_phrase "textbrytning textmuted" "text-break text-muted"
+tr_phrase "oi oi-chevron-höger" "oi oi-chevron-right"
+
+
+## web
+tr_word visningsnamn displayName
+tr_word gräns limit
+tr_word meddelande message
+tr_word mbLaddad mbLoaded
+
 
 tr_phrase "{{plats}}" "{{location}}"
 tr_phrase "oi oi-pil-h\öger" "oi oi-arrow-right"
