@@ -4,7 +4,7 @@ alias odooadminpw='sudo grep -o "^admin_passwd.*$" /etc/odoo/odoo.conf | cut -f 
 
 alias allprojects='ls -dl /usr/share/odoo*'
 alias cdo='cd /usr/share/core-odoo/addons'
-export VERSION=$((cat /usr/share/core-odoo/release.py; echo 'print(".".join([str(i) for i in version_info[0:2]]))')|python3 -)
+[ -f /usr/share/core-odoo/release.py ] && export VERSION=$((cat /usr/share/core-odoo/release.py; echo 'print(".".join([str(i) for i in version_info[0:2]]))')|python3 -)
 export ODOO_USER="odoo"
 export ODOO_SOURCE_DIR=/opt/odoo
 export ODOO_SERVER_CONF=/etc/odoo/odoo.conf
@@ -439,8 +439,8 @@ function odooinstallocb() {
 
     echo installing dependencies
     DEPENDENCIES=$(grep -oP '\s{8}.*' $OCB_DIRECTORY/setup/package.dfdebian | tr -d '\\' | tr -d ' ' | tr -d '&&' | tr -s '\n' ' ' )
-    sudo apt install "$DEPENDENCIES"
-
+    sudo apt-get install ${DEPENDENCIES}
+    sudo apt-get install python3-dev libsasl2-dev python-dev-is-python3 libldap2-dev libssl-dev libpq-dev
     sudo pip install -r /usr/src/OCB/requirements.txt
 
     echo adding odoo-bin
@@ -454,20 +454,21 @@ function odooinstallocb() {
     if [ ! -d /etc/odoo ]; then
         sudo mkdir /etc/odoo
     fi
-    sudo cp /usr/src/OCB/debian/odoo.conf /etc/odoo/odoo.conf
-
-    sudo sed -i "s|^.*admin_passwd = .*|admin_passwd = $(openssl rand -base64 32)|g" /etc/odoo/odoo.conf
 
     echo creating odoo user
     sudo su -c "bash /usr/src/OCB/debian/postinst configure"
     sudo adduser "$USER" odoo
 
+    sudo cp /usr/src/OCB/debian/odoo.conf /etc/odoo/odoo.conf
+    sudo sed -i "s|^.*admin_passwd = .*|admin_passwd = $(openssl rand -base64 32)|g" /etc/odoo/odoo.conf
+    sudo wget -O /etc/odoo/scaffold.tar.gz https://raw.githubusercontent.com/vertelab/odootools/common/scaffold.tar.gz
+
     echo adding odoo as a python library
     sudo pip install -U git+https://github.com/OCA/OCB.git@"$VERSION" 
 
     echo create symlinks to cores
-    sudo ln -s /usr/local/lib/python3.8/dist-packages/odoo /usr/share/core-odoo
-    sudo ln -s /usr/src/OCB/addons /usr/share/core-ocb
+    sudo ln -s /usr/local/lib/python3.8/dist-packages/odoo /usr/share/core-odoo-base
+    sudo ln -s /usr/src/OCB/addons /usr/share/core-odoo
 
     ADDONS_PATH=$(sudo grep "addons_path" $ODOO_CONFIGURATION_FILE)
     sudo sed -i "s:$ADDONS_PATH:addons_path=/usr/src/OCB/addons:" $ODOO_CONFIGURATION_FILE
@@ -476,6 +477,14 @@ function odooinstallocb() {
     sudo wget -O /etc/profile.d/odootools.sh https://raw.githubusercontent.com/vertelab/odootools/common/odootools.sh
     sudo wget -O /etc/odoo/odoo.tools https://raw.githubusercontent.com/vertelab/odootools/common/odoo.tools
     . /etc/profile.d/odootools.sh
+
+    echo adding wkhtmltopdf/wkhtmltox
+    sudo -H pip3 install openpyxl
+    sudo add-apt-repository "deb http://archive.canonical.com/ $(lsb_release -sc) partner"
+    sudo apt -y install xfonts-base xfonts-75dpi
+    wget -O /tmp/wkhtmltox_0.12.6-1.focal_amd64.deb https://github.com/wkhtmltopdf/packaging/releases/download/0.12.6-1/wkhtmltox_0.12.6-1.focal_amd64.deb
+    sudo dpkg -i /tmp/wkhtmltox_0.12.6-1.focal_amd64.deb
+    sudo rm -f /tmp/wkhtmltox_0.12.6-1.focal_amd64.deb
 
     sudo systemctl daemon-reload
 
