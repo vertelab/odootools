@@ -487,6 +487,10 @@ function odooinstallocb() {
     sudo dpkg -i /tmp/wkhtmltox_0.12.6-1.focal_amd64.deb
     sudo rm -f /tmp/wkhtmltox_0.12.6-1.focal_amd64.deb
 
+    echo creating odoo user again
+    sudo su -c "bash /usr/src/OCB/debian/postinst configure"
+    sudo adduser "$USER" odoo
+
     sudo systemctl daemon-reload
 
     if [[ "$(sudo systemctl is-active odoo)" != "active" ]]; then
