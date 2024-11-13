@@ -5,5 +5,5 @@
 # List addons directories in ODOOADDONS-variable
 export ODOOADDONS=`ls -d /usr/share/odoo-* /usr/share/odooext-* /usr/src/OCB/addons 2> /dev/null | grep -v odoo-addons | paste -sd ","`
 export ODOOHOSTS="azzar.net"
-#export ODOOPID=$(pgrep odoo)
+#export ODOOPID=$(pgrep -f /usr/bin/odoo)
 #export ODOORESTART="sudo kill $ODOOPID; sudo kill $ODOOPID; sudo service odoo start"
