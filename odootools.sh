@@ -470,7 +470,7 @@ function odooinstallocb() {
 
     echo create symlinks to cores
     sudo ln -s /usr/local/lib/python3.8/dist-packages/odoo /usr/share/core-odoo-base
-    sudo ln -s /usr/src/OCB/addons /usr/share/core-odoo
+    sudo ln -s /usr/src/OCB /usr/share/core-odoo
 
     ADDONS_PATH=$(sudo grep "addons_path" $ODOO_CONFIGURATION_FILE)
     sudo sed -i "s:$ADDONS_PATH:addons_path=/usr/src/OCB/addons:" $ODOO_CONFIGURATION_FILE
