@@ -439,6 +439,8 @@ function odooinstallocb() {
 
     echo installing dependencies
     DEPENDENCIES=$(grep -oP '\s{8}.*' $OCB_DIRECTORY/setup/package.dfdebian | tr -d '\\' | tr -d ' ' | tr -d '&&' | tr -s '\n' ' ' )
+    sudo add-apt-repository "deb http://archive.canonical.com/ $(lsb_release -sc) partner"
+    sudo apt-get update
     sudo apt-get install ${DEPENDENCIES}
     sudo apt-get install python3-dev libsasl2-dev python-dev-is-python3 libldap2-dev libssl-dev libpq-dev
     sudo pip install -r /usr/src/OCB/requirements.txt
@@ -480,8 +482,6 @@ function odooinstallocb() {
 
     echo adding wkhtmltopdf/wkhtmltox
     sudo -H pip3 install openpyxl
-    sudo add-apt-repository "deb http://archive.canonical.com/ $(lsb_release -sc) partner"
-    sudo apt-get update
     sudo apt -y install xfonts-base xfonts-75dpi
     wget -O /tmp/wkhtmltox_0.12.6-1.focal_amd64.deb https://github.com/wkhtmltopdf/packaging/releases/download/0.12.6-1/wkhtmltox_0.12.6-1.focal_amd64.deb
     sudo dpkg -i /tmp/wkhtmltox_0.12.6-1.focal_amd64.deb
