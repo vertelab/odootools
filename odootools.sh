@@ -120,7 +120,7 @@ alias odoopatch='_patch_all_patches'
 function odooaddons() {
     [ -f /etc/odoo/odoo.tools ] && . /etc/odoo/odoo.tools
     if [ -n "$ODOOADDONS" ]; then
-        CMD="s/^addons_path.*=.*/addons_path=${ODOOADDONS//"/"/"\/"}/g"
+        CMD="s/^\;?addons_path.*=.*/addons_path=${ODOOADDONS//"/"/"\/"}/g"
         sudo perl -i -pe "$CMD" "$ODOO_SERVER_CONF"
     fi
 }
@@ -224,6 +224,8 @@ function odoosyncall() {
 
 function odoosetperm() {
     if [ -n "$ODOOADDONS" ]; then
+
+        odooaddons
 
         sudo chown odoo:odoo $(echo "$ODOOADDONS" | tr ',' ' ') -R
         sudo chmod g+w $(echo "$ODOOADDONS" | tr ',' ' ') -R
