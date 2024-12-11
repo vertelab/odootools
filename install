@@ -67,12 +67,12 @@ sudo DEBIAN_FRONTEND=noninteractive apt -y install git python3-pip build-essenti
 
 # Python with dependencies
 echo "Installing Python modules"
-sudo -H pip3 install wheel
+sudo -H pip3 install wheel --break-system-packages
 wget -O /tmp/requirements.txt "https://raw.githubusercontent.com/odoo/odoo/${VERSION}/requirements.txt"
 sudo -H pip3 install -r /tmp/requirements.txt --break-system-packages
 
 # wkhtmltopdf
-sudo -H pip3 install openpyxl
+sudo -H pip3 install openpyxl --break-system-packages
 sudo DEBIAN_FRONTEND=noninteractive apt -y install xfonts-base xfonts-75dpi
 wget -O /tmp/wkhtmltox_0.12.6-1.focal_amd64.deb https://github.com/wkhtmltopdf/packaging/releases/download/0.12.6.1-2/wkhtmltox_0.12.6.1-2.jammy_amd64.deb
 sudo dpkg -i /tmp/wkhtmltox_0.12.6-1.focal_amd64.deb
@@ -92,7 +92,7 @@ sudo wget -O /usr/local/bin/odoocheckdeps.py https://raw.githubusercontent.com/v
 # 2023-10-11
 # Error occurred: module 'lib' has no attribute 'OpenSSL_add_all_algorithms'
 # https://www.odoo.com/forum/help-1/attributeerror-module-lib-has-no-attribute-x509-v-flag-cb-issuer-check-when-creating-new-staging-branch-202955
-sudo pip uninstall -y pyopenssl && sudo pip install pyopenssl==22.0.0 && sudo pip uninstall -y cryptography && sudo pip install cryptography==37.0.0
+sudo pip uninstall -y pyopenssl && sudo pip install pyopenssl==22.0.0 --break-system-packages && sudo pip uninstall -y cryptography && sudo pip install cryptography==37.0.0 --break-system-packages
 
 
 # daily backup
