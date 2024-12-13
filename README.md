@@ -9,6 +9,8 @@ systems might require tweaking to work.
 
 ## Install
 
+Note! If this install fail, uninstall Odoo and install Odoo again!
+
 Installation of Odoo and Odootools.
 
 Ensure you are using the version (eg branch 16.0 for Odoo 16) you want to install.
