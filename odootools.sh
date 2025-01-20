@@ -658,9 +658,9 @@ alias odooaddpreprocess='_odooaddpreprocess'
 
 function _odoopreprocess() {
     [ -z "$1" ] || export ODOOPROJECT=$1
-    if [ -f "/usr/share/"$PROJECT"/.git/hooks/post-checkout" ] ; do
+    if [ -f "/usr/share/"$PROJECT"/.git/hooks/post-checkout" ] ; then
        cd /usr/share/"$ODOOPROJECT"
        /usr/share/"$ODOOPROJECT"/.git/hooks/post-checkout
-    done
+    fi
 }
 alias odoopreprocess='_odoopreprocess'
