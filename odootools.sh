@@ -658,11 +658,11 @@ alias odooaddpreprocess='_odooaddpreprocess'
 
 function _odoopreprocess() {
     [ -z "$1" ] || export ODOOPROJECT=$1
-    PWD=`pwd`
     if [ -f "/usr/share/"$ODOOPROJECT"/.git/hooks/post-checkout" ] ; then
-       cd /usr/share/"$ODOOPROJECT"
-       /usr/share/"$ODOOPROJECT"/.git/hooks/post-checkout
+       find /usr/share/"$ODOOPROJECT" -name "*.p.py" | xargs -I {} sh -c 'base=$(echo {}); preprocess -D VERSION=${branch_name} -D REPO=${repo_name} -o "${base%.p.py}.py" "{}"'
+       find /usr/share/"$ODOOPROJECT" -name "*.p.js" | xargs -I {} sh -c 'base=$(echo {}); preprocess -D VERSION=${branch_name} -D REPO=${repo_name} -o "${base%.p.js}.js" "{}"'
+       find /usr/share/"$ODOOPROJECT" -name "*.p.csv" | xargs -I {} sh -c 'base=$(echo {}); preprocess -D VERSION=${branch_name} -D REPO=${repo_name} -o "${base%.p.csv}.csv" "{}"'
+       find /usr/share/"$ODOOPROJECT" -name "*.p.xml" | xargs -I {} sh -c 'base=$(echo {}); preprocess -D VERSION=${branch_name} -D REPO=${repo_name} -o "${base%.p.xml}.xml" "{}"'
     fi
-    cd $PWD
 }
 alias odoopreprocess='_odoopreprocess'
