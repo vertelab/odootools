@@ -657,12 +657,25 @@ function _odooaddpreprocess() {
 alias odooaddpreprocess='_odooaddpreprocess'
 
 function _odoopreprocess() {
+    # Get the current branch name
+    branch_name=$(git rev-parse --abbrev-ref HEAD)
+    export branch_name
+    # Get the repository name
+    repo_name=$(basename `git rev-parse --show-toplevel`)
+    export repo_name
     [ -z "$1" ] || export ODOOPROJECT=$1
     if [ -f "/usr/share/"$ODOOPROJECT"/.git/hooks/post-checkout" ] ; then
+       PWD=$(pwd)
+       cd /usr/share/"$ODOOPROJECT"
+       branch_name=$(git rev-parse --abbrev-ref HEAD)
+       export branch_name
+       repo_name=$(basename `git rev-parse --show-toplevel`)
+       export repo_name
        find /usr/share/"$ODOOPROJECT" -name "*.p.py" | xargs -I {} sh -c 'base=$(echo {}); preprocess -D VERSION=${branch_name} -D REPO=${repo_name} -o "${base%.p.py}.py" "{}"'
        find /usr/share/"$ODOOPROJECT" -name "*.p.js" | xargs -I {} sh -c 'base=$(echo {}); preprocess -D VERSION=${branch_name} -D REPO=${repo_name} -o "${base%.p.js}.js" "{}"'
        find /usr/share/"$ODOOPROJECT" -name "*.p.csv" | xargs -I {} sh -c 'base=$(echo {}); preprocess -D VERSION=${branch_name} -D REPO=${repo_name} -o "${base%.p.csv}.csv" "{}"'
        find /usr/share/"$ODOOPROJECT" -name "*.p.xml" | xargs -I {} sh -c 'base=$(echo {}); preprocess -D VERSION=${branch_name} -D REPO=${repo_name} -o "${base%.p.xml}.xml" "{}"'
+       cd $PWD
     fi
 }
 alias odoopreprocess='_odoopreprocess'
