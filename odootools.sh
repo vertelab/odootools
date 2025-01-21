@@ -664,6 +664,7 @@ function _odoopreprocess() {
     repo_name=$(basename `git rev-parse --show-toplevel`)
     export repo_name
     [ -z "$1" ] || export ODOOPROJECT=$1
+    [ -z "$ODOOPROJECT" ] && echo "You have to set project odoopreprocess [project]" && return
     if [ -f "/usr/share/"$ODOOPROJECT"/.git/hooks/post-checkout" ] ; then
        PWD=$(pwd)
        cd /usr/share/"$ODOOPROJECT"
