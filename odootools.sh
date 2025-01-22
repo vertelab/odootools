@@ -680,3 +680,15 @@ function _odoopreprocess() {
     fi
 }
 alias odoopreprocess='_odoopreprocess'
+
+
+function _odooprecp() {
+    # Copy p-file to same file without p
+     [ -z "$1" ] && echo "You have give filename odooprecp [p-file]" && return
+    if [[ -f "$1" && "$1" == *.p.* ]]; then
+        newname="${1/.p./.}"
+        cp "$1" "$newname"
+        echo "Renamed: $1 -> $newname"
+    fi
+}
+alias odooprecp='_odooprecp'
