@@ -681,14 +681,14 @@ function _odoopreprocess() {
 }
 alias odoopreprocess='_odoopreprocess'
 
-
-function _odooprecp() {
-    # Copy p-file to same file without p
-     [ -z "$1" ] && echo "You have give filename odooprecp [p-file]" && return
-    if [[ -f "$1" && "$1" == *.p.* ]]; then
-        newname="${1/.p./.}"
-        cp "$1" "$newname"
-        echo "Renamed: $1 -> $newname"
-    fi
+function _odooprepfile() {
+    # Preprocess p-file to same file without p
+    [ -z "${branch_name}" ] &&  branch_name=$(git rev-parse --abbrev-ref HEAD) && export branch_name
+    [ -z "${repo_name}" ] &&    repo_name=$(basename `git rev-parse --show-toplevel`) && export repo_name
+    [ -z "$1" ] || [[ "$1" != *.p.* ]] || [ ! -f "$1" ] && echo "You must provide a valid filename ending with .p.[extension]" && return
+    newname="${1/.p./.}"
+    preprocess -D VERSION=${branch_name} -D REPO=${repo_name} -o ${newname} $1
+    echo "Renamed: $1 -> $newname"
 }
-alias odooprecp='_odooprecp'
+alias odooprecp='_odooprepfile'
+
