@@ -703,6 +703,7 @@ function _odooreqclone() {
                 if ! git clone -b "$VERSION" --depth 1  "$repo_url" "$fs_path" ; then
                     echo -e "${RED}failed to git clone "$repo_url" ${NOCOLOR}"
                 fi
+		sudo chown odoo:odoo "$fs_path" -R
             fi
         done < "$repo_file"
     done
