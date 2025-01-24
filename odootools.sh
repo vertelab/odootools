@@ -694,7 +694,7 @@ alias odooprecp='_odooprepfile'
 
 
 function _odooreqclone() {
-  # requirement.repo  git@github.com:OCA/knowledge.git /usr/share/odooext-OCA-knowledge
+  # requirements.repo  git@github.com:OCA/knowledge.git /usr/share/odooext-OCA-knowledge
     for repo_file in "$@"
     do
         while IFS=' ' read -r repo_url fs_path
