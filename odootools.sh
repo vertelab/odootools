@@ -692,3 +692,15 @@ function _odooprepfile() {
 }
 alias odooprecp='_odooprepfile'
 
+
+function _odooreqclone() {
+    while IFS=' ' read -r repo_url fs_path
+    do
+        if [ -n "$repo_url" ] && [ -n "$fs_path" ]; then
+            git clone "$repo_url" "$fs_path"
+            echo "Cloned $repo_url to $fs_path"
+        fi
+    done < $1
+
+}
+alias odooreqclone='_odooreqclone'
