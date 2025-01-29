@@ -723,6 +723,7 @@ function _odoodiff2p() {
       	  mv ${diff_file} ${new_name}
       else
          echo "Wrong filename, not a diff-file"
+      fi
     done
 }
 alias odoodiff2p='_odoodiff2p'
