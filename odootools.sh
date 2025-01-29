@@ -720,7 +720,7 @@ function _odoodiff2p() {
           # For files like pelle.something.diff
           new_name="${base%.*}.p.${base##*.}"
           #perl -i -pe 'BEGIN{undef $/} s/^.*?@@/@@/s; s/^[+-]/ /mg' ${diff_file}
-	  perl -i -pe 'BEGIN{undef $/}   s/^.*?@@-\d+,\d+ \+\d+,\d+ @@\n//s; s/\\No newline at end of file\n?$//' ${diff_file}
+	  perl -i -pe 'BEGIN{undef $/}   s/^.*?@@-\d+,\d+ \+\d+,\d+ @@\n//s; s/^[+-]/ /mg'; s/\\No newline at end of file\n?$//' ${diff_file}
 
       	  mv ${diff_file} ${new_name}
       else
