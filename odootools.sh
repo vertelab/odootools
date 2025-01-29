@@ -709,3 +709,20 @@ function _odooreqclone() {
     done
 }
 alias odooreqclone='_odooreqclone'
+
+
+function _odoodiff2p() {
+  # odoodiff2p *.diff
+    for diff_file in "$@"
+    do
+      base=${diff_file%.diff}  # Remove .diff extension
+      if [[ $base == *.* ]]; then
+          # For files like pelle.something.diff
+          new_name="${base%.*}.p.${base##*.}.diff"
+          perl -i -pe 'BEGIN{undef $/} s/^.*?@@/@@/s; s/^[+-]/ /mg' ${diff_file}
+      	  mv ${diff_file} ${new_name}
+      else
+         echo "Wrong filename, not a diff-file"
+    done
+}
+alias odoodiff2p='_odoodiff2p'
