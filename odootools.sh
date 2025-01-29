@@ -718,8 +718,10 @@ function _odoodiff2p() {
       base=${diff_file%.diff}  # Remove .diff extension
       if [[ $base == *.* ]]; then
           # For files like pelle.something.diff
-          new_name="${base%.*}.p.${base##*.}.diff"
-          perl -i -pe 'BEGIN{undef $/} s/^.*?@@/@@/s; s/^[+-]/ /mg' ${diff_file}
+          new_name="${base%.*}.p.${base##*.}"
+          #perl -i -pe 'BEGIN{undef $/} s/^.*?@@/@@/s; s/^[+-]/ /mg' ${diff_file}
+	  perl -i -pe 'BEGIN{undef $/} s/^.*?@@.*\n//s; s/^[+-]/ /; s/\\No newline at end of file\n?$//' ${diff_file}
+
       	  mv ${diff_file} ${new_name}
       else
          echo "Wrong filename, not a diff-file"
