@@ -637,7 +637,7 @@ function _odoobranchdiff() {
 		git diff --quiet "$SBRANCH" "$DBRANCH" -- "$file" && continue
 		echo  "${file}".diff
 		git diff -U10000 "$SBRANCH" "$DBRANCH" -- "$file" > "${file}".diff
-                perl -pi -e 's/\s//' "${file}".diff 
+                perl -pi -e 's/^\s//' "${file}".diff 
 	done
 	git checkout "$OBRANCH"
 	cd "$CWD"
