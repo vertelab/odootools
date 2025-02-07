@@ -172,7 +172,11 @@ function odooextgitpull() {
 function odooallrequirements() {
     for req in /usr/share/odoo*/requirements.txt
     do
-        sudo pip3 install -r "$req"
+    	if [ -n $VERSION ] && [[ $VERSION == "18.0" ]]; then 
+	    sudo pip3 install -r "$req" --break-system-packages
+	else
+ 	    sudo pip3 install -r "$req"
+ 	fi
     done
 }
 
