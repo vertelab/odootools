@@ -579,7 +579,6 @@ function _odoobranchpfile() {
 	[ -z "$ODOOPROJECT" ] && echo "You have to set -p --project option to continue" && return
 	[ -z "$MODULE" ] && echo "You have to set -m --module option to continue" && return
 	[ -z "$SBRANCH" ] && echo "You have to set -s --source option to continue" && return
-	[ -z "$DBRANCH" ] && echo "You have to set -d --destination option to continue" && return
 	CWD=$(pwd)
 	cd /usr/share/"$ODOOPROJECT"
 	git checkout "$SBRANCH"
