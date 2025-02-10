@@ -612,8 +612,8 @@ function _odoobranchdiff() {
 	usage() { echo "Usage: $0 [-p|--project <project>] [-m|--moduie <module>] [-s|--source <branch> ] [-d|--destination <branch> ]" 1>&2; exit 1; }
 	[ -f /etc/odoo/odoo.tools ] && . /etc/odoo/odoo.tools
 	OBRANCH=$(git rev-parse --abbrev-ref HEAD)
-	SBRANCH=$OBRANCH
-	export SBRANCH
+	DBRANCH=$OBRANCH
+	export DBRANCH
     ODOOPROJECT=$(basename "$(git rev-parse --show-toplevel)")
 	export ODOOPROJECT
 	local OPTIND OPTARG option
@@ -636,6 +636,7 @@ function _odoobranchdiff() {
 	git checkout "$SBRANCH"
 	files=$(find /usr/share/"$ODOOPROJECT"/"$MODULE"  \( -name "*.py" -o -name "*.js" -o -name "*.sh" -o -name "*.csv" -o -name "*.xml" \))
 	echo "$files"
+ 	git checkout "$DBRANCH"
 	for file in $files 
 	do  
 		git diff --quiet "$SBRANCH" "$DBRANCH" -- "$file" && continue
