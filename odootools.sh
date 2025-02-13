@@ -546,6 +546,7 @@ function _odoobranchget() {
 	
     CWD=$(pwd)
     cd /usr/share/"$ODOOPROJECT"
+    git checkout "$SBRANCH"
     git checkout "$DBRANCH"
     git checkout "$SBRANCH" ./"$MODULE" 
 
@@ -595,8 +596,7 @@ function _odoobranchpfile() {
 	       echo "$file"
 	       if [ -f "${file/.p/}" ]
 	       then
-		   #TODO merge inkompatibelt med Ubuntu 24.04
-	           git checkout --merge "$SBRANCH" "$file" -q
+	           git checkout "$SBRANCH" "$file" -q
 	       fi
 	   done
 	   git add .
