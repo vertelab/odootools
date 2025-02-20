@@ -594,10 +594,7 @@ function _odoobranchpfile() {
 	   for file in $pfiles
 	   do
 	       echo "$file"
-	       if [ -f "${file/.p/}" ]
-	       then
-	           git checkout "$SBRANCH" "$file" -q
-	       fi
+	       git checkout "$SBRANCH" "$file" -q
 	   done
 	   git add .
 	   git commit -m "odoobranchpfile $MODULE from $branch"
