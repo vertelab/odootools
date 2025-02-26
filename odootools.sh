@@ -584,7 +584,7 @@ function _odoobranchpfile() {
 	cd /usr/share/"$ODOOPROJECT"
 	git checkout "$SBRANCH"
     	#TODO kopiera index.html *.png och *.jpg.
-    pfiles=$(find /usr/share/"$ODOOPROJECT"/"$MODULE" \( -name "*.p.py" -o -name "*.p.js" -o -name "*.p.sh" -o -name "*.p.csv" -o -name "*.p.xml" \))
+    pfiles=$(find /usr/share/"$ODOOPROJECT"/"$MODULE" \( -name "*.p.py" -o -name "*.p.js" -o -name "*.p.sh" -o -name "*.p.csv" -o -name "*.p.xml" -o -name "*.png" -o -name "*.jpeg" -o -name "*index.html" \))
     branches=$(git branch -r | tr ' ' '\n'  | grep -E '^origin/[0-9]+\.0$' | sed 's/^origin\///')
 	for branch in $branches
 	do
