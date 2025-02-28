@@ -394,15 +394,10 @@ function odooinstallocb() {
     fi
 
     if  "$(pip freeze | grep -q odoo)"; then
-
         while true; do
-
             if [ -z "${YESNO}" ]; then
-
                 read -rp "odoo is already installed do you want to uninstall odoo? (y/n) " YESNO
-
             fi
-
             case $YESNO in 
                 [yY] ) echo uninstalling odoo...;
                     sudo apt remove --purge odoo
@@ -412,35 +407,22 @@ function odooinstallocb() {
                     break;;
                 * ) echo invalid response;;
             esac
-
         done
-
     fi
 
     if [ -z "${VERSION}" ]; then
-
         while true; do
-
             read -rp "Which version of odoo should be installed? " VERSION
-
             if [ -n "${VERSION}" ]; then 
-
                 break
-
             fi
-
         done
-
     fi
 
     if [ -d $OCB_DIRECTORY ]; then
-
         sudo git -C $OCB_DIRECTORY pull
-
     elif [ ! -d $OCB_DIRECTORY ]; then
-
         sudo git clone --depth=1 --single-branch --branch "$VERSION" https://github.com/OCA/OCB.git "$OCB_DIRECTORY"
-
     fi
 
     echo installing dependencies
@@ -497,6 +479,9 @@ function odooinstallocb() {
     sudo su -c "bash /usr/src/OCB/debian/postinst configure"
     sudo adduser "$USER" odoo
 
+    sudo wget -O /etc/cron.daily/db_backup https://raw.githubusercontent.com/vertelab/odootools/${VERSION}/db_backup
+    sudo chmod a+x /etc/cron.daily/db_backup
+
     sudo systemctl daemon-reload
 
     if [[ "$(sudo systemctl is-active odoo)" != "active" ]]; then
@@ -505,10 +490,8 @@ function odooinstallocb() {
 
     if [[ "$(sudo systemctl is-active odoo)" == "inactive" ]]; then
         echo -e "${RED}odoo is not starting!!! check the logs at /var/log/odoo/odoo-server.log to figure out why ${NOCOLOR}" 
-
     elif [[ "$(sudo systemctl is-active odoo)" == "active" ]]; then
         echo -e "${GREEN}odoo started successfully ${NOCOLOR}" 
-
     else
         echo -e "${RED}Something seems to have gone horribly wrong!!! ${NOCOLOR}" 
     fi
