@@ -25,6 +25,8 @@ wget -O- https://raw.githubusercontent.com/vertelab/odootools/18.0/install | bas
 Step 2: Add users with these commands:
 Add userser
 ```
+sudo apt install python3-phonenumbers
+
 sudo adduser $USER
 sudo adduser $USER sudo
 sudo adduser $USER odoo
