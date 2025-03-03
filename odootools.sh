@@ -574,6 +574,7 @@ function _odoobranchpfile() {
 	   [ "$branch" == "$SBRANCH" ] && continue
 	   echo "$branch" 
 	   git checkout "$branch"
+           git pull
 	   for file in $pfiles
 	   do
 	       echo "$file"
