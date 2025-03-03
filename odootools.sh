@@ -571,10 +571,10 @@ function _odoobranchpfile() {
     branches=$(git branch -r | tr ' ' '\n'  | grep -E '^origin/[0-9]+\.0$' | sed 's/^origin\///')
 	for branch in $branches
 	do
+           git pull
 	   [ "$branch" == "$SBRANCH" ] && continue
 	   echo "$branch" 
 	   git checkout "$branch"
-           git pull
 	   for file in $pfiles
 	   do
 	       echo "$file"
