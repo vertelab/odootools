@@ -547,3 +547,20 @@ function _odoomodules() {
 alias odoomodules="_odoomodules"
 
 alias odoocheckdeps='python3 /usr/local/bin/odoocheckdeps.py'
+
+function _odooreqclone() {
+  # requirements.repo  git@github.com:OCA/knowledge.git /usr/share/odooext-OCA-knowledge
+    for repo_file in "$@"
+    do
+        while IFS=' ' read -r repo_url fs_path
+        do
+            if [ -n "$repo_url" ] && [ -n "$fs_path" ]; then
+                if ! git clone -b "$VERSION" --depth 1  "$repo_url" "$fs_path" ; then
+                    echo -e "${RED}failed to git clone "$repo_url" ${NOCOLOR}"
+                fi
+		sudo chown odoo:odoo "$fs_path" -R
+            fi
+        done < "$repo_file"
+    done
+}
+alias odooreqclone='_odooreqclone'
