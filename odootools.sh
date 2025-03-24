@@ -715,3 +715,9 @@ function _odoodiff2p() {
     done
 }
 alias odoodiff2p='_odoodiff2p'
+
+function _odootoolsupgrade() {
+    sudo wget https://raw.githubusercontent.com/vertelab/odootools/refs/heads/common/odootools.sh /etc/profile.d/odootools.sh
+    . /etc/profile.d/odootools.sh
+}
+alias odootoolsupgrade='_odootoolsupgrade'
