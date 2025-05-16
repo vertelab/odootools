@@ -96,6 +96,44 @@ pip uninstall cryptography
 pip install cryptography==37.0.0
 ```
 
+## Trouble with --break-system-packages
+If you find the warning you get when you try to install Python libraries system-wide annoying, you can follow the steps below.
+
+A reminder that you do this at your own discretion.
+
+To make this easy, become root:
+```
+sudo su
+```
+Go to the root home directory:
+```
+cd
+```
+In the root home folder, create a .config directory:
+```
+mkdir .config
+```
+Enter the .config directory:
+```
+cd .config
+```
+In the .config directory, create a pip directory:
+```
+mkdir pip
+```
+Enter the pip directory:
+```
+cd pip
+```
+In the pip directory, create a pip.conf file:
+```
+touch pip.conf
+```
+And add the following to the pip.conf file.
+```
+[global]
+break_system_packages = true
+```
 ## Odoo-tools commands
 
 Odoo-tools command |Description
