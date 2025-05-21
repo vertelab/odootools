@@ -1,7 +1,7 @@
 #!/bin/bash
 
 SOURCE_DIR="/usr/share"
-TARGET_DIR="/home/miracle/fake_addons"
+TARGET_DIR="$HOME/fake_addons"
 
 ADDONS_PROJECTS=(
 "odoo-account"
@@ -94,6 +94,20 @@ for project in "${ADDONS_PROJECTS[@]}"; do
 
         # Copy and empty XML files in views and data
         for subdir in view data; do
+            if [ -d "$module/$subdir" ]; then
+                mkdir -p "$dest/$subdir"
+                for xml in "$module/$subdir"/*.xml; do
+                    [ -f "$xml" ] && echo "<odoo></odoo>" > "$dest/$subdir/$(basename "$xml")"
+                done
+                for csv in "$module/$subdir"/*.csv; do
+                    [ -f "$csv" ] && echo "id,name" > "$dest/$subdir/$(basename "$csv")"
+                done
+
+            fi
+        done
+
+        # Copy and empty XML files in templates and data
+        for subdir in templates data; do
             if [ -d "$module/$subdir" ]; then
                 mkdir -p "$dest/$subdir"
                 for xml in "$module/$subdir"/*.xml; do
