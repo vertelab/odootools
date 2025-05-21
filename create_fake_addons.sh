@@ -63,6 +63,13 @@ for project in "${ADDONS_PROJECTS[@]}"; do
                 [ -f "$pyfile" ] && cp "$pyfile" "$dest/"
             fi
         done
+
+        # Copy xml files in module root
+        for xmlfile in "$module"/*.xml; do
+            [ -f "$xmlfile" ] && cp "$xmlfile" "$dest/"
+            [ -f "$xmlfile" ] && echo "<odoo></odoo>" > "$dest/$(basename "$xmlfile")"
+        done
+
         # Copy models folder and its Python files
         if [ -d "$module/models" ]; then
             mkdir -p "$dest/models"
