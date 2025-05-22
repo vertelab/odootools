@@ -150,12 +150,19 @@ for project in "${ADDONS_PROJECTS[@]}"; do
             fi
         done
 
-
         # Copy and empty controllers files
         if [ -d "$module/controllers" ]; then
             mkdir -p "$dest/controllers"
             for ctrlfile in "$module/controllers"/*; do
                 [ -f "$ctrlfile" ] && : > "$dest/controllers/$(basename "$ctrlfile")"
+            done
+        fi
+
+        # Copy and empty controller files
+        if [ -d "$module/controller" ]; then
+            mkdir -p "$dest/controller"
+            for ctrlfile in "$module/controller"/*; do
+                [ -f "$ctrlfile" ] && : > "$dest/controller/$(basename "$ctrlfile")"
             done
         fi
 
