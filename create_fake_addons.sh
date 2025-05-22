@@ -77,11 +77,20 @@ for project in "${ADDONS_PROJECTS[@]}"; do
                 [ -f "$pyfile" ] && cp "$pyfile" "$dest/models/"
             done
         fi
-        # Copy models folder and its Python files
+        
+        # Copy model folder and its Python files
         if [ -d "$module/model" ]; then
             mkdir -p "$dest/model"
             for pyfile in "$module/model"/*.py; do
                 [ -f "$pyfile" ] && cp "$pyfile" "$dest/model/"
+            done
+        fi
+
+        # Copy tools folder and its Python files
+        if [ -d "$module/tools" ]; then
+            mkdir -p "$dest/tools"
+            for pyfile in "$module/tools"/*.py; do
+                [ -f "$pyfile" ] && cp "$pyfile" "$dest/tools/"
             done
         fi
 
