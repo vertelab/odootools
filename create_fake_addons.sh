@@ -118,7 +118,6 @@ for project in "${ADDONS_PROJECTS[@]}"; do
                 for csv in "$module/$subdir"/*.csv; do
                     [ -f "$csv" ] && echo "id,name" > "$dest/$subdir/$(basename "$csv")"
                 done
-
             fi
         done
 
@@ -132,7 +131,19 @@ for project in "${ADDONS_PROJECTS[@]}"; do
                 for csv in "$module/$subdir"/*.csv; do
                     [ -f "$csv" ] && echo "id,name" > "$dest/$subdir/$(basename "$csv")"
                 done
+            fi
+        done
 
+        # Copy and empty XML files in templates and data
+        for subdir in snippets data; do
+            if [ -d "$module/$subdir" ]; then
+                mkdir -p "$dest/$subdir"
+                for xml in "$module/$subdir"/*.xml; do
+                    [ -f "$xml" ] && echo "<odoo></odoo>" > "$dest/$subdir/$(basename "$xml")"
+                done
+                for csv in "$module/$subdir"/*.csv; do
+                    [ -f "$csv" ] && echo "id,name" > "$dest/$subdir/$(basename "$csv")"
+                done
             fi
         done
 
@@ -195,7 +206,16 @@ for project in "${ADDONS_PROJECTS[@]}"; do
             for ctrlfile2 in "$module/reports"/*.xml; do
                 [ -f "$ctrlfile2" ] && echo "<odoo></odoo>" > "$dest/reports/$(basename "$ctrlfile2")"
             done
+        fi
 
+        if [ -d "$module/report" ]; then
+            mkdir -p "$dest/report"
+            for ctrlfile in "$module/report"/*.py; do
+                [ -f "$ctrlfile" ] && : > "$dest/report/$(basename "$ctrlfile")"
+            done
+            for ctrlfile2 in "$module/report"/*.xml; do
+                [ -f "$ctrlfile2" ] && echo "<odoo></odoo>" > "$dest/report/$(basename "$ctrlfile2")"
+            done
         fi
 
         if [ -d "$module/module" ]; then
