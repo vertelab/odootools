@@ -134,7 +134,7 @@ for project in "${ADDONS_PROJECTS[@]}"; do
             fi
         done
 
-        # Copy and empty XML files in templates and data
+        # Copy and empty XML files in snippets and data
         for subdir in snippets data; do
             if [ -d "$module/$subdir" ]; then
                 mkdir -p "$dest/$subdir"
@@ -143,6 +143,19 @@ for project in "${ADDONS_PROJECTS[@]}"; do
                 done
                 for csv in "$module/$subdir"/*.csv; do
                     [ -f "$csv" ] && echo "id,name" > "$dest/$subdir/$(basename "$csv")"
+                done
+            fi
+        done
+    
+        # Copy and empty XML files in snippets in views and data
+        for subdir in snippets data; do
+            if [ -d "$module/views/$subdir" ]; then
+                mkdir -p "$dest/views/$subdir"
+                for xml in "$module/views/$subdir"/*.xml; do
+                    [ -f "$xml" ] && echo "<odoo></odoo>" > "$dest/views/$subdir/$(basename "$xml")"
+                done
+                for csv in "$module/views/$subdir"/*.csv; do
+                    [ -f "$csv" ] && echo "id,name" > "$dest/views/$subdir/$(basename "$csv")"
                 done
             fi
         done
