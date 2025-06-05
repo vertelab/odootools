@@ -227,9 +227,8 @@ function odoosyncall() {
 }
 
 function odoosetperm() {
+    [ -f /etc/odoo/odoo.tools ] && . /etc/odoo/odoo.tools
     if [ -n "$ODOOADDONS" ]; then
-
-        odooaddons
 
         sudo chown odoo:odoo $(echo "$ODOOADDONS" | tr ',' ' ') -R
         sudo chmod g+w $(echo "$ODOOADDONS" | tr ',' ' ') -R
