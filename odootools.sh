@@ -662,7 +662,10 @@ function _odoopreprocess() {
        find /usr/share/"$ODOOPROJECT" -name "*.p.csv" | xargs -I {} sh -c 'base=$(echo {}); preprocess -D VERSION=${branch_name} -D REPO=${repo_name} -o "${base%.p.csv}.csv" "{}"'
        find /usr/share/"$ODOOPROJECT" -name "*.p.xml" | xargs -I {} sh -c 'base=$(echo {}); preprocess -D VERSION=${branch_name} -D REPO=${repo_name} -o "${base%.p.xml}.xml" "{}"'
        cd $PWD
+    else
+       echo "odooaddpreprocess hasn't been run on this project, which is required for this command to work."
     fi
+    
 }
 alias odoopreprocess='_odoopreprocess'
 
