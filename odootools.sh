@@ -642,15 +642,16 @@ function _odooaddpreprocess() {
 alias odooaddpreprocess='_odooaddpreprocess'
 
 function _odoopreprocess() {
-    # Get the current branch name
-    branch_name=$(git rev-parse --abbrev-ref HEAD)
-    export branch_name
-    # Get the repository name
-    repo_name=$(basename `git rev-parse --show-toplevel`)
-    export repo_name
+      
     [ -z "$1" ] || export ODOOPROJECT=$1
     [ -z "$ODOOPROJECT" ] && echo "You have to set project odoopreprocess [project]" && return
     if [ -f "/usr/share/"$ODOOPROJECT"/.git/hooks/post-checkout" ] ; then
+       # Get the current branch name
+       branch_name=$(git rev-parse --abbrev-ref HEAD)
+       export branch_name
+       # Get the repository name
+       repo_name=$(basename `git rev-parse --show-toplevel`)
+       export repo_name
        PWD=$(pwd)
        cd /usr/share/"$ODOOPROJECT"
        branch_name=$(git rev-parse --abbrev-ref HEAD)
