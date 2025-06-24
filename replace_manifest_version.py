@@ -8,26 +8,35 @@ def replace_versions(base_dir, new_version='1.0'):
     using the pattern: ('version':\s')(?:\d+\.\d+\.\d+\.\d+\.\d+)(',)
     and replacement: $1{new_version}$2
     """
-    pattern = re.compile(r"('version':\s')(?:\d+\.\d+\.\d+\.\d+\.\d+)(',)")
+    base_digit_str = "\.\d+"
+    digit_str = ""
     updated_count = 0
 
-    for root, _, files in os.walk(base_dir):
-        if '__manifest__.py' in files:
-            file_path = os.path.join(root, '__manifest__.py')
-            with open(file_path, 'r+', encoding='utf-8') as f:
-                content = f.read()
-                new_content, replacements = pattern.subn(
-                    rf"\g<1>{new_version}\g<2>",  # Using named groups to avoid ambiguity
-                    content
-                )
+    for _ in range(4):
 
-                if replacements > 0:
-                    f.seek(0)
-                    f.truncate()
-                    f.write(new_content)
-                    updated_count += 1
-                    print(f"Updated {file_path} to version '{new_version}'")
-    
+        digit_str += base_digit_str
+
+        pattern_text = f"([\'\"]version[\'\"]:\s[\'\"])(?:\d+{digit_str})([\'\"],)"
+
+        pattern = re.compile(pattern_text)
+
+        for root, _, files in os.walk(base_dir):
+            if '__manifest__.py' in files:
+                file_path = os.path.join(root, '__manifest__.py')
+                with open(file_path, 'r+', encoding='utf-8') as f:
+                    content = f.read()
+                    new_content, replacements = pattern.subn(
+                        rf"\g<1>{new_version}\g<2>",  # Using named groups to avoid ambiguity
+                        content
+                    )
+
+                    if replacements > 0:
+                        f.seek(0)
+                        f.truncate()
+                        f.write(new_content)
+                        updated_count += 1
+                        print(f"Updated {file_path} to version '{new_version}'")
+                        
     print(f"\nTotal files updated: {updated_count}")
 
 if __name__ == "__main__":
