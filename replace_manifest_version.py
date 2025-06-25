@@ -5,18 +5,17 @@ import sys
 def replace_versions(base_dir, new_version='1.0'):
     """
     Replace version numbers in __manifest__.py files
-    using the pattern: ('version':\s')(?:\d+\.\d+\.\d+\.\d+\.\d+)(',)
+    using the pattern: ([\'\"]version[\'\"]:\s?[\'\"])(?:\d+{digit_str})([\'\"],)
     and replacement: $1{new_version}$2
     """
     base_digit_str = "\.\d+"
     digit_str = ""
     updated_count = 0
-
-    for _ in range(4):
+    for _ in range(5):
 
         digit_str += base_digit_str
 
-        pattern_text = f"([\'\"]version[\'\"]:\s[\'\"])(?:\d+{digit_str})([\'\"],)"
+        pattern_text = f"([\'\"]version[\'\"]:\s?[\'\"])(?:\d+{digit_str})([\'\"],)"
 
         pattern = re.compile(pattern_text)
 
