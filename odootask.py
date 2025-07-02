@@ -47,7 +47,7 @@ def main(project_name, my_only, task_number,close):
         if not stage_ids:
             print("No 'Klar' stage found for this project.")
             return
-        task.write({'stage_id': stage_ids[0])
+        task.write({'stage_id': stage_ids[0]})
         print(f"Task [{task.number}] {task.name} closed")
         return
 
