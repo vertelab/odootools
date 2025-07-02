@@ -86,6 +86,8 @@ sudo wget -O /etc/profile.d/odootools.sh https://raw.githubusercontent.com/verte
 sudo wget -O "/etc/odoo/scaffold.tar.gz https://raw.githubusercontent.com/vertelab/odootools/common/scaffold.tar.gz"
 sudo wget -O /etc/bash_completion.d/odoo https://raw.githubusercontent.com/vertelab/odootools/common/bash_completion.odoo
 sudo wget -O /usr/local/bin/odooextras.py https://raw.githubusercontent.com/vertelab/odootools/common/odooextras.py
+sudo wget -O /usr/local/bin/odootask https://raw.githubusercontent.com/vertelab/odootools/common/odootask.py
+sudo chmod a+x /usr/local/bin/odootask
 
 # Extra tools
 sudo wget -O /usr/local/bin/odoocheckdeps.py https://raw.githubusercontent.com/vertelab/odootools/common/scripts/odoocheckdeps.py
