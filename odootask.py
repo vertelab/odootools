@@ -2,6 +2,8 @@
 """
 odootask -p <project> or odootask -> List open tasks
 odootask -t <task_number>         -> display task description 
+odootask -c <task_number>         -> Close a task
+odootask -t <task_number> -m <message> -> Log a message on a task TODO
 
 ~/.odoorpcrc
 ...
