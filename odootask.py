@@ -27,18 +27,6 @@ ODOORPCRC_PATH = os.path.expanduser("~/.odoorpcrc")
 SESSION_NAME = "projectdb"
 
 def main(project_name, my_only, task_number):
-    if not os.path.exists(ODOORPCRC_PATH):
-        print(f"Error: File '{ODOORPCRC_PATH}' missing. Create session projectdb with database credentials.", file=sys.stderr)
-        sys.exit(1)
-    if SESSION_NAME not in odoorpc.ODOO.list(ODOORPCRC_PATH):
-        print(f"Error: Session '{SESSION_NAME}' missing in {ODOORPCRC_PATH}. Create this with database credentials", file=sys.stderr)
-        sys.exit(1)
-
-    odoo = odoorpc.ODOO.load(SESSION_NAME)
-
-
-
-def main(project_name, my_only, task_number):
     odoo = odoorpc.ODOO.load('projectdb')
 
     if task_number:
@@ -85,6 +73,41 @@ def main(project_name, my_only, task_number):
 
 
 if __name__ == "__main__":
+    if not os.path.exists(ODOORPCRC_PATH):
+        print(f"""Error: File '{ODOORPCRC_PATH}' missing. Create session projectdb with database credentials.
+~/.odoorpcrc
+...
+[projectdb]
+type = ODOO
+protocol = jsonrpc
+host = your server
+port = 8069
+database = database name
+user = your user
+timeout = 120.0
+passwd = password
+...
+
+
+              """, file=sys.stderr)
+        sys.exit(1)
+    if SESSION_NAME not in odoorpc.ODOO.list(ODOORPCRC_PATH):
+        print(f"""Error: Session '{SESSION_NAME}' missing in {ODOORPCRC_PATH}. Create this with database credentials
+~/.odoorpcrc
+...
+[projectdb]
+type = ODOO
+protocol = jsonrpc
+host = your server
+port = 8069
+database = database name
+user = your user
+timeout = 120.0
+passwd = password
+...
+        """, file=sys.stderr)
+        sys.exit(1)
+        
     parser = argparse.ArgumentParser(description=__doc__)
     parser.add_argument("-p", "--project", default=None, help="Project name (defaults to current directory)")
     parser.add_argument("--my", action="store_true", help="Filter to my tasks")
