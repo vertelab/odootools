@@ -2,12 +2,41 @@
 """
 odootask -p <project> or odootask -> List open tasks
 odootask -t <task_number>         -> display task description 
+
+~/.odoorpcrc
+...
+[projectdb]
+type = ODOO
+protocol = jsonrpc
+host = your server
+port = 8069
+database = database name
+user = your user
+timeout = 120.0
+passwd = password
+...
 """
 
 import argparse
 import os
 import odoorpc
 from bs4 import BeautifulSoup
+
+
+ODOORPCRC_PATH = os.path.expanduser("~/.odoorpcrc")
+SESSION_NAME = "projectdb"
+
+def main(project_name, my_only, task_number):
+    if not os.path.exists(ODOORPCRC_PATH):
+        print(f"Error: File '{ODOORPCRC_PATH}' missing. Create session projectdb with database credentials.", file=sys.stderr)
+        sys.exit(1)
+    if SESSION_NAME not in odoorpc.ODOO.list(ODOORPCRC_PATH):
+        print(f"Error: Session '{SESSION_NAME}' missing in {ODOORPCRC_PATH}. Create this with database credentials", file=sys.stderr)
+        sys.exit(1)
+
+    odoo = odoorpc.ODOO.load(SESSION_NAME)
+
+
 
 def main(project_name, my_only, task_number):
     odoo = odoorpc.ODOO.load('projectdb')
