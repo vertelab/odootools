@@ -37,6 +37,14 @@ def main(project_name, my_only, task_number,close):
         task = odoo.env['project.task'].browse(tasks[0])
         print(f"{task.number} {task.name} {task.user_id.name}\n{BeautifulSoup(task.description or '', 'html.parser').get_text()}")
         return
+    
+    if not project_name:
+        project_name = os.path.basename(os.getcwd())
+    project_ids = odoo.env['project.project'].search([('name', 'ilike', project_name)])
+    if not project_ids:
+        print("No project found with that name.")
+        return
+        
     if close:
         tasks = odoo.env['project.task'].search([('number', '=', close)], limit=1)
         if not tasks:
@@ -52,12 +60,7 @@ def main(project_name, my_only, task_number,close):
         return
 
     
-    if not project_name:
-        project_name = os.path.basename(os.getcwd())
-    project_ids = odoo.env['project.project'].search([('name', 'ilike', project_name)])
-    if not project_ids:
-        print("No project found with that name.")
-        return
+
 
     # Find the 'Analys' stage for this project
     stage_ids = odoo.env['project.task.type'].search([('project_ids', 'in', project_ids[0]), ('name', '=', 'Analys')])
