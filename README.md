@@ -1,12 +1,12 @@
-# odootools for Ubuntu 20.04
+# odootools for Ubuntu 22.04
 
 Tools to help to install and manage an Odoo installation.
 
-https://ftp.lysator.liu.se/ubuntu-releases/20.04/
+https://ftp.lysator.liu.se/ubuntu-releases/22.04/
 
 ## Prerequisites
 
-The installation scripts assume the host OS is Ubuntu 20.04. Usage on other
+The installation scripts assume the host OS is Ubuntu 22.04. Usage on other
 systems might require tweaking to work.
 
 Odoo 14 require `init-system-helpers 1.57` or later. This rules out usage of
