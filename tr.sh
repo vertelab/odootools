@@ -1,4 +1,6 @@
 #!/bin/bash
+# Notes at github!
+# https://github.com/vertelab/odootools/tree/18.0
 
 function tr_word() {
     echo $1 $2  $file
@@ -70,6 +72,47 @@ tr_word stat state
 tr_word "l\änk)" link
 tr_word timmar hours
 tr_word minuter minutes
+
+## OCA contract / product_contract
+tr_phrase "{datum_text}" "{date_text}"
+tr_phrase "{faktureringstyp}" "{invoicing_type}"
+tr_phrase "{produkt}" "{product}"
+tr_phrase "{återkommande_regel}" "{recurring_rule}"
+
+## account
+tr_phrase "{konto_källnamn}" "{account_source_name}"
+tr_phrase "{konto_målnamn}" "{account_target_name}"
+tr_phrase "{länk}" "{link}"
+tr_word field fields
+tr_word records entries
+tr_word record entry
+tr_word kontonamn account_name
+tr_word fakturadatum invoice_date
+tr_word aktuell_total current_total
+tr_word förväntad_total expected_total
+tr_word medel mean
+tr_word rad line
+tr_word månad month
+tr_word dag day
+tr_word dagar days
+tr_word valuta_belopp currency_amount
+tr_phrase "{procent}" "{percent}"
+tr_phrase "objekt.namn" "object.name"
+tr_phrase "object.partner_id.name eller" "object.partner_id.name or"
+tr_word nummer number
+tr_word konto account
+tr_word antal_konton num_accounts
+tr_word kvantitet_levererad quantity_delivered
+tr_word kvantitet_fakturerad quantity_invoiced
+tr_word enhetspris unit_price
+tr_word undantag exception
+tr_word verifikat journal
+tr_word skatt_namn tax_name
+tr_word landskod country_code
+tr_word tagg tag
+tr_word nb_av_värden nb_of_values
+
+
 
 # mail
 tr_word samtalsnamn conversation_name
@@ -209,6 +252,10 @@ tr_word s\ökv\äg path
 ## sale_project
 tr_word procduct_name procduct_names
 
+## 2025-05-12 odoo-management-system
+tr_phrase "{{ bar.sträng }}" "{{ bar.string }}"
+
+
 
 ## sms
 tr_word totalt total
@@ -258,6 +305,11 @@ tr_word ny_kostnad new_cost
 ## stock_picking_batch
 tr_word inkompatibla_överföringar incompatible_transfers
 
+## odoo-resource 2025-06-10
+tr_word "Stilla havet" Pacific
+tr_word "stilla havet" pacific
+
+
 ## survey
 tr_word "undersökningens namn" survey_names
 tr_phrase "textbrytning textmuted" "text-break text-muted"
@@ -270,9 +322,52 @@ tr_word gräns limit
 tr_word meddelande message
 tr_word mbLaddad mbLoaded
 
-
 tr_phrase "{{plats}}" "{{location}}"
 tr_phrase "oi oi-pil-h\öger" "oi oi-arrow-right"
+
+## website
+tr_word webbplatsnamn website_name
+tr_word operation action
+tr_word tangent key
+tr_word e-post email
+
+
+tr_phrase "visuellt dold" "visually-hidden"
+tr_phrase "fa-pil-höger text-primär" "fa-arrow-right text-primar"
+tr_phrase "fa-shopping-korg" "fa-shopping-basket"
+tr_phrase "karusell-styrning-nästa-ikon" "carousel-control-next-icon"
+tr_phrase "carousel-control-prev-icon" "karusellkontroll-prev-ikon"
+tr_phrase "s_badge badge text-bg-sekundär o_animerbar" "s_badge badge text-bg-secondary o_animerbar"
+
+## website_event
+tr_phrase "oi-chevron-vänster" "oi-chevron-left"
+
+## website_event_track
+tr_word "kontaktnamn" "contact_name"
+tr_word "funktion" "function"
+tr_phrase "{{ objekt.namn }" "{{ object.name }"
+tr_phrase "object.partner_id.name or object.partner_name or" "object.partner_id.name eller object.partner_name eller"
+
+## website_forum
+tr_phrase "fa fa-fråga-cirkel" "fa fa-question-circle"
+tr_phrase "fa fa-svara mig-1" "fa fa-reply me-1"
+tr_phrase "fa fa-flagga" "fa fa-flag"
+tr_phrase "fa fa-pil-höger" "fa fa-arrow-right"
+
+## website_hr_recruite
+tr_word "rekryterare_kontakt" "recruiter_contact"
+tr_phrase "fa-extern-länk" "fa-external-link"
+
+## website_sale
+tr_phrase "fa-bult me-2" "fa-bolt me-2"
+tr_phrase "formulär-text" "form-text"
+tr_phrase "record.namn.värde" "record.name.value"
+
+## website_slides
+tr_phrase "platshållare" "placeholder"
+tr_phrase "fa fa-lås" "fa fa-lock"
+tr_phrase "text-bg-varning" "text-bg-warning"
+tr_phrase "text-varning" "text-warning"
 
 
 tr_phrase "&amp; &amp; &amp; &amp; &amp;;;;;;;;;;;;;;;;;;;;;;;;;;;;" "&amp;nbsp;&amp;nbsp;"
