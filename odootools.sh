@@ -41,7 +41,7 @@ function _dirname() {
 }
 
 function _odoo_update_module() {
-    sudo su odoo -c "odoo -c ${ODOO_SERVER_CONF} --database $1 --update $2 --stop-after-init"
+    sudo su odoo -c "odoo -c ${ODOO_SERVER_CONF} --database $1 --update $2 -p 4444 --stop-after-init"
 }
 alias odooupdm='_odoo_update_module'
 
