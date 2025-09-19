@@ -1,6 +1,4 @@
 #!/bin/bash
-# Notes at github!
-# https://github.com/vertelab/odootools/tree/18.0
 
 function tr_word() {
     echo $1 $2  $file
@@ -17,6 +15,73 @@ function tr_phrase() {
     perl -p -i -e "s/$1/$2/g" $file 
 }
 file=$1
+
+# Vertel 2025-09-02
+tr_phrase "<span osynlig=" "<span invisible="
+tr_phrase "text-brytning text-muted" "text-break text-muted"
+tr_phrase "aria-label=\"N\ästa" "aria-label=\"Next"
+tr_phrase "text-bg-sekund\är" "text-bg-secondary"
+tr_phrase "fa fa-penna" "fa fa-pencil"
+tr_phrase "object.name eller 'n/a'" "object.name or 'n/a'"
+tr_phrase "{{ objekt." "{{ object."
+tr_phrase "{{ objekt.företag_id.namn" "{{ object.company_id.name"
+tr_phrase "nästa_rank_id" "next_rank_id"
+tr_phrase "id.namn" "in.name"
+tr_word Lopp Kurser
+
+## Odoo SA Point Of Sale 2025-09-12
+tr_phrase "%(skatter)s" "%(taxes)s"
+tr_phrase "%(titel)s" "%(title)s"
+
+## odoo-base // booking
+tr_phrase "%(bokningens_namn)s" "%(booking_name)s"
+tr_phrase "%(deltagarens_namn)s" "%(attendee_name)s"
+
+## Odoo SA Appointment 2025-09-11
+tr_phrase "%(partner)s" "%(partners)s"
+tr_phrase "fa fa-long-pil-h\öger" "fa fa-long-arrow-right"
+
+
+## Silvertouch 2025-09-10
+tr_phrase "%(tidsbokningar)s" "%(appointments)s"
+tr_phrase "%(personal_användare)s" "%(staff_user)s"
+tr_phrase "%(datum_start)s" "%(date_start)s"
+tr_phrase "%(startdatum)s" "%(start_date)s"
+tr_phrase "%(till_datum)s" "%(to_date)s"
+tr_phrase "%(datum_slut)s" "%(date_end)s"
+tr_phrase "%(slutdatum)s" "%(end_date)s"
+tr_phrase "%(fr\ån_datum)s" "%(from_date)s"
+tr_phrase "%(tid_start)s" "%(tid_start)s"
+tr_phrase "%(tid_slut)s" "%(tid_end)s"
+tr_phrase "%(tidszon)s" "%(timezone)s"
+tr_phrase  "%(partner)s" "%(partners)s"
+tr_phrase  "fa fa-varning" "fa fa-warning"
+tr_phrase  "fa fa-info-cirkel" "fa fa-info-circle"
+tr_phrase "%(deltagarnamn)s" "%(attendee_name)s"
+tr_phrase "%(avtalsnamn)s" "%(appointment_name)s"
+tr_phrase "%(namn_på_möte)s" "%(appointment_name)s"
+tr_phrase "%(namn_på_partner)s" "%(partner_name)s"
+tr_phrase "%(attributnamn)s" "%(attribute_name)s"
+tr_phrase "%(varningsmeddelande_f\ör_hyrning)s" "%(renting_warning_message)s"
+tr_phrase "%(konflikt_meddelande)s" "%(conflict_message)s"
+tr_phrase "%(produkt)er" "%(product)s"
+
+# OCA -- contract
+tr_phrase "Kontrakts linje" "Kontraktsrader"
+tr_phrase "Kontraktslinje" "Kontraktsrader"
+tr_phrase "Contract Line" "Kontraktsrader"
+tr_phrase "Kontraktslinjen" "Kontraktsraden"
+tr_phrase "avtalslinje" "avtalsrad"
+tr_phrase "object.name eller" "object.name or"
+tr_phrase "(invoice_link)" "(faktural\änk)"
+tr_phrase "Auto-price" "Autopris"
+tr_phrase "{djup}" "{depth}"
+
+tr_word nytt_datum_start new_date_start
+tr_word nytt_datum_slut new_date_end
+tr_word Kontraktslinje Kontraktsrad
+tr_word Suspensionens Avstängningens
+
 
 tr_word attribut attribute
 tr_word pris   price
@@ -73,12 +138,6 @@ tr_word "l\änk)" link
 tr_word timmar hours
 tr_word minuter minutes
 
-## OCA contract / product_contract
-tr_phrase "{datum_text}" "{date_text}"
-tr_phrase "{faktureringstyp}" "{invoicing_type}"
-tr_phrase "{produkt}" "{product}"
-tr_phrase "{återkommande_regel}" "{recurring_rule}"
-
 ## account
 tr_phrase "{konto_källnamn}" "{account_source_name}"
 tr_phrase "{konto_målnamn}" "{account_target_name}"
@@ -107,12 +166,12 @@ tr_word kvantitet_fakturerad quantity_invoiced
 tr_word enhetspris unit_price
 tr_word undantag exception
 tr_word verifikat journal
+tr_word Verifikat Journal
+tr_phrase "Verifikat" "Journal Entry"
 tr_word skatt_namn tax_name
 tr_word landskod country_code
 tr_word tagg tag
 tr_word nb_av_värden nb_of_values
-
-
 
 # mail
 tr_word samtalsnamn conversation_name
