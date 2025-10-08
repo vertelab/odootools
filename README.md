@@ -13,13 +13,13 @@ systems might require tweaking to work.
 
 Installation of Odoo and Odootools.
 
-Ensure you are using the version (eg branch 18.0 for Odoo 18) you want to install.
+Ensure you are using the version (eg branch 19.0 for Odoo 18) you want to install.
 
 When you are logged in with the root-account. Run the following command.
 
 Step 1: The command below will download and execute the installation script:
 ```
-wget -O- https://raw.githubusercontent.com/vertelab/odootools/18.0/install | bash
+wget -O- https://raw.githubusercontent.com/vertelab/odootools/19.0/install | bash
 ```
 
 Step 2: Add users with these commands:
@@ -83,7 +83,7 @@ Use the command below to uninstall your Odoo installation.
 
 *this drops your databases and all your data related to Odoo*
 ```
-wget -O- https://raw.githubusercontent.com/vertelab/odootools/18.0/uninstall | bash
+wget -O- https://raw.githubusercontent.com/vertelab/odootools/19.0/uninstall | bash
 ```
 
 ## module 'lib' has no attribute 'OpenSSL_add_all_algorithms'
@@ -143,7 +143,7 @@ Odoo-tools command |Description
  cdb                       | change database
  cdo                       | Shortcut: /usr/share/core-odoo/addons$
  cdp                       | Shortcut: /usr/share$
- odooaddons                | Updates the addons_path with all project according to ODOOADDONS defined in odoo.tools. These are stored here: https://github.com/vertelab/odootools/blob/18.0/repos/
+ odooaddons                | Updates the addons_path with all project according to ODOOADDONS defined in odoo.tools. These are stored here: https://github.com/vertelab/odootools/blob/19.0/repos/
  odooadminpw               | view master password
  odooallrequirements       | Loop through all projects installing / updating requirements.txt
  odoocheckmodule   <module>        | lists databases that use a module (eg odoocheckmodule sale)
