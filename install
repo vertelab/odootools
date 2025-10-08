@@ -32,10 +32,10 @@ echo "Installing Odoo"
 if [ ! -d /etc/odoo ]; then  # Install Odoo (only one time)
 
     sudo add-apt-repository universe
-    sudo wget -O - https://nightly.odoo.com/odoo.key | sudo apt-key add -
-    echo "deb http://nightly.odoo.com/$VERSION/nightly/deb/ ./" | sudo tee /etc/apt/sources.list.d/odoo.list > /dev/null
-    sudo apt update
-    sudo DEBIAN_FRONTEND=noninteractive apt -y install odoo
+    wget -q -O - https://nightly.odoo.com/odoo.key | sudo gpg --dearmor -o /usr/share/keyrings/odoo-archive-keyring.gpg
+    echo 'deb [signed-by=/usr/share/keyrings/odoo-archive-keyring.gpg] https://nightly.odoo.com/$VERSION/nightly/deb/ ./' | sudo tee /etc/apt/sources.list.d/odoo.list
+    sudo apt-get update && sudo DEBIAN_FRONTEND=noninteractive apt-get install odoo
+    
     # Generate a good password
     sudo sed -i "s|^.*admin_passwd = .*|admin_passwd = $(openssl rand -base64 32)|g" /etc/odoo/odoo.conf
     sudo wget -O /etc/odoo/odoo.tools https://raw.githubusercontent.com/vertelab/odootools/common/odoo.tools
@@ -75,8 +75,6 @@ wget -O /tmp/wkhtmltox_0.12.6-1.focal_amd64.deb https://github.com/wkhtmltopdf/p
 sudo dpkg -i /tmp/wkhtmltox_0.12.6-1.focal_amd64.deb
 sudo rm -f /tmp/wkhtmltox_0.12.6-1.focal_amd64.deb
 
-# sudo su postgres createuser odoo -s
-
 # Odootools
 sudo wget -O /etc/profile.d/odootools.sh https://raw.githubusercontent.com/vertelab/odootools/common/odootools.sh
 sudo wget -O "/etc/odoo/scaffold.tar.gz https://raw.githubusercontent.com/vertelab/odootools/common/scaffold.tar.gz"
@@ -92,7 +90,6 @@ sudo wget -O /usr/local/bin/odoocheckdeps.py https://raw.githubusercontent.com/v
 # Error occurred: module 'lib' has no attribute 'OpenSSL_add_all_algorithms'
 # https://www.odoo.com/forum/help-1/attributeerror-module-lib-has-no-attribute-x509-v-flag-cb-issuer-check-when-creating-new-staging-branch-202955
 # sudo pip uninstall -y pyopenssl && sudo pip install pyopenssl==22.0.0 --break-system-packages && sudo pip uninstall -y cryptography && sudo pip install cryptography==37.0.0 --break-system-packages
-
 
 # daily backup
 sudo wget -O /etc/cron.daily/db_backup https://raw.githubusercontent.com/vertelab/odootools/common/db_backup
