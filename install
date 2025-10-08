@@ -9,7 +9,7 @@
 
 echo "Performing basic prerequisite checks ..."
 
-VERSION=18.0
+VERSION=19.0
 export PIP_BREAK_SYSTEM_PACKAGES=1
 #echo "Download common files..."
 #wget -O- https://raw.githubusercontent.com/vertelab/odootools/common/install | bash > /tmp/tmpinstallcommon.sh
@@ -30,14 +30,10 @@ fi
 # Odoo
 echo "Installing Odoo"
 if [ ! -d /etc/odoo ]; then  # Install Odoo (only one time)
-    # this package is missing in 16.04
-    #wget https://launchpad.net/ubuntu/+archive/primary/+files/python-support_1.0.15_all.deb
-    #sudo dpkg -i python-support_1.0.15_all.deb
 
     sudo add-apt-repository universe
     sudo wget -O - https://nightly.odoo.com/odoo.key | sudo apt-key add -
     echo "deb http://nightly.odoo.com/$VERSION/nightly/deb/ ./" | sudo tee /etc/apt/sources.list.d/odoo.list > /dev/null
-    # echo "deb http://nightly.odoo.com/master/nightly/deb/ ./" | sudo tee /etc/apt/sources.list.d/odoo.list > /dev/null  # Change to $VERSION as soon its completed
     sudo apt update
     sudo DEBIAN_FRONTEND=noninteractive apt -y install odoo
     # Generate a good password
@@ -95,7 +91,7 @@ sudo wget -O /usr/local/bin/odoocheckdeps.py https://raw.githubusercontent.com/v
 # 2023-10-11
 # Error occurred: module 'lib' has no attribute 'OpenSSL_add_all_algorithms'
 # https://www.odoo.com/forum/help-1/attributeerror-module-lib-has-no-attribute-x509-v-flag-cb-issuer-check-when-creating-new-staging-branch-202955
-sudo pip uninstall -y pyopenssl && sudo pip install pyopenssl==22.0.0 --break-system-packages && sudo pip uninstall -y cryptography && sudo pip install cryptography==37.0.0 --break-system-packages
+# sudo pip uninstall -y pyopenssl && sudo pip install pyopenssl==22.0.0 --break-system-packages && sudo pip uninstall -y cryptography && sudo pip install cryptography==37.0.0 --break-system-packages
 
 
 # daily backup
