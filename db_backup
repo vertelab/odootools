@@ -1,19 +1,45 @@
 #!/bin/bash
-for DB in `su postgres -c "psql -At -c \"select datname from pg_database where datistemplate = false and 'postgres' <> datname;\" postgres"`
+## 2025-06-25 Fine tuning backup script to be more selective when backing up
+for DB in $(su postgres -c "psql -At -c \"select datname from pg_database where datistemplate = false and datname <> 'postgres';\" postgres")
 do
-        echo $DB
-        #su odoo -c "odoobackup --database=$DB --filename=/tmp/odoobackup.$$" && mv /tmp/odoobackup.$$ /var/backups/"$DB".zip
-	#if [ -f /tmp/odoobackup.$$ ] 
-	#then
-	#	rm -f /tmp/odoobackup.$$ ; echo Database $DB not backedup
-		su postgres -c "pg_dump -Fp $DB " | gzip > /var/backups/"$DB".sql.gz
-	#fi
-	# remarked backup with filestore, this is not a good idea when filestore i large and another system takes backup
-done
+    echo "Kontrollerar $DB..."
+    DO_BACKUP=$(sudo su postgres -c "psql $DB -c \"DO \\$\\$
+DECLARE
+    tabeller text[] := ARRAY['res_users', 'res_partner', 'sale_order', 'account_move', 'mrp_production', 'project_task', 'stock_picking', 'ir_session'];
+    t text;
+    sql text := '';
+    first boolean := true;
+    active boolean;
+BEGIN
+    FOR t IN
+        SELECT table_name
+        FROM information_schema.tables
+        WHERE table_schema = 'public'
+          AND table_name = ANY(tabeller)
+    LOOP
+        IF first THEN
+            sql := sql || format('SELECT MAX(write_date) AS write_date FROM %I', t);
+            first := false;
+        ELSE
+            sql := sql || format(' UNION ALL SELECT MAX(write_date) FROM %I', t);
+        END IF;
+    END LOOP;
 
-#
-#  odoobackup uses large amount space on /tmp, if this a problem bind a large partion to /tmp
-#  sudo mount -o bind /var/tmp /tmp  # bind tmp-directory from /var to /tmp
-# /etc/fstab:
-#  /var/tmp /tmp 	none	defaults,bind	0	0
-#
+    IF sql <> '' THEN
+        sql := 'SELECT (MAX(write_date) > (CURRENT_DATE - INTERVAL ''5 days'')) AS active FROM (' || sql || ') AS all_dates;';
+        EXECUTE sql INTO active;
+        RAISE NOTICE '%', active;
+    ELSE
+        RAISE NOTICE 'Inga tabeller hittades.';
+        -- Alternativt: RETURN FALSE;
+    END IF;
+END \\$\\$;
+ \"" 2>&1|cut -c10) ;
+
+    if [ "$DO_BACKUP" == 't' ]; then
+        echo "Ändringar hittades ($DO_BACKUP). Tar backup..."
+        su postgres -c "pg_dump -Fp $DB" | gzip > /var/backups/"$DB".sql.gz
+    else
+        echo "Ingen relevant ändring hittades i $DB. Ingen backup tas."
+    fi
+done
