@@ -27,35 +27,10 @@ Add userser
 ```
 sudo apt install python3-phonenumbers
 
-sudo adduser $USER
-sudo adduser $USER sudo
 sudo adduser $USER odoo
-
-/etc/odoo/odoo.conf
-admin_passwd = Silanxi9Oo23
-db_password = Silanxi9Oo23
-
-In Terminal, go to psql and run the following query:
-1) sudo su postgres
-2) psql
-3) create user odoo with password 'Silanxi9Oo23' superuser;
-4) ALTER USER user_name WITH PASSWORD 'new_password';
-5) odoorestart
-
-failed: FATAL: role "odoo" does not exist >> Use odooadminpw for password.
-1) sudo su postgres
-2) createuser odoo -s
-3) psql template1
-4) alter role odoo with password 'pnybYEg';
-5) exit
-https://www.odoo.com/forum/help-1/operationalerror-fatal-role-root-does-not-exist-123992
-
 ```
 Step 3: Follow the instructions for the management of the Odoo source repositories
 https://github.com/vertelab/odootools/blob/17.0/repos/README.md
-
-Step 4: If you want to add more than the standard themes please add them from here
-https://github.com/vertelab/odootools/blob/17.0/themes
 
 ```
 The following packages have unmet dependencies:
