@@ -33,7 +33,7 @@ if [ ! -d /etc/odoo ]; then  # Install Odoo (only one time)
 
     sudo add-apt-repository universe
     wget -q -O - https://nightly.odoo.com/odoo.key | sudo gpg --dearmor -o /usr/share/keyrings/odoo-archive-keyring.gpg
-    echo "deb [signed-by=/usr/share/keyrings/odoo-archive-keyring.gpg] https://nightly.odoo.com/$VERSION/nightly/deb/ ./" | sudo tee /etc/apt/sources.list.d/odoo.list
+    echo "deb [signed-by=/usr/share/keyrings/odoo-archive-keyring.gpg] https://nightly.odoo.com/${VERSION}/nightly/deb/ ./" | sudo tee /etc/apt/sources.list.d/odoo.list
     sudo apt-get update && sudo DEBIAN_FRONTEND=noninteractive apt-get install odoo
     
     # Generate a good password
