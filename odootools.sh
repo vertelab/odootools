@@ -119,7 +119,15 @@ alias odoopatch='_patch_all_patches'
 
 function odooaddons() {
     [ -f /etc/odoo/odoo.tools ] && . /etc/odoo/odoo.tools
+    if [ ! $ODOO_SERVER_CONF ]; then
+ 	echo "Can not find odoo.conf file. Is Odootools properly installed?"
+	return 0
+    fi
     if [ -n "$ODOOADDONS" ]; then
+        if [ ! "$(grep "addons_path" $ODOO_SERVER_CONF)" ]; then
+            echo "$ODOO_SERVER_CONF does not contain \"addons_path=\". It will be autonmatically added."
+            echo "addons_path=" | sudo tee -a $ODOO_SERVER_CONF > /dev/null
+        fi
         CMD="s/^\;?addons_path.*=.*/addons_path=${ODOOADDONS//"/"/"\/"}/g"
         sudo perl -i -pe "$CMD" "$ODOO_SERVER_CONF"
     fi
