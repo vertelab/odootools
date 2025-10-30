@@ -118,10 +118,16 @@ function _patch_all_patches() {
 alias odoopatch='_patch_all_patches'
 
 function odooaddons() {
+    VERBOSE=''
+    while getopts 'v' option; do
+        case "${option}" in
+            v) VERBOSE='true' ;;
+        esac
+    done
     [ -f /etc/odoo/odoo.tools ] && . /etc/odoo/odoo.tools
     if [ ! $ODOO_SERVER_CONF ]; then
- 	echo "Can not find odoo.conf file. Is Odootools properly installed?"
-	return 0
+        echo "Can not find odoo.conf file. Is Odootools properly installed?"
+        return 0
     fi
     if [ -n "$ODOOADDONS" ]; then
         if [ ! "$(grep "addons_path" $ODOO_SERVER_CONF)" ]; then
@@ -131,6 +137,7 @@ function odooaddons() {
         CMD="s/^\;?addons_path.*=.*/addons_path=${ODOOADDONS//"/"/"\/"}/g"
         sudo perl -i -pe "$CMD" "$ODOO_SERVER_CONF"
     fi
+    [ $VERBOSE ] && cat $ODOO_SERVER_CONF
 }
 
 function odoogitpull() {
