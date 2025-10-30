@@ -119,8 +119,9 @@ alias odoopatch='_patch_all_patches'
 
 function odooaddons() {
     VERBOSE=''
+    local OPTIND OPTARG option
     while getopts 'v' option; do
-        case "${option}" in
+        case $option in
             v) VERBOSE='true' ;;
         esac
     done
