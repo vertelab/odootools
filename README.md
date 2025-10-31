@@ -17,7 +17,7 @@ When you are logged in with the root-account. Run the following command.
 
 Step 1: The command below will download and execute the installation script:
 ```
-wget -O- https://raw.githubusercontent.com/vertelab/odootools/17.0/install | bash
+wget -O- https://raw.githubusercontent.com/vertelab/odootools/<ODOO VERSION>.0/install | bash
 ```
 
 Step 2: Add users with these commands:
