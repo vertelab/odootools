@@ -107,6 +107,57 @@ function _odoosync() {
 }
 alias odoosync='_odoosync'
 
+function _odooposync() {
+    usage() { echo "Usage: $0 [-h <host>]" 1>&2; exit 1; }
+    [ -f /etc/odoo/odoo.tools ] && . /etc/odoo/odoo.tools
+    local OPTIND OPTARG option
+
+    while getopts ":h:" option; do
+        case $option in
+            h) export HOST=${OPTARG} ; echo "Host: $OPTARG" ;;
+            :) echo "Option $option requires an argument" ; return ;;
+            \?) echo "Illegal argument ${option}::${OPTARG}" ; return ;;
+        esac
+    done
+
+    if [ -z "$HOST" ] ; then
+        echo "You must set -h option to continue"
+        return
+    fi
+
+    log_file="/tmp/odooposync-$(date +%Y%m%d-%H%M%S).log"
+    echo "Logging to $log_file"
+    echo "Collecting all sv.po files..."
+
+    tempdir=$(mktemp -d)
+
+    # Kopiera alla sv.po-filer till en temporär katalog, bevara struktur
+    find /usr/share/odoo-*/*/i18n/ -type f -name "sv.po" | while read -r file; do
+        relpath=$(echo "$file" | sed 's|^/usr/share/||')
+        mkdir -p "$tempdir/$(dirname "$relpath")"
+        cp -p "$file" "$tempdir/$relpath"
+    done
+
+    echo "Syncing sv.po files to $HOST..."
+    sudo chown -R odoo:odoo "$tempdir"
+
+    # Synka med detaljerad logg, progress och filnamn
+    rsync -avz --delete \
+        --progress \
+        --itemize-changes \
+        --rsync-path="sudo mkdir -p /usr/share && sudo rsync" \
+        "$tempdir"/ "$HOST":/usr/share/
+
+    echo "Cleaning up temporary directory..."
+    rm -rf "$tempdir"
+
+    echo "Done syncing all sv.po files."
+}
+alias odooposync='_odooposync'
+
+
+
+
 function _patch_all_patches() {
     CWD=$(pwd)
     cd /usr/lib/python3/dist-packages/odoo
