@@ -226,6 +226,36 @@ function odooextgitpull() {
     sudo chmod g+w /usr/share/odoo*/ -R
 }
 
+function odooocagitpull() {
+    BASEDIRS=(/usr/share/odooext-OCA*/)
+
+    echo "=== Odoo OCA Git Pull start ==="
+    echo "Söker efter git-repon under: ${BASEDIRS[*]}"
+    echo
+
+    for base in "${BASEDIRS[@]}"; do
+        if [ -d "$base" ]; then
+            echo "--- Katalog: $base ---"
+            find "$base" -type d -name ".git" | while read gitdir; do
+                repo=$(dirname "$gitdir")
+                echo ">> Uppdaterar repo: $repo"
+                cd "$repo" || continue
+                git config --global --add safe.directory "$repo" 2>/dev/null
+                git pull --ff-only 2>> ~/odooocagitpull.err
+            done
+        fi
+    done
+
+    echo
+    echo "=== Färdigt! ==="
+    echo "Fel (om några) finns i ~/odooocagitpull.err"
+
+    sudo chown odoo:odoo /usr/share/odoo*/ -R
+    sudo chmod g+w /usr/share/odoo*/ -R
+}
+
+
+
 function odooallrequirements() {
     for req in /usr/share/odoo*/requirements.txt
     do
