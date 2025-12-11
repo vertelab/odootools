@@ -125,38 +125,28 @@ function _odooposync() {
         return
     fi
 
-    log_file="/tmp/odooposync-$(date +%Y%m%d-%H%M%S).log"
-    echo "Logging to $log_file"
     echo "Collecting all sv.po files..."
-
     tempdir=$(mktemp -d)
 
-    # Kopiera alla sv.po-filer till en temporär katalog, bevara struktur
+    # Kopiera alla sv.po-filer (ingen sudo här)
     find /usr/share/odoo-*/*/i18n/ -type f -name "sv.po" | while read -r file; do
         relpath=$(echo "$file" | sed 's|^/usr/share/||')
         mkdir -p "$tempdir/$(dirname "$relpath")"
-        cp -p "$file" "$tempdir/$relpath"
+        sudo cp -p "$file" "$tempdir/$relpath"  # sudo bara vid kopiering
     done
 
-    echo "Syncing sv.po files to $HOST..."
-    sudo chown -R odoo:odoo "$tempdir"
-
-    # Synka med detaljerad logg, progress och filnamn
-    rsync -avz --delete \
-        --progress \
-        --itemize-changes \
-        --rsync-path="sudo mkdir -p /usr/share && sudo rsync" \
+    echo "Syncing sv.po files to $HOST (NO sudo på fjärrservern)..."
+    
+    # Inget sudo på fjärrservern - rsync skapar mappar automatiskt
+    rsync -avz --progress --itemize-changes \
         "$tempdir"/ "$HOST":/usr/share/
 
-    echo "Cleaning up temporary directory..."
-    rm -rf "$tempdir"
+    echo "Cleaning up..."
+    sudo rm -rf "$tempdir"  # sudo för att radera odoo:odoo filer
 
-    echo "Done syncing all sv.po files."
+    echo "Done! Alla sv.po-filer är synkade."
 }
 alias odooposync='_odooposync'
-
-
-
 
 function _patch_all_patches() {
     CWD=$(pwd)
