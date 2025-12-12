@@ -117,8 +117,10 @@ Odoo-tools command |Description
  odoogitpull    | does a *git pull* for every project in ODOOADDONS
  [odoolangexport](https://github.com/vertelab/odootools/blob/17.0/odoolangexport.pdf)    | export po/pot file for a module, -m <module> -d <database> -l <language>. To export a pot-file exclude "-l"
  odoomodules <database>    | List all installed modules in a database
+ odooocagitpull            | Odoo OCA Git Pull, /usr/share/odooext-OCA-* git pull in this hierarchy 
  odoopsql <database>       | Open database in psql-mode
  odoopatch                 | Implements patches from the directory /etc/odoo/patch.d
+ odooposyn -h *host*       | Syncs all /usr/share/odoo-*/*/i18n/sv.po in Vertel projects and modules
  odoorestart               | Restarts odoo and apache/varnish or other systems that have to be restarted (configure in odoo.tools)
  odoosetperm               | Sets permissions for all projects and modules
  odoosyncall -h *host*     | Syncs all projects and modules
