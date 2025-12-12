@@ -1,0 +1,48 @@
+#!/bin/bash
+# Change owner of database between Odoo and Postgres.
+# This will put an end to the any back-up strategy.
+# However, the database will remain "as is", for future to look at...
+# enable_db -d databasen
+# disable_db -d databasen
+
+SCRIPT_NAME=$(basename "$0")
+ACTION=""
+
+if [[ "$SCRIPT_NAME" == *"enable"* ]]; then
+  ACTION="enable"
+elif [[ "$SCRIPT_NAME" == *"disable"* ]]; then
+  ACTION="disable"
+else
+  echo "Filnamnet måste innehålla 'enable' eller 'disable'."
+  exit 1
+fi
+
+DB_NAME=""
+
+# Enkel flagg-parser för -d
+while [[ $# -gt 0 ]]; do
+  case "$1" in
+    -d|--database)
+      DB_NAME="$2"
+      shift 2
+      ;;
+    *)
+      echo "Okänd flagga: $1"
+      exit 1
+      ;;
+  esac
+done
+
+if [ -z "$DB_NAME" ]; then
+  echo "Användning: $SCRIPT_NAME -d DATABASNAMN"
+  exit 1
+fi
+echo $DB_NAME
+
+if [ "$ACTION" = "enable" ]; then
+  sudo su postgres -c 'psql  -d postgres -c "ALTER DATABASE '$DB_NAME' OWNER TO odoo;"'
+  echo "Databasen $DB_NAME är nu aktiverad."
+else
+  sudo su postgres -c 'psql  -d postgres -c "ALTER DATABASE '$DB_NAME' OWNER TO postgres;"'
+  echo "Databasen $DB_NAME är nu inaktiverad."
+fi
