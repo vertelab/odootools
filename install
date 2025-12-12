@@ -87,6 +87,8 @@ sudo wget -O /usr/local/bin/odooextras.py https://raw.githubusercontent.com/vert
 sudo wget -O /usr/local/bin/odoocheckdeps.py https://raw.githubusercontent.com/vertelab/odootools/{$VERSION}/scripts/odoocheckdeps.py
 sudo wget -O /usr/local/bin/odoocheckmanifests.py https://raw.githubusercontent.com/vertelab/odootools/{$VERSION}/scripts/odoocheckmanifests.py
 sudo wget -O /usr/local/bin/manifest_template.py https://raw.githubusercontent.com/vertelab/odootools/{$VERSION}/scripts/manifest_template.py
+sudo wget -O /usr/local/bin/enable_db https://raw.githubusercontent.com/vertelab/odootools/{$VERSION}/scripts/enable_db
+sudo wget -O /usr/local/bin/disable_db https://raw.githubusercontent.com/vertelab/odootools/{$VERSION}/scripts/disable_db
 
 
 
