@@ -106,7 +106,7 @@ Odoo-tools command |Description
  cdb                       | change database
  cdo                       | Shortcut: /usr/share/core-odoo/addons$
  cdp                       | Shortcut: /usr/share$
- enabledb / disabledb      | enabledb test_demo / disabledb test_demo : Change owner from / to odoo / postgres. Will be leftout in back-ups but still saved for future. 
+ enabledb / disabledb      | enabledb test_demo / disabledb test_demo : Change owner from odoo to postgres. Will be leftout in back-ups but still saved for future. 
  odooaddons [-v]           | Updates the addons_path with all project according to ODOOADDONS defined in odoo.tools. These are stored here: https://github.com/vertelab/odootools/tree/common/repos/
  odooadminpw               | view master password
  odooallrequirements       | Loop through all projects installing / updating requirements.txt
