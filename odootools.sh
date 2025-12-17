@@ -107,7 +107,7 @@ function _odoosync() {
 }
 alias odoosync='_odoosync'
 
-function _odooposync() {
+function _odoosvsync() {
 ## 2025-12-20 This code will sync all sv.po-files from our projects, UTV18 /usr/share/odoo-* to azzar.org
 ## Same as odoosync, but only sv.po -files and also, loop through *every* project. // Jakob K.
     usage() { echo "Usage: $0 [-h <host>]" 1>&2; exit 1; }
@@ -148,7 +148,7 @@ function _odooposync() {
 
     echo "Done! Alla sv.po-filer är synkade."
 }
-alias odooposync='_odooposync'
+alias odoosvsync='_odoosvsync'
 
 function _patch_all_patches() {
     CWD=$(pwd)
