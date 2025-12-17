@@ -108,6 +108,8 @@ function _odoosync() {
 alias odoosync='_odoosync'
 
 function _odooposync() {
+## 2025-12-20 This code will sync all sv.po-files from our projects, UTV18 /usr/share/odoo-* to azzar.org
+## Same as odoosync, but only sv.po -files and also, loop through *every* project. // Jakob K.
     usage() { echo "Usage: $0 [-h <host>]" 1>&2; exit 1; }
     [ -f /etc/odoo/odoo.tools ] && . /etc/odoo/odoo.tools
     local OPTIND OPTARG option
