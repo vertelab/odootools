@@ -813,3 +813,9 @@ function _odootoolsupgrade() {
     . /etc/profile.d/odootools.sh
 }
 alias odootoolsupgrade='_odootoolsupgrade'
+
+function _odooshell() {
+    [ -z "$1" ] && echo "Usage: $0 [database]" 1>&2 && return 
+	sudo su odoo -c "odoo shell -d $1 -c /etc/odoo/odoo.conf -p 8888"
+}
+alias odooshell='_odooshell'
