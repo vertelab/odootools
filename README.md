@@ -4,6 +4,11 @@ Tools to help to install and manage an Odoo installation.
 
 https://ftp.lysator.liu.se/ubuntu-releases/24.04/
 
+```
+Ubuntu Server -- download in Terminal
+wget -O- https://ftp.lysator.liu.se/ubuntu-releases/24.04/ubuntu-24.04.3-live-server-amd64.iso
+```
+
 ## Prerequisites
 
 The installation scripts assume the host OS is Ubuntu 22.04. Usage on other
