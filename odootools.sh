@@ -846,7 +846,7 @@ function _odoodisabledb() {
     fi
 
     if sudo su postgres -c "psql -d postgres -c \"ALTER DATABASE \\\"${DB_NAME}\\\" OWNER TO postgres;\""; then
-        echo "The database $DB_NAME is now disable."
+        echo "The database $DB_NAME is now disabled."
     else
         echo "Failed to disable database $DB_NAME."
         return 1
@@ -863,8 +863,8 @@ function _odooenabledb() {
     while getopts ":d:" option; do
         case $option in
             d) DB_NAME="${OPTARG}" echo "Host: $OPTARG" ;;
-            :) echo "Error: Option -$OPTARG requires an argument" return 1 ;;
-            \?) echo "Error: Illegal argument -$OPTARG" return 1 ;;
+            :) echo "Error: Option -$OPTARG requires an argument"; return 1 ;;
+            \?) echo "Error: Illegal argument -$OPTARG"; return 1 ;;
         esac
     done
 
