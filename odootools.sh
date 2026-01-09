@@ -827,52 +827,58 @@ alias odooshell='_odooshell'
 
 function _odoodisabledb() {
     local DB_NAME=""
-    local OPTIND OPTARG option
+    local OPTIND=1
+    local option
 
     usage() { echo "Usage: $0 [-d <database>]" 1>&2; exit 1; }
 
     while getopts ":d:" option; do
         case $option in
             d) export DB_NAME=${OPTARG} ; echo "Host: $OPTARG" ;;
-            :) echo "Option $option requires an argument" ; return ;;
-            \?) echo "Illegal argument ${option}::${OPTARG}" ; return ;;
+            :) echo "Option $option requires an argument" ; return 1;;
+            \?) echo "Illegal argument ${option}::${OPTARG}" ; return 1;;
         esac
     done
 
     if [[ -z "$DB_NAME" ]]; then
-        echo "Error: Database name (-d) is required" 1>&2
-        usage
-        exit 1
+        echo "Error: Database name [-d <database>] is required" 1>&2
+        return 1 
     fi
 
-    sudo su postgres -c 'psql  -d postgres -c "ALTER DATABASE '$DB_NAME' OWNER TO postgres;"'
-    echo "The database $DB_NAME is now disabled."
+    if sudo su postgres -c "psql -d postgres -c \"ALTER DATABASE \\\"${DB_NAME}\\\" OWNER TO postgres;\""; then
+        echo "The database $DB_NAME is now disable."
+    else
+        echo "Failed to disable database $DB_NAME."
+        return 1
+    fi
 
 }
 alias odoodisabledb='_odoodisabledb'
 
 function _odooenabledb() {
     local DB_NAME=""
-    local OPTIND OPTARG option
-
-    usage() { echo "Usage: $0 [-d <database>]" 1>&2; exit 1; }
+    local OPTIND=1
+    local option
 
     while getopts ":d:" option; do
         case $option in
-            d) export DB_NAME=${OPTARG} ; echo "Host: $OPTARG" ;;
-            :) echo "Option $option requires an argument" ; return ;;
-            \?) echo "Illegal argument ${option}::${OPTARG}" ; return ;;
+            d) DB_NAME="${OPTARG}" echo "Host: $OPTARG" ;;
+            :) echo "Error: Option -$OPTARG requires an argument" return 1 ;;
+            \?) echo "Error: Illegal argument -$OPTARG" return 1 ;;
         esac
     done
 
+
     if [[ -z "$DB_NAME" ]]; then
-        echo "Error: Database name (-d) is required" 1>&2
-        usage
-        exit 1
+        echo "Error: Database name [-d <database>] is required" 1>&2
+        return 1 
     fi
 
-    sudo su postgres -c 'psql  -d postgres -c "ALTER DATABASE '$DB_NAME' OWNER TO odoo;"'
-    echo "The database $DB_NAME is now enabled."
-
+    if sudo su postgres -c "psql -d postgres -c \"ALTER DATABASE \\\"${DB_NAME}\\\" OWNER TO odoo;\""; then
+        echo "The database $DB_NAME is now enabled."
+    else
+        echo "Failed to enable database $DB_NAME."
+        return 1
+    fi
 }
 alias odooenabledb='_odooenabledb'
