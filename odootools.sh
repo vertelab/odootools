@@ -856,7 +856,6 @@ function _odoodisabledb() {
 
     # Require DB_NAME for disable operation
     if [[ -z "$DB_NAME" ]]; then
-        usage
         return 1
     fi
 
@@ -901,7 +900,6 @@ function _odooenabledb() {
 
     # Require DB_NAME for enable operation
     if [[ -z "$DB_NAME" ]]; then
-        usage
         return 1
     fi
 
