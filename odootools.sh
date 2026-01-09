@@ -824,3 +824,43 @@ function _odooshell() {
 	sudo su odoo -c "odoo shell -d $1 -c /etc/odoo/odoo.conf -p 8888"
 }
 alias odooshell='_odooshell'
+
+function _odoodisabledb() {
+    local DB_NAME=""
+    local OPTIND OPTARG option
+
+    usage() { echo "Usage: $0 [-d <database>]" 1>&2; exit 1; }
+
+    while getopts ":d:" option; do
+        case $option in
+            d) export DB_NAME=${OPTARG} ; echo "Host: $OPTARG" ;;
+            :) echo "Option $option requires an argument" ; return ;;
+            \?) echo "Illegal argument ${option}::${OPTARG}" ; return ;;
+        esac
+    done
+
+    sudo su postgres -c 'psql  -d postgres -c "ALTER DATABASE '$DB_NAME' OWNER TO postgres;"'
+    echo "The database $DB_NAME is now disabled."
+
+}
+alias odoodisabledb='_odoodisabledb'
+
+function _odooenabledb() {
+    local DB_NAME=""
+    local OPTIND OPTARG option
+
+    usage() { echo "Usage: $0 [-d <database>]" 1>&2; exit 1; }
+
+    while getopts ":d:" option; do
+        case $option in
+            d) export DB_NAME=${OPTARG} ; echo "Host: $OPTARG" ;;
+            :) echo "Option $option requires an argument" ; return ;;
+            \?) echo "Illegal argument ${option}::${OPTARG}" ; return ;;
+        esac
+    done
+
+    sudo su postgres -c 'psql  -d postgres -c "ALTER DATABASE '$DB_NAME' OWNER TO odoo;"'
+    echo "The database $DB_NAME is now enabled."
+
+}
+alias odooenabledb='_odooenabledb'
