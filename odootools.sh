@@ -842,6 +842,7 @@ function _odoodisabledb() {
     if [[ -z "$DB_NAME" ]]; then
         echo "Error: Database name (-d) is required" 1>&2
         usage
+        return 1
     fi
 
     sudo su postgres -c 'psql  -d postgres -c "ALTER DATABASE '$DB_NAME' OWNER TO postgres;"'
@@ -867,6 +868,7 @@ function _odooenabledb() {
     if [[ -z "$DB_NAME" ]]; then
         echo "Error: Database name (-d) is required" 1>&2
         usage
+        return 1
     fi
 
     sudo su postgres -c 'psql  -d postgres -c "ALTER DATABASE '$DB_NAME' OWNER TO odoo;"'
