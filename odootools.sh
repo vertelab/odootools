@@ -839,6 +839,11 @@ function _odoodisabledb() {
         esac
     done
 
+    if [[ -z "$DB_NAME" ]]; then
+        echo "Error: Database name (-d) is required" 1>&2
+        usage
+    fi
+
     sudo su postgres -c 'psql  -d postgres -c "ALTER DATABASE '$DB_NAME' OWNER TO postgres;"'
     echo "The database $DB_NAME is now disabled."
 
@@ -858,6 +863,11 @@ function _odooenabledb() {
             \?) echo "Illegal argument ${option}::${OPTARG}" ; return ;;
         esac
     done
+
+    if [[ -z "$DB_NAME" ]]; then
+        echo "Error: Database name (-d) is required" 1>&2
+        usage
+    fi
 
     sudo su postgres -c 'psql  -d postgres -c "ALTER DATABASE '$DB_NAME' OWNER TO odoo;"'
     echo "The database $DB_NAME is now enabled."
