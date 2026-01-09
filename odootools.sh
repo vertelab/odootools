@@ -862,9 +862,9 @@ function _odooenabledb() {
 
     while getopts ":d:" option; do
         case $option in
-            d) DB_NAME="${OPTARG}" echo "Host: $OPTARG" ;;
-            :) echo "Error: Option -$OPTARG requires an argument"; return 1 ;;
-            \?) echo "Error: Illegal argument -$OPTARG"; return 1 ;;
+            d) export DB_NAME=${OPTARG} ; echo "Host: $OPTARG" ;;
+            :) echo "Option $option requires an argument" ; return 1;;
+            \?) echo "Illegal argument ${option}::${OPTARG}" ; return 1;;
         esac
     done
 
