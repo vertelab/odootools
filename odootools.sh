@@ -856,8 +856,8 @@ function _odoodisabledb() {
 
     # Require DB_NAME for disable operation
     if [[ -z "$DB_NAME" ]]; then
-        echo "Error: Database name [-d <database>] is required (unless using -l)" 1>&2
         usage
+        return 1
     fi
 
     echo "Disabling database: $DB_NAME"
@@ -902,6 +902,7 @@ function _odooenabledb() {
     # Require DB_NAME for enable operation
     if [[ -z "$DB_NAME" ]]; then
         usage
+        return 1
     fi
 
     echo "Enabling database: $DB_NAME"
