@@ -829,29 +829,44 @@ function _odoodisabledb() {
     local DB_NAME=""
     local OPTIND=1
     local option
+    local LIST_ODOO=false
 
-    usage() { echo "Usage: $0 [-d <database>]" 1>&2; exit 1; }
+    usage() { 
+        echo "Usage: $0 [-d <database>] [-l]" 1>&2
+        echo "  -d <database> : Disable specific database" 1>&2
+        echo "  -l            : List databases owned by odoo" 1>&2
+        return 1
+    }
 
-    while getopts ":d:" option; do
+    while getopts ":d:l" option; do
         case $option in
-            d) export DB_NAME=${OPTARG} ; echo "Host: $OPTARG" ;;
-            :) echo "Option $option requires an argument" ; return 1;;
-            \?) echo "Illegal argument ${option}::${OPTARG}" ; return 1;;
+            d) DB_NAME="$OPTARG" ;;
+            l) LIST_ODOO=true ;;
+            :) echo "Option -$OPTARG requires an argument" 1>&2; usage ;;
+            \?) echo "Illegal option -$OPTARG" 1>&2; usage ;;
         esac
     done
 
-    if [[ -z "$DB_NAME" ]]; then
-        echo "Error: Database name [-d <database>] is required" 1>&2
-        return 1 
+    # Handle -l flag (list odoo-owned databases)
+    if [[ "$LIST_ODOO" == true ]]; then
+        echo "=== Databases owned by odoo ==="
+        psql -d postgres -tAc "SELECT datname FROM pg_database WHERE datdba = (SELECT oid FROM pg_roles WHERE rolname='odoo');"
+        return 0
     fi
 
-    if sudo su postgres -c "psql -d postgres -c \"ALTER DATABASE \\\"${DB_NAME}\\\" OWNER TO postgres;\""; then
-        echo "The database $DB_NAME is now disabled."
+    # Require DB_NAME for disable operation
+    if [[ -z "$DB_NAME" ]]; then
+        echo "Error: Database name [-d <database>] is required (unless using -l)" 1>&2
+        usage
+    fi
+
+    echo "Disabling database: $DB_NAME"
+    if sudo su postgres -c "psql -d postgres -c \"ALTER DATABASE \\\"$DB_NAME\\\" OWNER TO postgres;\""; then
+        echo "The database '$DB_NAME' is now disabled."
     else
-        echo "Failed to disable database $DB_NAME."
+        echo "Failed to disable database '$DB_NAME'" 1>&2
         return 1
     fi
-
 }
 alias odoodisabledb='_odoodisabledb'
 
@@ -859,25 +874,41 @@ function _odooenabledb() {
     local DB_NAME=""
     local OPTIND=1
     local option
+    local LIST_POSTGRES=false
 
-    while getopts ":d:" option; do
+    usage() { 
+        echo "Usage: $0 [-d <database>] [-l]" 1>&2
+        echo "  -d <database> : Enable specific database" 1>&2
+        echo "  -l            : List databases owned by postgres" 1>&2
+        return 1
+    }
+
+    while getopts ":d:l" option; do
         case $option in
-            d) export DB_NAME=${OPTARG} ; echo "Host: $OPTARG" ;;
-            :) echo "Option $option requires an argument" ; return 1;;
-            \?) echo "Illegal argument ${option}::${OPTARG}" ; return 1;;
+            d) DB_NAME="$OPTARG" ;;
+            l) LIST_POSTGRES=true ;;
+            :) echo "Option -$OPTARG requires an argument" 1>&2; usage ;;
+            \?) echo "Illegal option -$OPTARG" 1>&2; usage ;;
         esac
     done
 
-
-    if [[ -z "$DB_NAME" ]]; then
-        echo "Error: Database name [-d <database>] is required" 1>&2
-        return 1 
+    # Handle -l flag (list postgres-owned databases)
+    if [[ "$LIST_POSTGRES" == true ]]; then
+        echo "=== Databases owned by postgres ==="
+        psql -d postgres -tAc "SELECT datname FROM pg_database WHERE datdba = (SELECT oid FROM pg_roles WHERE rolname='postgres');"
+        return 0
     fi
 
-    if sudo su postgres -c "psql -d postgres -c \"ALTER DATABASE \\\"${DB_NAME}\\\" OWNER TO odoo;\""; then
-        echo "The database $DB_NAME is now enabled."
+    # Require DB_NAME for enable operation
+    if [[ -z "$DB_NAME" ]]; then
+        usage
+    fi
+
+    echo "Enabling database: $DB_NAME"
+    if sudo su postgres -c "psql -d postgres -c \"ALTER DATABASE \\\"$DB_NAME\\\" OWNER TO odoo;\""; then
+        echo "The database '$DB_NAME' is now enabled."
     else
-        echo "Failed to enable database $DB_NAME."
+        echo "Failed to enable database '$DB_NAME'" 1>&2
         return 1
     fi
 }
