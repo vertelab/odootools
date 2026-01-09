@@ -850,7 +850,7 @@ function _odoodisabledb() {
     # Handle -l flag (list odoo-owned databases)
     if [[ "$LIST_ODOO" == true ]]; then
         echo "=== Databases owned by odoo ==="
-        psql -d postgres -tAc "SELECT datname FROM pg_database WHERE datdba = (SELECT oid FROM pg_roles WHERE rolname='odoo');"
+        sudo su postgres -c "psql -d postgres -tAc \"SELECT datname FROM pg_database WHERE datdba = (SELECT oid FROM pg_roles WHERE rolname='odoo');\""
         return 0
     fi
 
@@ -895,7 +895,7 @@ function _odooenabledb() {
     # Handle -l flag (list postgres-owned databases)
     if [[ "$LIST_POSTGRES" == true ]]; then
         echo "=== Databases owned by postgres ==="
-        psql -d postgres -tAc "SELECT datname FROM pg_database WHERE datdba = (SELECT oid FROM pg_roles WHERE rolname='postgres');"
+        sudo su postgres -c "psql -d postgres -tAc \"SELECT datname FROM pg_database WHERE datdba = (SELECT oid FROM pg_roles WHERE rolname='postgres');\""
         return 0
     fi
 
