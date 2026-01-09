@@ -830,6 +830,7 @@ function _odoodisabledb() {
     local OPTIND=1
     local option
     local LIST_ODOO=false
+    local ARGS_PROCESSED=false
 
     usage() { 
         echo "Usage: $0 [-d <database>] [-l]" 1>&2
@@ -839,6 +840,7 @@ function _odoodisabledb() {
     }
 
     while getopts ":d:l" option; do
+        ARGS_PROCESSED=true
         case $option in
             d) DB_NAME="$OPTARG" ;;
             l) LIST_ODOO=true ;;
@@ -856,6 +858,7 @@ function _odoodisabledb() {
 
     # Require DB_NAME for disable operation
     if [[ -z "$DB_NAME" ]]; then
+        [[ "$ARGS_PROCESSED" == false ]] && usage
         return 1
     fi
 
@@ -874,6 +877,7 @@ function _odooenabledb() {
     local OPTIND=1
     local option
     local LIST_POSTGRES=false
+    local ARGS_PROCESSED=false
 
     usage() { 
         echo "Usage: $0 [-d <database>] [-l]" 1>&2
@@ -883,6 +887,7 @@ function _odooenabledb() {
     }
 
     while getopts ":d:l" option; do
+        ARGS_PROCESSED=true
         case $option in
             d) DB_NAME="$OPTARG" ;;
             l) LIST_POSTGRES=true ;;
@@ -900,6 +905,7 @@ function _odooenabledb() {
 
     # Require DB_NAME for enable operation
     if [[ -z "$DB_NAME" ]]; then
+        [[ "$ARGS_PROCESSED" == false ]] && usage
         return 1
     fi
 
