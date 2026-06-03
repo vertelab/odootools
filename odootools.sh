@@ -102,7 +102,7 @@ function _odoosync() {
 	echo "You have to set -p option to continue"
     else
 	sudo chown odoo:odoo /usr/share/"$ODOOPROJECT" -R
-	rsync -var --delete --exclude='.git/' /usr/share/"$ODOOPROJECT" "$HOST":/usr/share
+	rsync -var -O --delete --exclude='.git/' /usr/share/"$ODOOPROJECT" "$HOST":/usr/share
     fi
 }
 alias odoosync='_odoosync'
