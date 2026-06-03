@@ -4,7 +4,7 @@ Tools to help to install and manage an Odoo installation.
 
 ## Prerequisites
 
-The installation scripts assume the host OS is Ubuntu 22.04. Usage on other
+The installation scripts assume the host OS is Ubuntu 24.04. Usage on other
 systems might require tweaking to work.
 
 ## Install
@@ -58,7 +58,7 @@ https://github.com/vertelab/odootools/blob/17.0/themes
 ```
 The following packages have unmet dependencies:
 wkhtmltox : Depends: libssl1.1 but it is not installable
-22.04 har libssl 3.02 och är alltså ej bakåtkompatibelt med libssl 1.1
+24.04 har libssl 3.02 och är alltså ej bakåtkompatibelt med libssl 1.1
 
 Solution:  "feisalramar" writes a 5-step guide at this URL: https://github.com/dotnet/sdk/issues/24759
 ```
