@@ -1,0 +1,163 @@
+#!/usr/bin/env bash
+################################################################################
+# checkmodule — install/update Odoo modules in a database (dev tool)
+#
+# Creates the database if it does not exist (owner: odoo), stops the Odoo
+# service, runs `odoo --init` for the given modules and restarts the service.
+# Optionally exports PO files and/or drops the database afterwards.
+#
+# Usage: checkmodule -d <database> -m <module[,module...]> [options]
+#
+# Requires: root (or sudo) — the script stops/starts the odoo service and
+# accesses PostgreSQL as the postgres superuser to create the database.
+################################################################################
+
+LOG_LEVEL="warn"        # default log level
+WITH_DEMO=true          # default: install with demo data
+EXPORT_PO=false         # default: no PO export
+LANG_CODE="sv_SE"       # default language
+TEST=""
+DROP_DB=false
+MULTI_USER=""
+ODOO_SERVER_CONF=${ODOO_SERVER_CONF:-"/etc/odoo/odoo.conf"}
+
+usage() {
+    cat <<'EOF' 1>&2
+Usage: checkmodule -d <database> -m <module[,module...]> [options]
+
+Required:
+  -d <database>       Database name (created automatically if it does not exist)
+  -m <module>,...     Comma-separated modules to install/update
+
+Options:
+  -D                  Install without demo data
+  -e                  Export PO file(s) after installation
+  -L <lang_code>      Language for PO export (default: sv_SE)
+  -l <log_level>      debug|debug_rpc|debug_sql|debug_rpc_answer|info|warn|test|error|critical|notset (default: warn)
+  -t                  Run tests (--test-enable)
+  --drop              Drop the database after completion (test databases)
+  --multi-user        Run odoo on port 4444 in parallel; do NOT stop the service
+
+Examples:
+  checkmodule -d test_demo -m sale,stock                    # create DB (if missing) + install modules
+  checkmodule -d test_demo -m my_module -t                  # install with tests
+  checkmodule -d test_demo -m my_module -e -L sv_SE         # install + export sv_SE PO file
+  checkmodule -d test_demo -m my_module --drop              # throwaway test database
+EOF
+    exit 1
+}
+
+OPTIONS=$(getopt -o d:m:l:DeL:th -l drop,multi-user -- "$@")
+if [ $? -ne 0 ]; then
+    usage
+fi
+
+eval set -- "$OPTIONS"
+
+while true; do
+    case "$1" in
+        -d) ODOODB="$2"; shift 2 ;;
+        -m) ODOOMODULES="$2"; shift 2 ;;
+        -l)
+            LOG_LEVEL="$2"
+            if [[ ! "$LOG_LEVEL" =~ ^(debug|debug_rpc|debug_sql|debug_rpc_answer|info|warn|test|error|critical|notset)$ ]]; then
+                echo "Invalid log level: $LOG_LEVEL" >&2
+                usage
+            fi
+            shift 2
+            ;;
+        -D) WITH_DEMO=false; shift ;;
+        -e) EXPORT_PO=true; shift ;;
+        -L) LANG_CODE="$2"; shift 2 ;;
+        -t) TEST="--test-enable"; shift ;;
+        -h) usage ;;
+        --drop) DROP_DB=true; shift ;;
+        --multi-user) MULTI_USER="-p 4444"; shift ;;
+        --) shift; break ;;
+        *) echo "Invalid option: $1" >&2; usage ;;
+    esac
+done
+
+if [ -z "$ODOOMODULES" ] || [ -z "$ODOODB" ]; then
+    echo "ERROR: -d <database> and -m <module> are required." >&2
+    usage
+fi
+
+# Odoo database names allow only [a-zA-Z0-9_]
+if ! [[ "$ODOODB" =~ ^[a-zA-Z0-9_]+$ ]]; then
+    echo "ERROR: invalid database name '$ODOODB' (only a-z, A-Z, 0-9 and _ allowed)." >&2
+    exit 1
+fi
+
+# -e (PO export) stops the service, so it cannot be combined with --multi-user
+if [ "$EXPORT_PO" = true ] && [ -n "$MULTI_USER" ]; then
+    echo "ERROR: -e (PO export) cannot be combined with --multi-user." >&2
+    exit 1
+fi
+
+# ── Ensure the database exists (create if missing) ─────────────────────────
+if sudo -u postgres psql -d postgres -tAc "SELECT 1 FROM pg_database WHERE datname='${ODOODB}';" 2>/dev/null | grep -q 1; then
+    echo "Database '${ODOODB}' already exists."
+else
+    echo "Database '${ODOODB}' does not exist — creating it (owner: odoo)..."
+    if ! sudo -u postgres createdb -O odoo -E UTF8 -T template0 --lc-collate=C --lc-ctype=C "${ODOODB}"; then
+        echo "WARN: could not create database with owner 'odoo' — retrying without explicit owner." >&2
+        sudo -u postgres createdb -E UTF8 -T template0 --lc-collate=C --lc-ctype=C "${ODOODB}" || {
+            echo "ERROR: failed to create database '${ODOODB}'." >&2
+            exit 1
+        }
+    fi
+fi
+
+# ── Install/update modules ──────────────────────────────────────────────────
+if [ "$WITH_DEMO" = "false" ]; then
+    DEMO_OPTION="--without-demo=all"
+else
+    DEMO_OPTION=""
+fi
+
+echo "Installing/updating module(s) ${ODOOMODULES} in database '${ODOODB}' (log_level=${LOG_LEVEL}, demo=${WITH_DEMO})"
+
+if [ -z "$MULTI_USER" ]; then
+    sudo service odoo stop
+fi
+
+if [ "$EXPORT_PO" = false ]; then
+    sudo -E su odoo -c "odoo --config ${ODOO_SERVER_CONF} --database ${ODOODB} --init ${ODOOMODULES} --load-language=${LANG_CODE} ${MULTI_USER} ${TEST} --limit-time-cpu=180 --limit-time-real=300 --stop-after-init --log-level=${LOG_LEVEL} ${DEMO_OPTION}"
+    INSTALL_RC=$?
+else
+    # Export PO file(s) after installation
+    echo "Exporting PO file(s) for language: ${LANG_CODE}"
+    IFS=',' read -ra MODULE_LIST <<< "$ODOOMODULES"
+    sudo service odoo stop
+
+    echo "Step 1/2: installing module(s) ${ODOOMODULES} in '${ODOODB}'..."
+    sudo -E su odoo -c "odoo --config ${ODOO_SERVER_CONF} --database ${ODOODB} --init ${ODOOMODULES} --load-language=${LANG_CODE} --limit-time-cpu=180 --limit-time-real=300 --stop-after-init ${DEMO_OPTION}"
+    INSTALL_RC=$?
+
+    for module in "${MODULE_LIST[@]}"; do
+        SHORT_LANG_CODE=${LANG_CODE%%_*}
+        PO_FILE="${module}-${SHORT_LANG_CODE}.po"
+        echo "Step 2/2: exporting ${PO_FILE}..."
+        if sudo -E su odoo -c "odoo --config ${ODOO_SERVER_CONF} --database ${ODOODB} --modules ${module} --i18n-export=/tmp/$$.po --language=${LANG_CODE} --stop-after-init" && \
+           sudo mv /tmp/$$.po "${PO_FILE}"; then
+            echo "Saved $(pwd)/${PO_FILE}"
+        else
+            echo "WARN: PO export failed for module '${module}'." >&2
+        fi
+    done
+fi
+
+if [ "$DROP_DB" = true ]; then
+    echo "Dropping database '${ODOODB}' (--drop)..."
+    sudo -u postgres dropdb -f "${ODOODB}"
+fi
+
+if [ -z "$MULTI_USER" ]; then
+    sudo service odoo start
+fi
+
+if [ "$INSTALL_RC" -ne 0 ]; then
+    echo "WARN: odoo --init exited with code ${INSTALL_RC}." >&2
+fi
+exit "$INSTALL_RC"

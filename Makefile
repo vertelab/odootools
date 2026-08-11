@@ -1,5 +1,5 @@
 
-all : odooupd.tmp erppeek.tmp openpyxl.tmp phonenumbers.tmp profile.tmp odoobackup.tmp
+all : odooupd.tmp erppeek.tmp openpyxl.tmp phonenumbers.tmp profile.tmp odoobackup.tmp checkmodule.tmp
 	@echo Complete
 
 openpyxl.tmp:
@@ -39,6 +39,10 @@ odooclonerepos.tmp: odooclonerepos.py
 	@sudo cp odooclonerepos.py /usr/bin/odooclonerepos
 	@sudo chmod a+x /usr/bin/odooclonerepos
 	@touch odooclonerepos.tmp
+
+checkmodule.tmp: checkmodule
+	@sudo install -m 755 checkmodule /usr/local/bin/checkmodule
+	@touch checkmodule.tmp
 
 clean:
 	@rm -f *pyc

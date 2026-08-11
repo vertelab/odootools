@@ -111,6 +111,7 @@ Odoo-tools command |Description
  odooadminpw               | view master password
  odooallrequirements       | Loop through all projects installing / updating requirements.txt
  odoocheckmodule   <module>        | lists databases that use a module (eg odoocheckmodule sale)
+ checkmodule -d <db> -m <mod>     | Creates the database (if missing) and installs/updates modules. Options: -D (no demo), -e (PO export), -L <lang>, -l <log_level>, -t (tests), --drop, --multi-user. Installed to /usr/local/bin (see Makefile).
  odoocheckdeps             | Helper script that is primarally intended to find missing dependencies. Can easily be extended to also show dependencies/consequences
  odoocreatetestdb <database name> <input file or stdin> | Creates new database without e-mail-settings for outgoing mail
  odoofind *pattern*        | find patterns in odoo-core source code
