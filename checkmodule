@@ -109,6 +109,15 @@ else
     fi
 fi
 
+# ── Ensure AGE/pgvector extensions (per-database setup) ─────────────────────
+# Required BEFORE Odoo model init (ai_agent_core OKF/Odoo Mind: ag_catalog
+# schema + vector/age extensions must exist when models are initialized).
+# Mirrors what Salt postgres.extensions_activate does on other servers.
+echo "Ensuring PostgreSQL extensions (vector, age) in '${ODOODB}'..."
+sudo -u postgres psql -d "${ODOODB}" -c "CREATE SCHEMA IF NOT EXISTS ag_catalog;" || echo "WARN: could not ensure ag_catalog schema" >&2
+sudo -u postgres psql -d "${ODOODB}" -c "CREATE EXTENSION IF NOT EXISTS vector;" || echo "WARN: vector extension unavailable (pgvector-paket saknas?)" >&2
+sudo -u postgres psql -d "${ODOODB}" -c "CREATE EXTENSION IF NOT EXISTS age CASCADE;" || echo "WARN: age extension unavailable (age-paket saknas?)" >&2
+
 # ── Install/update modules ──────────────────────────────────────────────────
 if [ "$WITH_DEMO" = "false" ]; then
     DEMO_OPTION="--without-demo=all"
