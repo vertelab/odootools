@@ -19,6 +19,7 @@ LANG_CODE="sv_SE"       # default language
 TEST=""
 DROP_DB=false
 MULTI_USER=""
+NO_ADDONS_PATH=false
 ODOO_SERVER_CONF=${ODOO_SERVER_CONF:-"/etc/odoo/odoo.conf"}
 
 usage() {
@@ -37,6 +38,7 @@ Options:
   -t                  Run tests (--test-enable)
   --drop              Drop the database after completion (test databases)
   --multi-user        Run odoo on port 4444 in parallel; do NOT stop the service
+  --no-addons-path    Skip refreshing addons_path in odoo.conf (default: refresh)
 
 Examples:
   checkmodule -d test_demo -m sale,stock                    # create DB (if missing) + install modules
@@ -47,7 +49,7 @@ EOF
     exit 1
 }
 
-OPTIONS=$(getopt -o d:m:l:DeL:th -l drop,multi-user -- "$@")
+OPTIONS=$(getopt -o d:m:l:DeL:th -l drop,multi-user,no-addons-path -- "$@")
 if [ $? -ne 0 ]; then
     usage
 fi
@@ -73,6 +75,7 @@ while true; do
         -h) usage ;;
         --drop) DROP_DB=true; shift ;;
         --multi-user) MULTI_USER="-p 4444"; shift ;;
+        --no-addons-path) NO_ADDONS_PATH=true; shift ;;
         --) shift; break ;;
         *) echo "Invalid option: $1" >&2; usage ;;
     esac
@@ -117,6 +120,40 @@ echo "Ensuring PostgreSQL extensions (vector, age) in '${ODOODB}'..."
 sudo -u postgres psql -d "${ODOODB}" -c "CREATE SCHEMA IF NOT EXISTS ag_catalog;" || echo "WARN: could not ensure ag_catalog schema" >&2
 sudo -u postgres psql -d "${ODOODB}" -c "CREATE EXTENSION IF NOT EXISTS vector;" || echo "WARN: vector extension unavailable (pgvector-paket saknas?)" >&2
 sudo -u postgres psql -d "${ODOODB}" -c "CREATE EXTENSION IF NOT EXISTS age CASCADE;" || echo "WARN: age extension unavailable (age-paket saknas?)" >&2
+
+# ── Refresh addons_path (samma logik som odooaddons, anpassad för Pi) ──────
+# Bygger addons_path från de faktiska /usr/share/odoo-* + odooext-*
+# katalogerna på disken och skriver raden i odoo.conf. Odoo 18 lägger
+# alltid till core-addons (/usr/lib/python3/dist-packages/odoo/addons +
+# filestore) själv, så det räcker att konfigen innehåller /usr/share-listan.
+refresh_addons_path() {
+    local new_addons cur
+    new_addons=$(
+        { ls -d /usr/share/odoo-* 2>/dev/null | grep -v 'odoo-addons$';
+          ls -d /usr/share/odooext-* 2>/dev/null;
+          [ -d /usr/src/OCB/addons ] && echo /usr/src/OCB/addons; } | paste -sd ","
+    )
+    if [ -z "$new_addons" ]; then
+        echo "WARN: hittade inga /usr/share/odoo-* addons-kataloger — hoppar addons_path-uppdatering." >&2
+        return 1
+    fi
+    cur=$(grep '^addons_path=' "$ODOO_SERVER_CONF" 2>/dev/null | head -1 | cut -d= -f2-)
+    if [ "$cur" = "$new_addons" ]; then
+        echo "addons_path redan aktuell (${#new_addons} tecken)."
+        return 0
+    fi
+    echo "Uppdaterar addons_path i $ODOO_SERVER_CONF..."
+    if grep -q '^addons_path=' "$ODOO_SERVER_CONF" 2>/dev/null; then
+        sudo perl -i -pe "s/^addons_path=.*/addons_path=${new_addons//\//\\\/}/g" "$ODOO_SERVER_CONF"
+    else
+        echo "addons_path=$new_addons" | sudo tee -a "$ODOO_SERVER_CONF" > /dev/null
+    fi
+    echo "  -> $(grep '^addons_path=' "$ODOO_SERVER_CONF" | cut -c1-100)..."
+}
+
+if [ "$NO_ADDONS_PATH" = false ]; then
+    refresh_addons_path
+fi
 
 # ── Install/update modules ──────────────────────────────────────────────────
 if [ "$WITH_DEMO" = "false" ]; then
